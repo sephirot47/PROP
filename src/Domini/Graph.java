@@ -1,8 +1,11 @@
 package Domini;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -42,14 +45,55 @@ public class Graph <N, E extends Edge>
 	public void RemoveNode(N node)
 	{	
 		//Get the nodes it was connected to
-		Set<N> connections = graph.get(node).keySet(); 
-		Iterator<N> it = (Iterator<N>) connections.iterator();
+		Iterator<N> it = graph.get(node).keySet().iterator();
 	    while (it.hasNext()) //Remove every edge connected to the removed node
 	    {
 	    	//Remove the removed node from others nodes' edge list
 	    	graph.get( it.next() ).remove(node);
 	    }
 	    graph.remove(node); //Remove the node itself
+	}
+	
+	public LinkedList<N> GetShortestPath(N origin, N destiny) //BFS
+	{
+		HashMap<N, N> parentNodes = new HashMap<N, N>();
+		HashSet<N> visitedNodes = new HashSet<N>();
+		LinkedList<N> nextNodes = new LinkedList<N>();
+		
+		N currentNode = origin;
+		nextNodes.push(origin);
+		visitedNodes.add(origin);
+		
+		boolean found = false;
+		while(nextNodes.size() > 0 && !found)
+		{
+			currentNode = nextNodes.get(0); nextNodes.remove(0);
+			Iterator<N> it = graph.get(currentNode).keySet().iterator();
+		    while (it.hasNext())
+		    {
+		    	N n = it.next();
+		    	if(!visitedNodes.contains(n))
+		    	{	
+					visitedNodes.add(n);
+		    		parentNodes.put(n, currentNode);
+			    	nextNodes.add(nextNodes.size(), n);
+			    	if(n == destiny) { found = true; break; }
+		    	}
+		    }
+		}
+		
+		LinkedList<N> path = new LinkedList<N>(); //Get the path
+		if(found)
+		{
+			N n = destiny;
+			while(n != origin)
+			{
+				path.add(0, n);
+				n = parentNodes.get(n); //jump to the previous node
+			}
+			path.add(0, origin);
+		}
+		return path;
 	}
 	
 	/**
@@ -85,8 +129,7 @@ public class Graph <N, E extends Edge>
 	    while (it.hasNext())
 	    {
 	    	HashMap<N,E> adjList = it.next();
-			Set<Entry<N,E>> entryList = adjList.entrySet();
-			Iterator<Entry<N,E>> it2 = entryList.iterator();
+			Iterator<Entry<N,E>> it2 = adjList.entrySet().iterator();
 		    while (it2.hasNext())
 		    {
 		    	Entry<N,E> nodeEdge = it2.next();
