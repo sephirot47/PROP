@@ -12,10 +12,12 @@ public class Main
 		public City(String name) { this.name = name; }
 	}
 
-	private static class Road extends Edge {
+	private static class Road extends Edge 
+	{
 		float kilometers;
 		public Road(float km) { this.kilometers = km; }
 		public float GetWeight() { return kilometers; }
+		public void  SetWeight(float km) { kilometers = km; }
 	}
 	
 	private static Graph<City, Road> map;
