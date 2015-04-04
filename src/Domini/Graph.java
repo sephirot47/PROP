@@ -95,7 +95,6 @@ public class Graph <N extends Node, E extends Edge>
 			    	N n = it2.next();
 			    	if(!visitedNodes.contains(n))
 			    	{	
-			    		System.out.println(origin.GetId() + ": " + currentNode.GetId() + " -> " + n.GetId());
 						visitedNodes.add(n);
 				    	nextNodes.add(nextNodes.size(), n);
 				    	
@@ -155,14 +154,16 @@ public class Graph <N extends Node, E extends Edge>
 		while(it.hasNext())
 		{
 			N n1 = it.next();
+			System.out.print(n1.GetId() + ": ");
 			Iterator<N> it2 = GetAdjacentNodesTo(n1).iterator();
 			while(it2.hasNext())
 			{
 				N n2 = it2.next();
 				E e  = GetEdge(n1, n2);
 				
-				System.out.println(n1.GetId() + " <- " + e.GetWeight() + " -> " + n2.GetId());
+				System.out.print("(" + n2.GetId() + ", " + e.GetWeight() + (it2.hasNext() ? "), " : ");"));
 			}
+			System.out.println("");
 		}
 	}
 	
