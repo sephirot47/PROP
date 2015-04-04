@@ -86,7 +86,6 @@ public class Graph <N extends Node, E extends Edge>
 			N currentNode = origin;
 			nextNodes.push(origin);
 			visitedNodes.add(origin);
-			
 			while(nextNodes.size() > 0)
 			{
 				currentNode = nextNodes.get(0); nextNodes.remove(0);
@@ -96,12 +95,12 @@ public class Graph <N extends Node, E extends Edge>
 			    	N n = it2.next();
 			    	if(!visitedNodes.contains(n))
 			    	{	
+			    		System.out.println(origin.GetId() + ": " + currentNode.GetId() + " -> " + n.GetId());
 						visitedNodes.add(n);
 				    	nextNodes.add(nextNodes.size(), n);
 				    	
-				    	//Add 1 to the edge!
 				    	E e = graph.get(currentNode).get(n);
-				    	e.SetWeight(e.GetWeight() + 1);
+				    	e.SetWeight(e.GetWeight() + 1); //Add betweenness
 				    }
 			    }
 			}

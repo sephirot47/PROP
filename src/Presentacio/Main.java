@@ -29,41 +29,32 @@ public class Main
 	{
 		//Example of the use of Graph class
 		map = new Graph<City, Road>();
-		City madrid, bcn, valencia, tokyo, sevilla, bombai, tarragona, murcia;
-		madrid = new City("Madrid");
-		bcn = new City("Barcelona");
-		sevilla = new City("Sevilla");
-		valencia = new City("Valencia");
-		tokyo = new City("Tokyo");
-		bombai = new City("Bombai");
-		tarragona = new City("Tarragona");
-		murcia = new City("Murcia");
+		City a, b, c, d, e, f, g, h, i, j, k;
+		a = new City("A");
+		b = new City("B");
+		c = new City("C");
+		d = new City("D");
+		e = new City("E");
+		f = new City("F");
+		g = new City("G");
+		h = new City("H");
+		i = new City("I");
+		j = new City("J");
+		k = new City("K");
 		
-		map.AddNode(madrid); map.AddNode(bcn); 
-		map.AddNode(valencia); map.AddNode(tokyo);
-		map.AddNode(sevilla); map.AddNode(bombai);
-		map.AddNode(tarragona); map.AddNode(murcia);
-
-    	System.out.println("Madrid: " + madrid.hashCode());
-    	System.out.println("Barcelona: " + bcn.hashCode());
-    	System.out.println("Valencia: " + valencia.hashCode());
-    	System.out.println("Tokyo: " + tokyo.hashCode());
-    	System.out.println("Sevilla: " + sevilla.hashCode());
-    	System.out.println("Bombai: " + bombai.hashCode());
-    	System.out.println("Tarragona: " + tarragona.hashCode());
-    	System.out.println("Murcia: " + murcia.hashCode());
-    	System.out.println(" ");
-    	
-		map.AddEdge(madrid, bcn, new Road(1));
-		map.AddEdge(bcn, valencia, new Road(1));
-		map.AddEdge(valencia, bombai, new Road(1));
-		map.AddEdge(bombai, sevilla, new Road(1));
-		map.AddEdge(bcn, tokyo, new Road(1));
-		map.AddEdge(tokyo, valencia, new Road(1));
-		map.AddEdge(tarragona, murcia, new Road(1));
-		map.AddEdge(tokyo, madrid, new Road(1));
-		map.AddEdge(tokyo, sevilla, new Road(1));
-		map.AddEdge(sevilla, madrid, new Road(1));
+		map.AddNode(a); map.AddNode(b); 
+		map.AddNode(c); map.AddNode(d);
+		map.AddNode(e); map.AddNode(f);
+		map.AddNode(g); map.AddNode(h);
+		map.AddNode(i); map.AddNode(j);
+		map.AddNode(k);
+		
+		map.AddEdge(a, b, new Road(1));
+		map.AddEdge(a, c, new Road(1));
+		map.AddEdge(b, c, new Road(1));
+		map.AddEdge(b, d, new Road(1));
+		map.AddEdge(b, e, new Road(1));
+		map.AddEdge(e, f, new Road(1));
 		
     	System.out.println(" ");
     	
