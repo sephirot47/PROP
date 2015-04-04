@@ -5,12 +5,14 @@ import java.util.LinkedList;
 
 import Domini.Graph;
 import Domini.Edge;
+import Domini.Node;
 
 public class Main 
 {
-	private static class City {
-		String name;
+	private static class City extends Node {
+		private String name;
 		public City(String name) { this.name = name; }
+		public String GetId() { return name; }
 	}
 
 	private static class Road extends Edge 
@@ -63,13 +65,9 @@ public class Main
 		map.AddEdge(tokyo, sevilla, new Road(1));
 		map.AddEdge(sevilla, madrid, new Road(1));
 		
-		LinkedList<City> path = map.GetShortestPath(bombai, madrid);
     	System.out.println(" ");
-    	System.out.println(path.size());
-		Iterator<City> it = path.iterator();
-		while(it.hasNext())
-		{
-			System.out.println(it.next().name);
-		}
+    	
+		map.UpdateEdgeBetweenness();
+		map.Print();
 	}
 }

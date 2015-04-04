@@ -9,7 +9,7 @@ import java.util.Queue;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class Graph <N, E extends Edge>
+public class Graph <N extends Node, E extends Edge>
 {
 	//For every node, there will be a hash containing
 	//the nodes it's connected to and its corresponding edges
@@ -38,6 +38,11 @@ public class Graph <N, E extends Edge>
 		return graph.get(node).keySet();
 	}
 
+	public Set<N> GetNodes()
+	{
+		return graph.keySet();
+	}
+	
 	/**
 	 * Remove a node and all its connections
 	 * @param node The node to be removed
@@ -52,6 +57,55 @@ public class Graph <N, E extends Edge>
 	    	graph.get( it.next() ).remove(node);
 	    }
 	    graph.remove(node); //Remove the node itself
+	}
+	
+	private void ClearEdgeBetweenness()
+	{
+		Iterator<N> it = graph.keySet().iterator();
+		while(it.hasNext())
+		{
+			Iterator<E> it2 = graph.get( it.next() ).values().iterator();
+			while(it2.hasNext()) it2.next().SetWeight(0);
+		}
+	}
+	
+	public void UpdateEdgeBetweenness()
+	{
+		ClearEdgeBetweenness(); //All edges to zero
+		
+		Iterator<N> it = graph.keySet().iterator();
+		//For every node, get the shortest path to every other node
+		//For every edge every path passes by, add 1 to its betweenness
+		while(it.hasNext()) 
+		{
+			N origin = it.next(); //FOR EVERY NODE
+
+			HashSet<N> visitedNodes = new HashSet<N>();
+			LinkedList<N> nextNodes = new LinkedList<N>();
+			
+			N currentNode = origin;
+			nextNodes.push(origin);
+			visitedNodes.add(origin);
+			
+			while(nextNodes.size() > 0)
+			{
+				currentNode = nextNodes.get(0); nextNodes.remove(0);
+				Iterator<N> it2 = graph.get(currentNode).keySet().iterator();
+			    while (it2.hasNext())
+			    {
+			    	N n = it2.next();
+			    	if(!visitedNodes.contains(n))
+			    	{	
+						visitedNodes.add(n);
+				    	nextNodes.add(nextNodes.size(), n);
+				    	
+				    	//Add 1 to the edge!
+				    	E e = graph.get(currentNode).get(n);
+				    	e.SetWeight(e.GetWeight() + 1);
+				    }
+			    }
+			}
+		}
 	}
 	
 	public LinkedList<N> GetShortestPath(N origin, N destiny) //BFS
@@ -96,6 +150,23 @@ public class Graph <N, E extends Edge>
 		return path;
 	}
 	
+	public void Print()
+	{
+		Iterator<N> it = GetNodes().iterator();
+		while(it.hasNext())
+		{
+			N n1 = it.next();
+			Iterator<N> it2 = GetAdjacentNodesTo(n1).iterator();
+			while(it2.hasNext())
+			{
+				N n2 = it2.next();
+				E e  = GetEdge(n1, n2);
+				
+				System.out.println(n1.GetId() + " <- " + e.GetWeight() + " -> " + n2.GetId());
+			}
+		}
+	}
+	
 	/**
 	 * Add a new edge between two nodes
 	 * @param node1 The first node to be connected
@@ -108,6 +179,7 @@ public class Graph <N, E extends Edge>
 		graph.get(node2).put(node1, edge);
 	}
 
+	
 	/**
 	 * Returns the edge between node1 and node2. 
 	 * Returns null in case it doesn't exist.
