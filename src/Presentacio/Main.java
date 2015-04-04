@@ -1,7 +1,7 @@
 package Presentacio;
 
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 import Domini.Graph;
 import Domini.Edge;
@@ -29,36 +29,38 @@ public class Main
 	{
 		//Example of the use of Graph class
 		map = new Graph<City, Road>();
-		City a, b, c, d, e, f, g, h, i, j, k;
-		a = new City("A");
-		b = new City("B");
-		c = new City("C");
-		d = new City("D");
-		e = new City("E");
-		f = new City("F");
-		g = new City("G");
-		h = new City("H");
-		i = new City("I");
-		j = new City("J");
-		k = new City("K");
+		City barcelona, madrid, valencia, tokyo, bombai, tarragona, cancun;
+		barcelona = new City("Barcelona");
+		madrid = new City("Madrid");
+		valencia = new City("Valencia");
+		tokyo = new City("Tokyo");
+		bombai = new City("Bombai");
+		tarragona = new City("Tarragona");
+		cancun = new City("Cancun");
 		
-		map.AddNode(a); map.AddNode(b); 
-		map.AddNode(c); map.AddNode(d);
-		map.AddNode(e); map.AddNode(f);
-		map.AddNode(g); map.AddNode(h);
-		map.AddNode(i); map.AddNode(j);
-		map.AddNode(k);
+		map.AddNode(barcelona); map.AddNode(madrid); 
+		map.AddNode(valencia); map.AddNode(tokyo);
+		map.AddNode(bombai); map.AddNode(tarragona);
+		map.AddNode(cancun);
 		
-		map.AddEdge(a, b, new Road(1));
-		map.AddEdge(a, c, new Road(1));
-		map.AddEdge(b, c, new Road(1));
-		map.AddEdge(b, d, new Road(1));
-		map.AddEdge(b, e, new Road(1));
-		map.AddEdge(e, f, new Road(1));
+		map.AddEdge(barcelona, madrid, new Road(1));
+		map.AddEdge(madrid, valencia, new Road(1));
+		map.AddEdge(valencia, tokyo, new Road(1));
+		map.AddEdge(bombai, cancun, new Road(1));
 		
     	System.out.println(" ");
     	
 		map.UpdateEdgeBetweenness();
+		ArrayList< HashSet<City> > communities = map.GetCommunities(2);
+		for(HashSet<City> cc : communities)
+		{
+			System.out.println("CC:");
+			for(City city : cc)
+			{
+				System.out.println(city.name);
+			}
+			System.out.println("----------");
+		}
 		map.Print();
 	}
 }

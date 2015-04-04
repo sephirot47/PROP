@@ -3,10 +3,7 @@ package Domini;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Map.Entry;
 import java.util.Set;
 
 public class Graph <N extends Node, E extends Edge>
@@ -38,6 +35,9 @@ public class Graph <N extends Node, E extends Edge>
 		return graph.get(node).keySet();
 	}
 
+	/**
+	 * Returns a set of all the nodes in the graph
+	 */
 	public Set<N> GetNodes()
 	{
 		return graph.keySet();
@@ -50,36 +50,84 @@ public class Graph <N extends Node, E extends Edge>
 	public void RemoveNode(N node)
 	{	
 		//Get the nodes it was connected to
-		Iterator<N> it = graph.get(node).keySet().iterator();
-	    while (it.hasNext()) //Remove every edge connected to the removed node
+	    for(N adjNode : graph.get(node).keySet()) //Remove every edge connected to the removed node
 	    {
 	    	//Remove the removed node from others nodes' edge list
-	    	graph.get( it.next() ).remove(node);
+	    	graph.get(adjNode).remove(node);
 	    }
 	    graph.remove(node); //Remove the node itself
 	}
-	
+
+	/**
+	 * Sets the weight of all edges to 0
+	 */
 	private void ClearEdgeBetweenness()
 	{
-		Iterator<N> it = graph.keySet().iterator();
-		while(it.hasNext())
+		for(N n : graph.keySet()) 
+			for(E e : graph.get(n).values()) e.SetWeight(0);
+	}
+
+	/**
+	 * Returns communities in the graph
+	 * @param comNumber The number of communities that you want
+	 */
+	public ArrayList< HashSet<N> > GetCommunities(int comNumber)
+	{
+		if(comNumber > GetNodes().size())
 		{
-			Iterator<E> it2 = graph.get( it.next() ).values().iterator();
-			while(it2.hasNext()) it2.next().SetWeight(0);
+			System.err.println("The number of communities can't be greater than the number of nodes.");
+			return new ArrayList< HashSet<N> >();
 		}
+		
+		return GetConnectedComponents();
+	}
+
+	/**
+	 * Returns the connected components in the graph
+	 */
+	public ArrayList< HashSet<N> > GetConnectedComponents()
+	{
+		ArrayList< HashSet<N> > connectedComponents = new ArrayList< HashSet<N> >();
+		HashSet<N> visitedNodes = new HashSet<N>();
+		
+		for(N origin : graph.keySet())
+		{
+			if(visitedNodes.contains(origin)) continue;
+			
+			LinkedList<N> nextNodes = new LinkedList<N>();
+			
+			N currentNode = origin;
+			nextNodes.push(origin);
+			
+			HashSet<N> cc = new HashSet<N>();
+			connectedComponents.add(cc);
+			cc.add(origin);
+			while(nextNodes.size() > 0)
+			{
+				currentNode = nextNodes.get(0); nextNodes.remove(0);
+			    for(N n : graph.get(currentNode).keySet())
+			    {
+			    	if(!visitedNodes.contains(n))
+			    	{	
+						cc.add(n);
+						visitedNodes.add(n);
+				    	nextNodes.add(nextNodes.size(), n);
+				    }
+			    }
+			}
+		}
+		
+		return connectedComponents;
 	}
 	
 	public void UpdateEdgeBetweenness()
 	{
 		ClearEdgeBetweenness(); //All edges to zero
 		
-		Iterator<N> it = graph.keySet().iterator();
 		//For every node, get the shortest path to every other node
 		//For every edge every path passes by, add 1 to its betweenness
-		while(it.hasNext()) 
+		for(N origin : graph.keySet())
 		{
-			N origin = it.next(); //FOR EVERY NODE
-
 			HashSet<N> visitedNodes = new HashSet<N>();
 			LinkedList<N> nextNodes = new LinkedList<N>();
 			
@@ -89,10 +137,8 @@ public class Graph <N extends Node, E extends Edge>
 			while(nextNodes.size() > 0)
 			{
 				currentNode = nextNodes.get(0); nextNodes.remove(0);
-				Iterator<N> it2 = graph.get(currentNode).keySet().iterator();
-			    while (it2.hasNext())
+			    for(N n : graph.get(currentNode).keySet())
 			    {
-			    	N n = it2.next();
 			    	if(!visitedNodes.contains(n))
 			    	{	
 						visitedNodes.add(n);
@@ -120,10 +166,8 @@ public class Graph <N extends Node, E extends Edge>
 		while(nextNodes.size() > 0 && !found)
 		{
 			currentNode = nextNodes.get(0); nextNodes.remove(0);
-			Iterator<N> it = graph.get(currentNode).keySet().iterator();
-		    while (it.hasNext())
+		    for(N n : graph.get(currentNode).keySet())
 		    {
-		    	N n = it.next();
 		    	if(!visitedNodes.contains(n))
 		    	{	
 					visitedNodes.add(n);
@@ -150,18 +194,13 @@ public class Graph <N extends Node, E extends Edge>
 	
 	public void Print()
 	{
-		Iterator<N> it = GetNodes().iterator();
-		while(it.hasNext())
+		for(N n1 : GetNodes())
 		{
-			N n1 = it.next();
 			System.out.print(n1.GetId() + ": ");
-			Iterator<N> it2 = GetAdjacentNodesTo(n1).iterator();
-			while(it2.hasNext())
+			for(N n2 : GetAdjacentNodesTo(n1))
 			{
-				N n2 = it2.next();
-				E e  = GetEdge(n1, n2);
-				
-				System.out.print("(" + n2.GetId() + ", " + e.GetWeight() + (it2.hasNext() ? "), " : ");"));
+				E e = GetEdge(n1, n2);
+				System.out.print("(" + n2.GetId() + ", " + e.GetWeight() + "), ");
 			}
 			System.out.println("");
 		}
@@ -197,17 +236,13 @@ public class Graph <N extends Node, E extends Edge>
 	 */
 	public void RemoveEdge(E edge)
 	{
-		Iterator<HashMap<N,E>> it = graph.values().iterator();
-	    while (it.hasNext())
-	    {
-	    	HashMap<N,E> adjList = it.next();
-			Iterator<Entry<N,E>> it2 = adjList.entrySet().iterator();
-		    while (it2.hasNext())
-		    {
-		    	Entry<N,E> nodeEdge = it2.next();
-		    	if(edge.equals(nodeEdge.getValue()))
+		for(HashMap<N,E> adjList : graph.values())
+		{
+			for(E nodeEdge : adjList.values())
+			{
+		    	if(edge.equals(nodeEdge))
 		    	{
-		    		adjList.remove(nodeEdge.getKey());
+		    		adjList.remove(nodeEdge);
 		    	}
 		    }
 	    }
