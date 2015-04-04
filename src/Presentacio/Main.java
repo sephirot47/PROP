@@ -29,33 +29,50 @@ public class Main
 	{
 		//Example of the use of Graph class
 		map = new Graph<City, Road>();
-		City barcelona, madrid, valencia, tokyo, bombai, tarragona, cancun;
-		barcelona = new City("Barcelona");
-		madrid = new City("Madrid");
-		valencia = new City("Valencia");
-		tokyo = new City("Tokyo");
-		bombai = new City("Bombai");
-		tarragona = new City("Tarragona");
-		cancun = new City("Cancun");
-		
-		map.AddNode(barcelona); map.AddNode(madrid); 
-		map.AddNode(valencia); map.AddNode(tokyo);
-		map.AddNode(bombai); map.AddNode(tarragona);
-		map.AddNode(cancun);
-		
-		map.AddEdge(barcelona, madrid, new Road(1));
-		map.AddEdge(madrid, valencia, new Road(1));
-		map.AddEdge(valencia, tokyo, new Road(1));
-		map.AddEdge(bombai, cancun, new Road(1));
-		map.AddEdge(cancun, tarragona, new Road(1));
-		map.AddEdge(barcelona, tokyo, new Road(1));
-		map.AddEdge(bombai, tokyo, new Road(1));
+		City a = new City("A"); map.AddNode(a);
+		City b = new City("B"); map.AddNode(b);
+		City c = new City("C"); map.AddNode(c);
+		City e = new City("E"); map.AddNode(e);
+		City f = new City("F"); map.AddNode(f);
+		City g = new City("G"); map.AddNode(g);
+		City h = new City("H"); map.AddNode(h);
+		City i = new City("I"); map.AddNode(i);
+		City j = new City("J"); map.AddNode(j);
+		City k = new City("K"); map.AddNode(k);
+		City l = new City("L"); map.AddNode(l);
+		City m = new City("M"); map.AddNode(m);
+		City x = new City("X"); map.AddNode(x);
+		City y = new City("Y"); map.AddNode(y);
 
-		map.Print();
+			map.AddEdge(a, b, new Road(1));
+			map.AddEdge(a, c, new Road(1));
+			map.AddEdge(b, c, new Road(1));
+			
+			map.AddEdge(e, f, new Road(1));
+			map.AddEdge(e, g, new Road(1));
+			map.AddEdge(g, f, new Road(1));
+			
+			map.AddEdge(h, i, new Road(1));
+			map.AddEdge(h, j, new Road(1));
+			map.AddEdge(j, i, new Road(1));
+			
+			map.AddEdge(k, l, new Road(1));
+			map.AddEdge(k, m, new Road(1));
+			map.AddEdge(l, m, new Road(1));
+			
+			map.AddEdge(x, c, new Road(1));
+			map.AddEdge(x, e, new Road(1));
+			
+			map.AddEdge(y, h, new Road(1));
+			map.AddEdge(y, k, new Road(1));
+
+			map.AddEdge(x, y, new Road(1));
+		
 		
     	System.out.println(" ");
     	
-		ArrayList< HashSet<City> > communities = map.GetCommunitiesGirvanNewman(2);
+		ArrayList< HashSet<City> > communities = map.GetCommunitiesGirvanNewman(6);
+		map.Print();
 		for(HashSet<City> cc : communities)
 		{
 			System.out.println("----- CC -----");

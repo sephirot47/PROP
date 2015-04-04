@@ -175,8 +175,9 @@ public class Graph <N extends Node, E extends Edge>
 			System.err.println("The number of communities can't be greater than the number of nodes.");
 			return null;
 		}
-
-		UpdateEdgeBetweenness();
+		
+		ClearEdgeBetweenness(); //ALL edges to zero betweenness
+		UpdateEdgeBetweennessGirvanNewman(); //Weight the edges
 		ArrayList< HashSet<N> > connectedComponents = GetConnectedComponentsGirvanNewman();
 		while(connectedComponents.size() < n)
 		{	
@@ -190,7 +191,7 @@ public class Graph <N extends Node, E extends Edge>
 					E currentEdge = GetEdge(node1, node2);
 					if(currentEdge.GetWeight() > maxEdgeBetweenness)
 					{
-						edgeToRemove = currentEdge;
+						edgeToRemove = currentEdge; //update the edge that'll be removed
 						maxEdgeBetweenness = currentEdge.GetWeight();
 					}
 				}
@@ -198,10 +199,13 @@ public class Graph <N extends Node, E extends Edge>
 			
 			//Remove it (pseudo remove it(put its weight to -1))
 			edgeToRemove.SetWeight(-1);
+
+			//Weight the edges. It doesn't take into account the negative weighted edges!!!
+			//(as if they didn't exist)
+			UpdateEdgeBetweennessGirvanNewman();
 			
 			//Count the connected components again, in order to know if we must continue
 			//removing edges or not
-			//UpdateEdgeBetweenness();
 			connectedComponents = GetConnectedComponentsGirvanNewman();
 		}
 		return connectedComponents;
@@ -254,20 +258,30 @@ public class Graph <N extends Node, E extends Edge>
 		for(N n : graph.keySet()) 
 			for(E e : graph.get(n).values()) e.SetWeight(0);
 	}
+
+	/**
+	 * Sets the weight of all edges to 0, except the negative ones
+	 */
+	private void ClearEdgeBetweennessExceptNegative()
+	{
+		for(N n : graph.keySet()) 
+			for(E e : graph.get(n).values()) if(e.GetWeight() > 0) e.SetWeight(0);
+	}
 	
 	/**
 	 * Updates the betweenness of every edge, this is, it assigns a weight equal
 	 * to [2 * (the number of shortest paths from every node to every node that pass through that edge)]
 	 * (approximately hehehe)
 	 */
-	private void UpdateEdgeBetweenness()
+	private void UpdateEdgeBetweennessGirvanNewman()
 	{
-		ClearEdgeBetweenness(); //All edges to zero
+		ClearEdgeBetweennessExceptNegative(); //All edges to zero, except the negative ones
 		
 		//For every node, get the shortest path to every other node
 		//For every edge every path passes by, add 1 to its betweenness
 		for(N origin : graph.keySet())
 		{
+	    	System.out.println(origin.GetId() + ": --------------");
 			HashSet<N> visitedNodes = new HashSet<N>();
 			LinkedList<N> nextNodes = new LinkedList<N>();
 			
@@ -277,18 +291,22 @@ public class Graph <N extends Node, E extends Edge>
 			while(nextNodes.size() > 0)
 			{
 				currentNode = nextNodes.get(0); nextNodes.remove(0);
+		    	System.out.println(currentNode.GetId());
 			    for(N n : graph.get(currentNode).keySet())
 			    {
-			    	if(!visitedNodes.contains(n))
+			    	E e = GetEdge(currentNode, n);
+			    	if(e.GetWeight() >= 0) //You can NOT travel through negative weighted edges bitch
 			    	{	
-						visitedNodes.add(n);
-				    	nextNodes.add(nextNodes.size(), n);
-				    	
-				    	E e = graph.get(currentNode).get(n);
-				    	e.SetWeight(e.GetWeight() + 1); //Add betweenness
+			    		if(!visitedNodes.contains(n))
+			    		{
+							visitedNodes.add(n);
+					    	nextNodes.add(nextNodes.size(), n);
+					    	e.SetWeight(e.GetWeight() + 1); //Add betweenness
+			    		}
 				    }
 			    }
 			}
+			System.out.println("----------------------------------------");
 		}
 	}
 	////////////////////////////////////////////////////////////////////////////
