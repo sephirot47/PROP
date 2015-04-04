@@ -47,20 +47,20 @@ public class Main
 		map.AddEdge(madrid, valencia, new Road(1));
 		map.AddEdge(valencia, tokyo, new Road(1));
 		map.AddEdge(bombai, cancun, new Road(1));
+		map.AddEdge(cancun, tarragona, new Road(1));
+		map.AddEdge(barcelona, tokyo, new Road(1));
+		map.AddEdge(bombai, tokyo, new Road(1));
+
+		map.Print();
 		
     	System.out.println(" ");
     	
-		map.UpdateEdgeBetweenness();
-		ArrayList< HashSet<City> > communities = map.GetCommunities(2);
+		ArrayList< HashSet<City> > communities = map.GetCommunitiesGirvanNewman(2);
 		for(HashSet<City> cc : communities)
 		{
-			System.out.println("CC:");
-			for(City city : cc)
-			{
-				System.out.println(city.name);
-			}
-			System.out.println("----------");
+			System.out.println("----- CC -----");
+			for(City city : cc) System.out.println(city.name);
+			System.out.println("----------"); System.out.println(" ");
 		}
-		map.Print();
 	}
 }

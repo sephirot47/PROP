@@ -18,6 +18,7 @@ public class Graph <N extends Node, E extends Edge>
 	}
 
 
+	///// NODES STUFF /////////////////////////////////////////////////////
 	/**
 	 * Add a new disconnected node (without edges to any node)
 	 * @param node The node to be added
@@ -33,6 +34,19 @@ public class Graph <N extends Node, E extends Edge>
 	public Set<N> GetAdjacentNodesTo(N node)
 	{
 		return graph.get(node).keySet();
+	}
+
+	/**
+	 * Returns the first occurrence of the two nodes connected
+	 * by the edge e
+	 */
+	public Pair<N, N> GetNodesConnectedBy(E e)
+	{
+		for(N n1 : graph.keySet())
+			for(N n2 : graph.get(n1).keySet())
+				if(GetEdge(n1, n2) == e) 
+					return new Pair<N, N>(n1, n2);
+		return null;
 	}
 
 	/**
@@ -57,31 +71,59 @@ public class Graph <N extends Node, E extends Edge>
 	    }
 	    graph.remove(node); //Remove the node itself
 	}
+	
+	//////////////////////////////////////////////////////////////////////
+	
 
+	
+	
+	///// EDGE STUFF /////////////////////////////////////////////////////
 	/**
-	 * Sets the weight of all edges to 0
+	 * Add a new edge between two nodes
+	 * @param node1 The first node to be connected
+	 * @param node2 The second node to be connected
+	 * @param edge The edge that will connect node1 and node2
 	 */
-	private void ClearEdgeBetweenness()
+	public void AddEdge(N node1, N node2, E edge)
 	{
-		for(N n : graph.keySet()) 
-			for(E e : graph.get(n).values()) e.SetWeight(0);
+		graph.get(node1).put(node2, edge);
+		graph.get(node2).put(node1, edge);
+	}
+	
+	/**
+	 * Returns the edge between node1 and node2. 
+	 * Returns null in case it doesn't exist.
+	 */
+	public E GetEdge(N node1, N node2)
+	{
+		return graph.get(node1).get(node2);
 	}
 
 	/**
-	 * Returns communities in the graph
-	 * @param comNumber The number of communities that you want
+	 * Removes a  given edge between EVERY pair of connected nodes using this edge.
+	 * Think that you can connect thousands of nodes using the same edge instance.
+	 * If this happens, all those thousands of connections will be removed.
+	 * @param edge The edge that will be removed
 	 */
-	public ArrayList< HashSet<N> > GetCommunities(int comNumber)
+	public void RemoveEdge(E edge)
 	{
-		if(comNumber > GetNodes().size())
+		for(HashMap<N,E> adjList : graph.values())
 		{
-			System.err.println("The number of communities can't be greater than the number of nodes.");
-			return new ArrayList< HashSet<N> >();
-		}
-		
-		return GetConnectedComponents();
+			for(E nodeEdge : adjList.values())
+			{
+		    	if(edge.equals(nodeEdge))
+		    	{
+		    		adjList.remove(nodeEdge);
+		    	}
+		    }
+	    }
 	}
-
+	//////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+	///// COMMUNITIES STUFF //////////////////////////////////////////////
 	/**
 	 * Returns the connected components in the graph
 	 */
@@ -95,13 +137,10 @@ public class Graph <N extends Node, E extends Edge>
 			if(visitedNodes.contains(origin)) continue;
 			
 			LinkedList<N> nextNodes = new LinkedList<N>();
-			
-			N currentNode = origin;
-			nextNodes.push(origin);
+			N currentNode = origin; nextNodes.push(origin);
 			
 			HashSet<N> cc = new HashSet<N>();
-			connectedComponents.add(cc);
-			cc.add(origin);
+			connectedComponents.add(cc); cc.add(origin);
 			while(nextNodes.size() > 0)
 			{
 				currentNode = nextNodes.get(0); nextNodes.remove(0);
@@ -119,8 +158,109 @@ public class Graph <N extends Node, E extends Edge>
 		
 		return connectedComponents;
 	}
+	//////////////////////////////////////////////////////////////////////
 	
-	public void UpdateEdgeBetweenness()
+	
+	
+	
+	////// GIRVAN NEWMAN STUFF (don't read if you don't want to throw up) /////
+	/**
+	 * Returns communities in the graph
+	 * @param comNumber The number of communities that you want at least
+	 */
+	public ArrayList< HashSet<N> > GetCommunitiesGirvanNewman(int n)
+	{
+		if(n > GetNodes().size())
+		{
+			System.err.println("The number of communities can't be greater than the number of nodes.");
+			return null;
+		}
+
+		UpdateEdgeBetweenness();
+		ArrayList< HashSet<N> > connectedComponents = GetConnectedComponentsGirvanNewman();
+		while(connectedComponents.size() < n)
+		{	
+			//Search for the edge with maximum betweenness
+			E edgeToRemove = null;
+			float maxEdgeBetweenness = 0;
+			for(N node1 : graph.keySet())
+			{
+				for(N node2 : graph.get(node1).keySet())
+				{
+					E currentEdge = GetEdge(node1, node2);
+					if(currentEdge.GetWeight() > maxEdgeBetweenness)
+					{
+						edgeToRemove = currentEdge;
+						maxEdgeBetweenness = currentEdge.GetWeight();
+					}
+				}
+			}
+			
+			//Remove it (pseudo remove it(put its weight to -1))
+			edgeToRemove.SetWeight(-1);
+			
+			//Count the connected components again, in order to know if we must continue
+			//removing edges or not
+			//UpdateEdgeBetweenness();
+			connectedComponents = GetConnectedComponentsGirvanNewman();
+		}
+		return connectedComponents;
+	}
+
+
+	/**
+	 * Returns the connected components in the graph, but it doesn't
+	 * take into account the edges with weight < 0. This is because for 
+	 * the GirvanNewman algorithm implementation, you have to remove edges
+	 * so this a way to preserve the edges and not doing copies of the graph. 
+	 * Pene.
+	 */
+	public ArrayList< HashSet<N> > GetConnectedComponentsGirvanNewman()
+	{
+		ArrayList< HashSet<N> > connectedComponents = new ArrayList< HashSet<N> >();
+		HashSet<N> visitedNodes = new HashSet<N>();
+		for(N origin : graph.keySet())
+		{
+			if(visitedNodes.contains(origin)) continue;
+			
+			LinkedList<N> nextNodes = new LinkedList<N>();
+			N currentNode = origin; nextNodes.push(origin);
+			
+			HashSet<N> cc = new HashSet<N>();
+			connectedComponents.add(cc); cc.add(origin);
+			while(nextNodes.size() > 0)
+			{
+				currentNode = nextNodes.get(0); nextNodes.remove(0);
+			    for(N n : graph.get(currentNode).keySet())
+			    {
+			    	if(GetEdge(currentNode, n).GetWeight() >= 0 && //The only line that changes
+			    	   !visitedNodes.contains(n))
+			    	{	
+						cc.add(n);
+						visitedNodes.add(n);
+				    	nextNodes.add(nextNodes.size(), n);
+				    }
+			    }
+			}
+		}
+		return connectedComponents;
+	}
+
+	/**
+	 * Sets the weight of all edges to 0
+	 */
+	private void ClearEdgeBetweenness()
+	{
+		for(N n : graph.keySet()) 
+			for(E e : graph.get(n).values()) e.SetWeight(0);
+	}
+	
+	/**
+	 * Updates the betweenness of every edge, this is, it assigns a weight equal
+	 * to [2 * (the number of shortest paths from every node to every node that pass through that edge)]
+	 * (approximately hehehe)
+	 */
+	private void UpdateEdgeBetweenness()
 	{
 		ClearEdgeBetweenness(); //All edges to zero
 		
@@ -151,7 +291,12 @@ public class Graph <N extends Node, E extends Edge>
 			}
 		}
 	}
+	////////////////////////////////////////////////////////////////////////////
 	
+	
+	
+	
+	///// FOR DA LOLZ STUFF /////////////////////////////////////////////////////
 	public LinkedList<N> GetShortestPath(N origin, N destiny) //BFS
 	{
 		HashMap<N, N> parentNodes = new HashMap<N, N>();
@@ -191,7 +336,12 @@ public class Graph <N extends Node, E extends Edge>
 		}
 		return path;
 	}
+	////////////////////////////////////////////////////////////////////////////
 	
+	
+	
+	
+	//// UTILS ////////////
 	public void Print()
 	{
 		for(N n1 : GetNodes())
@@ -205,46 +355,5 @@ public class Graph <N extends Node, E extends Edge>
 			System.out.println("");
 		}
 	}
-	
-	/**
-	 * Add a new edge between two nodes
-	 * @param node1 The first node to be connected
-	 * @param node2 The second node to be connected
-	 * @param edge The edge that will connect node1 and node2
-	 */
-	public void AddEdge(N node1, N node2, E edge)
-	{
-		graph.get(node1).put(node2, edge);
-		graph.get(node2).put(node1, edge);
-	}
-
-	
-	/**
-	 * Returns the edge between node1 and node2. 
-	 * Returns null in case it doesn't exist.
-	 */
-	public E GetEdge(N node1, N node2)
-	{
-		return graph.get(node1).get(node2);
-	}
-
-	/**
-	 * Removes a  given edge between EVERY pair of connected nodes using this edge.
-	 * Think that you can connect thousands of nodes using the same edge instance.
-	 * If this happens, all those thousands of connections will be removed.
-	 * @param edge The edge that will be removed
-	 */
-	public void RemoveEdge(E edge)
-	{
-		for(HashMap<N,E> adjList : graph.values())
-		{
-			for(E nodeEdge : adjList.values())
-			{
-		    	if(edge.equals(nodeEdge))
-		    	{
-		    		adjList.remove(nodeEdge);
-		    	}
-		    }
-	    }
-	}
+	////////////////////////////////////////////////////////////////////////////
 }
