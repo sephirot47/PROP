@@ -201,7 +201,7 @@ public class Graph <N extends Node, E extends Edge>
 			}
 			
 			//Remove it (pseudo remove it(put its weight to -1))
-			edgeToRemove.SetWeight(-1);
+			if(edgeToRemove != null) edgeToRemove.SetWeight(-1);
 
 			//Weight the edges. It doesn't take into account the negative weighted edges!!!
 			//(as if they didn't exist)
