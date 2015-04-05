@@ -3,6 +3,7 @@ package Domini;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 
@@ -181,6 +182,8 @@ public class Graph <N extends Node, E extends Edge>
 		ArrayList< HashSet<N> > connectedComponents = GetConnectedComponentsGirvanNewman();
 		while(connectedComponents.size() < n)
 		{	
+			Print();
+			
 			//Search for the edge with maximum betweenness
 			E edgeToRemove = null;
 			float maxEdgeBetweenness = 0;
@@ -273,49 +276,41 @@ public class Graph <N extends Node, E extends Edge>
 	 * to [2 * (the number of shortest paths from every node to every node that pass through that edge)]
 	 * (approximately hehehe)
 	 */
-	private void UpdateEdgeBetweennessGirvanNewman()
+	public void UpdateEdgeBetweennessGirvanNewman()
 	{
 		ClearEdgeBetweennessExceptNegative(); //All edges to zero, except the negative ones
 		
 		//For every node, get the shortest path to every other node
 		//For every edge every path passes by, add 1 to its betweenness
-		for(N origin : graph.keySet())
+		for(N n1 : graph.keySet())
 		{
-	    	System.out.println(origin.GetId() + ": --------------");
-			HashSet<N> visitedNodes = new HashSet<N>();
-			LinkedList<N> nextNodes = new LinkedList<N>();
-			
-			N currentNode = origin;
-			nextNodes.push(origin);
-			visitedNodes.add(origin);
-			while(nextNodes.size() > 0)
+			for(N n2 : graph.keySet())
 			{
-				currentNode = nextNodes.get(0); nextNodes.remove(0);
-		    	System.out.println(currentNode.GetId());
-			    for(N n : graph.get(currentNode).keySet())
-			    {
-			    	E e = GetEdge(currentNode, n);
-			    	if(e.GetWeight() >= 0) //You can NOT travel through negative weighted edges bitch
-			    	{	
-			    		if(!visitedNodes.contains(n))
-			    		{
-							visitedNodes.add(n);
-					    	nextNodes.add(nextNodes.size(), n);
-					    	e.SetWeight(e.GetWeight() + 1); //Add betweenness
-			    		}
-				    }
-			    }
+				if(n1 == n2) continue;
+				
+				LinkedList<N> path = GetShortestPathGirvanNewman(n1, n2);
+				Iterator<N> it = path.iterator();
+				
+				N prevN = null; 
+				if(it.hasNext()) prevN = it.next();
+				while(it.hasNext())
+				{
+					if(it.hasNext())
+					{
+						N n = it.next();
+						Edge e = GetEdge(prevN, n);
+						if(e != null) e.SetWeight(e.GetWeight() + 1);
+						prevN = n;
+					}
+				}
+				
+				//System.out.println(n1.GetId() + " to " + n2.GetId());
+				//Print();
 			}
-			System.out.println("----------------------------------------");
 		}
 	}
-	////////////////////////////////////////////////////////////////////////////
 	
-	
-	
-	
-	///// FOR DA LOLZ STUFF /////////////////////////////////////////////////////
-	public LinkedList<N> GetShortestPath(N origin, N destiny) //BFS
+	public LinkedList<N> GetShortestPathGirvanNewman(N origin, N destiny) //BFS
 	{
 		HashMap<N, N> parentNodes = new HashMap<N, N>();
 		HashSet<N> visitedNodes = new HashSet<N>();
@@ -331,8 +326,8 @@ public class Graph <N extends Node, E extends Edge>
 			currentNode = nextNodes.get(0); nextNodes.remove(0);
 		    for(N n : graph.get(currentNode).keySet())
 		    {
-		    	if(!visitedNodes.contains(n))
-		    	{	
+		    	if(!visitedNodes.contains(n) && GetEdge(currentNode, n).GetWeight() >= 0)
+		    	{
 					visitedNodes.add(n);
 		    		parentNodes.put(n, currentNode);
 			    	nextNodes.add(nextNodes.size(), n);
@@ -354,9 +349,8 @@ public class Graph <N extends Node, E extends Edge>
 		}
 		return path;
 	}
+	
 	////////////////////////////////////////////////////////////////////////////
-	
-	
 	
 	
 	//// UTILS ////////////

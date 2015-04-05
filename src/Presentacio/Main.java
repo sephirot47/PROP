@@ -32,7 +32,6 @@ public class Main
 		City a = new City("A"); map.AddNode(a);
 		City b = new City("B"); map.AddNode(b);
 		City c = new City("C"); map.AddNode(c);
-		City d = new City("D"); map.AddNode(d);
 		City e = new City("E"); map.AddNode(e);
 		City f = new City("F"); map.AddNode(f);
 		City g = new City("G"); map.AddNode(g);
@@ -42,36 +41,32 @@ public class Main
 		City k = new City("K"); map.AddNode(k);
 		City l = new City("L"); map.AddNode(l);
 		City m = new City("M"); map.AddNode(m);
-		City n = new City("N"); map.AddNode(n);
-
-			map.AddEdge(a, b, new Road(1));
-			map.AddEdge(a, e, new Road(1));
-			map.AddEdge(b, c, new Road(1));
-			map.AddEdge(b, d, new Road(1));
-			map.AddEdge(b, e, new Road(1));
-			map.AddEdge(c, d, new Road(1));
-			map.AddEdge(c, k, new Road(1));
-			map.AddEdge(d, g, new Road(1));
-			map.AddEdge(e, j, new Road(1));
-			map.AddEdge(f, g, new Road(1));
-			map.AddEdge(f, h, new Road(1));
-			map.AddEdge(f, i, new Road(1));
-			map.AddEdge(g, h, new Road(1));
-			map.AddEdge(g, l, new Road(1));
-			map.AddEdge(h, i, new Road(1));
-			map.AddEdge(j, k, new Road(1));
-			map.AddEdge(j, l, new Road(1));
-			map.AddEdge(j, m, new Road(1));
-			map.AddEdge(k, l, new Road(1));
-			map.AddEdge(k, n, new Road(1));
-			map.AddEdge(l, m, new Road(1));
-			map.AddEdge(l, n, new Road(1));
-			map.AddEdge(m, n, new Road(1));
+		City x = new City("X"); map.AddNode(x);
+		City y = new City("Y"); map.AddNode(y);
+		map.AddEdge(a, b, new Road(1));
+		map.AddEdge(a, c, new Road(1));
+		map.AddEdge(b, c, new Road(1));
+		map.AddEdge(e, f, new Road(1));
+		map.AddEdge(e, g, new Road(1));
+		map.AddEdge(g, f, new Road(1));
+		map.AddEdge(h, i, new Road(1));
+		map.AddEdge(h, j, new Road(1));
+		map.AddEdge(j, i, new Road(1));
+		map.AddEdge(k, l, new Road(1));
+		map.AddEdge(k, m, new Road(1));
+		map.AddEdge(l, m, new Road(1));
+		map.AddEdge(x, c, new Road(1));
+		map.AddEdge(x, e, new Road(1));
+		map.AddEdge(y, h, new Road(1));
+		map.AddEdge(y, k, new Road(1));
+		map.AddEdge(x, y, new Road(1));
 		
     	System.out.println(" ");
     	
-		ArrayList< HashSet<City> > communities = map.GetCommunitiesGirvanNewman(3);
-		map.Print();
+    	//map.UpdateEdgeBetweennessGirvanNewman();
+		//map.Print();
+
+		ArrayList< HashSet<City> > communities = map.GetCommunitiesGirvanNewman(6);
 		for(HashSet<City> cc : communities)
 		{
 			System.out.println("----- CC -----");
