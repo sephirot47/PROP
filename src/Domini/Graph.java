@@ -364,7 +364,7 @@ public class Graph <N extends Node, E extends Edge>
 				E e = GetEdge(n1, n2);
 				System.out.print("(" + n2.GetId() + ", " + e.GetWeight() + "), ");
 			}
-			System.out.println("");
+			System.out.println(""); // :3
 		}
 	}
 	////////////////////////////////////////////////////////////////////////////
