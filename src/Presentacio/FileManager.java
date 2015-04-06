@@ -32,7 +32,7 @@ public class FileManager{
         
         String l;
         while ((l = reader.readline()) != null){
-            list.add(line); //Afegim a la llista
+            list.add(l); //Afegim a la llista
         }
         
         reader.close();
