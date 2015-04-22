@@ -1,37 +1,44 @@
+package Domini;
+
 import java.util.ArrayList;
 
-public class Song{
-	
+public class Song
+{	
 	String author;
 	String title;
 	int year;
-	ArrayList<String> styles;
 	int duration; //en segons
+	ArrayList<String> styles;
 	
-	public Song(){
-		//inicialitzar Estils
+	public Song()
+	{
 		styles = new ArrayList<String>();
-		
+		year = duration = 0;
+		title = "";
+		author = "";
 	}
 	
-	public Song(String at, String ti, int any, ArrayList<String> est, int dur)
+	public Song(String at, String ti, int y, ArrayList<String> est, int dur)
 	{
 		styles = new ArrayList<String>();
 		author = at;
 		title = ti;
-		styles.add(est);
+		styles.addAll(est);
 		duration = dur;
+		year = y;
 	}	
 	
-	public void AddSong(String at, String ti, int any, ArrayList<String> est, int dur)
+	public void SetSong(String at, String ti, int y, ArrayList<String> est, int dur)
 	{
 		author = at;
 		title = ti;
-		styles.add(est);
+		styles.addAll(est);
 		duration = dur;
+		year = y;
 	}
 	
-	public void AddAuthorTitle(String at, String ti){
+	public void SetAuthorTitle(String at, String ti)
+	{
 		author= at;
 		title = ti;
 	}
@@ -39,19 +46,26 @@ public class Song{
 	public int AddStyles(ArrayList<String> est)
 	{
 		int error = 0;
-		if((styles.size() + est.size()) <= 3){
-					Estils.add(est);
+		if((styles.size() + est.size()) <= 3)
+		{
+			styles.addAll(est);
 		}
-		else{
+		else
+		{
 			//retornar error
 			error = -1;
 		}
 		return error;
 	}
 	
-	public int AddDuration(int dur)
+	public void SetDuration(int dur)
 	{
 		duration = dur;
 	}
 	
+	public String GetAuthor() { return author; }
+	public String GetTitle() { return author; }
+	public int GetDuration() { return duration; }
+	public int GetYear() { return year; }
+	public ArrayList<String> GetStyles() { return styles; }
 }

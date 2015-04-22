@@ -2,7 +2,9 @@ package Presentacio;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 
+import Domini.GirvanNewman;
 import Domini.Graph;
 import Domini.Edge;
 import Domini.Node;
@@ -62,12 +64,15 @@ public class Main
 		songGraph.AddEdge(y, h, new Relation());
 		songGraph.AddEdge(y, k, new Relation());
 		songGraph.AddEdge(x, y, new Relation());
+		Relation r = new Relation();
+		songGraph.AddEdge(x, a, r);
+		songGraph.AddEdge(x, b, r);
 		
     	System.out.println(" ");
 
-		ArrayList< HashSet<Song> > solution = songGraph.GetCommunitiesGirvanNewman(6); //Obtinc el conjunt de llistes de Songs
+		ArrayList< Set<Song> > solution = GirvanNewman.GetSolution(songGraph, 6); //Obtinc el conjunt de llistes de Songs
 		int foo = 0;
-		for(HashSet<Song> songList : solution)
+		for(Set<Song> songList : solution)
 		{
 			System.out.println("Song List " + (++foo) +":");
 			for(Song Song : songList) System.out.println("-" + Song.name);
