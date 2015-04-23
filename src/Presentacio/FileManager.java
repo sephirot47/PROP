@@ -1,16 +1,17 @@
-package Presentacio
+package Presentacio;
+
+////IMPORTS /////////////////////////////////////
+import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FileManager{
-
-//// IMPORTS /////////////////////////////////////
-    import java.util.ArrayList;
-    
-    import java.io.FileReader;
-    import java.io.FileWriter;
-    import java.io.file.Path;
-    import java.io.file.Paths;
-    import java.io.BufferedReader;
-    import java.io.File;
 
 //// CONSTRUCTOR ////////////////////////////////
     public FileManager(){}
@@ -20,23 +21,32 @@ public class FileManager{
     //path apunta a un .txt a la carpeta del projecte
     // es retorna una llista d'strings, cada element es una linia del fitxer de text
 
-    public ArrayList<string> loadData(String path){
+    public ArrayList<String> loadData(String path){
         ArrayList<String> list = new ArrayList(); //Creem array
         
         Path fileToLoad = Paths.get(path); //generem un path amb l'string
         fileToLoad = fileToLoad.toAbsolutePath();
         path = fileToLoad.toString();
         
-        FileReader fReader = new FileReader(path); //Creem lector a fitxer
-        BufferedReader reader = new BufferedReader(fReader); //Creem un buffer on desar cada l
-        
-        String l;
-        while ((l = reader.readline()) != null){
-            list.add(l); //Afegim a la llista
-        }
-        
-        reader.close();
-        return l;   
+        FileReader fReader;
+		try 
+		{
+			fReader = new FileReader(path);
+	        BufferedReader reader = new BufferedReader(fReader); //Creem un buffer on desar cada l
+	        
+	        String l = "";
+	        while ((l = reader.readLine()) != null){
+	            list.add(l); //Afegim a la llista
+	        }
+	        
+	        reader.close();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		} 
+		
+        return list;   
     }
     
     // path es el nom.txt del fitxer que es generara(inexistent) (es poden incloure directoris si existeixen previament)
@@ -49,15 +59,23 @@ public class FileManager{
         File file = new File(path);
         file.getParentFile().mkdirs(); //Not sure al 100% que fa eso, pero pels puestos posava que era per crear el susodicho fitxer
         
-        FileWriter writer = new FileWriter(path);
+        FileWriter writer;
+		try 
+		{
+			writer = new FileWriter(path);
         
-        for (int i = 0; i < list.size(); ++i){
-            writer.write(list.get(i));
-            if (i != (list.size()-1)){
-                writer.write('\n');
-            }
-        }
-        writer.close();    
+	        for (int i = 0; i < list.size(); ++i){
+	            writer.write(list.get(i));
+	            if (i != (list.size()-1)){
+	                writer.write('\n');
+	            }
+	        }
+	        writer.close();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}   
     }
     
     // path es el nom.txt del fitxer a guardar
@@ -68,26 +86,34 @@ public class FileManager{
         fileToLoad = fileToLoad.toAbsolutePath();
         path = fileToLoad.toString();
         
-        FileWriter writer = new FileWriter(path);
-        
-        for (int i = 0; i < list.size(); ++i){
-            writer.write(list.get(i));
-            if (i != (list.size()-1)){
-                writer.write('\n');
-            }
-        }
-        writer.close();    
+        FileWriter writer;
+		try 
+		{
+			writer = new FileWriter(path);
+	        
+	        for (int i = 0; i < list.size(); ++i){
+	            writer.write(list.get(i));
+	            if (i != (list.size()-1)){
+	                writer.write('\n');
+	            }
+	        }
+	        writer.close();    
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
     }
     
     //TODO
     //path es un path a un fitxer existent
     //path deixa d'existir
-    public boolean eraseData(String Path) {}
+    public void eraseData(String Path) {}
     
     //TODO
     //path es un path no nul
     //retorna cert si path existeix
-    public boolean exists(String Path){}
+    public void exists(String Path){}
     
     //TODO
     //path es un camí a un fitxer existent, newLine conté una linia de text
