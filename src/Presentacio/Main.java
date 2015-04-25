@@ -8,6 +8,7 @@ import Domini.GirvanNewman;
 import Domini.Graph;
 import Domini.Edge;
 import Domini.Node;
+import Domini.SongRelation;
 
 public class Main 
 {
@@ -16,21 +17,13 @@ public class Main
 		public Song(String name) { this.name = name; }
 		public String GetId() { return name; }
 	}
-
-	private static class Relation extends Edge 
-	{
-		float weight;
-		public Relation() { weight = 0.0f; }
-		public float GetWeight() { return weight; }
-		public void  SetWeight(float w) { weight = w; }
-	}
 	
-	private static Graph<Song, Relation> songGraph;
+	private static Graph<Song, SongRelation> songGraph;
 	
 	public static void main(String[] args)
 	{
 		//Example of the use of Graph class
-		songGraph = new Graph<Song, Relation>();
+		songGraph = new Graph<Song, SongRelation>();
 		
 		Song a = new Song("A"); songGraph.AddNode(a);
 		Song b = new Song("B"); songGraph.AddNode(b);
@@ -47,24 +40,24 @@ public class Main
 		Song x = new Song("X"); songGraph.AddNode(x);
 		Song y = new Song("Y"); songGraph.AddNode(y);
 		
-		songGraph.AddEdge(a, b, new Relation());
-		songGraph.AddEdge(a, c, new Relation());
-		songGraph.AddEdge(b, c, new Relation());
-		songGraph.AddEdge(e, f, new Relation());
-		songGraph.AddEdge(e, g, new Relation());
-		songGraph.AddEdge(g, f, new Relation());
-		songGraph.AddEdge(h, i, new Relation());
-		songGraph.AddEdge(h, j, new Relation());
-		songGraph.AddEdge(j, i, new Relation());
-		songGraph.AddEdge(k, l, new Relation());
-		songGraph.AddEdge(k, m, new Relation());
-		songGraph.AddEdge(l, m, new Relation());
-		songGraph.AddEdge(x, c, new Relation());
-		songGraph.AddEdge(x, e, new Relation());
-		songGraph.AddEdge(y, h, new Relation());
-		songGraph.AddEdge(y, k, new Relation());
-		songGraph.AddEdge(x, y, new Relation());
-		Relation r = new Relation();
+		songGraph.AddEdge(a, b, new SongRelation());
+		songGraph.AddEdge(a, c, new SongRelation());
+		songGraph.AddEdge(b, c, new SongRelation());
+		songGraph.AddEdge(e, f, new SongRelation());
+		songGraph.AddEdge(e, g, new SongRelation());
+		songGraph.AddEdge(g, f, new SongRelation());
+		songGraph.AddEdge(h, i, new SongRelation());
+		songGraph.AddEdge(h, j, new SongRelation());
+		songGraph.AddEdge(j, i, new SongRelation());
+		songGraph.AddEdge(k, l, new SongRelation());
+		songGraph.AddEdge(k, m, new SongRelation());
+		songGraph.AddEdge(l, m, new SongRelation());
+		songGraph.AddEdge(x, c, new SongRelation());
+		songGraph.AddEdge(x, e, new SongRelation());
+		songGraph.AddEdge(y, h, new SongRelation());
+		songGraph.AddEdge(y, k, new SongRelation());
+		songGraph.AddEdge(x, y, new SongRelation());
+		SongRelation r = new SongRelation();
 		songGraph.AddEdge(x, a, r);
 		songGraph.AddEdge(x, b, r);
 		
