@@ -112,7 +112,7 @@ public class FileManager
     		Pair<Song, Song> songSong = entrada.GetNodesConnectedBy(e);
     		Song s1 = songSong.GetFirst(), s2 = songSong.GetSecond();
     		
-    		String line = songsArray.indexOf(s1) + ";" + songsArray.indexOf(s2);
+    		String line = songsArray.indexOf(s1) + ";" + songsArray.indexOf(s2) + ";" + e.GetWeight();
     		lines.add(line);
     	}
     	
@@ -123,8 +123,8 @@ public class FileManager
     	 * (victor, cuando sarpa el hamor)
     	 * (jfons, tramboliko)
     	 * (aina, mesigualno?)
-    	 * 0;1
-    	 * 1;2
+    	 * 0;1;0.5    //del 0 al 1, con peso 0.5
+    	 * 1;2;1.3	  //del 1 al 2, con peso 1.3
     	 * (hi ha un edge de la canco del victor al jfons, i del jfons a l'aina)
     	 */
     }
