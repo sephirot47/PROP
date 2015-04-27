@@ -1,6 +1,7 @@
 package Domini;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class User {
     
@@ -13,18 +14,30 @@ public class User {
     	reproductions = new ArrayList<Reproduction>();
     }
     
-    public User(String a, int b, ArrayList<Reproduction> r)
+    public User(String name, int age, ArrayList<Reproduction> r)
     {
-        name = a;
-        age = b;
+        this.name = name;
+        this.age = age;
         reproductions = new ArrayList<Reproduction>();
         reproductions.addAll(r);
         
     }
     
+    public User(String name, int age)
+    {
+        this.name = name;
+        this.age = age;
+        reproductions = new ArrayList<Reproduction>();
+    }
+    
     public void AddReproduction(Reproduction r)
     {
     	reproductions.add(r);
+    }
+    
+    public void AddReproductions(List<Reproduction> r)
+    {
+    	reproductions.addAll(r);
     }
     
     public void SetAge(int a) { age = a; }
@@ -40,5 +53,17 @@ public class User {
     {
 		return reproductions;
 	}
-
+    
+    public void Print()
+    {
+    	System.out.println("------");
+    	System.out.println(name);
+    	System.out.println(age);
+    	System.out.println("---");
+    	for(Reproduction r : reproductions)
+    	{
+    		r.Print();
+    	}
+    	System.out.println("------");
+    }
 }

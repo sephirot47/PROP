@@ -23,6 +23,12 @@ public class GirvanNewman
 			return null;
 		}
 		
+		//Save the original weights to restore them later
+		Set<Edge> edges = g.GetAllEdges();
+		Set<Pair<Edge, Float>> originalEdges = new HashSet<Pair<Edge, Float>>();
+		for(Edge e : edges) originalEdges.add( new Pair<Edge, Float>(e, e.GetWeight()) );
+		//
+				
 		ClearEdgeBetweenness(g); //ALL edges to zero betweenness
 		UpdateEdgeBetweenness(g); //Weight the edges
 		ArrayList< Set<N> > connectedComponents = GirvanNewman.GetConnectedComponents(g);
@@ -57,6 +63,13 @@ public class GirvanNewman
 			//removing edges or not
 			connectedComponents = GetConnectedComponents(g);
 		}
+
+		//Restore the original weights !!!!!
+		for(Pair<Edge, Float> e : originalEdges)
+		{
+			e.GetFirst().SetWeight(e.GetSecond()); //Deberia restaurarlos ya que los edges se guardan por referencia
+		}
+		//
 		return connectedComponents;
 	}
 	

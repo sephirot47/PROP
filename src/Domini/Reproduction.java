@@ -2,12 +2,20 @@ package Domini;
 
 public class Reproduction
 {
-	Song song;
+	String songAuthor, songTitle;
 	int time; //en segons
 	
-	public Reproduction(Song song, int time)
+	public Reproduction(String author,String title, int time)
 	{
-		this.song = song;
+		songAuthor = author;
+		songTitle = title;
 		this.time = time;
+	}
+	
+	public void Print()
+	{
+		System.out.println(songAuthor);
+		System.out.println(songTitle);
+		System.out.println(time);
 	}
 }

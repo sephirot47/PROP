@@ -1,5 +1,7 @@
 package Presentacio;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -8,16 +10,14 @@ import Domini.GirvanNewman;
 import Domini.Graph;
 import Domini.Edge;
 import Domini.Node;
+import Domini.Song;
 import Domini.SongRelation;
+import Domini.User;
+import Persistencia.FileManager;
+import Persistencia.FileParser;
 
 public class Main 
 {
-	private static class Song extends Node {
-		private String name;
-		public Song(String name) { this.name = name; }
-		public String GetId() { return name; }
-	}
-	
 	private static Graph<Song, SongRelation> songGraph;
 	
 	public static void main(String[] args)
@@ -25,20 +25,20 @@ public class Main
 		//Example of the use of Graph class
 		songGraph = new Graph<Song, SongRelation>();
 		
-		Song a = new Song("A"); songGraph.AddNode(a);
-		Song b = new Song("B"); songGraph.AddNode(b);
-		Song c = new Song("C"); songGraph.AddNode(c);
-		Song e = new Song("E"); songGraph.AddNode(e);
-		Song f = new Song("F"); songGraph.AddNode(f);
-		Song g = new Song("G"); songGraph.AddNode(g);
-		Song h = new Song("H"); songGraph.AddNode(h);
-		Song i = new Song("I"); songGraph.AddNode(i);
-		Song j = new Song("J"); songGraph.AddNode(j);
-		Song k = new Song("K"); songGraph.AddNode(k);
-		Song l = new Song("L"); songGraph.AddNode(l);
-		Song m = new Song("M"); songGraph.AddNode(m);
-		Song x = new Song("X"); songGraph.AddNode(x);
-		Song y = new Song("Y"); songGraph.AddNode(y);
+		Song a = new Song("A", "A"); songGraph.AddNode(a);
+		Song b = new Song("B", "A"); songGraph.AddNode(b);
+		Song c = new Song("C", "A"); songGraph.AddNode(c);
+		Song e = new Song("E", "A"); songGraph.AddNode(e);
+		Song f = new Song("F", "A"); songGraph.AddNode(f);
+		Song g = new Song("G", "A"); songGraph.AddNode(g);
+		Song h = new Song("H", "A"); songGraph.AddNode(h);
+		Song i = new Song("I", "A"); songGraph.AddNode(i);
+		Song j = new Song("J", "A"); songGraph.AddNode(j);
+		Song k = new Song("K", "A"); songGraph.AddNode(k);
+		Song l = new Song("L", "A"); songGraph.AddNode(l);
+		Song m = new Song("M", "A"); songGraph.AddNode(m);
+		Song x = new Song("X", "A"); songGraph.AddNode(x);
+		Song y = new Song("Y", "A"); songGraph.AddNode(y);
 		
 		songGraph.AddEdge(a, b, new SongRelation());
 		songGraph.AddEdge(a, c, new SongRelation());
@@ -57,19 +57,42 @@ public class Main
 		songGraph.AddEdge(y, h, new SongRelation());
 		songGraph.AddEdge(y, k, new SongRelation());
 		songGraph.AddEdge(x, y, new SongRelation());
-		SongRelation r = new SongRelation();
-		songGraph.AddEdge(x, a, r);
-		songGraph.AddEdge(x, b, r);
-		
+
     	System.out.println(" ");
 
-		ArrayList< Set<Song> > solution = GirvanNewman.GetSolution(songGraph, 6); //Obtinc el conjunt de llistes de Songs
+		ArrayList< Set<Song> > solution = GirvanNewman.GetSolution(songGraph, 6); //Get el conjunt de llistes de Songs
 		int foo = 0;
 		for(Set<Song> songList : solution)
 		{
 			System.out.println("Song List " + (++foo) +":");
-			for(Song Song : songList) System.out.println("-" + Song.name);
+			for(Song s : songList) System.out.println("-" + s.GetId());
 			System.out.println(" ");
+		}
+		
+		try
+		{
+			ArrayList<Song> songs = FileParser.GetSongs("data/songs/provaSongs.txt");
+			for(Song s : songs)
+			{
+				s.Print();
+			}
+		}
+		catch(IOException e1)
+		{
+			System.err.println("No existeix l'arxiu: " + e1.getMessage());
+		}
+
+		try
+		{
+			ArrayList<User> users = FileParser.GetUsers("data/users/provaUsers.txt");
+			for(User u : users)
+			{
+				u.Print();
+			}
+		}
+		catch(IOException e2)
+		{
+			System.err.println("No existeix l'arxiu: "  + e2.getMessage());
 		}
 	}
 }
