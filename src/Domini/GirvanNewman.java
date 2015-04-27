@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Set;
 
 
-public class GirvanNewman 
+public class GirvanNewman
 {
 	/**
 	 * Returns communities in the graph, using the GirvanNewman algorithm
@@ -70,6 +70,7 @@ public class GirvanNewman
 			e.GetFirst().SetWeight(e.GetSecond()); //Deberia restaurarlos ya que los edges se guardan por referencia
 		}
 		//
+		
 		return connectedComponents;
 	}
 	

@@ -10,7 +10,9 @@ import Domini.GirvanNewman;
 import Domini.Graph;
 import Domini.Edge;
 import Domini.Node;
+import Domini.Solution;
 import Domini.Song;
+import Domini.SongGraph;
 import Domini.SongRelation;
 import Domini.User;
 import Persistencia.FileManager;
@@ -18,12 +20,12 @@ import Persistencia.FileParser;
 
 public class Main 
 {
-	private static Graph<Song, SongRelation> songGraph;
+	private static SongGraph songGraph;
 	
 	public static void main(String[] args)
 	{
 		//Example of the use of Graph class
-		songGraph = new Graph<Song, SongRelation>();
+		songGraph = new SongGraph();
 		
 		Song a = new Song("A", "A"); songGraph.AddNode(a);
 		Song b = new Song("B", "A"); songGraph.AddNode(b);
@@ -60,39 +62,37 @@ public class Main
 
     	System.out.println(" ");
 
-		ArrayList< Set<Song> > solution = GirvanNewman.GetSolution(songGraph, 6); //Get el conjunt de llistes de Songs
+    	ArrayList< Set<Song> > rawSolution = GirvanNewman.GetSolution(songGraph, 6); //Get el conjunt de llistes de Songs
 		int foo = 0;
-		for(Set<Song> songList : solution)
+		for(Set<Song> songList : rawSolution)
 		{
-			System.out.println("Song List " + (++foo) +":");
+			System.out.println("Song List " + (++foo) + ":");
 			for(Song s : songList) System.out.println("-" + s.GetId());
 			System.out.println(" ");
+		}
+		
+		Solution solution = new Solution(songGraph, "GirvanNewman", rawSolution, 0.5f);
+		try 
+		{
+			FileManager.SaveSolution(solution);
+		} 
+		catch (IOException e3) 
+		{
+			e3.printStackTrace();
 		}
 		
 		try
 		{
 			ArrayList<Song> songs = FileParser.GetSongs("data/songs/provaSongs.txt");
-			for(Song s : songs)
-			{
-				s.Print();
-			}
+			for(Song s : songs) s.Print();
 		}
-		catch(IOException e1)
-		{
-			System.err.println("No existeix l'arxiu: " + e1.getMessage());
-		}
+		catch(IOException e1) { System.err.println("No existeix l'arxiu: " + e1.getMessage()); }
 
 		try
 		{
 			ArrayList<User> users = FileParser.GetUsers("data/users/provaUsers.txt");
-			for(User u : users)
-			{
-				u.Print();
-			}
+			for(User u : users) u.Print();
 		}
-		catch(IOException e2)
-		{
-			System.err.println("No existeix l'arxiu: "  + e2.getMessage());
-		}
+		catch(IOException e2) { System.err.println("No existeix l'arxiu: "  + e2.getMessage()); }
 	}
 }

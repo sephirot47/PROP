@@ -133,6 +133,15 @@ public class Graph <N extends Node, E extends Edge>
 		    }
 	    }
 	}
+
+	/**
+	 * Removes all the edges.
+	 */
+	public void RemoveAllEdges()
+	{
+		Set<E> edges = GetAllEdges();
+		for(E e : edges) RemoveEdge(e);
+	}
 	//////////////////////////////////////////////////////////////////////
 	
 	

@@ -70,7 +70,7 @@ public class Song extends Node
 	}
 	
 	public String GetAuthor() { return author; }
-	public String GetTitle() { return author; }
+	public String GetTitle() { return title; }
 	public int GetDuration() { return duration; }
 	public int GetYear() { return year; }
 	public ArrayList<String> GetStyles() { return styles; }

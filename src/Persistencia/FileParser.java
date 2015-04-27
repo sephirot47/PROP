@@ -20,7 +20,7 @@ public class FileParser
 	{
 		ArrayList<User> users = new ArrayList<User>();
 		
-		ArrayList<String> fileLines = FileManager.loadData(filepath);
+		ArrayList<String> fileLines = FileManager.LoadData(filepath);
 		for(String line : fileLines)
 		{
 			User u = FileParser.GetUser(line);
@@ -40,7 +40,7 @@ public class FileParser
 	{
 		ArrayList<Song> songs = new ArrayList<Song>();
 		
-		ArrayList<String> fileLines = FileManager.loadData(filepath);
+		ArrayList<String> fileLines = FileManager.LoadData(filepath);
 		for(String line : fileLines)
 		{
 			songs.add(FileParser.GetSong(line));
@@ -53,7 +53,7 @@ public class FileParser
 	{
 		ArrayList<Reproduction> reproductions = new ArrayList<Reproduction>();
 		
-		ArrayList<String> fileLines = FileManager.loadData(filepath);
+		ArrayList<String> fileLines = FileManager.LoadData(filepath);
 		for(String line : fileLines)
 		{
 			reproductions.add(FileParser.GetReproduction(line));
