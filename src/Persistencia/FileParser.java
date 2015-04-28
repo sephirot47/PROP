@@ -10,8 +10,11 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import Domini.Edge;
 import Domini.Reproduction;
 import Domini.Song;
+import Domini.SongGraph;
+import Domini.SongRelation;
 import Domini.User;
 
 public class FileParser
@@ -60,6 +63,33 @@ public class FileParser
 		}
 		
 		return reproductions;
+	}
+	
+	public static SongGraph GetGraph(String filepath) throws IOException
+	{
+		SongGraph g = new SongGraph();
+		ArrayList<String> lines = FileManager.LoadData(filepath);
+		ArrayList<Song> songs = new ArrayList<Song>(); //2 be able to get the index of each node
+		for(String line : lines)
+		{
+			if(line.charAt(0) == '(') //nodes (author,title)
+			{
+				String author = line.substring(1, line.indexOf(','));
+				String title = line.substring(line.indexOf(',') + 1, line.indexOf(')'));
+				Song s = new Song(author, title);
+				g.AddNode(s);
+				songs.add(s);
+			}
+			else //edges
+			{
+				String fields[] = line.split(";");
+				int index0 = Integer.parseInt(fields[0]), index1 = Integer.parseInt(fields[1]);
+				float weight = Float.parseFloat(fields[2]);
+				SongRelation e = new SongRelation();
+				g.AddEdge(songs.get(index0), songs.get(index1), e);	
+			}
+		}
+		return g;
 	}
 	
 	private static Reproduction GetReproduction(String line)

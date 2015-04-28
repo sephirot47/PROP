@@ -59,7 +59,7 @@ public class Main
 		songGraph.AddEdge(y, h, new SongRelation());
 		songGraph.AddEdge(y, k, new SongRelation());
 		songGraph.AddEdge(x, y, new SongRelation());
-
+		
     	System.out.println(" ");
 
     	ArrayList< Set<Song> > rawSolution = GirvanNewman.GetSolution(songGraph, 6); //Get el conjunt de llistes de Songs
@@ -94,5 +94,14 @@ public class Main
 			for(User u : users) u.Print();
 		}
 		catch(IOException e2) { System.err.println("No existeix l'arxiu: "  + e2.getMessage()); }
+		
+		SongGraph entrada = null;
+		try {
+			entrada = FileParser.GetGraph("data/solutions/solution_27-04-2015 13:43:12.647/entrada.txt");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		entrada.Print();
 	}
 }
