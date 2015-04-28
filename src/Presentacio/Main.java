@@ -101,7 +101,15 @@ public class Main
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
 		entrada.Print();
+		
+		SongGraph s = new SongGraph();
+		try {
+			s.LoadSongs();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		s.Print();
 	}
 }
