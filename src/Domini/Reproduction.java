@@ -2,8 +2,8 @@ package Domini;
 
 public class Reproduction
 {
-	String songAuthor, songTitle;
-	int time; //en segons
+	private String songAuthor, songTitle;
+	private int time; //en segons
 	
 	public Reproduction(String author,String title, int time)
 	{
@@ -18,4 +18,29 @@ public class Reproduction
 		System.out.println(songTitle);
 		System.out.println(time);
 	}
+	
+	public String GetSongAuthor() {
+		return songAuthor;
+	}
+
+	public void SetSongAuthor(String songAuthor) {
+		this.songAuthor = songAuthor;
+	}
+
+	public String GetSongTitle() {
+		return songTitle;
+	}
+
+	public void SetSongTitle(String songTitle) {
+		this.songTitle = songTitle;
+	}
+
+	public int GetTime() {
+		return time;
+	}
+
+	public void SetTime(int time) {
+		this.time = time;
+	}
+
 }

@@ -1,6 +1,7 @@
 package Domini;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class Song extends Node
 {	
@@ -85,6 +86,32 @@ public class Song extends Node
 		for(int i = 0; i < styles.size(); ++i) 
 			System.out.println("Style " + i + ": " + styles.get(i));
     	System.out.println("------");
+	}
+	
+	/*
+	 * Returns the mean of the age of all the users who have listened to this song
+	 */
+	public float GetMeanUserAge()
+	{
+		float sum = 0.0f;
+		int usersWhoHaveListenedToThisAwesomeOneHourSong = 0;
+		
+		Set<User> users = UserManager.GetUsers();
+		for(User u : users)
+		{
+			ArrayList<Reproduction> repros = u.GetReproductions();
+			for(Reproduction r : repros)
+			{
+				if(r.GetSongAuthor().equals(author) && r.GetSongTitle().equals(title))
+				{
+					sum += u.GetAge();
+					++usersWhoHaveListenedToThisAwesomeOneHourSong;
+					break; //Nomes suma una vegada per user
+				}
+			}
+		}
+		
+		return sum / usersWhoHaveListenedToThisAwesomeOneHourSong;
 	}
 
 	@Override

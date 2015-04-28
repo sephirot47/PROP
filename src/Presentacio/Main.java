@@ -13,8 +13,10 @@ import Domini.Node;
 import Domini.Solution;
 import Domini.Song;
 import Domini.SongGraph;
+import Domini.SongManager;
 import Domini.SongRelation;
 import Domini.User;
+import Domini.UserManager;
 import Persistencia.FileManager;
 import Persistencia.FileParser;
 
@@ -81,20 +83,6 @@ public class Main
 			e3.printStackTrace();
 		}
 		
-		try
-		{
-			ArrayList<Song> songs = FileParser.GetSongs("data/songs/provaSongs.txt");
-			for(Song s : songs) s.Print();
-		}
-		catch(IOException e1) { System.err.println("No existeix l'arxiu: " + e1.getMessage()); }
-
-		try
-		{
-			ArrayList<User> users = FileParser.GetUsers("data/users/provaUsers.txt");
-			for(User u : users) u.Print();
-		}
-		catch(IOException e2) { System.err.println("No existeix l'arxiu: "  + e2.getMessage()); }
-		
 		SongGraph entrada = null;
 		try {
 			entrada = FileParser.GetGraph("data/solutions/solution_27-04-2015 13:43:12.647/entrada.txt");
@@ -107,9 +95,11 @@ public class Main
 		try {
 			s.LoadSongs();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		s.Print();
+		
+		for(Song songu : SongManager.GetSongs()) songu.Print();
+		for(User user : UserManager.GetUsers()) user.Print();
 	}
 }

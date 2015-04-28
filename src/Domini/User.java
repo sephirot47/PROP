@@ -56,14 +56,17 @@ public class User {
     
     public void Print()
     {
-    	System.out.println("------");
-    	System.out.println(name);
-    	System.out.println(age);
-    	System.out.println("---");
+    	System.out.println("--- User ----------");
+    	System.out.println("Name: " + name);
+    	System.out.println("Age: " + age);
+    	System.out.println("Reproductions of " + name + ":");
+		System.out.println("_____");
     	for(Reproduction r : reproductions)
     	{
     		r.Print();
+    		System.out.println("_____");
     	}
     	System.out.println("------");
+    	System.out.println("");
     }
 }
