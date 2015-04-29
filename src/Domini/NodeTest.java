@@ -16,6 +16,12 @@ public class NodeTest extends TestCase
 
 	public void test() 
 	{
-		assertEquals(111, 111);
+		class TestNode extends Node
+		{
+			public String GetId() { return "potato"; }
+		}
+		
+		TestNode n = new TestNode();
+		assertEquals("potato", n.GetId());
 	}
 }
