@@ -4,6 +4,6 @@ public class UserDriver
 {
 	public static void main(String[] args) 
 	{
-		junit.textui.TestRunner.run(SongTest.class);
+		junit.textui.TestRunner.run(UserTest.class);
 	}
 }
