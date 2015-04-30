@@ -203,10 +203,6 @@ public class FileParserTest extends TestCase
 		
 		g2 = FileParser.GetGraph("tests/graph2.txt");
 		
-		g1.Print();
-		System.out.println("*********");
-		g2.Print();
-		
 		assertEquals(g1, g2);
 	}
 	
