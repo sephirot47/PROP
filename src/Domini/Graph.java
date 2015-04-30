@@ -3,6 +3,7 @@ package Domini;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 
@@ -137,18 +138,18 @@ public class Graph <N extends Node, E extends Edge>
 	 */
 	public void RemoveEdge(E edge)
 	{
-		for(HashMap<N,E> adjList : graph.values())
+		Iterator it1 = graph.values().iterator();
+		while(it1.hasNext())
 		{
-			for(E nodeEdge : adjList.values())
+			HashMap<N,E> adjList = (HashMap<N,E>) it1.next();
+			Iterator it2 = adjList.keySet().iterator();
+			while(it2.hasNext())
 			{
-		    	if(edge.equals(nodeEdge))
-		    	{
-		    		adjList.remove(nodeEdge);
-		    	}
-		    }
-	    }
+				Node adjNode = (Node)it2.next();
+				if(adjList.get(adjNode) == edge) it2.remove();
+			}
+		}
 	}
-
 	/**
 	 * Removes all the edges.
 	 */
