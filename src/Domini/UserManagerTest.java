@@ -23,67 +23,63 @@ public class UserManagerTest extends TestCase
 		//TEST 1
 		Set<User> usersRead = UserManager.GetUsers("tests/users1.txt", "tests"); //read from file
 		Set<User> users = new HashSet<User>(); //created by us
-	
-		assertFalse(UserSetsEquals(users, usersRead));
+
+		assertFalse(users.equals(usersRead));
 		
-		users.add(new User("a", 25));
-		assertTrue(UserSetsEquals(users, usersRead));
+		User u = new User("a", 12);
+		u.AddReproduction(new Reproduction("a", "b", 20));
+		u.AddReproduction(new Reproduction("a", "b", 30));
+		users.add(u);
+		assertFalse(SetsEquals(users, usersRead));
+		
+		u.AddReproduction(new Reproduction("a", "b", 592));
+		assertTrue(SetsEquals(users, usersRead));
 		
 		users.add(new User("xza", 123));
-		assertFalse(UserSetsEquals(users, usersRead));
+		assertFalse(SetsEquals(users, usersRead));
 		
 		//TEST 2
 		usersRead.clear();
 		usersRead  = UserManager.GetUsers("tests/users2.txt", "tests"); //read from file
 		users.clear();
+
+		User u2 = new User("BbsdA124^!", 78);
+		u2.AddReproduction(new Reproduction("xcvxcv", "xcvvc", 20));
+		u2.AddReproduction(new Reproduction("xcvxcv", "ioppoi", 30));
+		users.add(u2);
+		assertFalse(SetsEquals(users, usersRead));
 		
-		users.add(new User("a", 12));
-		users.add(new User("cxcvxcv asdas", 22));
-		users.add(new User("BbsdA124*^!", 78));
-		assertTrue(UserSetsEquals(users, usersRead)); //TEST20
+		User u3 = new User("a", 12);
+		u3.AddReproduction(new Reproduction("a", "b", 20));
+		u3.AddReproduction(new Reproduction("a", "b", 30));
+		u3.AddReproduction(new Reproduction("a", "b", 592));
+		users.add(u3);
+		assertFalse(SetsEquals(users, usersRead));
+
+		User u4 = new User("cxcvxcv asdas", 25);
+		users.add(u4);
+		assertFalse(SetsEquals(users, usersRead));
 		
+		u4.AddReproduction(new Reproduction("jkll", "kl", 20));
+		u4.AddReproduction(new Reproduction("jjjj", "jk", 30));
+		assertTrue(SetsEquals(users, usersRead));
+
 		users.add(new User("asdsad", 2));
-		assertFalse(UserSetsEquals(users, usersRead)); //TEST21
+		assertFalse(SetsEquals(users, usersRead));
 		
 		users.clear();
 		users.add(new User("xccvxxcv", 6));
-		assertFalse(UserSetsEquals(users, usersRead)); //TEST22
+		assertFalse(SetsEquals(users, usersRead));
 	}
 	
-	public boolean UserSetsEquals(Set<User> su1, Set<User> su2)
+	public <T> boolean SetsEquals(Set<T> ss1, Set<T> ss2)
 	{
-		for(User u : su1)
-		{
-			boolean trobatIgual = false;
-			for(User u2 : su2) 
-			{ 
-				if(u.GetName().equals(u2.GetName())) 
-				{
-					trobatIgual = true;
-				}
-			}
-			if(!trobatIgual) return false;
-		}
-		return su1.size() == su2.size();
-	}
-	
-	public void testUserSetsEquals()
-	{
-		Set<User> su1 = new HashSet<User>();
-		Set<User> su2 = new HashSet<User>();
+		//S'ha de passar a ArrayList perque si no, al comparar sets amb set.equals(set2), tambe compara
+		//els hashcodes, i nomes volem que compari amb la funcio T.equals, per aixo aquesta conversio.
+		ArrayList<T> ar1 = new ArrayList<T>(ss1);
+		ArrayList<T> ar2 = new ArrayList<T>(ss2);
 		
-		assertTrue(UserSetsEquals(su1, su2));
-	
-		su1.add(new User("asdsad", 202115));
-		assertFalse(UserSetsEquals(su1, su2));
-		
-		su1.add(new User("xcvxc", 122));
-		assertFalse(UserSetsEquals(su1, su2));
-		
-		su2.add(new User("asdsad", 202115));
-		assertFalse(UserSetsEquals(su1, su2));
-		
-		su2.add(new User("xcvxc", 122));
-		assertTrue(UserSetsEquals(su1, su2));
+		//No uso equals, ja que al venir de sets el ordre no importa 
+		return ar1.containsAll(ar2) && ar2.containsAll(ar1); //NO CAL TEST, ES UN AXIOMA DE TEORIA DE CONJUNTS
 	}
 }

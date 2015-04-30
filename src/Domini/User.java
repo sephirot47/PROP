@@ -69,4 +69,10 @@ public class User {
     	System.out.println("------");
     	System.out.println("");
     }
+    
+    public boolean equals(Object obj)
+    {
+    	User u = (User) obj;
+    	return GetName().equals(u.GetName()) && GetAge() == u.GetAge() && GetReproductions().equals(u.GetReproductions());
+    }
 }

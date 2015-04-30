@@ -95,6 +95,7 @@ public class FileParser
 	private static Reproduction GetReproduction(String line)
 	{
     	String fields[] = line.split(";");
+    	if(fields.length < 3) return null; 
     	String author = fields[0];
     	String title = fields[1];
     	int time = Integer.parseInt(fields[2]);
@@ -105,6 +106,7 @@ public class FileParser
     private static User GetUser(String line)
     {
     	String fields[] = line.split(";");
+    	if(fields.length < 2) return null; 
     	
     	String name = fields[0];
     	int age = Integer.parseInt(fields[1]);
@@ -115,6 +117,7 @@ public class FileParser
     private static Song GetSong(String line)
     {
     	String fields[] = line.split(";");
+    	if(fields.length < 7) return null; 
     	
     	String author = fields[0];
     	String title = fields[1];

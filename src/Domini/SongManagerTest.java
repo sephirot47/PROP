@@ -1,6 +1,7 @@
 package Domini;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,19 +25,19 @@ public class SongManagerTest extends TestCase
 		Set<Song> songsRead = SongManager.GetSongs("tests/songs1.txt"); //read from file
 		Set<Song> songs = new HashSet<Song>(); //created by us
 
-		assertFalse(SongSetsEquals(songs, songsRead));
+		assertFalse(SetsEquals(songs, songsRead)); 
 		
 		ArrayList<String> styles1 = new ArrayList<String>(); styles1.add("estil3");
 		songs.add(new Song("a", "b", 2015, styles1, 42));
 		
-		assertTrue(SongSetsEquals(songs, songsRead));
+		assertTrue(SetsEquals(songs, songsRead));
 		
 		songs.add(new Song("xza", "b123", 22215, styles1, 678));
-		assertFalse(SongSetsEquals(songs, songsRead));
+		assertFalse(SetsEquals(songs, songsRead));
 		
 		//TEST 2
 		songsRead.clear();
-		songsRead  = SongManager.GetSongs("tests/songs2.txt"); //read from file
+		songsRead = SongManager.GetSongs("tests/songs2.txt"); //read from file
 		songs.clear();
 		
 		ArrayList<String> styles20 = new ArrayList<String>(); 
@@ -46,68 +47,27 @@ public class SongManagerTest extends TestCase
 		styles30.add("s1"); styles30.add("s43534");
 		
 		songs.add(new Song("a", "b", 2015, new ArrayList<String>(), 42));
-		songs.add(new Song("c", "t", 2015, styles30, 212));
 		songs.add(new Song("c", "t", 2015, styles20, 212));
-		assertTrue(SongSetsEquals(songs, songsRead)); //TEST20
+		songs.add(new Song("x", "y", 2015, styles30, 212));
+		
+		assertTrue(SetsEquals(songs, songsRead));
 		
 		songs.add(new Song("asdsad", "asddas", 202115, styles20, 345));
-		assertFalse(SongSetsEquals(songs, songsRead)); //TEST21
+		assertFalse(SetsEquals(songs, songsRead));
 		
 		songs.clear();
 		songs.add(new Song("xccvxxcv", "xcv", 45, styles30, 2));
-		assertFalse(SongSetsEquals(songs, songsRead)); //TEST22
+		assertFalse(SetsEquals(songs, songsRead));
 	}
 	
-	public boolean SongSetsEquals(Set<Song> ss1, Set<Song> ss2)
+	public <T> boolean SetsEquals(Set<T> ss1, Set<T> ss2)
 	{
-		for(Song s : ss1)
-		{
-			boolean trobatIgual = false;
-			for(Song s2 : ss2) { if(s.Equals(s2)) {trobatIgual = true;}}
-			if(!trobatIgual) return false;
-		}
-		return ss1.size() == ss2.size();
-	}
-	
-	public void testSongSetsEquals()
-	{
-		Set<Song> ss1 = new HashSet<Song>();
-		Set<Song> ss2 = new HashSet<Song>();
-
-		ArrayList<String> styles1 = new ArrayList<String>(); 
-		ArrayList<String> styles2 = new ArrayList<String>(); 
+		//S'ha de passar a ArrayList perque si no, al comparar sets amb set.equals(set2), tambe compara
+		//els hashcodes, i nomes volem que compari amb la funcio T.equals, per aixo aquesta conversio.
+		ArrayList<T> ar1 = new ArrayList<T>(ss1);
+		ArrayList<T> ar2 = new ArrayList<T>(ss2);
 		
-		ss1.add(new Song("asdsad", "asddas", 202115, styles1, 345));
-		assertFalse(SongSetsEquals(ss1, ss2));
-		
-		ss1.add(new Song("xcvxc", "xcv", 123, styles1, 122));
-		assertFalse(SongSetsEquals(ss1, ss2));
-		
-		ss2.add(new Song("asdsad", "asddas", 202115, styles1, 345));
-		assertFalse(SongSetsEquals(ss1, ss2));
-		
-		ss2.add(new Song("xcvxc", "xcv", 123, styles1, 122));
-		assertTrue(SongSetsEquals(ss1, ss2));
-		
-		styles1.add("asda");
-		
-		ss1.add(new Song("fvgb", "cvb", 31, styles1, 12));
-		assertFalse(SongSetsEquals(ss1, ss2));
-		
-		ss2.add(new Song("fvgb", "cvb", 31, styles1, 12));
-		assertTrue(SongSetsEquals(ss1, ss2));
-		
-		styles2.add("asda");
-		ss1.add(new Song("fvgb", "cvb", 31, styles1, 12)); //different style arrays
-		assertFalse(SongSetsEquals(ss1, ss2));
-		ss2.add(new Song("fvgb", "cvb", 31, styles2, 12)); //different styles arrays
-		assertTrue(SongSetsEquals(ss1, ss2));
-		
-		styles1.add("aaaa"); styles1.add("bbbb");
-		styles2.add("bbbb"); styles2.add("aaaa");
-		ss2.add(new Song("fvgb", "cvb", 31, styles1, 12)); //different style order
-		assertFalse(SongSetsEquals(ss1, ss2));
-		ss1.add(new Song("fvgb", "cvb", 31, styles2, 12)); //different styles order
-		assertTrue(SongSetsEquals(ss1, ss2));
+		//No uso equals, ja que al venir de sets el ordre no importa 
+		return ar1.containsAll(ar2) && ar2.containsAll(ar1); //NO CAL TEST, ES UN AXIOMA DE TEORIA DE CONJUNTS
 	}
 }

@@ -43,8 +43,9 @@ public class Reproduction
 		this.time = time;
 	}
 	
-	public boolean Equals(Reproduction r) 
+	public boolean equals(Object obj) 
 	{
+		Reproduction r = (Reproduction) obj;
 		return GetTime() == r.GetTime() && 
 			   GetSongAuthor().equals(r.GetSongAuthor()) &&
 			   GetSongTitle().equals(r.GetSongTitle());

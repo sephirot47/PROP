@@ -21,6 +21,7 @@ public class Song extends Node
 	
 	public Song(String author, String title)
 	{
+		this.styles = new ArrayList<String>();
 		this.author = author;
 		this.title = title;
 	}	
@@ -120,10 +121,11 @@ public class Song extends Node
 		return author + ", " + title;
 	}
 	
-	public boolean Equals(Song s2)
+	public boolean equals(Object obj)
 	{
+		Song s2 = (Song) obj;
 		return GetAuthor().equals(s2.GetAuthor()) && GetTitle().equals(s2.GetTitle()) &&
 			   GetId().equals(s2.GetId()) && GetYear() == s2.GetYear() && GetDuration() == s2.GetDuration() &&
-			   GetStyles().containsAll(s2.GetStyles()) && GetStyles().size() == s2.GetStyles().size();
+			   GetStyles().containsAll(s2.GetStyles()) && s2.GetStyles().containsAll(GetStyles()); //No importa l'ordre dels styles
 	}
 }

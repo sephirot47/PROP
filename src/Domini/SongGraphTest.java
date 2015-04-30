@@ -64,7 +64,7 @@ public class SongGraphTest extends TestCase
 		sg.GenerateEdges(p);
 	}
 	
-	private void testGetNearbyReproductionsAportation()
+	public void testGetNearbyReproductionsAportation()
 	{
 		Ponderations p = new Ponderations();
 		SongGraph sg = new SongGraph();
@@ -90,11 +90,5 @@ public class SongGraphTest extends TestCase
 		sg.AddNode(s2);
 		sg.AddNode(s3);
 		sg.AddNode(s4);
-		
-	
-		
-	
 	}
-	
-	
 }
