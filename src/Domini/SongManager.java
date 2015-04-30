@@ -9,10 +9,9 @@ import Persistencia.FileParser;
 
 public class SongManager 
 {
-	
 	private static Set<Song> songs = new HashSet<Song>();
 	
-	public static Set<Song> GetSongs()
+	public static Set<Song> GetSongs(String filepath)
 	{
 		songs.clear();
 		
@@ -21,7 +20,7 @@ public class SongManager
 			ArrayList<Song> songsArray = new ArrayList<Song>();
 			try 
 			{
-				songsArray = FileParser.GetSongs("data/songs/songs.txt");
+				songsArray = FileParser.GetSongs(filepath);
 			} 
 			catch (IOException e) { e.printStackTrace(); }
 			

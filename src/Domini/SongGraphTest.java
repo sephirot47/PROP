@@ -1,8 +1,12 @@
 package Domini;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
+import Domini.GraphTest.E;
+import Domini.GraphTest.N;
 import junit.framework.TestCase;
 
 public class SongGraphTest extends TestCase 
@@ -17,48 +21,80 @@ public class SongGraphTest extends TestCase
 		super.setUp();
 	}
 
-	public void TestGenerateEdges()
+	class N extends Node
+	{
+		public String GetId() { return "potato"; }
+	}
+	
+	class E extends Edge
+	{
+		float weight;
+		public float GetWeight() { return weight;}
+		public void SetWeight(float weight) { this.weight = weight; }
+	}
+	public void testGenerateEdges()
 	{
 		Ponderations p = new Ponderations();
+		
 		SongGraph sg = new SongGraph();
+		
+		ArrayList<String> style = new ArrayList<String>();		
+		style.add("Rock");
+		
+		Song s = new Song("AC/DC","Thunderstruck",1990,style,292);
+		Song s1 = new Song("AC/DC","Highway to Hell",1979,style,284);
+		Song s2 = new Song("AC/DC","You Shook Me All Night Long",1980,style,212);
+		Song s3 = new Song("AC/DC","Hells Bells",1980,style,312);
+		Song s4 = new Song("AC/DC","T.N.T",1975,style,214);
+		SongRelation sr = new SongRelation();
+		sr.SetWeight(3.14f);
+		
+		p.SetAuthor(9);
+		p.SetDuration(8);
+		p.SetStyle(10);
+		p.SetUserAge(1);
+		
+		sg.AddNode(s);
+		sg.AddNode(s1);
+		sg.AddNode(s2);
+		sg.AddNode(s3);
+		sg.AddNode(s4);
+		sg.AddEdge(s, s1, sr);
 		
 		sg.GenerateEdges(p);
 	}
 	
-	private float GetNearbyReproductionsAportation(Song s1, Song s2) //Entre 0.0f y 1.0f
+	private void testGetNearbyReproductionsAportation()
 	{
-		float aportation = 0.0f;
-		int coincidences = 0;
+		Ponderations p = new Ponderations();
+		SongGraph sg = new SongGraph();
 		
-		Set<User> users = UserManager.GetUsers();
-		for(User u : users)
-		{
-			float userAportation = 0.0f;
-			int userCoincidences = 0;
-			ArrayList<Reproduction> repros = u.GetReproductions();
-			for(Reproduction r : repros)
-			{
-				if(r.GetSongAuthor().equals(s1.GetAuthor()) && r.GetSongTitle().equals(s1.GetTitle()))
-				{
-					float minTimeBetweenReproductions = Float.POSITIVE_INFINITY; 
-					for(Reproduction r2 : repros)
-					{
-						if(r == r2) continue;
-						if(r2.GetSongAuthor().equals(s2.GetAuthor()) && r2.GetSongTitle().equals(s2.GetTitle()))
-						{
-							float t1 = r.GetTime(), t2 = r2.GetTime();
-							float timeBetweenRepros = Math.abs(t1 - t2);
-							if(timeBetweenRepros < minTimeBetweenReproductions)
-								minTimeBetweenReproductions = timeBetweenRepros;
-						}
-					}
-					++userCoincidences;
-					userAportation += minTimeBetweenReproductions;
-				}
-			}
-			aportation += userAportation / userCoincidences;
-			++coincidences;
-		}
-		return aportation / coincidences;
+		ArrayList<String> style = new ArrayList<String>();		
+		style.add("Rock");
+		
+		Song s = new Song("AC/DC","Thunderstruck",1990,style,292);
+		Song s1 = new Song("AC/DC","Highway to Hell",1979,style,284);
+		Song s2 = new Song("AC/DC","You Shook Me All Night Long",1980,style,212);
+		Song s3 = new Song("AC/DC","Hells Bells",1980,style,312);
+		Song s4 = new Song("AC/DC","T.N.T",1975,style,214);
+		
+		
+		
+		p.SetAuthor(9);
+		p.SetDuration(1);
+		p.SetStyle(10);
+		p.SetUserAge(1);
+		
+		sg.AddNode(s);
+		sg.AddNode(s1);
+		sg.AddNode(s2);
+		sg.AddNode(s3);
+		sg.AddNode(s4);
+		
+	
+		
+	
 	}
+	
+	
 }

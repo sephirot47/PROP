@@ -119,4 +119,11 @@ public class Song extends Node
 	{
 		return author + ", " + title;
 	}
+	
+	public boolean Equals(Song s2)
+	{
+		return GetAuthor().equals(s2.GetAuthor()) && GetTitle().equals(s2.GetTitle()) &&
+			   GetId().equals(s2.GetId()) && GetYear() == s2.GetYear() && GetDuration() == s2.GetDuration() &&
+			   GetStyles().containsAll(s2.GetStyles()) && GetStyles().size() == s2.GetStyles().size();
+	}
 }
