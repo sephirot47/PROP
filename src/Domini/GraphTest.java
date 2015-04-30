@@ -311,19 +311,18 @@ public class GraphTest extends TestCase
 		e3.SetWeight(3.1415f);
 		e4.SetWeight(3.14159f);
 		
-		Set<N> p = new HashSet<N>(Arrays.asList(n,n1,n2));
-		Set<N> p2 = new HashSet<N>(Arrays.asList(n3,n4));
+		Set<Node> p = new HashSet<Node>(Arrays.asList(n,n1,n2));
+		Set<Node> p2 = new HashSet<Node>(Arrays.asList(n3,n4));
 		
-		ArrayList< Set<GraphTest.N> > result = new ArrayList< Set<GraphTest.N> >();
+		ArrayList< Set<Node> > result = new ArrayList< Set<Node> >();
 		
 		result.add(p);
 		result.add(p2);
 		
-		ArrayList< Set<GraphTest.N> > result2 = new ArrayList< Set<GraphTest.N> >();
+		ArrayList< Set<Node> > result2 = new ArrayList< Set<Node> >();
 		
-		result.add(p2);
-		result.add(p);
-		
+		result2.add(p2);
+		result2.add(p);
 		g.AddNode(n);
 		g.AddNode(n1);
 		g.AddNode(n2);
@@ -335,6 +334,7 @@ public class GraphTest extends TestCase
 		g.AddEdge(n3, n4, e3);
 		
 		
+		assertEquals(result.equals(g.GetConnectedComponents()) || result2.equals(g.GetConnectedComponents()), true);
 		
 		if(result.equals(g.GetConnectedComponents())) System.out.println("Equals");
 		else if(result2.equals(g.GetConnectedComponents())) System.out.println("Equals");
