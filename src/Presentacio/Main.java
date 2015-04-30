@@ -112,6 +112,6 @@ public class Main
 		s.Print();
 		
 		for(Song songu : SongManager.GetSongs("data/songs/songs.txt")) songu.Print();
-		for(User user : UserManager.GetUsers()) user.Print();
+		for(User user : UserManager.GetUsers("data/users/users.txt", "data/reproductions")) user.Print();
 	}
 }

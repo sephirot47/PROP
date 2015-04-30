@@ -60,7 +60,7 @@ public class SongManagerTest extends TestCase
 	
 	public boolean SongSetsEquals(Set<Song> ss1, Set<Song> ss2)
 	{
-		for(Song s : ss1) //songs i songsRead son iguals???
+		for(Song s : ss1)
 		{
 			boolean trobatIgual = false;
 			for(Song s2 : ss2) { if(s.Equals(s2)) {trobatIgual = true;}}
@@ -109,6 +109,5 @@ public class SongManagerTest extends TestCase
 		assertFalse(SongSetsEquals(ss1, ss2));
 		ss1.add(new Song("fvgb", "cvb", 31, styles2, 12)); //different styles order
 		assertTrue(SongSetsEquals(ss1, ss2));
-		
 	}
 }

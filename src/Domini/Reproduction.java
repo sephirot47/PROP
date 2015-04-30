@@ -42,5 +42,13 @@ public class Reproduction
 	public void SetTime(int time) {
 		this.time = time;
 	}
+	
+	public boolean Equals(Reproduction r) 
+	{
+		return GetTime() == r.GetTime() && 
+			   GetSongAuthor().equals(r.GetSongAuthor()) &&
+			   GetSongTitle().equals(r.GetSongTitle());
+	}
+
 
 }
