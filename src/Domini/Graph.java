@@ -25,6 +25,7 @@ public class Graph <N extends Node, E extends Edge>
 	 */
 	public void AddNode(N node)
 	{
+		if(graph.containsKey(node)) return;
 		graph.put(node, new HashMap<N, E>()); //Init its edge list
 	}
 
@@ -33,6 +34,7 @@ public class Graph <N extends Node, E extends Edge>
 	 */
 	public Set<N> GetAdjacentNodesTo(N node)
 	{
+		if(!graph.containsKey(node)) { System.err.println("The graph doesn't contain the node."); return null; }
 		return graph.get(node).keySet();
 	}
 
@@ -62,6 +64,8 @@ public class Graph <N extends Node, E extends Edge>
 	 */
 	public void RemoveNode(N node)
 	{	
+		if(!graph.containsKey(node)) return;
+		
 		//Get the nodes it was connected to
 	    for(N adjNode : graph.get(node).keySet()) //Remove every edge connected to the removed node
 	    {
@@ -85,6 +89,17 @@ public class Graph <N extends Node, E extends Edge>
 	 */
 	public void AddEdge(N node1, N node2, E edge)
 	{
+		if(!graph.containsKey(node1) || !graph.containsKey(node2))
+		{
+			System.err.println("node1 or node2 don't exist in the graph.");
+			return;
+		}
+		else if(GetAllEdges().contains(edge))
+		{
+			System.err.println("Can't add repeated edges. Use a new instance of Edge instead.");
+			return;
+		}
+
 		graph.get(node1).put(node2, edge);
 		graph.get(node2).put(node1, edge);
 	}
