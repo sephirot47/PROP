@@ -24,7 +24,7 @@ public class SongGraph extends Graph<Song, SongRelation>
 		float threshold = p.GetThreshold();
 		
 		Set<Song> songs = GetAllNodes();
-		Set<User> users = UserManager.GetUsers();
+		Set<User> users = UserManager.GetUsers("data/users/users.txt", "data/reproductions");
 		for(Song s : songs)
 		{
 			for(Song s2 : songs)
@@ -86,7 +86,7 @@ public class SongGraph extends Graph<Song, SongRelation>
 		float aportation = 0.0f;
 		int coincidences = 0;
 		
-		Set<User> users = UserManager.GetUsers();
+		Set<User> users = UserManager.GetUsers("data/users/users.txt", "data/reproductions");
 		for(User u : users)
 		{
 			float userAportation = 0.0f;

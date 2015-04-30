@@ -11,7 +11,7 @@ public class UserManager
 {
 	private static Set<User> users = new HashSet<User>();
 	
-	public static Set<User> GetUsers()
+	public static Set<User> GetUsers(String filepath, String reprosDir)
 	{
 		users.clear();
 		
@@ -20,7 +20,7 @@ public class UserManager
 			ArrayList<User> usersArray = new ArrayList<User>();
 			try 
 			{
-				usersArray = FileParser.GetUsers("data/users/users.txt");
+				usersArray = FileParser.GetUsers(filepath, reprosDir);
 			} 
 			catch (IOException e) { e.printStackTrace(); }
 			

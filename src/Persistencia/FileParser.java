@@ -19,17 +19,17 @@ import Domini.User;
 
 public class FileParser
 {
-	public static ArrayList<User> GetUsers(String filepath) throws IOException
+	public static ArrayList<User> GetUsers(String userFilepath, String reprosDir) throws IOException
 	{
 		ArrayList<User> users = new ArrayList<User>();
 		
-		ArrayList<String> fileLines = FileManager.LoadData(filepath);
+		ArrayList<String> fileLines = FileManager.LoadData(userFilepath);
 		for(String line : fileLines)
 		{
 			User u = FileParser.GetUser(line);
 			
 			//Afegim al user llegit les reproduccions corresponents
-			String reproductionsFilepath = "data/reproductions/" + u.GetName() + "Reproductions.txt";
+			String reproductionsFilepath = reprosDir + "/" + u.GetName() + "Reproductions.txt";
 			ArrayList<Reproduction> userReproductions = FileParser.GetReproductions(reproductionsFilepath);
 			u.AddReproductions(userReproductions);
 			
