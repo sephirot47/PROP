@@ -99,7 +99,7 @@ public class Main
 		}
 		s.Print();
 		
-		for(Song songu : SongManager.GetSongs()) songu.Print();
+		for(Song songu : SongManager.GetSongs("data/songs/songs.txt")) songu.Print();
 		for(User user : UserManager.GetUsers()) user.Print();
 	}
 }
