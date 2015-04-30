@@ -30,7 +30,7 @@ public class FileManager
 
     public static ArrayList<String> LoadData(String path) throws IOException
     {
-        ArrayList<String> list = new ArrayList(); //Creem array
+        ArrayList<String> list = new ArrayList<String>(); //Creem array
         
         Path fileToLoad = Paths.get(path); //generem un path amb l'string
         fileToLoad = fileToLoad.toAbsolutePath();
@@ -146,7 +146,6 @@ public class FileManager
     	SaveData(filedir + "communitiesSolution.txt",  lines);
     }
     
-    //TODO
     //path es un path a un fitxer existent
     //path deixa d'existir
     public boolean EraseData(String path) {
@@ -157,7 +156,6 @@ public class FileManager
           return file.delete();
     }
     
-    //TODO
     //path es un path no nul
     //retorna cert si path existeix
     public boolean Exists(String path){
@@ -170,7 +168,6 @@ public class FileManager
     	
     }
     
-    //TODO
     //path es un camí a un fitxer existent, newLine conté una linia de text
     //newLine queda concatenat a la ultima linia del fitxer de path
     public void AddData(String path, String newLine) throws IOException{
