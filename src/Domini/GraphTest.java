@@ -52,18 +52,20 @@ public class GraphTest extends TestCase
 		N n2 = new N();
 		
 		E e = new E();
+		E e1 = new E();
 		e.SetWeight(3.14f);
-		
-		Set<N> p = new HashSet<N>(Arrays.asList(n,n2));
+		e1.SetWeight(3.14f);
+		//Set<N> p = new HashSet<N>(Arrays.asList(n,n2));
 		
 		g.AddNode(n);
 		g.AddNode(n1);
 		g.AddNode(n2);
 		g.AddEdge(n, n1, e);
-		g.AddEdge(n2, n1, e);
+		g.AddEdge(n2, n1, e1);
 		g.GetAdjacentNodesTo(n1);
 		
-		assertEquals(p,g.GetAdjacentNodesTo(n1));
+		Set<Node> p = g.GetAdjacentNodesTo(n1);
+		assertEquals((p.contains(n2)&&(p.contains(n))),true);
 	}
 	public void testGetNodesConnectedBy()
 	{
@@ -71,15 +73,16 @@ public class GraphTest extends TestCase
 		N n = new N();
 		N n1 = new N();
 		E e = new E();
+		
+		g.AddNode(n);
+		g.AddNode(n1);
+		g.AddEdge(n, n1, e);
 		e.SetWeight(3.14f);
 		
-		Pair<N,N> PairNodes = new Pair<N,N>(n,n1);
+		Pair<Node, Node> p = g.GetNodesConnectedBy(e);
 		
-		g.AddNode(n1);
-		g.AddNode(n);
-		g.AddEdge(n, n1, e);
-		
-		assertEquals(PairNodes, g.GetNodesConnectedBy(e));
+		assertEquals((n == p.GetFirst()  || n1 == p.GetFirst()) && (n1 == p.GetSecond() || n == p.GetSecond()), true); //L'ordre en que surt es indeterminat
+	
 	}
 	public void testAddEdge()
 	{
@@ -190,7 +193,7 @@ public class GraphTest extends TestCase
 		g.AddEdge(n3, n4, e3);
 		g.AddEdge(n4, n, e4);
 		
-		Set<E> p = new HashSet<E>(Arrays.asList(e,e1,e2,e3,e4));
+		Set<E> p = new HashSet<E>(Arrays.asList(e1,e2,e3));
 		
 		g.AddNode(n);
 		g.AddNode(n1);
@@ -200,7 +203,7 @@ public class GraphTest extends TestCase
 		
 		g.RemoveNode(n);
 		
-		assertEquals(p,g.GetAllEdges());		
+		assertEquals(p, g.GetAllEdges());		
 	}
 	
 	public void testRemoveEdge()
@@ -224,7 +227,7 @@ public class GraphTest extends TestCase
 		e3.SetWeight(3.1415f);
 		e4.SetWeight(3.14159f);
 		
-		Set<E> p = new HashSet<E>(Arrays.asList(e,e1,e2,e3));
+		
 		
 		g.AddNode(n);
 		g.AddNode(n1);
@@ -239,8 +242,8 @@ public class GraphTest extends TestCase
 		g.AddEdge(n4, n, e4);
 		
 		g.RemoveEdge(e4);
-		
-		assertEquals(p,g.GetAllEdges());
+		Set<Edge> p = g.GetAllEdges();
+		assertEquals(p.contains(e4),false);
 		
 	}
 	
@@ -308,19 +311,18 @@ public class GraphTest extends TestCase
 		e3.SetWeight(3.1415f);
 		e4.SetWeight(3.14159f);
 		
-		Set<N> p = new HashSet<N>(Arrays.asList(n,n1,n2));
-		Set<N> p2 = new HashSet<N>(Arrays.asList(n3,n4));
+		Set<Node> p = new HashSet<Node>(Arrays.asList(n,n1,n2));
+		Set<Node> p2 = new HashSet<Node>(Arrays.asList(n3,n4));
 		
-		ArrayList< Set<GraphTest.N> > result = new ArrayList< Set<GraphTest.N> >();
+		ArrayList< Set<Node> > result = new ArrayList< Set<Node> >();
 		
 		result.add(p);
 		result.add(p2);
 		
-		ArrayList< Set<GraphTest.N> > result2 = new ArrayList< Set<GraphTest.N> >();
+		ArrayList< Set<Node> > result2 = new ArrayList< Set<Node> >();
 		
-		result.add(p2);
-		result.add(p);
-		
+		result2.add(p2);
+		result2.add(p);
 		g.AddNode(n);
 		g.AddNode(n1);
 		g.AddNode(n2);
@@ -332,6 +334,7 @@ public class GraphTest extends TestCase
 		g.AddEdge(n3, n4, e3);
 		
 		
+		assertEquals(result.equals(g.GetConnectedComponents()) || result2.equals(g.GetConnectedComponents()), true);
 		
 		if(result.equals(g.GetConnectedComponents())) System.out.println("Equals");
 		else if(result2.equals(g.GetConnectedComponents())) System.out.println("Equals");
@@ -371,7 +374,6 @@ public class GraphTest extends TestCase
 		g.AddEdge(n3, n4, e3);
 		g.AddEdge(n4, n, e4);
 		
-		//g.Print();
-		assertEquals(0, 0);
+		g.Print();
 	}
 }
