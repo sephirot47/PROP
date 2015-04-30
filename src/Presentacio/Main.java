@@ -26,9 +26,10 @@ public class Main
 	
 	public static void main(String[] args)
 	{
+		
 		//Example of the use of Graph class
 		songGraph = new SongGraph();
-		
+
 		Song a = new Song("A", "A"); songGraph.AddNode(a);
 		Song b = new Song("B", "A"); songGraph.AddNode(b);
 		Song c = new Song("C", "A"); songGraph.AddNode(c);
@@ -60,9 +61,20 @@ public class Main
 		songGraph.AddEdge(x, e, new SongRelation());
 		songGraph.AddEdge(y, h, new SongRelation());
 		songGraph.AddEdge(y, k, new SongRelation());
-		songGraph.AddEdge(x, y, new SongRelation());
+		SongRelation sr = new SongRelation();
+		songGraph.AddEdge(x, y, sr);
 		
     	System.out.println(" ");
+
+    	/*
+    	System.out.println("********************* ");
+    	songGraph.Print();
+    	System.out.println("********************* ");
+    	songGraph.RemoveEdge(sr);
+    	System.out.println("********************* ");
+    	songGraph.Print();
+    	System.out.println("********************* ");
+    	*/
 
     	ArrayList< Set<Song> > rawSolution = GirvanNewman.GetSolution(songGraph, 6); //Get el conjunt de llistes de Songs
 		int foo = 0;
