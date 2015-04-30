@@ -149,16 +149,39 @@ public class FileManager
     //TODO
     //path es un path a un fitxer existent
     //path deixa d'existir
-    public static void EraseData(String Path) {}
+    public boolean EraseData(String path) {
+    	  Path fileToLoad = Paths.get(path); //generem un path amb l'string
+          fileToLoad = fileToLoad.toAbsolutePath();
+          path = fileToLoad.toString();
+          File file = new File(path);
+          return file.delete();
+    }
     
     //TODO
     //path es un path no nul
     //retorna cert si path existeix
-    public static void Exists(String Path){}
+    public boolean Exists(String path){
+    	Path fileToLoad = Paths.get(path); //generem un path amb l'string
+        fileToLoad = fileToLoad.toAbsolutePath();
+        path = fileToLoad.toString();
+        File file = new File(path);
+        file.getParentFile().mkdirs();
+        if(file.exists()) return true; return false;
+    	
+    }
     
     //TODO
     //path es un camí a un fitxer existent, newLine conté una linia de text
     //newLine queda concatenat a la ultima linia del fitxer de path
-    public static void AddData(String Path, String newLine){}    
+    public void AddData(String path, String newLine) throws IOException{
+    	Path fileToLoad = Paths.get(path); //generem un path amb l'string
+        fileToLoad = fileToLoad.toAbsolutePath();
+        path = fileToLoad.toString();
+        FileWriter w = new FileWriter(path, true);
+        w.write(newLine);
+        w.write("\n");
+        w.close();
+    	
+    }    
 }
 
