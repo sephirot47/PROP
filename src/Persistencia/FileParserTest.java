@@ -125,7 +125,50 @@ public class FileParserTest extends TestCase
 
 	public void testGetReproductions() throws IOException
 	{
-		ArrayList<Reproduction> reprosRead = FileParser.GetReproductions("tests/repros");
+		ArrayList<Reproduction> reprosRead = FileParser.GetReproductions("tests/repros1.txt");
+		ArrayList<Reproduction> repros = new ArrayList<Reproduction>();
+		
+		repros.add(new Reproduction("jkll", "kl", 20));
+		assertFalse(reprosRead.containsAll(repros) && repros.containsAll(reprosRead));
+		
+		repros.add(new Reproduction("ababa", "lololol", 3042));
+		assertTrue(reprosRead.containsAll(repros) && repros.containsAll(reprosRead));
+
+		repros.add(new Reproduction("xzcczx", "zxcfdg", 3042));
+		assertFalse(reprosRead.containsAll(repros) && repros.containsAll(reprosRead));
+		
+		
+		//TEST2
+		reprosRead = FileParser.GetReproductions("tests/repros2.txt");
+		repros = new ArrayList<Reproduction>();
+		
+		//Molts i en desordre
+		repros.add(new Reproduction("aaa", "bbb", 111));
+		assertFalse(reprosRead.containsAll(repros) && repros.containsAll(reprosRead));
+		repros.add(new Reproduction("lll", "bbb", 222));
+		assertFalse(reprosRead.containsAll(repros) && repros.containsAll(reprosRead));
+		repros.add(new Reproduction("ccc", "bbb", 111));
+		assertFalse(reprosRead.containsAll(repros) && repros.containsAll(reprosRead));
+		repros.add(new Reproduction("fff", "bbb", 222));
+		assertFalse(reprosRead.containsAll(repros) && repros.containsAll(reprosRead));
+		repros.add(new Reproduction("ggg", "bbb", 111));
+		assertFalse(reprosRead.containsAll(repros) && repros.containsAll(reprosRead));
+		repros.add(new Reproduction("ddd", "bbb", 222));
+		assertFalse(reprosRead.containsAll(repros) && repros.containsAll(reprosRead));
+		repros.add(new Reproduction("eee", "bbb", 111));
+		assertFalse(reprosRead.containsAll(repros) && repros.containsAll(reprosRead));
+		repros.add(new Reproduction("hhh", "bbb", 222));
+		assertFalse(reprosRead.containsAll(repros) && repros.containsAll(reprosRead));
+		repros.add(new Reproduction("jjj", "bbb", 222));
+		assertFalse(reprosRead.containsAll(repros) && repros.containsAll(reprosRead));
+		repros.add(new Reproduction("kkk", "bbb", 111));
+		assertFalse(reprosRead.containsAll(repros) && repros.containsAll(reprosRead));
+		repros.add(new Reproduction("iii", "bbb", 111));
+		assertFalse(reprosRead.containsAll(repros) && repros.containsAll(reprosRead));
+		
+		//true now ^^
+		repros.add(new Reproduction("bbb", "bbb", 222));
+		assertTrue(reprosRead.containsAll(repros) && repros.containsAll(reprosRead));
 	}
 	
 	public void testGetGraph() throws IOException
