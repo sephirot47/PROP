@@ -52,18 +52,20 @@ public class GraphTest extends TestCase
 		N n2 = new N();
 		
 		E e = new E();
+		E e1 = new E();
 		e.SetWeight(3.14f);
-		
-		Set<N> p = new HashSet<N>(Arrays.asList(n,n2));
+		e1.SetWeight(3.14f);
+		//Set<N> p = new HashSet<N>(Arrays.asList(n,n2));
 		
 		g.AddNode(n);
 		g.AddNode(n1);
 		g.AddNode(n2);
 		g.AddEdge(n, n1, e);
-		g.AddEdge(n2, n1, e);
+		g.AddEdge(n2, n1, e1);
 		g.GetAdjacentNodesTo(n1);
 		
-		assertEquals(p,g.GetAdjacentNodesTo(n1));
+		Set<Node> p = g.GetAdjacentNodesTo(n1);
+		assertEquals((p.contains(n2)&&(p.contains(n))),true);
 	}
 	public void testGetNodesConnectedBy()
 	{
@@ -79,8 +81,8 @@ public class GraphTest extends TestCase
 		
 		Pair<Node, Node> p = g.GetNodesConnectedBy(e);
 		
-		assertEquals(n == p.GetFirst()  || n1 == p.GetSecond(), true); //L'ordre en que surt es indeterminat
-		assertEquals(n1 == p.GetFirst() || n == p.GetSecond(), true); //Per aixo s'ha de fer aixi el test
+		assertEquals((n == p.GetFirst()  || n1 == p.GetFirst()) && (n1 == p.GetSecond() || n == p.GetSecond()), true); //L'ordre en que surt es indeterminat
+	
 	}
 	public void testAddEdge()
 	{
@@ -191,7 +193,7 @@ public class GraphTest extends TestCase
 		g.AddEdge(n3, n4, e3);
 		g.AddEdge(n4, n, e4);
 		
-		Set<E> p = new HashSet<E>(Arrays.asList(e,e1,e2,e3,e4));
+		Set<E> p = new HashSet<E>(Arrays.asList(e1,e2,e3));
 		
 		g.AddNode(n);
 		g.AddNode(n1);
@@ -225,7 +227,7 @@ public class GraphTest extends TestCase
 		e3.SetWeight(3.1415f);
 		e4.SetWeight(3.14159f);
 		
-		Set<E> p = new HashSet<E>(Arrays.asList(e,e1,e2,e3));
+		
 		
 		g.AddNode(n);
 		g.AddNode(n1);
@@ -240,8 +242,8 @@ public class GraphTest extends TestCase
 		g.AddEdge(n4, n, e4);
 		
 		g.RemoveEdge(e4);
-		
-		assertEquals(p,g.GetAllEdges());
+		Set<Edge> p = g.GetAllEdges();
+		assertEquals(p.contains(e4),false);
 		
 	}
 	
