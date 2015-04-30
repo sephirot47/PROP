@@ -71,16 +71,15 @@ public class GraphTest extends TestCase
 		N n = new N();
 		N n1 = new N();
 		E e = new E();
-		
-		g.AddNode(n);
-		g.AddNode(n1);
-		g.AddEdge(n, n1, e);
 		e.SetWeight(3.14f);
 		
-		Pair<Node, Node> p = g.GetNodesConnectedBy(e);
+		Pair<N,N> PairNodes = new Pair<N,N>(n,n1);
 		
-		assertEquals(n == p.GetFirst()  || n1 == p.GetSecond(), true); //L'ordre en que surt es indeterminat
-		assertEquals(n1 == p.GetFirst() || n == p.GetSecond(), true); //Per aixo s'ha de fer aixi el test
+		g.AddNode(n1);
+		g.AddNode(n);
+		g.AddEdge(n, n1, e);
+		
+		assertEquals(PairNodes, g.GetNodesConnectedBy(e));
 	}
 	public void testAddEdge()
 	{
@@ -201,7 +200,7 @@ public class GraphTest extends TestCase
 		
 		g.RemoveNode(n);
 		
-		assertEquals(p, g.GetAllEdges());		
+		assertEquals(p,g.GetAllEdges());		
 	}
 	
 	public void testRemoveEdge()
@@ -372,6 +371,7 @@ public class GraphTest extends TestCase
 		g.AddEdge(n3, n4, e3);
 		g.AddEdge(n4, n, e4);
 		
-		g.Print();
+		//g.Print();
+		assertEquals(0, 0);
 	}
 }
