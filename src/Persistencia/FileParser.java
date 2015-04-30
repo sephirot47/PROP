@@ -86,13 +86,14 @@ public class FileParser
 				int index0 = Integer.parseInt(fields[0]), index1 = Integer.parseInt(fields[1]);
 				float weight = Float.parseFloat(fields[2]);
 				SongRelation e = new SongRelation();
+				e.SetWeight(weight);
 				g.AddEdge(songs.get(index0), songs.get(index1), e);	
 			}
 		}
 		return g;
 	}
 	
-	private static Reproduction GetReproduction(String line)
+	public static Reproduction GetReproduction(String line)
 	{
     	String fields[] = line.split(";");
     	if(fields.length < 3) return null; 
@@ -103,7 +104,7 @@ public class FileParser
     	return new Reproduction(author, title, time);
 	}
 	
-    private static User GetUser(String line)
+    public static User GetUser(String line)
     {
     	String fields[] = line.split(";");
     	if(fields.length < 2) return null; 
@@ -114,7 +115,7 @@ public class FileParser
     	return new User(name, age);
     }
 
-    private static Song GetSong(String line)
+    public static Song GetSong(String line)
     {
     	String fields[] = line.split(";");
     	if(fields.length < 7) return null; 

@@ -111,6 +111,9 @@ public class Graph <N extends Node, E extends Edge>
 	 */
 	public E GetEdge(N node1, N node2)
 	{
+		Set<N> allEdges = GetAllNodes();
+		if(!allEdges.contains(node1) || !allEdges.contains(node2)) return null;
+		
 		return graph.get(node1).get(node2);
 	}
 
@@ -200,7 +203,40 @@ public class Graph <N extends Node, E extends Edge>
 	}
 	//////////////////////////////////////////////////////////////////////
 	
-	
+	public boolean equals(Object o)
+	{
+		Graph<N,E> g = (Graph<N,E>) o;
+		
+		//S'ha de passar a ArrayList perque si no, al comparar sets amb set.equals(set2), tambe compara
+		//els hashcodes, i nomes volem que compari amb la funcio (Node/Edge).equals, 
+		//per aixo aquesta conversio rara.
+		ArrayList<N> nsG = new ArrayList<N>(g.graph.keySet());
+		ArrayList<N> nsThis = new ArrayList<N>(this.graph.keySet());
+		
+		//Los nodos han de ser los mismos
+		//Per comparar si son els mateixos sets, miro si es contenen l'un al altre :3
+		if(!nsG.containsAll(nsThis) || !nsThis.containsAll(nsG)) return false;
+		for(N nG : nsG)
+		{
+			for(N nThis : nsThis)
+			{
+				if(nG.equals(nThis))
+				{
+					ArrayList<N> nsAdjG =  new ArrayList<N>(g.graph.get(nG).keySet());
+					ArrayList<E> esAdjG =  new ArrayList<E>(g.graph.get(nG).values());
+					ArrayList<N> nsAdjThis =  new ArrayList<N>(this.graph.get(nThis).keySet());
+					ArrayList<E> esAdjThis =  new ArrayList<E>(this.graph.get(nThis).values());
+					
+					//Els nodes adjacents a nG han de ser els mateixos
+					if(!nsAdjG.containsAll(nsAdjThis) || !nsAdjThis.containsAll(nsAdjG)) return false;
+					
+					//Els edges tambe
+					if(!esAdjG.containsAll(esAdjThis) || !esAdjThis.containsAll(esAdjG)) return false;
+				}
+			}
+		}
+		return true;
+	}
 	
 	//// UTILS ////////////
 	public void Print()

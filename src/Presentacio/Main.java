@@ -95,6 +95,7 @@ public class Main
 			e3.printStackTrace();
 		}
 		
+		/*
 		SongGraph entrada = null;
 		try {
 			entrada = FileParser.GetGraph("data/solutions/solution_27-04-2015 13:43:12.647/entrada.txt");
@@ -102,6 +103,7 @@ public class Main
 			e1.printStackTrace();
 		}
 		entrada.Print();
+		*/
 		
 		SongGraph s = new SongGraph();
 		try {

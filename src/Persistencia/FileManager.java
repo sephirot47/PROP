@@ -65,14 +65,14 @@ public class FileManager
         for (int i = 0; i < list.size(); ++i)
         {
             writer.write(list.get(i));
-            if (i != (list.size()-1))  writer.write('\n');
+            if (i != (list.size()-1))  writer.write("\r\n");
         }
         writer.close();    
     }
     
     public static void SaveSolution(Solution s) throws IOException
     {
-    	String date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS").format(new Date());
+    	String date = new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date());
     	String filedir = "data/solutions/solution_" + date + "/";
     	
     	//arxiu de Graph(entrada)
@@ -99,7 +99,7 @@ public class FileManager
     	ArrayList<Song> songsArray = new ArrayList<Song>();
     	for(Song s : songs) //Nodes pels que esta format el graph
     	{
-    		String line = "(" + s.GetAuthor() + ", " + s.GetTitle() + ")";
+    		String line = "(" + s.GetAuthor() + "," + s.GetTitle() + ")";
     		lines.add(line);
     		
     		songsArray.add(s);
@@ -148,7 +148,8 @@ public class FileManager
     
     //path es un path a un fitxer existent
     //path deixa d'existir
-    public boolean EraseData(String path) {
+    public boolean EraseData(String path) 
+    {
     	  Path fileToLoad = Paths.get(path); //generem un path amb l'string
           fileToLoad = fileToLoad.toAbsolutePath();
           path = fileToLoad.toString();
@@ -158,7 +159,8 @@ public class FileManager
     
     //path es un path no nul
     //retorna cert si path existeix
-    public boolean Exists(String path){
+    public boolean Exists(String path)
+    {
     	Path fileToLoad = Paths.get(path); //generem un path amb l'string
         fileToLoad = fileToLoad.toAbsolutePath();
         path = fileToLoad.toString();
@@ -168,15 +170,16 @@ public class FileManager
     	
     }
     
-    //path es un camí a un fitxer existent, newLine conté una linia de text
+    //path es un cami a un fitxer existent, newLine conte una linia de text
     //newLine queda concatenat a la ultima linia del fitxer de path
-    public void AddData(String path, String newLine) throws IOException{
+    public void AddData(String path, String newLine) throws IOException
+    {
     	Path fileToLoad = Paths.get(path); //generem un path amb l'string
         fileToLoad = fileToLoad.toAbsolutePath();
         path = fileToLoad.toString();
         FileWriter w = new FileWriter(path, true);
         w.write(newLine);
-        w.write("\n");
+        w.write("\r\n");
         w.close();
     	
     }    
