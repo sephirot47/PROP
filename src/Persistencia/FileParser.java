@@ -106,6 +106,7 @@ public class FileParser
 	
     public static User GetUser(String line)
     {
+
     	String fields[] = line.split(";");
     	if(fields.length < 2) return null; 
     	
