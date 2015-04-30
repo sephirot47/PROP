@@ -36,22 +36,36 @@ public class GraphTest extends TestCase
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
 		N n = new N();
+		
+		Set<N> p = new HashSet<N>(Arrays.asList(n));
+		
 		g.AddNode(n);
-			
+		
+		assertEquals(p,g.GetAllNodes());
+		
 	}
-	public void TestGetAdjacentNodesTo()
+	public void testGetAdjacentNodesTo()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
 		N n = new N();
 		N n1 = new N();
 		N n2 = new N();
 		
+		E e = new E();
+		e.SetWeight(3.14f);
+		
+		Set<N> p = new HashSet<N>(Arrays.asList(n,n2));
+		
 		g.AddNode(n);
 		g.AddNode(n1);
 		g.AddNode(n2);
+		g.AddEdge(n, n1, e);
+		g.AddEdge(n2, n1, e);
 		g.GetAdjacentNodesTo(n1);
+		
+		assertEquals(p,g.GetAdjacentNodesTo(n1));
 	}
-	public void TestGetNodesConnectedBy()
+	public void testGetNodesConnectedBy()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
 		N n = new N();
@@ -61,14 +75,14 @@ public class GraphTest extends TestCase
 		
 		Pair<N,N> PairNodes = new Pair<N,N>(n,n1);
 		
-		g.AddNode(n);
 		g.AddNode(n1);
+		g.AddNode(n);
 		g.AddEdge(n, n1, e);
 		
 		assertEquals(PairNodes,g.GetNodesConnectedBy(e));
 		
 	}
-	public void TestAddEdge()
+	public void testAddEdge()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
 		N n = new N();
@@ -79,10 +93,13 @@ public class GraphTest extends TestCase
 		g.AddNode(n);
 		g.AddNode(n1);
 		
+		Set<E> p = new HashSet<E>(Arrays.asList(e));
 		g.AddEdge(n, n1, e);
+		
+		assertEquals(p,g.GetAllEdges());
 	
 	}
-	public void TestGetAllNodes()
+	public void testGetAllNodes()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
 		N n = new N();
@@ -99,11 +116,11 @@ public class GraphTest extends TestCase
 		g.AddNode(n3);
 		g.AddNode(n4);
 		
-		if(p.equals(g.GetAllNodes())) System.out.println("Execution Complete and OK");
-		else System.out.println("Execution Complete and NOT OK");
+		assertEquals(p,g.GetAllNodes());
+		
 	}
 	
-	public void TestRemoveNode()
+	public void testRemoveNode()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
 		N n = new N();
@@ -122,11 +139,10 @@ public class GraphTest extends TestCase
 		
 		g.RemoveNode(n);
 		
-		if(p.equals(g.GetAllNodes())) System.out.println("Execution Complete and OK");
-		else System.out.println("Execution Complete and NOT OK");
+		assertEquals(p,g.GetAllNodes());
 		
 	}
-	public void TestGetEdge()
+	public void testGetEdge()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
 		N n = new N();
@@ -137,14 +153,12 @@ public class GraphTest extends TestCase
 		
 		g.AddNode(n);
 		g.AddNode(n1);
-		g.AddEdge(n, n, e);
-		
-		if(e.equals(g.GetEdge(n,n1))) System.out.println("Execution Complete and OK");
-		else System.out.println("Execution Complete and NOT OK");
+		g.AddEdge(n, n1, e);
 		
 		
+		assertEquals(e,g.GetEdge(n, n1));
 	}
-	public void TestGetAllEdges()
+	public void testGetAllEdges()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
 		N n = new N();
@@ -182,13 +196,10 @@ public class GraphTest extends TestCase
 		
 		g.RemoveNode(n);
 		
-		if(p.equals(g.GetAllEdges())) System.out.println("Execution Complete and OK");
-		else System.out.println("Execution Complete and NOT OK");
-		
-		
+		assertEquals(p,g.GetAllEdges());		
 	}
 	
-	public void RemoveEdge()
+	public void testRemoveEdge()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
 		N n = new N();
@@ -225,12 +236,11 @@ public class GraphTest extends TestCase
 		
 		g.RemoveEdge(e4);
 		
-		if(p.equals(g.GetAllEdges())) System.out.println("Execution Complete and OK");
-		else System.out.println("Execution Complete and NOT OK");
+		assertEquals(p,g.GetAllEdges());
 		
 	}
 	
-	public void RemoveAllEdges()
+	public void testRemoveAllEdges()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
 		N n = new N();
@@ -264,9 +274,16 @@ public class GraphTest extends TestCase
 		g.AddEdge(n4, n, e4);
 		
 		g.RemoveAllEdges();
+		
+		E e5 = new E();
+		e4.SetWeight(5f);
+		g.AddEdge(n4, n, e5);
+		
+		Set<E> p = new HashSet<E>(Arrays.asList(e5));
+		assertEquals(p,g.GetAllEdges());
 	}
 	
-	public void TestGetConnectedComponents()
+	public void testGetConnectedComponents()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
 		N n = new N();
@@ -316,7 +333,7 @@ public class GraphTest extends TestCase
 		else if(result2.equals(g.GetConnectedComponents())) System.out.println("Equals");
 		else System.out.println("Not equals");
 	}
-	public void TestPrint()
+	public void testPrint()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
 		N n = new N();

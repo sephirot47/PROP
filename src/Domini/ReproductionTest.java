@@ -14,20 +14,20 @@ public class ReproductionTest extends TestCase
 		super.setUp();
 	}
 
-	public void TestPrint()
+	public void testPrint()
 	{
 		Reproduction r = new Reproduction("AC/DC","T.N.T",101);
 		r.Print();
 		
 	}
 	
-	public void TestGetSongAuthor() 
+	public void testGetSongAuthor() 
 	{
 		Reproduction r = new Reproduction("AC/DC","T.N.T",101);
 		assertEquals("AC/DC",r.GetSongAuthor());
 	}
 
-	public void TestSetSongAuthor() 
+	public void testSetSongAuthor() 
 	{
 		Reproduction r = new Reproduction("Justin Bebier","T.N.T",101);
 		r.SetSongAuthor("AC/DC");
@@ -35,13 +35,13 @@ public class ReproductionTest extends TestCase
 		
 	}
 
-	public void TestGetSongTitle() 
+	public void testGetSongTitle() 
 	{
 		Reproduction r = new Reproduction("AC/DC","Highway to hell",208);
 		assertEquals("Highway to hell",r.GetSongTitle());
 	}
 
-	public void TestSetSongTitle() 
+	public void testSetSongTitle() 
 	{
 		Reproduction r = new Reproduction("AC/DC","La Macarena",208);
 		r.SetSongTitle("Highway to hell");
@@ -49,13 +49,13 @@ public class ReproductionTest extends TestCase
 		
 	}
 
-	public void TestGetTime() 
+	public void testGetTime() 
 	{
 		Reproduction r = new Reproduction("AC/DC","Thunderstruck",294);
 		assertEquals(294,r.GetTime());
 	}
 
-	public void TestSetTime() {
+	public void testSetTime() {
 		Reproduction r = new Reproduction("AC/DC","Thunderstruck",1);
 		r.SetTime(294);
 		assertEquals(294,r.GetTime());
