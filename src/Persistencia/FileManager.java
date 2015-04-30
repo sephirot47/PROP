@@ -148,7 +148,7 @@ public class FileManager
     
     //path es un path a un fitxer existent
     //path deixa d'existir
-    public boolean EraseData(String path) 
+    public static boolean EraseData(String path) 
     {
     	  Path fileToLoad = Paths.get(path); //generem un path amb l'string
           fileToLoad = fileToLoad.toAbsolutePath();
@@ -159,7 +159,7 @@ public class FileManager
     
     //path es un path no nul
     //retorna cert si path existeix
-    public boolean Exists(String path)
+    public static boolean Exists(String path)
     {
     	Path fileToLoad = Paths.get(path); //generem un path amb l'string
         fileToLoad = fileToLoad.toAbsolutePath();
@@ -172,7 +172,7 @@ public class FileManager
     
     //path es un cami a un fitxer existent, newLine conte una linia de text
     //newLine queda concatenat a la ultima linia del fitxer de path
-    public void AddData(String path, String newLine) throws IOException
+    public static void AddData(String path, String newLine) throws IOException
     {
     	Path fileToLoad = Paths.get(path); //generem un path amb l'string
         fileToLoad = fileToLoad.toAbsolutePath();
@@ -184,4 +184,3 @@ public class FileManager
     	
     }    
 }
-
