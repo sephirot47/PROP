@@ -5,6 +5,8 @@ import java.util.Set;
 
 public class Song extends Node
 {	
+	private static String forbiddenCharacters = "[\\\\/\\.;:\"*?<>\\|]*";
+	
 	String author;
 	String title;
 	int year;
@@ -21,49 +23,64 @@ public class Song extends Node
 	
 	public Song(String author, String title)
 	{
+		author.replaceAll(forbiddenCharacters, "");
+		title.replaceAll(forbiddenCharacters, "");
+
 		this.styles = new ArrayList<String>();
 		this.author = author;
 		this.title = title;
-	}	
+	}
 	
 	public Song(String author, String title, int year, ArrayList<String> styles, int duration)
 	{
+		author.replaceAll(forbiddenCharacters, "");
+		title.replaceAll(forbiddenCharacters, "");
+		
 		this.styles = new ArrayList<String>();
 		this.author = author;
 		this.title = title;
 		this.styles.addAll(styles);
+		for(String s : styles) s.replaceAll(forbiddenCharacters, "");
+		
 		this.duration = duration;
 		this.year = year;
 	}	
 	
 	public void SetSong(String author, String title, int year, ArrayList<String> styles, int duration)
 	{
+		author.replaceAll(forbiddenCharacters, "");
+		title.replaceAll(forbiddenCharacters, "");
+		
 		this.author = author;
 		this.title = title;
 		this.styles.addAll(styles);
+		for(String s : styles) s.replaceAll(forbiddenCharacters, "");
+		
 		this.duration = duration;
 		this.year = year;
 	}
 	
 	public void SetAuthorTitle(String author, String title)
 	{
+		author.replaceAll(forbiddenCharacters, "");
+		title.replaceAll(forbiddenCharacters, "");
+		
 		this.author = author;
 		this.title = title;
 	}
 	
-	public int AddStyles(ArrayList<String> est)
+	public void AddStyles(ArrayList<String> est)
 	{
-		int error = 0;
+		for(String s : est) s.replaceAll(forbiddenCharacters, "");
+		
 		if((styles.size() + est.size()) <= 3)
 		{
 			styles.addAll(est);
 		}
 		else
 		{
-			//retornar error
-			error = -1;
+			System.err.println("Can't add more than 3 styles to a song...");
 		}
-		return error;
 	}
 	
 	public void SetDuration(int dur)
