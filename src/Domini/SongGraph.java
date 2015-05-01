@@ -81,7 +81,7 @@ public class SongGraph extends Graph<Song, SongRelation>
 		}
 	}
 	
-	private float GetNearbyReproductionsAportation(Song s1, Song s2) //Entre 0.0f y 1.0f
+	public float GetNearbyReproductionsAportation(Song s1, Song s2) //Entre 0.0f y 1.0f
 	{
 		float aportation = 0.0f;
 		int coincidences = 0;
@@ -90,12 +90,25 @@ public class SongGraph extends Graph<Song, SongRelation>
 		for(User u : users)
 		{
 			float userAportation = 0.0f;
-			int userCoincidences = 0;
+			boolean findit1 = false;
+			boolean findit2 = false;
+			
+			Reproduction r1 = new Reproduction("buit","buit",0);
+			Reproduction r2 = new Reproduction("buit","buit",0);
 			ArrayList<Reproduction> repros = u.GetReproductions();
 			for(Reproduction r : repros)
-			{
-				if(r.GetSongAuthor().equals(s1.GetAuthor()) && r.GetSongTitle().equals(s1.GetTitle()))
-				{
+			{				
+				if(r.GetSongAuthor().equals(s1.GetAuthor()) && r.GetSongTitle().equals(s1.GetTitle())){
+					findit1 = true;
+					r1 = r;
+					
+				}
+				if(r.GetSongAuthor().equals(s2.GetAuthor()) && r.GetSongTitle().equals(s2.GetTitle())){
+					findit2 = true;
+					r2 = r;
+				}
+								
+				/*{
 					float minTimeBetweenReproductions = Float.POSITIVE_INFINITY; 
 					for(Reproduction r2 : repros)
 					{
@@ -110,11 +123,19 @@ public class SongGraph extends Graph<Song, SongRelation>
 					}
 					++userCoincidences;
 					userAportation += minTimeBetweenReproductions;
-				}
+				}*/
+
+			//if((findit1 && findit2)&&())
+				
 			}
-			aportation += userAportation / userCoincidences;
-			++coincidences;
+			//System.out.println(users.size());
+			System.out.println(u.GetName() + " " + (findit1&&findit2));
+			if((findit1&&findit2)&&(Math.abs(r1.GetTime() - r2.GetTime()) <= 180000)){
+				
+				aportation += 1.0/(float) users.size();
+				System.out.println(aportation);
+			}
 		}
-		return aportation / coincidences;
+		return aportation;
 	}
 }

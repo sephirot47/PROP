@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Date;
 
 import Domini.GraphTest.E;
 import Domini.GraphTest.N;
@@ -21,6 +22,8 @@ public class SongGraphTest extends TestCase
 		super.setUp();
 	}
 
+	
+	
 	class N extends Node
 	{
 		public String GetId() { return "potato"; }
@@ -64,9 +67,11 @@ public class SongGraphTest extends TestCase
 		sg.GenerateEdges(p);
 	}
 	
+	
 	public void testGetNearbyReproductionsAportation()
 	{
-		Ponderations p = new Ponderations();
+		
+		/*Ponderations p = new Ponderations();
 		SongGraph sg = new SongGraph();
 		
 		ArrayList<String> style = new ArrayList<String>();		
@@ -89,6 +94,18 @@ public class SongGraphTest extends TestCase
 		sg.AddNode(s1);
 		sg.AddNode(s2);
 		sg.AddNode(s3);
-		sg.AddNode(s4);
+		sg.AddNode(s4);*/
+		
+		SongGraph sg = new SongGraph();
+		
+		ArrayList<String> style = new ArrayList<String>();		
+		style.add("flamenquillo del weno");
+		
+		Song s = new Song("victor","cuando sarpa el hamor",2015,style,180);
+		style.remove(0);
+		style.add("ioroYOLO");
+		Song s1 = new Song("jfons","tramboliko",1867,style,45);
+		
+		System.out.println(sg.GetNearbyReproductionsAportation(s, s1));
 	}
 }
