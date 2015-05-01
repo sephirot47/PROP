@@ -187,10 +187,10 @@ public class FileManager
     
     //SAVE DATA FUNCTIONS (User, Song, Reproductions, etc)
     
-    public static void SaveUser(String filepath, User u) throws Exception
+    public static void SaveUser(String filepath, User u) throws IOException
     {
     	ArrayList<String> fileLines = new ArrayList<String>();
-    	String userLine = u.GetName() + ";" + u.GetAge();
+    	String songLine = u.GetName() + ";" + u.GetAge();
     	
     	if(Exists(filepath))
     	{
@@ -201,7 +201,7 @@ public class FileManager
 	    	{
 	    		if(line.startsWith(u.GetName()))
 	    		{
-	    			fileLines.set(fileLines.indexOf(line), userLine);
+	    			fileLines.set(fileLines.indexOf(line), songLine);
 	    			existedInFile = true;
 	    			break;
 	    		}
@@ -212,22 +212,75 @@ public class FileManager
 	    		EraseData(filepath);
 	    		SaveData(filepath, fileLines);
 	    	}
-	    	else AddData(filepath, userLine); //Append to the eof
+	    	else AddData(filepath, songLine); //Append to the eof
     	}
     	else
     	{
-    		fileLines.add(userLine);
+    		fileLines.add(songLine);
     		SaveData(filepath, fileLines);
     	}
     }
     
-    public static void SaveUsers(String filepath, ArrayList<User> users) throws Exception
+    public static void SaveUsers(String filepath, ArrayList<User> songs) throws IOException
     {
     	ArrayList<String> fileLines = new ArrayList<String>();
-    	for(User u : users)
+    	for(User u : songs)
     	{
-    		String userLine = u.GetName() + ";" + u.GetAge();
-    		fileLines.add(userLine);
+    		String songLine = u.GetName() + ";" + u.GetAge();
+    		fileLines.add(songLine);
+    	}
+		SaveData(filepath, fileLines);
+    }
+    
+    public static void SaveSong(String filepath, Song s) throws IOException
+    {
+    	ArrayList<String> fileLines = new ArrayList<String>();
+    	
+    	String songLine = s.GetAuthor() + ";" + s.GetTitle() + ";" + s.GetYear() + ";";
+    	for(String style : s.GetStyles()) songLine += style + ";";
+    	for(int i = s.GetStyles().size(); i < 3; ++i) songLine += "-;"; //Resta d'estils buits
+    	songLine += s.GetDuration();
+    	
+    	if(Exists(filepath))
+    	{
+    		fileLines = LoadData(filepath);
+    		
+	    	boolean existedInFile = false;
+	    	for(String line : fileLines)
+	    	{
+	    		if(line.startsWith(s.GetAuthor() + ";" + s.GetTitle()))
+	    		{
+	    			fileLines.set(fileLines.indexOf(line), songLine);
+	    			existedInFile = true;
+	    			break;
+	    		}
+	    	}
+	    	
+	    	if(existedInFile) //replace the line
+	    	{
+	    		EraseData(filepath);
+	    		SaveData(filepath, fileLines);
+	    	}
+	    	else AddData(filepath, songLine); //Append to the eof
+    	}
+    	else
+    	{
+    		fileLines.add(songLine);
+    		SaveData(filepath, fileLines);
+    	}
+    }
+    
+    public static void SaveSongs(String filepath, ArrayList<Song> songs) throws IOException
+    {
+    	ArrayList<String> fileLines = new ArrayList<String>();
+    	for(Song s : songs)
+    	{
+        	String songLine = s.GetAuthor() + ";" + s.GetTitle() + ";" + s.GetYear() + ";";
+        	for(String style : s.GetStyles()) songLine += style + ";";
+        	for(int i = s.GetStyles().size(); i < 3; ++i) songLine += "-;"; //Resta d'estils buits
+        	songLine += s.GetDuration();
+        	
+    		fileLines.add(songLine);
     	}
 		SaveData(filepath, fileLines);
     }
