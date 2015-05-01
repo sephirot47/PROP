@@ -1,0 +1,4 @@
+autor1;titol1;1
+autor2;titol2;2
+autor3;titol3;3
+autor2bis;titol2;2

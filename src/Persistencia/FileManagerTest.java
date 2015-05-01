@@ -3,6 +3,7 @@ package Persistencia;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Domini.Reproduction;
 import Domini.Song;
 import Domini.User;
 import junit.framework.TestCase;
@@ -219,5 +220,52 @@ public class FileManagerTest extends TestCase
 		 
 		 FileManager.SaveSongs("tests/songSaveProva2.txt", writtenSongs);
 		 assertEquals(FileManager.LoadData("tests/songSaveProva2.txt"), songsLines);
+	 }
+	 
+	 public static void testSaveReproduction() throws Exception
+	 {
+		Reproduction r1 = new Reproduction("autor1", "titol1", 1);
+		Reproduction r2 = new Reproduction("autor2", "titol2", 2);
+		Reproduction r3 = new Reproduction("autor3", "titol3", 3);
+		ArrayList<String> reproductionsLines = new ArrayList<String>();
+
+		FileManager.EraseData("tests/reproductionSaveProva1.txt"); //Comencem amb larxiu buit
+		
+		FileManager.SaveReproduction("tests/reproductionSaveProva1.txt", r1);
+		reproductionsLines.add("autor1;titol1;1");
+		assertEquals(FileManager.LoadData("tests/reproductionSaveProva1.txt"), reproductionsLines);
+		
+		FileManager.SaveReproduction("tests/reproductionSaveProva1.txt", r2);
+		reproductionsLines.add("autor2;titol2;2");
+		assertEquals(FileManager.LoadData("tests/reproductionSaveProva1.txt"), reproductionsLines);
+		
+		FileManager.SaveReproduction("tests/reproductionSaveProva1.txt", r3);
+		reproductionsLines.add("autor3;titol3;3");
+		assertEquals(FileManager.LoadData("tests/reproductionSaveProva1.txt"), reproductionsLines);
+		
+		r2.SetSongAuthor("autor2bis"); //Si canviem la primary key, es considera un nou user
+		FileManager.SaveReproduction("tests/reproductionSaveProva1.txt", r2);
+		assertFalse(FileManager.LoadData("tests/reproductionSaveProva1.txt").equals(reproductionsLines));
+		reproductionsLines.add("autor2bis;titol2;2");
+		assertEquals(FileManager.LoadData("tests/reproductionSaveProva1.txt"), reproductionsLines);
+	 }
+	 
+	 public static void testSaveReproductions() throws Exception
+	 {
+		 ArrayList<Reproduction> writtenReproductions = new ArrayList<Reproduction>();
+		 ArrayList<String> reproductionsLines = new ArrayList<String>();
+		 
+		 FileManager.EraseData("tests/reproductionSaveProva2.txt"); //Comencem amb larxiu buit
+		
+		 writtenReproductions.add(new Reproduction("autor1", "titol1", 1));
+		 writtenReproductions.add(new Reproduction("autor2", "titol1", 2));
+		 writtenReproductions.add(new Reproduction("autor3", "titol123", 3));
+		 
+		 reproductionsLines.add("autor1;titol1;1");
+		 reproductionsLines.add("autor2;titol1;2");
+		 reproductionsLines.add("autor3;titol123;3");
+		 
+		 FileManager.SaveReproductions("tests/reproductionSaveProva2.txt", writtenReproductions);
+		 assertEquals(FileManager.LoadData("tests/reproductionSaveProva2.txt"), reproductionsLines);
 	 }
 }

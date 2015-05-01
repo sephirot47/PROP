@@ -16,6 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import Domini.Pair;
+import Domini.Reproduction;
 import Domini.Solution;
 import Domini.Song;
 import Domini.SongGraph;
@@ -285,5 +286,33 @@ public class FileManager
 		SaveData(filepath, fileLines);
     }
     
+    
+    public static void SaveReproduction(String filepath, Reproduction r) throws IOException
+    {
+    	ArrayList<String> fileLines = new ArrayList<String>();
+    	
+    	String reproductionLine = r.GetSongAuthor() + ";" + r.GetSongTitle() + ";" + r.GetTime();
+    	
+    	if(Exists(filepath))
+    	{
+	    	AddData(filepath, reproductionLine); //Append to the eof
+    	}
+    	else
+    	{
+    		fileLines.add(reproductionLine);
+    		SaveData(filepath, fileLines);
+    	}
+    }
+    
+    public static void SaveReproductions(String filepath, ArrayList<Reproduction> reproductions) throws IOException
+    {
+    	ArrayList<String> fileLines = new ArrayList<String>();
+    	for(Reproduction r : reproductions)
+    	{
+    		String reproductionLine = r.GetSongAuthor() + ";" + r.GetSongTitle() + ";" + r.GetTime();
+    		fileLines.add(reproductionLine);
+    	}
+		SaveData(filepath, fileLines);
+    }
     //
 }
