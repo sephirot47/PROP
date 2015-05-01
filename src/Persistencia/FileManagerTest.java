@@ -127,4 +127,36 @@ public class FileManagerTest extends TestCase
 			e1.printStackTrace();
 		}
 	}
+	
+	 public static void testSaveUsers() throws Exception
+	 {
+		 ArrayList<User> writtenUsers = new ArrayList<User>();
+		 ArrayList<String> usersLines = new ArrayList<String>();
+		 
+		 FileManager.EraseData("tests/userSaveProva2.txt"); //Comencem amb larxiu buit
+		
+		 writtenUsers.add(new User("usuari1", 23));
+		 writtenUsers.add(new User("usuari2", 21));
+		 writtenUsers.add(new User("usuari3", 45));
+		 
+		 usersLines.add("usuari1;23");
+		 usersLines.add("usuari2;21");
+		 usersLines.add("usuari3;45");
+		 
+		 FileManager.SaveUsers("tests/userSaveProva2.txt", writtenUsers);
+		 assertEquals(FileManager.LoadData("tests/userSaveProva2.txt"), usersLines);
+		 
+		
+		 writtenUsers = new ArrayList<User>();
+		 usersLines = new ArrayList<String>();
+		 
+		 FileManager.EraseData("tests/userSaveProva3.txt"); //Comencem amb larxiu buit
+		 
+		 writtenUsers.add(new User("AAAAAAAAAAAAA", 213));
+		 FileManager.SaveUsers("tests/userSaveProva3.txt", writtenUsers);
+		 assertFalse(FileManager.LoadData("tests/userSaveProva3.txt").equals(usersLines));
+		 
+		 usersLines.add("AAAAAAAAAAAAA;213");
+		 assertEquals(FileManager.LoadData("tests/userSaveProva3.txt"), usersLines);
+	 }
 }
