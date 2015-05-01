@@ -20,6 +20,7 @@ import Domini.Solution;
 import Domini.Song;
 import Domini.SongGraph;
 import Domini.SongRelation;
+import Domini.User;
 
 public class FileManager
 {
@@ -65,7 +66,7 @@ public class FileManager
         for (int i = 0; i < list.size(); ++i)
         {
             writer.write(list.get(i));
-            if (i != (list.size()-1))  writer.write("\r\n");
+            writer.write("\r\n");
         }
         writer.close();    
     }
@@ -183,4 +184,42 @@ public class FileManager
         w.close();
     	
     }    
+    
+    //SAVE DATA FUNCTIONS (User, Song, Reproductions, etc)
+    
+    public static void SaveUser(String filepath, User u) throws Exception
+    {
+    	ArrayList<String> fileLines = new ArrayList<String>();
+    	String userLine = u.GetName() + ";" + u.GetAge();
+    	
+    	if(Exists(filepath))
+    	{
+    		fileLines = LoadData(filepath);
+    		
+	    	boolean existedInFile = false;
+	    	for(String line : fileLines)
+	    	{
+	    		if(line.startsWith(u.GetName()))
+	    		{
+	    			fileLines.set(fileLines.indexOf(line), userLine);
+	    			existedInFile = true;
+	    			break;
+	    		}
+	    	}
+	    	
+	    	if(existedInFile)
+	    	{
+	    		EraseData(filepath);
+	    		SaveData(filepath, fileLines);
+	    	}
+	    	else AddData(filepath, userLine); //Append to the eof
+    	}
+    	else
+    	{
+    		fileLines.add(userLine);
+    		SaveData(filepath, fileLines);
+    	}
+    }
+    
+    //
 }

@@ -26,6 +26,8 @@ public class Main
 	
 	public static void main(String[] args)
 	{
+		Song ssss = new Song("\"\\sdj<>*ks/a|mfk;s:.asd", "\"\\sdj<>*ksa|mf?k;s:.asd");
+		ssss.Print();
 		
 		//Example of the use of Graph class
 		songGraph = new SongGraph();
@@ -115,5 +117,11 @@ public class Main
 		
 		for(Song songu : SongManager.GetSongs("data/songs/songs.txt")) songu.Print();
 		for(User user : UserManager.GetUsers("data/users/users.txt", "data/reproductions")) user.Print();
+		
+		System.out.println("*********************");
+		System.out.println("*********************");
+		System.out.println("*********************");
+		
+		
 	}
 }
