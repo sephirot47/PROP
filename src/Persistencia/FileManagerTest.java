@@ -19,7 +19,6 @@ public class FileManagerTest extends TestCase
 	{
 		super.setUp();
 	}
-
 	
 	public void testLoadData() throws IOException
 	{
