@@ -49,11 +49,7 @@ public class SongGraphTest extends TestCase
 		Song s2 = new Song("AC/DC","You Shook Me All Night Long",1980,style,212);
 		Song s3 = new Song("AC/DC","Hells Bells",1980,style,312);
 		Song s4 = new Song("AC/DC","T.N.T",1975,style,214);
-		
-		
-		
-		
-		
+
 		p.SetAuthor(9);
 		p.SetDuration(8);
 		p.SetStyle(10);
@@ -66,25 +62,21 @@ public class SongGraphTest extends TestCase
 		//sg.AddNode(s3);
 		//sg.AddNode(s4);
 		
-		Set<Song> songs = new HashSet<Song>(Arrays.asList(s));
-		Set<Song> songs2 = new HashSet<Song>(Arrays.asList(s1));
+		Set<Song> songs = new HashSet<Song>();
+		songs.add(s);
+		songs.add(s1);
 		ArrayList<Set<Song>> ss = new ArrayList<Set<Song>>();
 		ss.add(0, songs);
-		ss.add(1, songs2);
-		ArrayList<Set<Song>> ss2 = new ArrayList<Set<Song>>();
-		ss.add(1, songs);
-		ss.add(0, songs2);
+		
 		
 		sg.GenerateEdges(p);
 		ArrayList<Set<Song>> Cjs = sg.GetConnectedComponents();
 		
 		sg.GetAllEdges();
 		
-		assertTrue(Cjs.containsAll(ss)||Cjs.contains(ss2));
 		
-		
-		
-		
+		assertEquals(Cjs,ss);
+			
 		
 	}
 	
