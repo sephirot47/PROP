@@ -179,6 +179,7 @@ public class FileManager
         fileToLoad = fileToLoad.toAbsolutePath();
         path = fileToLoad.toString();
         FileWriter w = new FileWriter(path, true);
+        w.write("\r\n");
         w.write(newLine);
         w.write("\r\n");
         w.close();
