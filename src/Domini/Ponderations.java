@@ -1,5 +1,12 @@
 package Domini;
 
+
+/**
+ * Contains a set of ponderations that can generate a solution.
+ * The higher the number of an element the more it will be taken into account for the
+ * final solution.
+ *
+ */
 public class Ponderations 
 {
 	private int duration,
