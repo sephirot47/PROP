@@ -29,7 +29,7 @@ public class SolutionTest extends TestCase
 		public void SetWeight(float weight) { this.weight = weight; }
 	}
 	
-	public void testSetEntrada()
+	/*public void testSetEntrada()
 	{
 		ArrayList<Set<Song>> songs = new ArrayList<Set<Song>>());
 		Graph<N,E> g = new Graph<N,E>();
@@ -47,5 +47,5 @@ public class SolutionTest extends TestCase
 	public String GetAlgorisme() { return algorisme; }
 	public float GetGenerationTime() { return generationTime; }
 	public SongGraph GetEntrada() { return entrada; }
-	public ArrayList<Set<Song>> GetSongCommunities() { return songCommunities; }
+	public ArrayList<Set<Song>> GetSongCommunities() { return songCommunities; }*/
 }

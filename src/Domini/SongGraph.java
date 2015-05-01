@@ -24,7 +24,7 @@ public class SongGraph extends Graph<Song, SongRelation>
 		float threshold = p.GetThreshold();
 		
 		Set<Song> songs = GetAllNodes();
-		Set<User> users = UserManager.GetUsers("data/users/users.txt", "data/reproductions");
+		//Set<User> users = UserManager.GetUsers("data/users/users.txt", "data/reproductions");
 		for(Song s : songs)
 		{
 			for(Song s2 : songs)
@@ -69,9 +69,10 @@ public class SongGraph extends Graph<Song, SongRelation>
 					if(userAgeAportation > 1.0f) userAgeAportation = 1.0f;
 					//
 					
-					//Nearby Reproductions (omg)
+					//Nearby Reproductions 
+					nearbyReproductionsAportation = GetNearbyReproductionsAportation(s,s2);
 					
-					//
+					affinity =  (authorAportation + styleAportation + durationAportation + yearAportation + userAgeAportation + nearbyReproductionsAportation)/(float) 6;
 					
 					SongRelation edge = new SongRelation();
 					edge.SetWeight(affinity);
@@ -84,12 +85,10 @@ public class SongGraph extends Graph<Song, SongRelation>
 	public float GetNearbyReproductionsAportation(Song s1, Song s2) //Entre 0.0f y 1.0f
 	{
 		float aportation = 0.0f;
-		int coincidences = 0;
 		
 		Set<User> users = UserManager.GetUsers("data/users/users.txt", "data/reproductions");
 		for(User u : users)
 		{
-			float userAportation = 0.0f;
 			boolean findit1 = false;
 			boolean findit2 = false;
 			
@@ -128,12 +127,8 @@ public class SongGraph extends Graph<Song, SongRelation>
 			//if((findit1 && findit2)&&())
 				
 			}
-			//System.out.println(users.size());
-			System.out.println(u.GetName() + " " + (findit1&&findit2));
 			if((findit1&&findit2)&&(Math.abs(r1.GetTime() - r2.GetTime()) <= 180000)){
-				
 				aportation += 1.0/(float) users.size();
-				System.out.println(aportation);
 			}
 		}
 		return aportation;
