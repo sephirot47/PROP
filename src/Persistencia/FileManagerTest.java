@@ -3,6 +3,7 @@ package Persistencia;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Domini.Song;
 import Domini.User;
 import junit.framework.TestCase;
 
@@ -94,38 +95,32 @@ public class FileManagerTest extends TestCase
 		User u2 = new User("usuari2", 21);
 		User u3 = new User("usuari3", 45);
 		ArrayList<String> usersLines = new ArrayList<String>();
-		try 
-		{
-			FileManager.EraseData("tests/userSaveProva1.txt"); //Comencem amb larxiu buit
-			
-			FileManager.SaveUser("tests/userSaveProva1.txt", u1);
-			usersLines.add("usuari1;23");
-			assertEquals(FileManager.LoadData("tests/userSaveProva1.txt"), usersLines);
-			
-			FileManager.SaveUser("tests/userSaveProva1.txt", u2);
-			usersLines.add("usuari2;21");
-			assertEquals(FileManager.LoadData("tests/userSaveProva1.txt"), usersLines);
-			
-			FileManager.SaveUser("tests/userSaveProva1.txt", u3);
-			usersLines.add("usuari3;45");
-			assertEquals(FileManager.LoadData("tests/userSaveProva1.txt"), usersLines);
-			
-			u2.SetAge(5478);
-			u2.SetName("usuari567");
-			FileManager.SaveUser("tests/userSaveProva1.txt", u2);
-			usersLines.add("usuari567;5478");
-			assertEquals(FileManager.LoadData("tests/userSaveProva1.txt"), usersLines);
-			
-			u2.SetName("usuari2");  //Modificarem una linia en especific
-			u2.SetAge(656);
-			FileManager.SaveUser("tests/userSaveProva1.txt", u2);
-			usersLines.set(1, "usuari2;656");
-			assertEquals(FileManager.LoadData("tests/userSaveProva1.txt"), usersLines);
-		} 
-		catch (Exception e1) 
-		{
-			e1.printStackTrace();
-		}
+	
+		FileManager.EraseData("tests/userSaveProva1.txt"); //Comencem amb larxiu buit
+		
+		FileManager.SaveUser("tests/userSaveProva1.txt", u1);
+		usersLines.add("usuari1;23");
+		assertEquals(FileManager.LoadData("tests/userSaveProva1.txt"), usersLines);
+		
+		FileManager.SaveUser("tests/userSaveProva1.txt", u2);
+		usersLines.add("usuari2;21");
+		assertEquals(FileManager.LoadData("tests/userSaveProva1.txt"), usersLines);
+		
+		FileManager.SaveUser("tests/userSaveProva1.txt", u3);
+		usersLines.add("usuari3;45");
+		assertEquals(FileManager.LoadData("tests/userSaveProva1.txt"), usersLines);
+		
+		u2.SetAge(5478);
+		u2.SetName("usuari567");
+		FileManager.SaveUser("tests/userSaveProva1.txt", u2);
+		usersLines.add("usuari567;5478");
+		assertEquals(FileManager.LoadData("tests/userSaveProva1.txt"), usersLines);
+		
+		u2.SetName("usuari2");  //Modificarem una linia en especific
+		u2.SetAge(656);
+		FileManager.SaveUser("tests/userSaveProva1.txt", u2);
+		usersLines.set(1, "usuari2;656");
+		assertEquals(FileManager.LoadData("tests/userSaveProva1.txt"), usersLines);
 	}
 	
 	 public static void testSaveUsers() throws Exception
@@ -158,5 +153,71 @@ public class FileManagerTest extends TestCase
 		 
 		 usersLines.add("AAAAAAAAAAAAA;213");
 		 assertEquals(FileManager.LoadData("tests/userSaveProva3.txt"), usersLines);
+	 }
+	 
+	 public static void testSaveSong() throws Exception
+	 {
+		Song s1 = new Song("autor1", "titol1", 2014, new ArrayList<String>(), 100);
+		Song s2 = new Song("autor2", "titol2", 222, new ArrayList<String>(), 200);
+		Song s3 = new Song("autor3", "titol3", 333, new ArrayList<String>(), 300);
+		ArrayList<String> songsLines = new ArrayList<String>();
+
+		FileManager.EraseData("tests/songSaveProva1.txt"); //Comencem amb larxiu buit
+		
+		FileManager.SaveSong("tests/songSaveProva1.txt", s1);
+		songsLines.add("autor1;titol1;2014;-;-;-;100");
+		assertEquals(FileManager.LoadData("tests/songSaveProva1.txt"), songsLines);
+		
+		FileManager.SaveSong("tests/songSaveProva1.txt", s2);
+		songsLines.add("autor2;titol2;222;-;-;-;200");
+		assertEquals(FileManager.LoadData("tests/songSaveProva1.txt"), songsLines);
+		
+		FileManager.SaveSong("tests/songSaveProva1.txt", s3);
+		songsLines.add("autor3;titol3;333;-;-;-;300");
+		assertEquals(FileManager.LoadData("tests/songSaveProva1.txt"), songsLines);
+		
+		s2.SetDuration(5478); //Si canviem la primary key, es considera un nou user
+		s2.SetAuthorTitle("aaa", "bbb");
+		FileManager.SaveSong("tests/songSaveProva1.txt", s2);
+		assertFalse(FileManager.LoadData("tests/songSaveProva1.txt").equals(songsLines));
+		songsLines.add("aaa;bbb;222;-;-;-;5478");
+		assertEquals(FileManager.LoadData("tests/songSaveProva1.txt"), songsLines);
+		
+		//Afegim estils, per veure si els guarda be
+		ArrayList<String> styles = new ArrayList<String>();
+		styles.add("Nightcore");
+		s3.AddStyles(styles);
+		FileManager.SaveSong("tests/songSaveProva1.txt", s3);
+		assertFalse(FileManager.LoadData("tests/songSaveProva1.txt").equals(songsLines));
+		songsLines.set(2, "autor3;titol3;333;Nightcore;-;-;300");
+		assertEquals(FileManager.LoadData("tests/songSaveProva1.txt"), songsLines);
+
+		//Guardar sense modificar no afecta
+		FileManager.SaveSong("tests/songSaveProva1.txt", s1);
+		FileManager.SaveSong("tests/songSaveProva1.txt", s2);
+		FileManager.SaveSong("tests/songSaveProva1.txt", s3);
+		FileManager.SaveSong("tests/songSaveProva1.txt", s1);
+		FileManager.SaveSong("tests/songSaveProva1.txt", s2);
+		FileManager.SaveSong("tests/songSaveProva1.txt", s3);
+		assertEquals(FileManager.LoadData("tests/songSaveProva1.txt"), songsLines);
+	 }
+	 
+	 public static void testSaveSongs() throws Exception
+	 {
+		 ArrayList<Song> writtenSongs = new ArrayList<Song>();
+		 ArrayList<String> songsLines = new ArrayList<String>();
+		 
+		 FileManager.EraseData("tests/songSaveProva2.txt"); //Comencem amb larxiu buit
+		
+		 writtenSongs.add(new Song("autor1", "titol1", 2014, new ArrayList<String>(), 120));
+		 writtenSongs.add(new Song("autor2", "titol1", 1997, new ArrayList<String>(), 180));
+		 writtenSongs.add(new Song("autor3", "titol123", 1870, new ArrayList<String>(), 60));
+		 
+		 songsLines.add("autor1;titol1;2014;-;-;-;120");
+		 songsLines.add("autor2;titol1;1997;-;-;-;180");
+		 songsLines.add("autor3;titol123;1870;-;-;-;60");
+		 
+		 FileManager.SaveSongs("tests/songSaveProva2.txt", writtenSongs);
+		 assertEquals(FileManager.LoadData("tests/songSaveProva2.txt"), songsLines);
 	 }
 }
