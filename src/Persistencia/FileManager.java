@@ -179,7 +179,6 @@ public class FileManager
         fileToLoad = fileToLoad.toAbsolutePath();
         path = fileToLoad.toString();
         FileWriter w = new FileWriter(path, true);
-        w.write("\r\n");
         w.write(newLine);
         w.write("\r\n");
         w.close();
@@ -220,6 +219,17 @@ public class FileManager
     		fileLines.add(userLine);
     		SaveData(filepath, fileLines);
     	}
+    }
+    
+    public static void SaveUsers(String filepath, ArrayList<User> users) throws Exception
+    {
+    	ArrayList<String> fileLines = new ArrayList<String>();
+    	for(User u : users)
+    	{
+    		String userLine = u.GetName() + ";" + u.GetAge();
+    		fileLines.add(userLine);
+    	}
+		SaveData(filepath, fileLines);
     }
     
     //
