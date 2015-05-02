@@ -318,63 +318,61 @@ public class FileManager
     
     //REMOVE AND ERASE
     
-    public static void RemoveSong(String Author, String Title) throws IOException{
+    public static void RemoveSong(String Author, String Title) throws IOException
+    {
     	String search = Author+";"+Title;
-
-		
-			File tempFile = new File("data/songs/songs2.txt");
-	    	BufferedReader br;
-			br = new BufferedReader(new FileReader("data/songs/songs.txt"));
-			PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
-	        
-	        String line = "";
-	        while ((line = br.readLine()) != null) {
-	        	
-	            if (!line.contains(search)) {
-	                pw.println(line);
-	                pw.flush();
-	            }
-	        }
-	        pw.close();
-	        br.close();
-	        
-	        File songs = new File("data/songs/songs.txt");
-	        songs.delete();
-	   
-	        tempFile.renameTo(songs);
-
+	
+		File tempFile = new File("data/songs/songs2.txt");
+    	BufferedReader br;
+		br = new BufferedReader(new FileReader("data/songs/songs.txt"));
+		PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+        
+        String line = "";
+        while ((line = br.readLine()) != null) {
+        	
+            if (!line.contains(search)) {
+                pw.println(line);
+                pw.flush();
+            }
+        }
+        pw.close();
+        br.close();
+        
+        File songs = new File("data/songs/songs.txt");
+        songs.delete();
+   
+        tempFile.renameTo(songs);
     }
     
     
-    public static void RemoveReproduction(String user, long time) throws IOException{
+    public static void RemoveReproduction(String user, long time) throws IOException
+    {
     	String search = String.valueOf(time);
-
-		
-			File tempFile = new File("data/reproductions/"+ user + "Reproductions2.txt");
-	    	BufferedReader br;
-			br = new BufferedReader(new FileReader("data/reproductions/"+ user + "Reproductions.txt"));
-			PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
-	        
-	        String line = "";
-	        while ((line = br.readLine()) != null) {
-	        	
-	            if (!line.contains(search)) {
-	                pw.println(line);
-	                pw.flush();
-	            }
-	        }
-	        pw.close();
-	        br.close();
-	        
-	        File repros = new File("data/reproductions/"+ user + "Reproductions.txt");
-	        repros.delete();
-	   
-	        tempFile.renameTo(repros);
-
+	
+		File tempFile = new File("data/reproductions/"+ user + "Reproductions2.txt");
+    	BufferedReader br;
+		br = new BufferedReader(new FileReader("data/reproductions/"+ user + "Reproductions.txt"));
+		PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+        
+        String line = "";
+        while ((line = br.readLine()) != null) {
+        	
+            if (!line.contains(search)) {
+                pw.println(line);
+                pw.flush();
+            }
+        }
+        pw.close();
+        br.close();
+        
+        File repros = new File("data/reproductions/"+ user + "Reproductions.txt");
+        repros.delete();
+   
+        tempFile.renameTo(repros);
     }
 
-    public static void RemoveSolution(String nomSolucio) throws IOException{
-    	
+    public static void RemoveSolution(String nomSolucio) throws IOException
+    {
     	File communities = new File("tests/" + nomSolucio + "/communities.txt");
     	File entrada = new File("tests/" + nomSolucio + "/entrada.txt");
     	File info = new File("tests/"+ nomSolucio + "/generationInfo.txt");
