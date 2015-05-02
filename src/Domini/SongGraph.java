@@ -76,8 +76,7 @@ public class SongGraph extends Graph<Song, SongRelation>
 					
 					affinity =  (authorAportation + styleAportation + durationAportation + yearAportation + userAgeAportation + nearbyReproductionsAportation)/(float) 6;
 					
-					System.out.println(authorAportation + " " + styleAportation + " " + durationAportation + " " + yearAportation + " " + userAgeAportation + " " + nearbyReproductionsAportation);
-					System.out.println(affinity + " " + threshold);
+				
 					SongRelation edge = new SongRelation();
 					edge.SetWeight(affinity);
 					if(affinity >= threshold) AddEdge(s, s2, edge);
