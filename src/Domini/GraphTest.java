@@ -487,7 +487,7 @@ public class GraphTest extends TestCase
 		
 		g6.AddNode(n3);
 		assertFalse(g5.equals(g6));
-		
+
 		g5.AddNode(n2);
 		assertTrue(g5.equals(g6)); //Ara si son iguals ^^
 	}

@@ -31,7 +31,7 @@ public class Graph <N extends Node, E extends Edge>
 			System.err.println("Can't add repeated nodes, create a new Node instead. Ignoring the AddNode");
 			return;
 		}      
-		else if(GetAllNodes().contains(node)) //Si tienen la misma id
+		else if(new ArrayList<Node>(GetAllNodes()).contains(node)) //Si tienen la misma id
 		{
 			System.err.println("Can't add two nodes with the same id.");
 			return;
