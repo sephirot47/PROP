@@ -102,7 +102,6 @@ public class GraphTest extends TestCase
 		g.AddEdge(n, n1, e);
 		
 		assertEquals(p,g.GetAllEdges());
-	
 	}
 	public void testGetAllNodes()
 	{
@@ -197,12 +196,6 @@ public class GraphTest extends TestCase
 		g.AddEdge(n4, n, e4);
 		
 		Set<E> p = new HashSet<E>(Arrays.asList(e1,e2,e3));
-		
-		g.AddNode(n);
-		g.AddNode(n1);
-		g.AddNode(n2);
-		g.AddNode(n3);
-		g.AddNode(n4);
 		
 		g.RemoveNode(n);
 		

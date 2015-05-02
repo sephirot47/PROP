@@ -26,7 +26,16 @@ public class Graph <N extends Node, E extends Edge>
 	 */
 	public void AddNode(N node)
 	{
-		if(graph.containsKey(node)) return;
+		if(graph.containsKey(node)) //Si son la misma instancia
+		{
+			System.err.println("Can't add repeated nodes, create a new Node instead. Ignoring the AddNode");
+			return;
+		}      
+		else if(GetAllNodes().contains(node)) //Si tienen la misma id
+		{
+			System.err.println("Can't add two nodes with the same id.");
+			return;
+		}
 		graph.put(node, new HashMap<N, E>()); //Init its edge list
 	}
 
