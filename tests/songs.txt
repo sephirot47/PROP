@@ -4,3 +4,4 @@ abraham;AC/DC;Thunderstruck;1990;Rock;292
 abraham;AC/DC;Highway to Hell;1979;Rock;284
 abraham;AC/DC;You Shook Me All Night Long;1980;Rock;212
 abraham;AC/DC;Hells Bells;1980;Rock;312
+abraham;AC/DC;T.N.T;1975;Rock;214
