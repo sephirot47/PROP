@@ -64,7 +64,11 @@ public class FileParser
 		ArrayList<String> fileLines = FileManager.LoadData(filepath);
 		for(String line : fileLines)
 		{
-			reproductions.add(FileParser.GetReproduction(line));
+			try
+			{
+			 reproductions.add(FileParser.GetReproduction(line));
+			}
+			catch(Exception e){}
 		}
 		
 		return reproductions;
@@ -98,7 +102,7 @@ public class FileParser
 		return g;
 	}
 	
-	public static Reproduction GetReproduction(String line)
+	public static Reproduction GetReproduction(String line) throws Exception
 	{
     	String fields[] = line.split(";");
     	if(fields.length < 3) return null; 

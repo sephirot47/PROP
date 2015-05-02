@@ -88,7 +88,7 @@ public class SongGraph extends Graph<Song, SongRelation>
 	public float GetNearbyReproductionsAportation(Song s1, Song s2) //Entre 0.0f y 1.0f
 	{
 		float aportation = 0.0f;
-		
+		try{
 		Set<User> users = UserManager.GetUsers("data/users/users.txt", "data/reproductions");
 		for(User u : users)
 		{
@@ -134,6 +134,8 @@ public class SongGraph extends Graph<Song, SongRelation>
 				aportation += 1.0/(float) users.size();
 			}
 		}
+		}
+		catch (Exception e){}
 		return aportation;
 	}
 }

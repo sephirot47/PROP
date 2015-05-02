@@ -5,8 +5,9 @@ public class Reproduction
 	private String songAuthor, songTitle;
 	private int time; //en segons
 	
-	public Reproduction(String author,String title, int time)
+	public Reproduction(String author,String title, int time) throws Exception
 	{
+		CheckString(author); CheckString(title);
 		songAuthor = author;
 		songTitle = title;
 		this.time = time;
@@ -23,7 +24,8 @@ public class Reproduction
 		return songAuthor;
 	}
 
-	public void SetSongAuthor(String songAuthor) {
+	public void SetSongAuthor(String songAuthor) throws Exception {
+		CheckString(songAuthor);
 		this.songAuthor = songAuthor;
 	}
 
@@ -31,7 +33,8 @@ public class Reproduction
 		return songTitle;
 	}
 
-	public void SetSongTitle(String songTitle) {
+	public void SetSongTitle(String songTitle) throws Exception {
+		CheckString(songTitle);
 		this.songTitle = songTitle;
 	}
 
@@ -42,7 +45,13 @@ public class Reproduction
 	public void SetTime(int time) {
 		this.time = time;
 	}
-	
+
+	private void CheckString(String str) throws Exception
+	{
+		if(str.contains(";")) throw new Exception("Song strings can't contain the \" ; \" character (\'" + 
+												  str + "\')");
+	}
+
 	public boolean equals(Object obj) 
 	{
 		Reproduction r = (Reproduction) obj;
@@ -50,6 +59,4 @@ public class Reproduction
 			   GetSongAuthor().equals(r.GetSongAuthor()) &&
 			   GetSongTitle().equals(r.GetSongTitle());
 	}
-
-
 }

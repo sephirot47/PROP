@@ -123,7 +123,7 @@ public class FileParserTest extends TestCase
 		assertFalse(SetsEquals(songs, songsRead));
 	}
 
-	public void testGetReproductions() throws IOException
+	public void testGetReproductions() throws Exception
 	{
 		ArrayList<Reproduction> reprosRead = FileParser.GetReproductions("tests/repros1.txt");
 		ArrayList<Reproduction> repros = new ArrayList<Reproduction>();
@@ -206,7 +206,7 @@ public class FileParserTest extends TestCase
 		assertEquals(g1, g2);
 	}
 	
-	public void testGetReproduction()
+	public void testGetReproduction() throws Exception
 	{
 		assertEquals(FileParser.GetReproduction("a;b;20"), new Reproduction("a", "b", 20));
 		assertEquals(FileParser.GetReproduction("aaaa;bbbb;592"), new Reproduction("aaaa", "bbbb", 592));
