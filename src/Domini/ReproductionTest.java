@@ -18,7 +18,6 @@ public class ReproductionTest extends TestCase
 	{
 		Reproduction r = new Reproduction("AC/DC","T.N.T",101);
 		r.Print();
-		
 	}
 	
 	public void testGetSongAuthor() 
@@ -59,6 +58,15 @@ public class ReproductionTest extends TestCase
 		Reproduction r = new Reproduction("AC/DC","Thunderstruck",1);
 		r.SetTime(294);
 		assertEquals(294,r.GetTime());
+	}
+	
+	public void testEquals() 
+	{
+		Reproduction r1 = new Reproduction("autor", "titol", 1);
+		Reproduction r2 = new Reproduction("autor", "titol", 1);
+		assertTrue(r1.equals(r2));
+		r2.SetSongAuthor("rotau");
+		assertFalse(r1.equals(r2));
 	}
 
 }

@@ -89,7 +89,7 @@ public class FileManager
     	lines.add( s.GetAlgorisme() ); //Algorisme usat
     	lines.add( String.valueOf( s.GetEntrada().GetAllNodes().size() ) ); //Nombre de cancons processades
     	lines.add( String.valueOf( s.GetGenerationTime() ) ); //Temps que ha tardat a generar la solucio
-    	SaveData(filedir + "generationInfo.txt", lines);
+    	SaveData(filedir + "info.txt", lines);
     	}
     }
     
@@ -145,7 +145,7 @@ public class FileManager
 	    		lines.add(line);
 	    	}
     	}
-    	SaveData(filedir + "communitiesSolution.txt",  lines);
+		SaveData(filedir + "communitiesSolution.txt",  lines);
     }
     
     //path es un path a un fitxer existent
