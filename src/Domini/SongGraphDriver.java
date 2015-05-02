@@ -4,6 +4,6 @@ public class SongGraphDriver
 {
 	public static void main(String[] args) 
 	{
-		junit.textui.TestRunner.run(SongGraphTest.class);
+		TestRunner.RunDriver(SongGraphTest.class);
 	}
 }

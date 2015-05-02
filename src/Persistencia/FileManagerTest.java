@@ -11,9 +11,9 @@ import junit.framework.TestCase;
 
 public class FileManagerTest extends TestCase 
 {
-	public FileManagerTest(String name) 
+	public FileManagerTest()
 	{
-		super(name);
+		super("FileManagerTest");
 	}
 
 	protected void setUp() throws Exception 

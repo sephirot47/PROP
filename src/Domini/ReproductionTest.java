@@ -4,9 +4,9 @@ import junit.framework.TestCase;
 
 public class ReproductionTest extends TestCase 
 {
-	public ReproductionTest(String name) 
+	public ReproductionTest()
 	{
-		super(name);
+		super("ReproductionTest");
 	}
 
 	protected void setUp() throws Exception 

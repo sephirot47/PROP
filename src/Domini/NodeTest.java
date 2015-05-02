@@ -4,9 +4,9 @@ import junit.framework.TestCase;
 
 public class NodeTest extends TestCase 
 {
-	public NodeTest(String name) 
+	public NodeTest()
 	{
-		super(name);
+		super("NodeTest");
 	}
 
 	protected void setUp() throws Exception 
@@ -14,7 +14,7 @@ public class NodeTest extends TestCase
 		super.setUp();
 	}
 
-	public void test() 
+	public void testGetId() 
 	{
 		class TestNode extends Node
 		{

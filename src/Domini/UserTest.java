@@ -7,9 +7,9 @@ import junit.framework.TestCase;
 
 public class UserTest extends TestCase 
 {
-	public UserTest(String name) 
+	public UserTest()
 	{
-		super(name);
+		super("UserTest");
 	}
 
 	protected void setUp() throws Exception 

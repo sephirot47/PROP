@@ -8,9 +8,9 @@ import junit.framework.TestCase;
 
 public class UserManagerTest extends TestCase 
 {
-	public UserManagerTest(String name) 
+	public UserManagerTest()
 	{
-		super(name);
+		super("UserManagerTest");
 	}
 
 	protected void setUp() throws Exception 

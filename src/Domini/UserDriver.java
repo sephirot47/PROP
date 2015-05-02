@@ -1,9 +1,9 @@
 package Domini;
 
-public class UserDriver
+public class UserDriver 
 {
 	public static void main(String[] args) 
 	{
-		junit.textui.TestRunner.run(UserTest.class);
+		TestRunner.RunDriver(UserTest.class);
 	}
 }

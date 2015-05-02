@@ -12,9 +12,9 @@ import junit.framework.TestCase;
 
 public class SongGraphTest extends TestCase 
 {
-	public SongGraphTest(String name) 
+	public SongGraphTest()
 	{
-		super(name);
+		super("SongGraphTest");
 	}
 
 	protected void setUp() throws Exception 

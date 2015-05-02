@@ -8,7 +8,11 @@ import junit.framework.TestCase;
 
 public class GirvanNewmanTest extends TestCase 
 {
-
+	public GirvanNewmanTest()
+	{
+		super("GirvanNewman");
+	}
+	
 	protected void setUp() throws Exception 
 	{
 		super.setUp();

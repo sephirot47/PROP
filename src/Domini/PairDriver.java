@@ -1,9 +1,9 @@
 package Domini;
 
-public class PairDriver
+public class PairDriver 
 {
 	public static void main(String[] args) 
 	{
-		junit.textui.TestRunner.run(PairTest.class);
+		TestRunner.RunDriver(PairTest.class);
 	}
 }

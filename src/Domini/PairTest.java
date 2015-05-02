@@ -4,9 +4,9 @@ import junit.framework.TestCase;
 
 public class PairTest extends TestCase 
 {
-	public PairTest(String name) 
+	public PairTest()
 	{
-		super(name);
+		super("PairTest");
 	}
 
 	protected void setUp() throws Exception 

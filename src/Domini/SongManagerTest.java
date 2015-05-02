@@ -9,9 +9,9 @@ import junit.framework.TestCase;
 
 public class SongManagerTest extends TestCase 
 {
-	public SongManagerTest(String name) 
+	public SongManagerTest()
 	{
-		super(name);
+		super("SongManagerTest");
 	}
 
 	protected void setUp() throws Exception 

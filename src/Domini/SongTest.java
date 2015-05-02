@@ -6,9 +6,9 @@ import junit.framework.TestCase;
 
 public class SongTest extends TestCase 
 {
-	public SongTest(String name) 
+	public SongTest() 
 	{
-		super(name);
+		super("SongTest");
 	}
 
 	protected void setUp() throws Exception 
@@ -66,9 +66,5 @@ public class SongTest extends TestCase
 		Reproduction r = new Reproduction(author, song, 3390);
 		u.AddReproduction(r);
 		assertEquals(33, s.GetMeanUserAge());
-	}
-	public void test() 
-	{
-		assertEquals(111, 111);
 	}
 }

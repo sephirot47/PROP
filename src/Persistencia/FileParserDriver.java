@@ -1,9 +1,11 @@
 package Persistencia;
 
+import Domini.TestRunner;
+
 public class FileParserDriver 
 {
 	public static void main(String[] args) 
 	{
-		junit.textui.TestRunner.run(FileParserTest.class);
+		TestRunner.RunDriver(FileParserTest.class);
 	}
 }

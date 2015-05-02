@@ -16,66 +16,65 @@ public class TestRunner
 {
 	public static void RunDriver(final Class<?> testClass)
 	{
-		 Class c = EdgeTest.class;
-			try 
+		 Class c = testClass;
+		try 
+		{
+			while(true)
 			{
-				while(true)
-				{
+				Method[] methods = c.getDeclaredMethods();
+		        ArrayList<Method> testMethods = new ArrayList<Method>();
+		        
+		    	System.out.println("Test menu for " + c.getName() + ": " + "--------------------");
+		    	System.out.println("");
+		    	
+		    	for (int i = 0; i < methods.length; i++) 
+		        	if(methods[i].getName().contains("test")) testMethods.add(methods[i]);
 
-					Method[] methods = c.getDeclaredMethods();
-			        ArrayList<Method> testMethods = new ArrayList<Method>();
-			        
-			    	System.out.println("Test menu for " + c.getName() + ": " + "--------------------");
-			    	System.out.println("");
-			    	
-			    	for (int i = 0; i < methods.length; i++) 
-			        	if(methods[i].getName().contains("test")) testMethods.add(methods[i]);
-
-			        for (int i = 0; i < testMethods.size(); i++) 
-			        	System.out.println("\t" + (i+1) + ". " + testMethods.get(i).getName().substring(4));
-			    	System.out.println("\t" + (testMethods.size() + 1) + ". Test ALL methods.");
-			    	
-		        	System.out.println("");
-		            System.out.print("Introdueixi el número del test que vol provar: ");
-		            Scanner in = new Scanner(System.in);
-		            int testNum = in.nextInt();
-		            
-		            if(testNum <= 0  || testNum > testMethods.size() + 1) 
-		            {
-		            	System.out.println("Numero de test NO valid");
-		            	continue;
-		            }
-		            
-		            if(testNum == testMethods.size() + 1)
-		            {
-		            	for(int i = 0; i < testMethods.size(); ++i)
-		            	{
-		            		TestRunner tr = new TestRunner();
-			            	TestRunner.Result r = tr.RunTest(c, testMethods.get(i).getName());
-			            	if(r.isOK()) System.out.println((i+1) + ". Test OK!");
-			            	else System.out.println((i+1) + ". Test fail.");
-		            	}
-		            }
-		            else
+		        for (int i = 0; i < testMethods.size(); i++) 
+		        	System.out.println("\t" + (i+1) + ". " + testMethods.get(i).getName().substring(4));
+		    	System.out.println("\t" + (testMethods.size() + 1) + ". Test ALL methods.");
+		    	
+	        	System.out.println("");
+	            System.out.print("Introdueixi el número del test que vol provar: ");
+	            Scanner in = new Scanner(System.in);
+	            int testNum = in.nextInt();
+	            
+	            if(testNum <= 0  || testNum > testMethods.size() + 1) 
+	            {
+	            	System.out.println("Numero de test NO valid");
+	            	continue;
+	            }
+	            
+	            if(testNum == testMethods.size() + 1)
+	            {
+	            	for(int i = 0; i < testMethods.size(); ++i)
 	            	{
 	            		TestRunner tr = new TestRunner();
-	    		    	System.out.println("");
-		            	System.out.println("Testing " + testMethods.get(testNum-1).getName().substring(4) + "...");
-				    	System.out.println("");
-		            	TestRunner.Result r = tr.RunTest(c, testMethods.get(testNum-1).getName());
-		            	if(r.isOK()) System.out.println("************** Test OK! **************");
-		            	else System.out.println("************** El test ha fallat **************");
+		            	TestRunner.Result r = tr.RunTest(c, testMethods.get(i).getName());
+		            	if(r.isOK()) System.out.println((i+1) + ". Test OK!");
+		            	else System.out.println((i+1) + ". Test fail.");
 	            	}
+	            }
+	            else
+            	{
+            		TestRunner tr = new TestRunner();
+    		    	System.out.println("");
+	            	System.out.println("Testing " + testMethods.get(testNum-1).getName().substring(4) + "...");
 			    	System.out.println("");
-			    	for(int i = 0; i < 2; ++i)System.out.println(":::::::::::::::::::::");
-			    	System.out.println("");
-				}
-	        }
-			catch (Throwable e)
-			{
-	            System.err.println("ERROR: " + e);
-	            e.printStackTrace();
-	        }
+	            	TestRunner.Result r = tr.RunTest(c, testMethods.get(testNum-1).getName());
+	            	if(r.isOK()) System.out.println("************** Test OK! **************");
+	            	else System.out.println("************** El test ha fallat **************");
+            	}
+		    	System.out.println("");
+		    	for(int i = 0; i < 2; ++i)System.out.println(":::::::::::::::::::::");
+		    	System.out.println("");
+			}
+        }
+		catch (Throwable e)
+		{
+            System.err.println("ERROR: " + e);
+            e.printStackTrace();
+        }
 	}
 	
 	public static Result RunTest(final Class<?> testClass, final String methodName) throws InitializationError 

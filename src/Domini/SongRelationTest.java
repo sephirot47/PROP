@@ -4,8 +4,9 @@ import junit.framework.TestCase;
 
 public class SongRelationTest extends TestCase 
 {
-	public SongRelationTest(String name) {
-		super(name);
+	public SongRelationTest()
+	{
+		super("SongRelationTest");
 	}
 
 	protected void setUp() throws Exception 

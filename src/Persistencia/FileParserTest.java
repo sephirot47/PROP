@@ -19,11 +19,11 @@ import junit.framework.TestCase;
 
 public class FileParserTest extends TestCase 
 {
-	public FileParserTest(String name) 
+	public FileParserTest()
 	{
-		super(name);
+		super("FileParserTest");
 	}
-
+	
 	protected void setUp() throws Exception 
 	{
 		super.setUp();

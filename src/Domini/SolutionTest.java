@@ -9,9 +9,9 @@ import junit.framework.TestCase;
 
 public class SolutionTest extends TestCase 
 {
-	public SolutionTest(String name) 
+	public SolutionTest()
 	{
-		super(name);
+		super("SolutionTest");
 	}
 
 	protected void setUp() throws Exception 

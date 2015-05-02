@@ -10,6 +10,10 @@ import junit.framework.TestCase;
 
 public class GraphTest extends TestCase 
 {
+	public GraphTest()
+	{
+		super("GraphTest");
+	}
 	
 	class N extends Node
 	{
@@ -21,10 +25,6 @@ public class GraphTest extends TestCase
 		float weight;
 		public float GetWeight() { return weight;}
 		public void SetWeight(float weight) { this.weight = weight; }
-	}
-	public GraphTest(String name) 
-	{
-		super(name);
 	}
 
 	protected void setUp() throws Exception 
