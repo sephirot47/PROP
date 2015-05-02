@@ -29,7 +29,7 @@ public class FileParserTest extends TestCase
 		super.setUp();
 	}
 
-	public void testGetUsers() throws IOException
+	public void testGetUsers() throws Exception
 	{
 		Set<User> usersRead = UserManager.GetUsers("tests/users1.txt", "tests"); //read from file
 		Set<User> users = new HashSet<User>(); //created by us
@@ -82,7 +82,7 @@ public class FileParserTest extends TestCase
 		assertFalse(SetsEquals(users, usersRead));
 	}
 
-	public void testGetSongs() throws IOException
+	public void testGetSongs() throws Exception
 	{
 		//TEST 1
 		Set<Song> songsRead = SongManager.GetSongs("tests/songs1.txt"); //read from file
@@ -171,7 +171,7 @@ public class FileParserTest extends TestCase
 		assertTrue(reprosRead.containsAll(repros) && repros.containsAll(reprosRead));
 	}
 	
-	public void testGetGraph() throws IOException
+	public void testGetGraph() throws Exception
 	{
 		//TEST 1
 		SongGraph g1 = new SongGraph();
@@ -212,13 +212,13 @@ public class FileParserTest extends TestCase
 		assertEquals(FileParser.GetReproduction("aaaa;bbbb;592"), new Reproduction("aaaa", "bbbb", 592));
 	}
 	
-    public void testGetUser()
+    public void testGetUser() throws Exception
     {
     	assertEquals(FileParser.GetUser("nombreUser;73"), new User("nombreUser", 73));
     	assertEquals(FileParser.GetUser("aaaaa;122"), new User("aaaaa", 122));
     }
 
-    public void testGetSong()
+    public void testGetSong() throws Exception
     {
 		ArrayList<String> styles20 = new ArrayList<String>(); 
 		styles20.add("s3"); styles20.add("s1"); styles20.add("s2"); 

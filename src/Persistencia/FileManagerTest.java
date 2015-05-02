@@ -92,6 +92,7 @@ public class FileManagerTest extends TestCase
 	
 	public void testSaveUser() throws IOException
 	{
+		try{
 		User u1 = new User("usuari1", 23);
 		User u2 = new User("usuari2", 21);
 		User u3 = new User("usuari3", 45);
@@ -122,6 +123,7 @@ public class FileManagerTest extends TestCase
 		FileManager.SaveUser("tests/userSaveProva1.txt", u2);
 		usersLines.set(1, "usuari2;656");
 		assertEquals(FileManager.LoadData("tests/userSaveProva1.txt"), usersLines);
+		} catch(Exception e) {}
 	}
 	
 	 public static void testSaveUsers() throws Exception

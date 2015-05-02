@@ -5,8 +5,6 @@ import java.util.Set;
 
 public class Song extends Node
 {	
-	private static String forbiddenCharacters = "[\\\\/\\.;:\"*?<>\\|]*";
-	
 	String author;
 	String title;
 	int year;
@@ -21,57 +19,51 @@ public class Song extends Node
 		author = "";
 	}
 	
-	public Song(String author, String title)
+	public Song(String author, String title) throws Exception
 	{
-		author.replaceAll(forbiddenCharacters, "");
-		title.replaceAll(forbiddenCharacters, "");
-
 		this.styles = new ArrayList<String>();
+		CheckString(author); CheckString(title);
 		this.author = author;
 		this.title = title;
 	}
 	
-	public Song(String author, String title, int year, ArrayList<String> styles, int duration)
+	public Song(String author, String title, int year, ArrayList<String> styles, int duration) throws Exception
 	{
-		author.replaceAll(forbiddenCharacters, "");
-		title.replaceAll(forbiddenCharacters, "");
+		CheckString(author); CheckString(title);
+		for(String style : styles) CheckString(style);
 		
 		this.styles = new ArrayList<String>();
 		this.author = author;
 		this.title = title;
 		this.styles.addAll(styles);
-		for(String s : styles) s.replaceAll(forbiddenCharacters, "");
 		
 		this.duration = duration;
 		this.year = year;
 	}	
 	
-	public void SetSong(String author, String title, int year, ArrayList<String> styles, int duration)
+	public void SetSong(String author, String title, int year, ArrayList<String> styles, int duration) throws Exception
 	{
-		author.replaceAll(forbiddenCharacters, "");
-		title.replaceAll(forbiddenCharacters, "");
+		CheckString(author); CheckString(title);
+		for(String style : styles) CheckString(style);
 		
 		this.author = author;
 		this.title = title;
 		this.styles.addAll(styles);
-		for(String s : styles) s.replaceAll(forbiddenCharacters, "");
 		
 		this.duration = duration;
 		this.year = year;
 	}
 	
-	public void SetAuthorTitle(String author, String title)
+	public void SetAuthorTitle(String author, String title) throws Exception
 	{
-		author.replaceAll(forbiddenCharacters, "");
-		title.replaceAll(forbiddenCharacters, "");
-		
+		CheckString(author); CheckString(title);
 		this.author = author;
 		this.title = title;
 	}
 	
-	public void AddStyles(ArrayList<String> est)
+	public void AddStyles(ArrayList<String> est) throws Exception
 	{
-		for(String s : est) s.replaceAll(forbiddenCharacters, "");
+		for(String style : est) CheckString(style);
 		
 		if((styles.size() + est.size()) <= 3)
 		{
@@ -79,7 +71,7 @@ public class Song extends Node
 		}
 		else
 		{
-			System.err.println("Can't add more than 3 styles to a song...");
+			throw new Exception("Can't add more than 3 styles to a song...");
 		}
 	}
 	
@@ -130,6 +122,12 @@ public class Song extends Node
 		}
 		
 		return sum / usersWhoHaveListenedToThisAwesomeOneHourSong;
+	}
+	
+	private void CheckString(String str) throws Exception
+	{
+		if(str.contains(";")) throw new Exception("Song strings can't contain the \" ; \" character (\'" + 
+												  str + "\')");
 	}
 
 	@Override

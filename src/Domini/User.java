@@ -3,8 +3,11 @@ package Domini;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
-    
+public class User 
+{
+	private static String[] forbiddenCharacters = { "\\", "/", ".", ";", ":", "\"", "*", "?",
+													"<", ">", "|", "*"};
+	
     String name;
     int age;
     ArrayList<Reproduction> reproductions;
@@ -14,17 +17,18 @@ public class User {
     	reproductions = new ArrayList<Reproduction>();
     }
     
-    public User(String name, int age, ArrayList<Reproduction> r)
+    public User(String name, int age, ArrayList<Reproduction> r) throws Exception
     {
+    	CheckUsername(name);
         this.name = name;
         this.age = age;
         reproductions = new ArrayList<Reproduction>();
         reproductions.addAll(r);
-        
     }
     
-    public User(String name, int age)
+    public User(String name, int age) throws Exception
     {
+    	CheckUsername(name);
         this.name = name;
         this.age = age;
         reproductions = new ArrayList<Reproduction>();
@@ -41,7 +45,11 @@ public class User {
     }
     
     public void SetAge(int a) { age = a; }
-    public void SetName(String n) { name = n; }
+    public void SetName(String n) throws Exception
+    { 
+    	CheckUsername(name);
+    	name = n; 
+    } 
 	public void SetReproductions(ArrayList<Reproduction> reproductions) 
 	{
 		this.reproductions = reproductions;
@@ -68,6 +76,18 @@ public class User {
     	}
     	System.out.println("------");
     	System.out.println("");
+    }
+    
+    private void CheckUsername(String name) throws Exception
+    {
+    	for(String c : forbiddenCharacters)
+		if(name.contains(c)) 
+		{
+			String characters = ""; 
+			for(String c2 : forbiddenCharacters) 
+				characters += "\"" + c2 + "\",  ";
+			throw new Exception("A user can't contain any of these characters: " + characters);
+		}
     }
     
     public boolean equals(Object obj)

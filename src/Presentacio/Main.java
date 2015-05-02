@@ -26,7 +26,8 @@ public class Main
 	
 	public static void main(String[] args)
 	{
-		Song ssss = new Song("\"\\sdj<>*ks/a|mfk;s:.asd", "\"\\sdj<>*ksa|mf?k;s:.asd");
+		try{
+		Song ssss = new Song("\"\\sdj<>*ks/a|mfks:.asd", "\"\\sdj<>*ksa|mf?ks:.asd");
 		ssss.Print();
 		
 		//Example of the use of Graph class
@@ -121,7 +122,7 @@ public class Main
 		System.out.println("*********************");
 		System.out.println("*********************");
 		System.out.println("*********************");
-		
-		
+		}
+		catch(Exception e){ e.printStackTrace(); }
 	}
 }

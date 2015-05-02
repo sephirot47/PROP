@@ -36,7 +36,8 @@ public class Graph <N extends Node, E extends Edge>
 			System.err.println("Can't add two nodes with the same id.");
 			return;
 		}
-		graph.put(node, new HashMap<N, E>()); //Init its edge list
+		
+		graph.put(node, new HashMap<N, E>()); //Tot correcte, es pot afegir el node
 	}
 
 	/**
@@ -150,6 +151,7 @@ public class Graph <N extends Node, E extends Edge>
 	 */
 	public void RemoveEdge(E edge)
 	{
+		//We need to use iterators because we are removing while iterating items
 		Iterator it1 = graph.values().iterator();
 		while(it1.hasNext())
 		{

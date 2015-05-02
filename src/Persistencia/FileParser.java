@@ -26,14 +26,17 @@ public class FileParser
 		ArrayList<String> fileLines = FileManager.LoadData(userFilepath);
 		for(String line : fileLines)
 		{
-			User u = FileParser.GetUser(line);
-			
-			//Afegim al user llegit les reproduccions corresponents
-			String reproductionsFilepath = reprosDir + "/" + u.GetName() + "Reproductions.txt";
-			ArrayList<Reproduction> userReproductions = FileParser.GetReproductions(reproductionsFilepath);
-			u.AddReproductions(userReproductions);
-			
-			users.add(u);
+			try{
+				User u = FileParser.GetUser(line);
+				
+				//Afegim al user llegit les reproduccions corresponents
+				String reproductionsFilepath = reprosDir + "/" + u.GetName() + "Reproductions.txt";
+				ArrayList<Reproduction> userReproductions = FileParser.GetReproductions(reproductionsFilepath);
+				u.AddReproductions(userReproductions);
+				
+				users.add(u);
+			}
+			catch(Exception e){}
 		}
 		
 		return users;
@@ -46,7 +49,9 @@ public class FileParser
 		ArrayList<String> fileLines = FileManager.LoadData(filepath);
 		for(String line : fileLines)
 		{
-			songs.add(FileParser.GetSong(line));
+			try{
+				songs.add(FileParser.GetSong(line));
+			}catch(Exception e){}
 		}
 		
 		return songs;
@@ -65,7 +70,7 @@ public class FileParser
 		return reproductions;
 	}
 	
-	public static SongGraph GetGraph(String filepath) throws IOException
+	public static SongGraph GetGraph(String filepath) throws Exception
 	{
 		SongGraph g = new SongGraph();
 		ArrayList<String> lines = FileManager.LoadData(filepath);
@@ -104,7 +109,7 @@ public class FileParser
     	return new Reproduction(author, title, time);
 	}
 	
-    public static User GetUser(String line)
+    public static User GetUser(String line) throws Exception
     {
 
     	String fields[] = line.split(";");
@@ -116,7 +121,7 @@ public class FileParser
     	return new User(name, age);
     }
 
-    public static Song GetSong(String line)
+    public static Song GetSong(String line) throws Exception
     {
     	String fields[] = line.split(";");
     	if(fields.length < 7) return null; 
