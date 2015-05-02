@@ -4,6 +4,6 @@ public class EdgeDriver
 {
 	public static void main(String[] args) 
 	{
-		junit.textui.TestRunner.run(EdgeTest.class);
+		TestRunner.RunDriver(EdgeTest.class);
 	}
 }

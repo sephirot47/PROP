@@ -4,11 +4,11 @@ import junit.framework.TestCase;
 
 public class EdgeTest extends TestCase 
 {
-	public EdgeTest(String name) 
+	public EdgeTest()
 	{
-		super(name);
+		super("EdgeTest");
 	}
-
+	
 	protected void setUp() throws Exception 
 	{
 		super.setUp();
