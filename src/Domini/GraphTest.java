@@ -340,6 +340,7 @@ public class GraphTest extends TestCase
 		else if(result2.equals(g.GetConnectedComponents())) System.out.println("Equals");
 		else System.out.println("Not equals");
 	}
+	
 	public void testPrint()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
@@ -375,5 +376,61 @@ public class GraphTest extends TestCase
 		g.AddEdge(n4, n, e4);
 		
 		g.Print();
+	}
+	
+	public void testEquals() 
+	{
+		N n = new N();
+		N n1 = new N();
+		N n2 = new N();
+		N n3 = new N();
+		N n4 = new N();
+		
+		E e = new E();
+		E e1 = new E();
+		E e2 = new E();
+		E e3 = new E();
+		E e4 = new E();
+		
+		e.SetWeight(3.1f);
+		e1.SetWeight(3.14f);
+		e2.SetWeight(3.141f);
+		e3.SetWeight(3.1415f);
+		e4.SetWeight(3.14159f);
+		
+		Graph<Node,Edge> g1 = new Graph<Node,Edge>();
+		g1.AddNode(n);
+		g1.AddNode(n1);
+		g1.AddNode(n2);
+		g1.AddNode(n3);
+		g1.AddNode(n4);
+		
+		g1.AddEdge(n, n1, e);
+		g1.AddEdge(n1, n2, e1);
+		g1.AddEdge(n2, n3, e2);
+		g1.AddEdge(n3, n4, e3);
+		g1.AddEdge(n4, n, e4);
+		
+		Graph<Node,Edge> g2 = new Graph<Node,Edge>();
+		g2.AddNode(n);
+		g2.AddNode(n1);
+		g2.AddNode(n2);
+		g2.AddNode(n3);
+		g2.AddNode(n4);
+		
+		g2.AddEdge(n, n1, e);
+		g2.AddEdge(n1, n2, e1);
+		g2.AddEdge(n2, n3, e2);
+		g2.AddEdge(n3, n4, e3);
+		g2.AddEdge(n4, n, e4);
+		
+		
+
+		assertTrue(g1.equals(g1));
+		/*g2.RemoveEdge(e);
+		assertFalse(g1.equals(g2));
+		g2.AddEdge(n, n1, e);
+		g1.RemoveNode(n);
+		assertFalse(g1.equals(g2));*/
 	}
 }
