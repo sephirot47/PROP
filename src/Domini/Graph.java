@@ -215,10 +215,8 @@ public class Graph <N extends Node, E extends Edge>
 		
 		//Los nodos han de ser los mismos
 		//Per comparar si son els mateixos sets, miro si es contenen l'un al altre :3
-		if(!nsG.containsAll(nsThis) || !nsThis.containsAll(nsG)) {
-			System.out.println("No te els mateixos nodes");
-			return false;
-		}
+		if(!nsG.containsAll(nsThis) || !nsThis.containsAll(nsG))  return false;
+		
 		for(N nG : nsG)
 		{
 			for(N nThis : nsThis)

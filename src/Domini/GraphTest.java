@@ -2,7 +2,6 @@ package Domini;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,12 +16,16 @@ public class GraphTest extends TestCase
 	
 	class N extends Node
 	{
-		public String GetId() { return "potato"; }
+		String id;
+		public N(String idd) { id = idd; }
+		public String GetId() { return id; }
 	}
 	
 	class E extends Edge
 	{
 		float weight;
+		public E() { weight = 1.0f; }
+		public E(float w) { weight = w; }
 		public float GetWeight() { return weight;}
 		public void SetWeight(float weight) { this.weight = weight; }
 	}
@@ -35,7 +38,7 @@ public class GraphTest extends TestCase
 	public void testAddNode() 
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
-		N n = new N();
+		N n = new N("node");
 		
 		Set<N> p = new HashSet<N>(Arrays.asList(n));
 		
@@ -47,9 +50,9 @@ public class GraphTest extends TestCase
 	public void testGetAdjacentNodesTo()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
-		N n = new N();
-		N n1 = new N();
-		N n2 = new N();
+		N n = new N("node");
+		N n1 = new N("node2");
+		N n2 = new N("node3");
 		
 		E e = new E();
 		E e1 = new E();
@@ -70,8 +73,8 @@ public class GraphTest extends TestCase
 	public void testGetNodesConnectedBy()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
-		N n = new N();
-		N n1 = new N();
+		N n = new N("node3");
+		N n1 = new N("node2");
 		E e = new E();
 		
 		g.AddNode(n);
@@ -87,8 +90,8 @@ public class GraphTest extends TestCase
 	public void testAddEdge()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
-		N n = new N();
-		N n1 = new N();
+		N n = new N("node1");
+		N n1 = new N("node2");
 		
 		E e = new E();
 		e.SetWeight(3.14f);
@@ -104,11 +107,11 @@ public class GraphTest extends TestCase
 	public void testGetAllNodes()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
-		N n = new N();
-		N n1 = new N();
-		N n2 = new N();
-		N n3 = new N();
-		N n4 = new N();
+		N n = new N("node1");
+		N n1 = new N("node2");
+		N n2 = new N("node3");
+		N n3 = new N("node4");
+		N n4 = new N("node5");
 		
 		Set<N> p = new HashSet<N>(Arrays.asList(n,n1,n2,n3,n4));
 		
@@ -125,11 +128,11 @@ public class GraphTest extends TestCase
 	public void testRemoveNode()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
-		N n = new N();
-		N n1 = new N();
-		N n2 = new N();
-		N n3 = new N();
-		N n4 = new N();
+		N n = new N("node1");
+		N n1 = new N("node2");
+		N n2 = new N("node3");
+		N n3 = new N("node4");
+		N n4 = new N("node5");
 		
 		Set<N> p = new HashSet<N>(Arrays.asList(n1,n2,n3,n4));
 		
@@ -147,8 +150,8 @@ public class GraphTest extends TestCase
 	public void testGetEdge()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
-		N n = new N();
-		N n1 = new N();
+		N n = new N("node1");
+		N n1 = new N("node2");
 		
 		E e = new E();
 		e.SetWeight(3.14f);
@@ -163,11 +166,11 @@ public class GraphTest extends TestCase
 	public void testGetAllEdges()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
-		N n = new N();
-		N n1 = new N();
-		N n2 = new N();
-		N n3 = new N();
-		N n4 = new N();
+		N n = new N("node1");
+		N n1 = new N("node2");
+		N n2 = new N("node3");
+		N n3 = new N("node4");
+		N n4 = new N("node5");
 		
 		E e = new E();
 		E e1 = new E();
@@ -209,11 +212,11 @@ public class GraphTest extends TestCase
 	public void testRemoveEdge()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
-		N n = new N();
-		N n1 = new N();
-		N n2 = new N();
-		N n3 = new N();
-		N n4 = new N();
+		N n = new N("node1");
+		N n1 = new N("node2");
+		N n2 = new N("node3");
+		N n3 = new N("node4");
+		N n4 = new N("node5");
 		
 		E e = new E();
 		E e1 = new E();
@@ -250,11 +253,11 @@ public class GraphTest extends TestCase
 	public void testRemoveAllEdges()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
-		N n = new N();
-		N n1 = new N();
-		N n2 = new N();
-		N n3 = new N();
-		N n4 = new N();
+		N n = new N("node1");
+		N n1 = new N("node2");
+		N n2 = new N("node3");
+		N n3 = new N("node4");
+		N n4 = new N("node5");
 		
 		E e = new E();
 		E e1 = new E();
@@ -293,11 +296,11 @@ public class GraphTest extends TestCase
 	public void testGetConnectedComponents()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
-		N n = new N();
-		N n1 = new N();
-		N n2 = new N();
-		N n3 = new N();
-		N n4 = new N();
+		N n = new N("node1");
+		N n1 = new N("node2");
+		N n2 = new N("node3");
+		N n3 = new N("node4");
+		N n4 = new N("node5");
 		
 		E e = new E();
 		E e1 = new E();
@@ -344,11 +347,11 @@ public class GraphTest extends TestCase
 	public void testPrint()
 	{
 		Graph<Node,Edge> g = new Graph<Node,Edge>();
-		N n = new N();
-		N n1 = new N();
-		N n2 = new N();
-		N n3 = new N();
-		N n4 = new N();
+		N n = new N("node1");
+		N n1 = new N("node2");
+		N n2 = new N("node3");
+		N n3 = new N("node4");
+		N n4 = new N("node5");
 		
 		E e = new E();
 		E e1 = new E();
@@ -380,11 +383,11 @@ public class GraphTest extends TestCase
 	
 	public void testEquals() 
 	{
-		N n = new N();
-		N n1 = new N();
-		N n2 = new N();
-		N n3 = new N();
-		N n4 = new N();
+		N n = new N("node1");
+		N n1 = new N("node2");
+		N n2 = new N("node3");
+		N n3 = new N("node4");
+		N n4 = new N("node5");
 		
 		E e = new E();
 		E e1 = new E();
@@ -398,7 +401,7 @@ public class GraphTest extends TestCase
 		e3.SetWeight(3.1415f);
 		e4.SetWeight(3.14159f);
 		
-		Graph<Node,Edge> g1 = new Graph<Node,Edge>();
+		Graph<N, E> g1 = new Graph<N, E>();
 		g1.AddNode(n);
 		g1.AddNode(n1);
 		g1.AddNode(n2);
@@ -411,26 +414,88 @@ public class GraphTest extends TestCase
 		g1.AddEdge(n3, n4, e3);
 		g1.AddEdge(n4, n, e4);
 		
-		Graph<Node,Edge> g2 = new Graph<Node,Edge>();
-		g2.AddNode(n);
-		g2.AddNode(n1);
-		g2.AddNode(n2);
-		g2.AddNode(n3);
+		Graph<N, E> g2 = new Graph<N, E>();
+		//ELS AFEGIM EN DESORDRE
 		g2.AddNode(n4);
-		
-		g2.AddEdge(n, n1, e);
-		g2.AddEdge(n1, n2, e1);
-		g2.AddEdge(n2, n3, e2);
+		g2.AddNode(n2);
+		g2.AddNode(n);
+		g2.AddNode(n3);
+		g2.AddNode(n1);
+ 
+		//ELS AFEGIM EN DESORDRE
 		g2.AddEdge(n3, n4, e3);
+		g2.AddEdge(n1, n2, e1);
 		g2.AddEdge(n4, n, e4);
-		
-		
-
-		assertTrue(g1.equals(g1));
-		/*g2.RemoveEdge(e);
-		assertFalse(g1.equals(g2));
 		g2.AddEdge(n, n1, e);
-		g1.RemoveNode(n);
-		assertFalse(g1.equals(g2));*/
+		g2.AddEdge(n2, n3, e2);
+		
+		//MORE TESTS
+		Graph<N, E> g3 = new Graph<N, E>();
+		g3.AddNode(n);
+		g3.AddNode(n1);
+		g3.AddNode(n2);
+		g3.AddNode(n3);
+		g3.AddNode(n4);
+		
+		//A LOT OF EDGES
+		g3.AddEdge(n, n1, new E(1.0f));
+		g3.AddEdge(n, n2, new E(1.1f));
+		g3.AddEdge(n, n3, new E(1.2f));
+		g3.AddEdge(n, n4, new E(1.3f));
+		g3.AddEdge(n2, n3, new E(1.4f));
+		g3.AddEdge(n3, n4, new E(1.5f));
+		g3.AddEdge(n4, n, new E(1.6f));
+		g3.AddEdge(n4, n2, e);
+		
+		Graph<N, E> g4 = new Graph<N, E>();
+		//ELS AFEGIM EN DESORDRE
+		g4.AddNode(n4);
+		g4.AddNode(n2);
+		g4.AddNode(n);
+		g4.AddNode(n3);
+		g4.AddNode(n1);
+ 
+		//ELS AFEGIM EN DESORDRE
+		g4.AddEdge(n, n1, new E(1.0f));
+		g4.AddEdge(n2, n3, new E(1.4f));
+		g4.AddEdge(n, n3, new E(1.2f));
+		g4.AddEdge(n, n4, new E(1.3f));
+		g4.AddEdge(n4, n, new E(1.6f));
+		g4.AddEdge(n, n2, new E(1.1f));
+		g4.AddEdge(n3, n4, new E(1.5f));
+
+		//Hauria de donar que son diferents, ja que a g4 li falta un edge (e)
+		assertFalse(g3.equals(g4));
+
+		g4.AddEdge(n4, n2, e);
+		
+		assertTrue(g3.equals(g4)); //Ara si son iguals
+
+		g4.RemoveEdge(e);
+		assertFalse(g3.equals(g4));
+	
+		g3.RemoveEdge(e);
+		assertTrue(g4.equals(g3));
+		
+		
+		//MOOOOOOOOORE TESTS (just nodes now)
+		Graph<N, E> g5 = new Graph<N, E>();
+		Graph<N, E> g6 = new Graph<N, E>();
+		
+		g5.AddNode(n);
+		g6.AddNode(n);
+		assertTrue(g5.equals(g6));
+		
+		g6.AddNode(n2);
+		assertFalse(g5.equals(g6));
+		
+		g5.AddNode(n3);
+		assertFalse(g5.equals(g6));
+		
+		g6.AddNode(n3);
+		assertFalse(g5.equals(g6));
+		
+		g5.AddNode(n2);
+		assertTrue(g5.equals(g6)); //Ara si son iguals ^^
 	}
 }
