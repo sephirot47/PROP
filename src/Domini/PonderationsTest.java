@@ -55,7 +55,7 @@ public class PonderationsTest extends TestCase
 		assertEquals(5, t.GetStyle());
 	}
 
-	public void testSetStyle(int style) {
+	public void testSetStyle() {
 		Ponderations t = new Ponderations();
 		t.SetStyle(8);
 		assertEquals(8,t.GetStyle());
