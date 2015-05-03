@@ -1,3 +1,0 @@
-This is the first line of a file
-This is the second line of a file
-This is the final line of a file
