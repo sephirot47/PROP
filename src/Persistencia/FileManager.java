@@ -326,30 +326,9 @@ public class FileManager
     }
     
     
-    public static void removeReproductions(String filedir, String username, long time) throws IOException
+    public static void removeReproductions(String filedir, String username) throws IOException
     {
-    	String search = String.valueOf(time);
-	
-		File tempFile = new File(filedir + username + "Reproductions2.txt");
-    	BufferedReader br;
-		br = new BufferedReader(new FileReader(filedir + username + "Reproductions.txt"));
-		PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
-        
-        String line = "";
-        while ((line = br.readLine()) != null) {
-        	
-            if (!line.contains(search)) {
-                pw.println(line);
-                pw.flush();
-            }
-        }
-        pw.close();
-        br.close();
-        
-        File repros = new File(filedir + username + "Reproductions.txt");
-        repros.delete();
-   
-        tempFile.renameTo(repros);
+		eraseData(filedir + "/" + username + "Reproductions.txt");
     }
 
 }

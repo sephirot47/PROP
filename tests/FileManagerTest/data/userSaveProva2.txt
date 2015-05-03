@@ -1,0 +1,3 @@
+usuari1;23
+usuari2;21
+usuari3;45
