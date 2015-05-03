@@ -1,13 +1,13 @@
 Objecte de la prova:
-  
+Comprovar que funcionin tots els metodes de la classe SongGraph  
 
 
 Altres elements integrats a la prova:
-  
+  Node, Edge, SongGraph
 
 
 Drivers:
-  
+  Un unic driver: SolutionTest.jar 
 
 
 Stubs: 
@@ -15,15 +15,27 @@ Stubs:
 
 
 Fitxers de dades necessaris:
-  
-
-
-Valors estudiats:
-  
-
+  Cap
 
 Efectes estudiats:
-  
+
+	SetSongCommunities: Comprova si donat un arrayList de Set de songs, s'estableixen com les comunitats.
+	
+	SetGenerationtime: Donat un float comprovar si s'etableis com a gernerationTimer.
+	
+	GetGenerationTime: Comprova si retorna el float generationTime correctament.
+	
+	GetSongCommunities: Comprova si retorna correctament les comunitats en un arraList de Set de Song.
+	
+	SetEntrada: Comprova si donat un graphSong com entrada, aquesta s'estableix en el SongGraph de la classe.
+	
+	SetAlgorisme: Comprova si donat un string com a "algorisme", aquest s'estableix com algorisme de la classe.
+	
+	GetAlgorisme: Comprova si retorna correctament l'string com a algorisme.
+	
+	GetEntrada: Comprova si retorna de forma correcte el SongGraph de la classe com a arrayList de Set de Song.  
+
 
 Operativa:
-  
+	Entra el numero del metode (indicat al mateix programa) que es vol provar
+  o (numero de metodes)+1 per provar-los tots.  

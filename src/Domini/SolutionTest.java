@@ -61,7 +61,7 @@ public class SolutionTest extends TestCase
 		assertEquals(sg,so.getEntrada());
 		} catch(Exception e) {}
 	}
-	public void testAlgorisme()
+	public void testsetAlgorisme()
 	{
 		SongGraph sg = new SongGraph();
 		
