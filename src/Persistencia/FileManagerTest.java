@@ -275,23 +275,24 @@ public class FileManagerTest extends TestCase
 	 {
 		 ArrayList<String> songsLines = new ArrayList<String>();
 		 
-		 songsLines.add("victor;cuando sarpa el hamor;2015;-;-;flamenquillo del weno;180");
-		 songsLines.add("jfons;tramboliko;1867;dubstep;-;ioroYOLO;45");
-		 songsLines.add("abraham;AC/DC;Thunderstruck;1990;Rock;292");
-		 songsLines.add("abraham;AC/DC;Highway to Hell;1979;Rock;284");
-		 songsLines.add("abraham;AC/DC;You Shook Me All Night Long;1980;Rock;212");
-		 songsLines.add("abraham;AC/DC;Hells Bells;1980;Rock;312");
+		 songsLines.add("Camela;cuando sarpa el hamor;2015;-;-;flamenquillo del weno;180"); //0
+		 songsLines.add("SoyTanSutil;tramboliko;1867;dubstep;-;ioroYOLO;45"); //1
+		 songsLines.add("AC/DC;Thunderstruck;1990;Rock;-;-;292"); //2
+		 songsLines.add("AC/DC;Highway to Hell;1979;Rock;-;-;284"); //3
+		 songsLines.add("AC/DC;You Shook Me All Night Long;1980;Rock;-;-;212"); //4
+		 songsLines.add("AC/DC;T.N.T;1980;Rock;-;-;312"); //5
+		 songsLines.add("AC/DC;Hells Bells;1980;Rock;-;-;312"); //6
 		 
-		 String Author = "AC/DC";
-		 String Title = "T.N.T";
-		 FileManager.RemoveSong(Author, Title);
-		 assertEquals(FileManager.LoadData("data/songs/songs.txt"), songsLines);
+		 FileManager.SaveData("tests/songsRemoveTest.txt", songsLines);
+
+		 songsLines.remove(5);
+		 FileManager.RemoveSong("tests/songsRemoveTest.txt", "AC/DC", "T.N.T");
+		 assertEquals(FileManager.LoadData("tests/songsRemoveTest.txt"), songsLines);
 	 }
 	 
-	 public static void testRemoveReproduction() throws IOException
+	 public static void testRemoveReproductions() throws IOException
 	 {
 		 ArrayList<String> reproductionsLines = new ArrayList<String>();
-		 
 		 
 		 reproductionsLines.add("victor;cuando sarpa el hamor;30");
 		 reproductionsLines.add("AC/DC;Thunderstruck;292");
@@ -302,7 +303,7 @@ public class FileManagerTest extends TestCase
 		 
 		 String User = "abraham";
 		 long time = 214;
-		 FileManager.RemoveReproduction(User, time);
-		 assertEquals(FileManager.LoadData("data/reproductions/abrahamReproductions.txt"), reproductionsLines);
+		 FileManager.RemoveReproductions("tests/", User, time);
+		 assertEquals(FileManager.LoadData("tests/abrahamReproductions.txt"), reproductionsLines);
 	 }
 }
