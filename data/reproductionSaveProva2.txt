@@ -1,3 +1,0 @@
-autor1;titol1;1
-autor2;titol1;2
-autor3;titol123;3
