@@ -15,15 +15,26 @@ Stubs:
 
 
 Fitxers de dades necessaris:
-  
-
-
-Valors estudiats:
-  
+  Cap
 
 
 Efectes estudiats:
-  
+
+  testGetFirst:
+  Crea un Pair, amb un valor de first=42, i comprova que al fer getFirst obté el valor 42.
+
+  testSetFirst:
+  Crea un Pair, i fa setFirst per modificar el valor de first i posar-ho a 42. Després llegeix el first del Pair  i comprova que ha obtingut el valor 42.
+
+  testGetSecond:
+  Crea un Pair, amb un valor de second=42, i comprova que al fer getSecond obté el valor 42.
+
+  testSetSecond:
+  Crea un Pair, i fa setSecond per modificar el valor de first i posar-ho a 42. Després llegeix el second del Pair i comprova que ha obtingut el valor 42.
+
+  testPairConstructor: 
+  Crea un Pair amb first=42 i second=3.141592. Comprova que el pair s'ha creat correctament i conté aquests valors.
+
 
 Operativa:
   Entra el numero del metode (indicat al mateix programa) que es vol provar
