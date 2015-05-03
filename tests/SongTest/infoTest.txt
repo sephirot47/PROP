@@ -1,5 +1,5 @@
 Objecte de la prova:
-  Comprovar que funcionin tots els metodes de la classe REPLACE
+  Comprovar que funcionin tots els metodes de la classe Song
 
 
 Altres elements integrats a la prova:
@@ -7,7 +7,7 @@ Altres elements integrats a la prova:
 
 
 Drivers:
-  Un unic driver: REPLACETest.jar 
+  Un unic driver: SongTest.jar 
 
 
 Stubs: 
@@ -15,15 +15,27 @@ Stubs:
 
 
 Fitxers de dades necessaris:
-  
-
-
-Valors estudiats:
-  
+  El fitxer d'usuaris a: "data/users/users.txt"
+  Els fitxers de reproduccions a: "data/reproductions/"
 
 
 Efectes estudiats:
-  
+  testSongConstructor0: 
+    Es crea una canço amb el primer constructor i despres es comprova que els
+    valors que retornen els seus getters siguin els esperats.
+
+  testSongConstructor1:
+    Es crea una canço amb el segon constructor i despres es comprova que els
+    valors que retornen els seus getters siguin els esperats.
+
+  testSetSong:
+    Es crea una canço buida, despres s'omplen els valors amb els setters i 
+    despres es comprova que els getters retornin el svalors esperats.
+
+  testMeanUserAge:
+    A partir dels fitxers de "data/" es comprova que la mitjana d'edat dels
+    usuaris que ha escoltat la canço "title" de l'utor "author" sigui 30, ja que
+    l'an escoltat 4 usuaris de 10,20,40 i 50 anys (120/4 = 30).
 
 Operativa:
   Entra el numero del metode (indicat al mateix programa) que es vol provar

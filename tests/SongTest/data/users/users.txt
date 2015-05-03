@@ -1,0 +1,6 @@
+foo;15
+jfons;10
+victor;20
+aina;40
+abraham;50
+bar;75
