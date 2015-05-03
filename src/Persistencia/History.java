@@ -14,7 +14,8 @@ import Domini.Song;
 
 public class History {
 
-	public static ArrayList<Solution> GetSolutions(String solutionsDir) throws Exception {
+	public static ArrayList<Solution> getSolutions(String solutionsDir) throws Exception 
+	{
 		ArrayList<Solution> result = new ArrayList<Solution>();
 
 		File baseDir = new File(solutionsDir);
@@ -23,10 +24,10 @@ public class History {
 		for (File dir : solutions) {
 
 			// Legir el graph
-			SongGraph graph = FileParser.GetGraph(dir.getPath() + "/entrada.txt");
+			SongGraph graph = FileParser.getGraph(dir.getPath() + "/entrada.txt");
 
 			// Llegir les comunitats
-			ArrayList<String> resultLines = FileManager.LoadData(dir.getPath() + "/comunitats.txt");
+			ArrayList<String> resultLines = FileManager.loadData(dir.getPath() + "/comunitats.txt");
 			ArrayList<Set<Song>> comunities = new ArrayList<Set<Song>>();
 			Set<Song> set = new HashSet<Song>();
 
@@ -45,7 +46,7 @@ public class History {
 			comunities.add(set);
 
 			// Llegir info
-			ArrayList<String> infoLines = FileManager.LoadData(dir.getPath() + "/info.txt");
+			ArrayList<String> infoLines = FileManager.loadData(dir.getPath() + "/info.txt");
 
 			result.add(new Solution(graph, infoLines.get(0), comunities, Float.parseFloat(infoLines.get(2))));
 
@@ -54,27 +55,27 @@ public class History {
 		return result;
 	}
 
-	public static void SaveSolution(Solution s, String id) throws IOException {
+	public static void saveSolution(Solution s, String id) throws IOException {
 		//String date = new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date());
 		String filedir = "data/solutions/solution_" + id + "/";
 
 		// arxiu de Graph(entrada)
-		FileManager.SaveEntradaSolution(filedir, s.GetEntrada());
+		FileManager.saveEntradaSolution(filedir, s.getEntrada());
 
 		// arxiu de solucio(communities)
-		FileManager.SaveCommunitiesSolution(filedir, s.GetSongCommunities());
+		FileManager.saveCommunitiesSolution(filedir, s.getSongCommunities());
 
 		// arxiu de info extra
 		{
 			ArrayList<String> lines = new ArrayList<String>();
-			lines.add(s.GetAlgorisme()); // Algorisme usat
-			lines.add(String.valueOf(s.GetEntrada().GetAllNodes().size())); // Nombre de cancons processades
-			lines.add(String.valueOf(s.GetGenerationTime())); // Temps que ha tardat a generar la solucio
-			FileManager.SaveData(filedir + "info.txt", lines);
+			lines.add(s.getAlgorisme()); // Algorisme usat
+			lines.add(String.valueOf(s.getEntrada().getAllNodes().size())); // Nombre de cancons processades
+			lines.add(String.valueOf(s.getGenerationTime())); // Temps que ha tardat a generar la solucio
+			FileManager.saveData(filedir + "info.txt", lines);
 		}
 	}
 
-	public static void RemoveSolution(String nomSolucio) throws IOException {
+	public static void removeSolution(String nomSolucio) throws IOException {
 		File communities = new File("tests/" + nomSolucio + "/communities.txt");
 		File entrada = new File("tests/" + nomSolucio + "/entrada.txt");
 		File info = new File("tests/" + nomSolucio + "/generationInfo.txt");

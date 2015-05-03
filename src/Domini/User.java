@@ -19,7 +19,7 @@ public class User
     
     public User(String name, int age, ArrayList<Reproduction> r) throws Exception
     {
-    	CheckUsername(name);
+    	checkUsername(name);
         this.name = name;
         this.age = age;
         reproductions = new ArrayList<Reproduction>();
@@ -28,41 +28,41 @@ public class User
     
     public User(String name, int age) throws Exception
     {
-    	CheckUsername(name);
+    	checkUsername(name);
         this.name = name;
         this.age = age;
         reproductions = new ArrayList<Reproduction>();
     }
     
-    public void AddReproduction(Reproduction r)
+    public void addReproduction(Reproduction r)
     {
     	reproductions.add(r);
     }
     
-    public void AddReproductions(List<Reproduction> r)
+    public void addReproductions(List<Reproduction> r)
     {
     	reproductions.addAll(r);
     }
     
-    public void SetAge(int a) { age = a; }
-    public void SetName(String n) throws Exception
+    public void setAge(int a) { age = a; }
+    public void setName(String n) throws Exception
     { 
-    	CheckUsername(name);
+    	checkUsername(name);
     	name = n; 
     } 
-	public void SetReproductions(ArrayList<Reproduction> reproductions) 
+	public void setReproductions(ArrayList<Reproduction> reproductions) 
 	{
 		this.reproductions = reproductions;
 	}
 	
-    public int GetAge() { return age; }
-    public String GetName() { return name; }
-    public ArrayList<Reproduction> GetReproductions() 
+    public int getAge() { return age; }
+    public String getName() { return name; }
+    public ArrayList<Reproduction> getReproductions() 
     {
 		return reproductions;
 	}
     
-    public void Print()
+    public void print()
     {
     	System.out.println("--- User ----------");
     	System.out.println("Name: " + name);
@@ -71,14 +71,14 @@ public class User
 		System.out.println("_____");
     	for(Reproduction r : reproductions)
     	{
-    		r.Print();
+    		r.print();
     		System.out.println("_____");
     	}
     	System.out.println("------");
     	System.out.println("");
     }
     
-    private void CheckUsername(String name) throws Exception
+    private void checkUsername(String name) throws Exception
     {
     	for(String c : forbiddenCharacters)
 		if(name.contains(c)) 
@@ -93,6 +93,6 @@ public class User
     public boolean equals(Object obj)
     {
     	User u = (User) obj;
-    	return GetName().equals(u.GetName()) && GetAge() == u.GetAge() && GetReproductions().equals(u.GetReproductions());
+    	return getName().equals(u.getName()) && getAge() == u.getAge() && getReproductions().equals(u.getReproductions());
     }
 }

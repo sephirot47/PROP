@@ -1,0 +1,31 @@
+Objecte de la prova:
+  Comprovar que funcionin tots els metodes de la classe Edge
+
+
+Altres elements integrats a la prova:
+  Cap
+
+
+Drivers:
+  Un unic driver: EdgeTest.jar 
+
+
+Stubs: 
+  Cap
+
+
+Fitxers de dades necessaris:
+  Cap
+
+
+Efectes estudiats:
+  testSetWeight:
+  Es comprova que setWeight functiona correctament. Per aixo assignem el valor 3.14159265 com a pes d'un edge, i despres comprovem que s'ha modificat correctament.
+
+  testGetWeight:
+  Comprovem si el getWeight, per obtenir el pes d'una aresta funciona be. Per aixo, assignem el valor 3.14159265 com a pes d'un edge, i despres comprovem que retorna el mateix valor.
+
+
+Operativa:
+  Entra el numero del metode (indicat al mateix programa) que es vol provar
+  o (numero de metodes)+1 per provar-los tots.

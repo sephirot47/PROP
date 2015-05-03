@@ -1,0 +1,30 @@
+Objecte de la prova:
+  Comprovar que funcionin tots els metodes de la classe Ponderations
+
+
+Altres elements integrats a la prova:
+  
+
+
+Drivers:
+  Un unic driver: PonderationsTest.jar 
+
+
+Stubs: 
+  Cap
+
+
+Fitxers de dades necessaris:
+  
+
+
+Valors estudiats:
+  
+
+
+Efectes estudiats:
+  
+
+Operativa:
+  Entra el numero del metode (indicat al mateix programa) que es vol provar
+  o (numero de metodes)+1 per provar-los tots.

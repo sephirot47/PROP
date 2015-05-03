@@ -1,0 +1,50 @@
+Objecte de la prova:
+  Comprovar que funcionin tots els metodes de la classe Reproduction
+
+
+Altres elements integrats a la prova:
+  
+
+Drivers:
+  Un unic driver: ReproductionTest.jar 
+
+
+Stubs: 
+  Cap
+
+
+Fitxers de dades necessaris:
+  Cap
+
+Efectes estudiats:
+  testPrint:
+    Es comprova que s'imprimeixi la informacio de la reproduccio.
+
+  testGetSongAuthor:
+    Es crea una reproduccio i es comprova que el metode retorni el vaolr esperat.
+
+  testGetSongTitle:
+    Es crea una reproduccio i es comprova que el metode retorni el vaolr esperat.
+
+  testGetTime:
+    Es crea una reproduccio i es comprova que el metode retorni el vaolr esperat.
+
+  testSetSongAuthor:
+    Es crea una reproduccio, despres es canvia el valor d'autor i es comprova que 
+    el seu getter retorni el valor esperat.
+
+  testGetSongTitle:
+    Es crea una reproduccio, despres es canvia el valor del titol i es comprova que 
+    el seu getter retorni el valor esperat.
+
+  testGetTime:
+    Es crea una reproduccio, despres es canvia el valor del temps i es comprova que 
+    el seu getter retorni el valor esperat.
+
+  testEquals:
+    Es creen dues reproduccions amb els mateixos valors i es comprova que el 
+    metode equals retorni true entre ells.
+
+Operativa:
+  Entra el numero del metode (indicat al mateix programa) que es vol provar
+  o (numero de metodes)+1 per provar-los tots.

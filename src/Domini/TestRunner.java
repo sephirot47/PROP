@@ -35,7 +35,7 @@ public class TestRunner
 		    	System.out.println("\t" + (testMethods.size() + 1) + ". Test ALL methods.");
 		    	
 	        	System.out.println("");
-	            System.out.print("Introdueixi el número del test que vol provar: ");
+	            System.out.print("Introdueixi el numero del test que vol provar: ");
 	            Scanner in = new Scanner(System.in);
 	            int testNum = in.nextInt();
 	            

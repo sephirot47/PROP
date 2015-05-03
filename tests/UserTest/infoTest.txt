@@ -1,0 +1,68 @@
+Objecte de la prova:
+  Comprovar que funcionin tots els metodes de la classe User
+
+
+Altres elements integrats a la prova:
+  
+
+
+Drivers:
+  Un unic driver: UserTest.jar 
+
+
+Stubs: 
+  Cap
+
+
+Fitxers de dades necessaris:
+  
+
+
+Valors estudiats:
+  
+
+
+Efectes estudiats:
+    testUserConstructor0: 
+        Crea un usuari amb el primer constructor, assignant un nom, una edat i unes reproduccions.
+        Comprova que els Getters retornin els valors esperats.
+        
+    testUserConstructor1:
+        Crea un User amb el segon contructor, assignant un nom i una edat i cap reproducció.
+        Comprova que els Getters retornin els valors esperats.
+        
+    testAddReproductions:
+        Crea un usuari i unes reproduccions.
+        Afegeix les reproduccions al usuari usant els metodes per afegir reproduccions.
+        Comprova que els getters d'aquestes reproduccions retornin els valors esperats.
+     
+    testSetAge:
+        Crea un usuari amb el constructor per defecte, es a dir un usuari sense nom, edat ni reproduccions.
+        Li assigna una edat.
+        Es comprova que el getter retorni el valor esperat.
+        
+    testSetName:
+        Crea un usuari amb el constructor per defecte, es a dir un usuari sense nom, edat ni reproduccions.
+        Li assigna un nom.
+        Es comprova que el getter retorni el valor esperat.
+    
+    testSetReproductions:
+        Crea un usuari i un conjunt de reproduccions.
+        Assigna totes les reproduccions al usuari amb el metode corresponent.
+        Comprova que els getters retornin el valor esperat.
+        
+    testGetAge:
+        Es comprova que el getter de la edat retorni correctament una edat coneguta assignada anteriorment.
+    
+    testGetName: 
+        Es comprova que el getter del nom retorni correctament un nom conegut assignat anteriorment.
+        
+    testGetReproductions():
+        Es comprova que el getter de les reproduccions retorni correctament un valor conegut assignat anteriorment.
+        
+    testPrint:
+        Banal.
+
+Operativa:
+  Entra el numero del metode (indicat al mateix programa) que es vol provar
+  o (numero de metodes)+1 per provar-los tots.

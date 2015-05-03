@@ -8,9 +8,9 @@ public class Pair<F, S>
 	public Pair() {}
 	public Pair(F first, S second) { f = first; s = second; }
 
-	public void SetFirst(F first) { f = first; }
-	public void SetSecond(S second) { s = second; }
+	public void setFirst(F first) { f = first; }
+	public void setSecond(S second) { s = second; }
 	
-	public F GetFirst()  { return f; }
-	public S GetSecond() { return s; }
+	public F getFirst()  { return f; }
+	public S getSecond() { return s; }
 }

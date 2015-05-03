@@ -11,7 +11,7 @@ public class UserManager
 {
 	private static Set<User> users = new HashSet<User>();
 	
-	public static Set<User> GetUsers(String filepath, String reprosDir) throws Exception
+	public static Set<User> getUsers(String filepath, String reprosDir) throws Exception
 	{
 		users.clear();
 		
@@ -19,7 +19,7 @@ public class UserManager
 		{
 			ArrayList<User> usersArray = new ArrayList<User>();
 			
-			usersArray = FileParser.GetUsers(filepath, reprosDir);
+			usersArray = FileParser.getUsers(filepath, reprosDir);
 			
 			for(User u : usersArray)
 			{

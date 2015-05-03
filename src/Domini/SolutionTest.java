@@ -21,14 +21,14 @@ public class SolutionTest extends TestCase
 
 	class N extends Node
 	{
-		public String GetId() { return "potato"; }
+		public String getId() { return "potato"; }
 	}
 	
 	class E extends Edge
 	{
 		float weight;
-		public float GetWeight() { return weight;}
-		public void SetWeight(float weight) { this.weight = weight; }
+		public float getWeight() { return weight;}
+		public void setWeight(float weight) { this.weight = weight; }
 	}
 	
 	public void testSetEntrada()
@@ -50,15 +50,15 @@ public class SolutionTest extends TestCase
 		
 		Solution so = new Solution(sg,"Girvan Newman",songs,0.01f);
 		
-		sg.AddNode(s);
-		sg.AddNode(s1);
-		sg.AddNode(s2);
-		sg.AddNode(s3);
-		sg.AddNode(s4);
+		sg.addNode(s);
+		sg.addNode(s1);
+		sg.addNode(s2);
+		sg.addNode(s3);
+		sg.addNode(s4);
 		
-		so.SetEntrada(sg);
+		so.setEntrada(sg);
 		
-		assertEquals(sg,so.GetEntrada());
+		assertEquals(sg,so.getEntrada());
 		} catch(Exception e) {}
 	}
 	public void testAlgorisme()
@@ -68,8 +68,8 @@ public class SolutionTest extends TestCase
 		ArrayList<Set<Song>> songs = new ArrayList<Set<Song>>();
 		
 		Solution so = new Solution(sg,"Girvan Newman",songs,0.01f);
-		so.SetAlgorisme("Just Do It");
-		assertEquals("Just Do It",so.GetAlgorisme());
+		so.setAlgorisme("Just Do It");
+		assertEquals("Just Do It",so.getAlgorisme());
 		
 	}
 	
@@ -106,9 +106,9 @@ public class SolutionTest extends TestCase
 		songs.add(0,ss);
 		songs.add(1,ss2);
 		
-		so.SetSongCommunities(songs);
+		so.setSongCommunities(songs);
 		
-		assertEquals(songs,so.GetSongCommunities());
+		assertEquals(songs,so.getSongCommunities());
 		} catch(Exception e) {}
 	}
 	
@@ -119,9 +119,9 @@ public class SolutionTest extends TestCase
 		ArrayList<Set<Song>> songs = new ArrayList<Set<Song>>();
 		
 		Solution so = new Solution(sg,"Girvan Newman",songs,0.01f);
-		so.SetGenerationTime(0.15f);
+		so.setGenerationTime(0.15f);
 		
-		assertEquals(0.15f,so.GetGenerationTime());
+		assertEquals(0.15f,so.getGenerationTime());
 	}
 
 	public void testGetAlgorisme()
@@ -131,9 +131,9 @@ public class SolutionTest extends TestCase
 		ArrayList<Set<Song>> songs = new ArrayList<Set<Song>>();
 		
 		Solution so = new Solution(sg,"Girvan Newman",songs,0.01f);
-		so.SetGenerationTime(0.15f);
+		so.setGenerationTime(0.15f);
 		
-		assertEquals(0.15f,so.GetGenerationTime());
+		assertEquals(0.15f,so.getGenerationTime());
 	}
 	
 	public void testGetGenerationTime()
@@ -143,9 +143,9 @@ public class SolutionTest extends TestCase
 		ArrayList<Set<Song>> songs = new ArrayList<Set<Song>>();
 		
 		Solution so = new Solution(sg,"Girvan Newman",songs,0.01f);
-		so.SetGenerationTime(1.3131313131f);
+		so.setGenerationTime(1.3131313131f);
 		
-		assertEquals(1.3131313131f,so.GetGenerationTime());
+		assertEquals(1.3131313131f,so.getGenerationTime());
 	}
 	
 	public void testGetEntrada()
@@ -166,15 +166,15 @@ public class SolutionTest extends TestCase
 		
 		Solution so = new Solution(sg,"Girvan Newman",songs,0.01f);
 		
-		sg.AddNode(s);
-		sg.AddNode(s1);
-		sg.AddNode(s2);
-		sg.AddNode(s3);
-		sg.AddNode(s4);
+		sg.addNode(s);
+		sg.addNode(s1);
+		sg.addNode(s2);
+		sg.addNode(s3);
+		sg.addNode(s4);
 		
-		so.SetEntrada(sg);
+		so.setEntrada(sg);
 		
-		assertEquals(sg,so.GetEntrada());
+		assertEquals(sg,so.getEntrada());
 		} catch(Exception e) {}
 	}
 	
@@ -210,9 +210,9 @@ public class SolutionTest extends TestCase
 		songs.add(0,ss);
 		songs.add(1,ss2);
 		
-		so.SetSongCommunities(songs);
+		so.setSongCommunities(songs);
 		
-		assertEquals(songs,so.GetSongCommunities());	
+		assertEquals(songs,so.getSongCommunities());	
 		} catch(Exception e) {}	
 	}
 }

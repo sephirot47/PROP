@@ -22,15 +22,15 @@ public class Song extends Node
 	public Song(String author, String title) throws Exception
 	{
 		this.styles = new ArrayList<String>();
-		CheckString(author); CheckString(title);
+		checkString(author); checkString(title);
 		this.author = author;
 		this.title = title;
 	}
 	
 	public Song(String author, String title, int year, ArrayList<String> styles, int duration) throws Exception
 	{
-		CheckString(author); CheckString(title);
-		for(String style : styles) CheckString(style);
+		checkString(author); checkString(title);
+		for(String style : styles) checkString(style);
 		
 		this.styles = new ArrayList<String>();
 		this.author = author;
@@ -41,10 +41,10 @@ public class Song extends Node
 		this.year = year;
 	}	
 	
-	public void SetSong(String author, String title, int year, ArrayList<String> styles, int duration) throws Exception
+	public void setSong(String author, String title, int year, ArrayList<String> styles, int duration) throws Exception
 	{
-		CheckString(author); CheckString(title);
-		for(String style : styles) CheckString(style);
+		checkString(author); checkString(title);
+		for(String style : styles) checkString(style);
 		
 		this.author = author;
 		this.title = title;
@@ -54,16 +54,16 @@ public class Song extends Node
 		this.year = year;
 	}
 	
-	public void SetAuthorTitle(String author, String title) throws Exception
+	public void setAuthorTitle(String author, String title) throws Exception
 	{
-		CheckString(author); CheckString(title);
+		checkString(author); checkString(title);
 		this.author = author;
 		this.title = title;
 	}
 	
-	public void AddStyles(ArrayList<String> est) throws Exception
+	public void addStyles(ArrayList<String> est) throws Exception
 	{
-		for(String style : est) CheckString(style);
+		for(String style : est) checkString(style);
 		
 		if((styles.size() + est.size()) <= 3)
 		{
@@ -75,18 +75,18 @@ public class Song extends Node
 		}
 	}
 	
-	public void SetDuration(int dur)
+	public void setDuration(int dur)
 	{
 		duration = dur;
 	}
 	
-	public String GetAuthor() { return author; }
-	public String GetTitle() { return title; }
-	public int GetDuration() { return duration; }
-	public int GetYear() { return year; }
-	public ArrayList<String> GetStyles() { return styles; }
+	public String getAuthor() { return author; }
+	public String getTitle() { return title; }
+	public int getDuration() { return duration; }
+	public int getYear() { return year; }
+	public ArrayList<String> getStyles() { return styles; }
 	
-	public void Print()
+	public void print()
 	{
     	System.out.println("------");
 		System.out.println("Author: " + author);
@@ -101,46 +101,46 @@ public class Song extends Node
 	/*
 	 * Returns the mean of the age of all the users who have listened to this song
 	 */
-	public float GetMeanUserAge()
+	public float getMeanUserAge()
 	{
 		float sum = 0.0f;
-		int usersWhoHaveListenedToThisAwesomeOneHourSong = 0;
+		int numUsers = 0;
 		
 		Set<User> users = null;
 		try 
 		{
-			users = UserManager.GetUsers("data/users/users.txt", "data/reproductions");
+			users = UserManager.getUsers("data/users/users.txt", "data/reproductions");
 		} 
 		catch (Exception e) 
 		{
 			e.printStackTrace();
 		}
-		
+
 		for(User u : users)
 		{
-			ArrayList<Reproduction> repros = u.GetReproductions();
+			ArrayList<Reproduction> repros = u.getReproductions();
 			for(Reproduction r : repros)
 			{
-				if(r.GetSongAuthor().equals(author) && r.GetSongTitle().equals(title))
+				if(r.getSongAuthor().equals(author) && r.getSongTitle().equals(title))
 				{
-					sum += u.GetAge();
-					++usersWhoHaveListenedToThisAwesomeOneHourSong;
+					sum += u.getAge();
+					++numUsers;
 					break; //Nomes suma una vegada per user
 				}
 			}
 		}
 		
-		return sum / usersWhoHaveListenedToThisAwesomeOneHourSong;
+		return sum / numUsers;
 	}
 	
-	private void CheckString(String str) throws Exception
+	private void checkString(String str) throws Exception
 	{
 		if(str.contains(";")) throw new Exception("Song strings can't contain the \" ; \" character (\'" + 
 												  str + "\')");
 	}
 
 	@Override
-	public String GetId() 
+	public String getId() 
 	{
 		return author + ", " + title;
 	}
@@ -148,8 +148,8 @@ public class Song extends Node
 	public boolean equals(Object obj)
 	{
 		Song s2 = (Song) obj;
-		return GetAuthor().equals(s2.GetAuthor()) && GetTitle().equals(s2.GetTitle()) &&
-			   GetId().equals(s2.GetId()) && GetYear() == s2.GetYear() && GetDuration() == s2.GetDuration() &&
-			   GetStyles().containsAll(s2.GetStyles()) && s2.GetStyles().containsAll(GetStyles()); //No importa l'ordre dels styles
+		return getAuthor().equals(s2.getAuthor()) && getTitle().equals(s2.getTitle()) &&
+			   getId().equals(s2.getId()) && getYear() == s2.getYear() && getDuration() == s2.getDuration() &&
+			   getStyles().containsAll(s2.getStyles()) && s2.getStyles().containsAll(getStyles()); //No importa l'ordre dels styles
 	}
 }

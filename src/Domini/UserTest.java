@@ -29,10 +29,10 @@ public class UserTest extends TestCase
     	
     	User u = new User("ILovePROP A LOT!!!", 47, repros);
     	
-		assertEquals("ILovePROP A LOT!!!", u.GetName());
-		assertEquals(47, u.GetAge());
-		assertEquals(r0, u.GetReproductions().get(0));
-		assertEquals(r1, u.GetReproductions().get(1));
+		assertEquals("ILovePROP A LOT!!!", u.getName());
+		assertEquals(47, u.getAge());
+		assertEquals(r0, u.getReproductions().get(0));
+		assertEquals(r1, u.getReproductions().get(1));
 		} catch(Exception e) {}
     }
     
@@ -41,8 +41,8 @@ public class UserTest extends TestCase
     	try{
     	User u = new User("IHatePROP Am I bipolar Yes! No!", 65535);
     	
-		assertEquals("IHatePROP Am I bipolar Yes! No!", u.GetName());
-		assertEquals(65535, u.GetAge());
+		assertEquals("IHatePROP Am I bipolar Yes! No!", u.getName());
+		assertEquals(65535, u.getAge());
 		} catch(Exception e) {}
     }
     
@@ -53,9 +53,9 @@ public class UserTest extends TestCase
     	
     	ArrayList<Reproduction> repros = new ArrayList<Reproduction>();
     	Reproduction r0 = (new Reproduction("a", "b", 2344));
-    	u.AddReproduction(r0);
+    	u.addReproduction(r0);
     	
-		assertEquals(r0, u.GetReproductions().get(0));
+		assertEquals(r0, u.getReproductions().get(0));
 		} catch(Exception e) {}
     }
     
@@ -71,26 +71,26 @@ public class UserTest extends TestCase
     	repros.add(r0);
     	repros.add(r1);
     	
-    	u.AddReproductions(repros);
+    	u.addReproductions(repros);
     	
-		assertEquals(repros.get(0), u.GetReproductions().get(0));
-		assertEquals(repros.get(1), u.GetReproductions().get(1));
+		assertEquals(repros.get(0), u.getReproductions().get(0));
+		assertEquals(repros.get(1), u.getReproductions().get(1));
 		} catch(Exception e) {}
     }
     
     public void testSetAge() 
     {
     	User u = new User();
-    	u.SetAge(20);
-    	assertEquals(20, u.GetAge());
+    	u.setAge(20);
+    	assertEquals(20, u.getAge());
     }
     
     public void testSetName()
     { 
     	try{
     	User u = new User();
-    	u.SetName("Im Mr Potato");
-    	assertEquals("Im Mr Potato", u.GetName());
+    	u.setName("Im Mr Potato");
+    	assertEquals("Im Mr Potato", u.getName());
 		} catch(Exception e) {}
     }
     
@@ -105,25 +105,25 @@ public class UserTest extends TestCase
     	repros.add(r1);
     	
     	User u = new User("OpenGL", 12);
-    	u.SetReproductions(repros);
-		assertEquals(repros.get(0), u.GetReproductions().get(0));
-		assertEquals(repros.get(1), u.GetReproductions().get(1));
+    	u.setReproductions(repros);
+		assertEquals(repros.get(0), u.getReproductions().get(0));
+		assertEquals(repros.get(1), u.getReproductions().get(1));
 		} catch(Exception e) {}
     }
 	
     public void testGetAge()
     { 
     	User u = new User();
-    	u.SetAge(20);
-    	assertEquals(20, u.GetAge());
+    	u.setAge(20);
+    	assertEquals(20, u.getAge());
     }
     
     public void testGetName()
     { 
     	try{
     	User u = new User();
-    	u.SetName("Im Mr Potato");
-    	assertEquals("Im Mr Potato", u.GetName());
+    	u.setName("Im Mr Potato");
+    	assertEquals("Im Mr Potato", u.getName());
 		} catch(Exception e) {}
     }
     
@@ -138,9 +138,9 @@ public class UserTest extends TestCase
     	repros.add(r1);
     	
     	User u = new User("OpenGL", 12);
-    	u.SetReproductions(repros);
-		assertEquals(repros.get(0), u.GetReproductions().get(0));
-		assertEquals(repros.get(1), u.GetReproductions().get(1));
+    	u.setReproductions(repros);
+		assertEquals(repros.get(0), u.getReproductions().get(0));
+		assertEquals(repros.get(1), u.getReproductions().get(1));
 		} catch(Exception e) {}
     }
     

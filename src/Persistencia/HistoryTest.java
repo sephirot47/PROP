@@ -29,17 +29,17 @@ public class HistoryTest extends TestCase {
 		Song s1 = new Song("A", "B");
 		Song s2 = new Song("C", "D");
 		Song s3 = new Song("E", "F");
-		g.AddNode(s1);
-		g.AddNode(s2);
-		g.AddNode(s3);
+		g.addNode(s1);
+		g.addNode(s2);
+		g.addNode(s3);
 
 		SongRelation e1 = new SongRelation();
 		SongRelation e2 = new SongRelation();
 		SongRelation e3 = new SongRelation();
 
-		g.AddEdge(s1, s2, e1);
-		g.AddEdge(s2, s3, e2);
-		g.AddEdge(s3, s1, e3);
+		g.addEdge(s1, s2, e1);
+		g.addEdge(s2, s3, e2);
+		g.addEdge(s3, s1, e3);
 
 		// Resultat esperat per entrada.txt
 		ArrayList<String> expectedGraph = new ArrayList<String>();
@@ -76,20 +76,20 @@ public class HistoryTest extends TestCase {
 
 		Solution s = new Solution(g, "GirvanNewman", comunities, 0.45f);
 
-		History.SaveSolution(s, "test");
+		History.saveSolution(s, "test");
 		
-		ArrayList<String> realGraph = FileManager.LoadData("data/solutions/solution_test/entrada.txt");
+		ArrayList<String> realGraph = FileManager.loadData("data/solutions/solution_test/entrada.txt");
 		assertTrue(realGraph.containsAll(expectedGraph) && expectedGraph.containsAll(realGraph));
 		
-		ArrayList<String> realComunities = FileManager.LoadData("data/solutions/solution_test/comunitats.txt");
+		ArrayList<String> realComunities = FileManager.loadData("data/solutions/solution_test/comunitats.txt");
 		assertEquals(realComunities.subList(0, 2), expectedComunities.subList(0, 2)); //Mirem que les 3 primeres linies siguin iguals
 		assertTrue(realComunities.containsAll(expectedComunities) && expectedComunities.containsAll(realComunities));
-		assertEquals(FileManager.LoadData("data/solutions/solution_test/info.txt"), expectedInfo);
+		assertEquals(FileManager.loadData("data/solutions/solution_test/info.txt"), expectedInfo);
 	}
 
 	public static void testRemoveSolution() throws IOException {
 		String nomSolucio = "solution_01-05-2015 00,10,53,681";
-		History.RemoveSolution(nomSolucio);
+		History.removeSolution(nomSolucio);
 		File solucio = new File("tests/" + nomSolucio);
 		assertFalse(solucio.exists());
 	}

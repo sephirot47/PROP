@@ -2,6 +2,6 @@ package Domini;
 
 public abstract class Node
 {
-	public abstract String GetId();
-	public boolean equals(Object o) { return GetId().equals( ((Node)o).GetId() ); }
+	public abstract String getId();
+	public boolean equals(Object o) { return getId().equals( ((Node)o).getId() ); }
 }

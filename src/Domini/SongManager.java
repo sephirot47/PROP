@@ -11,7 +11,7 @@ public class SongManager
 {
 	private static Set<Song> songs = new HashSet<Song>();
 	
-	public static Set<Song> GetSongs(String filepath) throws Exception
+	public static Set<Song> getSongs(String filepath) throws Exception
 	{
 		songs.clear();
 		
@@ -19,7 +19,7 @@ public class SongManager
 		{
 			ArrayList<Song> songsArray = new ArrayList<Song>();
 			
-			songsArray = FileParser.GetSongs(filepath);
+			songsArray = FileParser.getSongs(filepath);
 			
 			for(Song s : songsArray)
 			{

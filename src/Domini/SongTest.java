@@ -2,81 +2,73 @@ package Domini;
 
 import java.util.ArrayList;
 
+import Persistencia.FileManager;
+
 import junit.framework.TestCase;
 
-public class SongTest extends TestCase 
-{
-	public SongTest() 
-	{
+public class SongTest extends TestCase {
+	public SongTest() {
 		super("SongTest");
 	}
 
-	protected void setUp() throws Exception 
-	{
+	protected void setUp() throws Exception {
 		super.setUp();
 	}
-	
-	public void testSongConstructor0()
-	{
-		try{ 
-		String author = "Manolo Escobar";
-		String song = "La rumbera";
-		Song s = new Song(author, song);
-		assertEquals("Manolo Escobar", s.GetAuthor());
-		assertEquals("La rumbera", s.GetTitle());
-		} catch(Exception e) {}
-	}
-	
-	public void testSongConstructor1()
-	{
+
+	public void testSongConstructor0() {
 		try {
-		String author = "John Powell";
-		String title = "Horton Suite";
-		int year = 2008;
-		int duration = 461;
-		ArrayList<String> styles = new ArrayList<String>();
-		styles.add("OST");
-		styles.add("Film Music");
-		styles.add("Orchestral");
-		Song s = new Song (author, title, year, styles, duration);
-		assertEquals("John Powell", s.GetAuthor());
-		assertEquals("Horton Suite", s.GetTitle());
-		assertEquals(2008, s.GetYear());
-		assertEquals(461, s.GetDuration());
-		assertEquals("OST", s.GetStyles().get(0));
-		assertEquals("Film Music", s.GetStyles().get(1));
-		assertEquals("Orchestral", s.GetStyles().get(2));
-		} catch(Exception e) {}
+			String author = "Manolo Escobar";
+			String song = "La rumbera";
+			Song s = new Song(author, song);
+			assertEquals("Manolo Escobar", s.getAuthor());
+			assertEquals("La rumbera", s.getTitle());
+		} catch (Exception e) {
+		}
 	}
 
-	public void testSetSong()
-	{
+	public void testSongConstructor1() {
 		try {
-		Song s = new Song();
-		ArrayList<String> styles = new ArrayList<String>();
-		styles.add("OST");
-		String author = "Jerry Goldsmith";
-		String title = "I'll Make A Man Out of You";
-		s.SetAuthorTitle(author, title);
-		s.AddStyles(styles);
-		assertEquals("OST", s.GetStyles().get(0));
-		assertEquals("Jerry Goldsmith", s.GetAuthor());
-		assertEquals("I'll Make A Man Out of You", s.GetTitle());
-		} catch(Exception e) {}
+			String author = "John Powell";
+			String title = "Horton Suite";
+			int year = 2008;
+			int duration = 461;
+			ArrayList<String> styles = new ArrayList<String>();
+			styles.add("OST");
+			styles.add("Film Music");
+			styles.add("Orchestral");
+			Song s = new Song(author, title, year, styles, duration);
+			assertEquals("John Powell", s.getAuthor());
+			assertEquals("Horton Suite", s.getTitle());
+			assertEquals(2008, s.getYear());
+			assertEquals(461, s.getDuration());
+			assertEquals("OST", s.getStyles().get(0));
+			assertEquals("Film Music", s.getStyles().get(1));
+			assertEquals("Orchestral", s.getStyles().get(2));
+		} catch (Exception e) {
+		}
 	}
-	
-	public void testMeanUserAge()
-	{
-		try{
-		User u = null;
-		try { u = new User("Austin Powers", 33); } catch (Exception e) { e.printStackTrace(); }
-		
-		String author = "Boney-M";
-		String song = "Rasputin";
-		Song s = new Song(author, song);
-		Reproduction r = new Reproduction(author, song, 3390);
-		u.AddReproduction(r);
-		assertEquals(33, s.GetMeanUserAge());
-		} catch(Exception e) {}
+
+	public void testSetSong() {
+		try {
+			Song s = new Song();
+			ArrayList<String> styles = new ArrayList<String>();
+			styles.add("OST");
+			String author = "Jerry Goldsmith";
+			String title = "I'll Make A Man Out of You";
+			s.setAuthorTitle(author, title);
+			s.addStyles(styles);
+			assertEquals("OST", s.getStyles().get(0));
+			assertEquals("Jerry Goldsmith", s.getAuthor());
+			assertEquals("I'll Make A Man Out of You", s.getTitle());
+		} catch (Exception e) {
+		}
+	}
+
+	public void testMeanUserAge() {
+		try {
+			Song s = new Song("author", "title");
+			assertEquals(30.0f, s.getMeanUserAge());
+		} catch (Exception e) {
+		}
 	}
 }

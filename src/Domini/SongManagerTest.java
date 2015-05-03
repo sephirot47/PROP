@@ -23,22 +23,22 @@ public class SongManagerTest extends TestCase
 	{
 		try {
 		//TEST 1
-		Set<Song> songsRead = SongManager.GetSongs("tests/songs1.txt"); //read from file
+		Set<Song> songsRead = SongManager.getSongs("tests/songs1.txt"); //read from file
 		Set<Song> songs = new HashSet<Song>(); //created by us
 
-		assertFalse(SetsEquals(songs, songsRead)); 
+		assertFalse(setsEquals(songs, songsRead)); 
 		
 		ArrayList<String> styles1 = new ArrayList<String>(); styles1.add("estil3");
 		songs.add(new Song("a", "b", 2015, styles1, 42));
 		
-		assertTrue(SetsEquals(songs, songsRead));
+		assertTrue(setsEquals(songs, songsRead));
 		
 		songs.add(new Song("xza", "b123", 22215, styles1, 678));
-		assertFalse(SetsEquals(songs, songsRead));
+		assertFalse(setsEquals(songs, songsRead));
 		
 		//TEST 2
 		songsRead.clear();
-		songsRead = SongManager.GetSongs("tests/songs2.txt"); //read from file
+		songsRead = SongManager.getSongs("tests/songs2.txt"); //read from file
 		songs.clear();
 		
 		ArrayList<String> styles20 = new ArrayList<String>(); 
@@ -51,19 +51,19 @@ public class SongManagerTest extends TestCase
 		songs.add(new Song("c", "t", 2015, styles20, 212));
 		songs.add(new Song("x", "y", 2015, styles30, 212));
 		
-		assertTrue(SetsEquals(songs, songsRead));
+		assertTrue(setsEquals(songs, songsRead));
 		
 		songs.add(new Song("asdsad", "asddas", 202115, styles20, 345));
-		assertFalse(SetsEquals(songs, songsRead));
+		assertFalse(setsEquals(songs, songsRead));
 		
 		songs.clear();
 		songs.add(new Song("xccvxxcv", "xcv", 45, styles30, 2));
-		assertFalse(SetsEquals(songs, songsRead));
+		assertFalse(setsEquals(songs, songsRead));
 
 		} catch(Exception e) {}
 	}
 	
-	public <T> boolean SetsEquals(Set<T> ss1, Set<T> ss2)
+	public <T> boolean setsEquals(Set<T> ss1, Set<T> ss2)
 	{
 		//S'ha de passar a ArrayList perque si no, al comparar sets amb set.equals(set2), tambe compara
 		//els hashcodes, i nomes volem que compari amb la funcio T.equals, per aixo aquesta conversio.

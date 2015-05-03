@@ -1,52 +1,66 @@
 package Domini;
 
+import java.util.Calendar;
+import java.util.TimeZone;
+
 public class Reproduction
 {
 	private String songAuthor, songTitle;
-	private int time; //en segons
+	private long time; //en segons
 	
-	public Reproduction(String author,String title, int time) throws Exception
+	public Reproduction(String author,String title) throws Exception
 	{
-		CheckString(author); CheckString(title);
+		checkString(author); checkString(title);
+		songAuthor = author;
+		songTitle = title;
+		
+		long milis = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis();
+		this.time = milis;
+	}
+	
+	public Reproduction(String author,String title, long time) throws Exception
+	{
+		checkString(author); checkString(title);
 		songAuthor = author;
 		songTitle = title;
 		this.time = time;
 	}
 	
-	public void Print()
+	public void print()
 	{
 		System.out.println(songAuthor);
 		System.out.println(songTitle);
 		System.out.println(time);
 	}
 	
-	public String GetSongAuthor() {
+	public String getSongAuthor() {
 		return songAuthor;
 	}
 
-	public void SetSongAuthor(String songAuthor) throws Exception {
-		CheckString(songAuthor);
+	public void setSongAuthor(String songAuthor) throws Exception {
+		checkString(songAuthor);
 		this.songAuthor = songAuthor;
 	}
 
-	public String GetSongTitle() {
+	public String getSongTitle() {
 		return songTitle;
 	}
 
-	public void SetSongTitle(String songTitle) throws Exception {
-		CheckString(songTitle);
+	public void setSongTitle(String songTitle) throws Exception {
+		checkString(songTitle);
 		this.songTitle = songTitle;
 	}
 
-	public int GetTime() {
+	public long getTime() 
+	{
 		return time;
 	}
 
-	public void SetTime(int time) {
+	public void setTime(int time) {
 		this.time = time;
 	}
 
-	private void CheckString(String str) throws Exception
+	private void checkString(String str) throws Exception
 	{
 		if(str.contains(";")) throw new Exception("Song strings can't contain the \" ; \" character (\'" + 
 												  str + "\')");
@@ -55,8 +69,8 @@ public class Reproduction
 	public boolean equals(Object obj) 
 	{
 		Reproduction r = (Reproduction) obj;
-		return GetTime() == r.GetTime() && 
-			   GetSongAuthor().equals(r.GetSongAuthor()) &&
-			   GetSongTitle().equals(r.GetSongTitle());
+		return getTime() == r.getTime() && 
+			   getSongAuthor().equals(r.getSongAuthor()) &&
+			   getSongTitle().equals(r.getSongTitle());
 	}
 }
