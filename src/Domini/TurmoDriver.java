@@ -51,24 +51,24 @@ public class TurmoDriver
 		
 		switch(option)
 		{
-		case 1: TestAddSongToFile(); break;
-		case 2: TestReadSongFile(); break;
-		case 3: TestRemoveSongOfFile(); break;
+		case 1: testAddSongToFile(); break;
+		case 2: testReadSongFile(); break;
+		case 3: testRemoveSongOfFile(); break;
 		
-		case 4: TestAddUserToFile(); break;
-		case 5: TestReadUserFile(); break;
-		case 6: TestRemoveUserOfFile(); break;
+		case 4: testAddUserToFile(); break;
+		case 5: testReadUserFile(); break;
+		case 6: testRemoveUserOfFile(); break;
 		
-		case 7: TestAddReproductionToFile(); break;
-		case 8: TestReadReproductions(); break;
+		case 7: testAddReproductionToFile(); break;
+		case 8: testReadReproductions(); break;
 		
-		case 9: TestReadSolutions(); break;
+		case 9: testReadSolutions(); break;
 		}
 		
 		}
 	}
 	
-	public static void TestAddSongToFile()
+	public static void testAddSongToFile()
 	{
 		String author, title;
 		ArrayList<String> styles = new ArrayList<String>();
@@ -103,7 +103,7 @@ public class TurmoDriver
 		
 		try
 		{
-			FileManager.SaveSong(filepath, s);
+			FileManager.saveSong(filepath, s);
 		}
 		catch(IOException e)
 		{
@@ -115,7 +115,7 @@ public class TurmoDriver
 		pl("Canco creada/modificada amb exit!!!!");
 	}
 	
-	public static void TestReadSongFile()
+	public static void testReadSongFile()
 	{
 		pl(""); pl("");
 		pl("TEST: Llegir Song de arxiu");
@@ -126,7 +126,7 @@ public class TurmoDriver
 		Set<Song> songs = null;
 		try
 		{
-			songs = SongManager.GetSongs(filepath);
+			songs = SongManager.getSongs(filepath);
 		}
 		catch(Exception e)
 		{
@@ -139,14 +139,14 @@ public class TurmoDriver
 		for(Song s : songs)
 		{
 			pl("Canco " + (++i));
-			s.Print();
+			s.print();
 			pl("");
 		}
 		pl(":::::::::::::::::::::::::::::::::::::::::");
 		pl("");
 	}
 	
-	public static void TestRemoveSongOfFile()
+	public static void testRemoveSongOfFile()
 	{
 		pl(""); pl("");
 		pl("TEST: Borrar Song de arxiu");
@@ -160,7 +160,7 @@ public class TurmoDriver
 		
 		try 
 		{
-			FileManager.RemoveSong(filepath, author, title);
+			FileManager.removeSong(filepath, author, title);
 		} 
 		catch (IOException e) 
 		{
@@ -172,7 +172,7 @@ public class TurmoDriver
 		   "\" ja no existeix al arxiu \"" + filepath + "\""); pl("");
 	}
 	
-	public static void TestAddUserToFile()
+	public static void testAddUserToFile()
 	{
 		String username;
 		int age;
@@ -202,7 +202,7 @@ public class TurmoDriver
 		
 		try
 		{
-			FileManager.SaveUser(filepath, u);
+			FileManager.saveUser(filepath, u);
 		}
 		catch(IOException e)
 		{
@@ -214,7 +214,7 @@ public class TurmoDriver
 		pl("User creat/modificat amb exit!!!!");
 	}
 	
-	public static void TestReadUserFile()
+	public static void testReadUserFile()
 	{
 		pl(""); pl("");
 		pl("TEST: Llegir User de arxiu");
@@ -227,7 +227,7 @@ public class TurmoDriver
 		Set<User> users = null;
 		try
 		{
-			users = UserManager.GetUsers(filepath, reprosFilepath.equals("-") ? "tests/" : reprosFilepath);
+			users = UserManager.getUsers(filepath, reprosFilepath.equals("-") ? "tests/" : reprosFilepath);
 		}
 		catch(Exception e)
 		{
@@ -240,14 +240,14 @@ public class TurmoDriver
 		for(User u : users)
 		{
 			pl("User " + (++i));
-			u.Print();
+			u.print();
 			pl("");
 		}
 		pl(":::::::::::::::::::::::::::::::::::::");
 		pl("");
 	}
 	
-	public static void TestRemoveUserOfFile()
+	public static void testRemoveUserOfFile()
 	{
 		pl(""); pl("");
 		pl("TEST: Borrar User de arxiu");
@@ -260,7 +260,7 @@ public class TurmoDriver
 		
 		try 
 		{
-			FileManager.RemoveUser(filepath, username);
+			FileManager.removeUser(filepath, username);
 		} 
 		catch (IOException e) 
 		{
@@ -270,7 +270,7 @@ public class TurmoDriver
 		pl("El user amb nom \"" + username +  "\" ja no existeix al arxiu \"" + filepath + "\""); pl("");
 	}
 	
-	public static void TestAddReproductionToFile()
+	public static void testAddReproductionToFile()
 	{
 		String username;
 		
@@ -303,7 +303,7 @@ public class TurmoDriver
 		
 		try
 		{
-			FileManager.SaveReproduction(filepath + "/" + username + "Reproductions.txt", r);
+			FileManager.saveReproduction(filepath + "/" + username + "Reproductions.txt", r);
 		}
 		catch(IOException e)
 		{
@@ -315,7 +315,7 @@ public class TurmoDriver
 		pl("Reproduccio afegida amb exit!!!!");
 	}
 	
-	public static void TestReadReproductions()
+	public static void testReadReproductions()
 	{
 		String username;
 		
@@ -342,8 +342,8 @@ public class TurmoDriver
 		try //Si no existeix el seu arxiu de repros pues no te repros
 		{ 
 			//Afegim al user llegit les reproduccions corresponents
-			String reproductionsFilepath = filepath + "/" + user.GetName() + "Reproductions.txt";
-			userReproductions = FileParser.GetReproductions(reproductionsFilepath);
+			String reproductionsFilepath = filepath + "/" + user.getName() + "Reproductions.txt";
+			userReproductions = FileParser.getReproductions(reproductionsFilepath);
 		}
 		catch(Exception e){}
 
@@ -354,14 +354,14 @@ public class TurmoDriver
 		for(Reproduction r : userReproductions)
 		{
 			pl("Reproduction " + (++i) + ":");
-			r.Print();
+			r.print();
 			pl("");
 		}
 		pl(":::::::::::::::::::::::::::::::::::::::");
 		pl("");
 	}
 	
-	public static void TestReadSolutions()
+	public static void testReadSolutions()
 	{
 		pl(""); pl("");
 		pl("TEST: Llegir Solucions:");
@@ -372,7 +372,7 @@ public class TurmoDriver
 		ArrayList<Solution> solutions = null;
 		try 
 		{
-			solutions = History.GetSolutions(filepath);
+			solutions = History.getSolutions(filepath);
 		} 
 		catch (Exception e) 
 		{
@@ -391,7 +391,7 @@ public class TurmoDriver
 			pl("");
 			pl(":::::: Solucio " + (++i) + " :::::::");
 			pl(":::::::::::::::::::::::::::");
-			s.Print();
+			s.print();
 			pl(":::::::::::::::::::::::::::");
 			pl("");
 		}

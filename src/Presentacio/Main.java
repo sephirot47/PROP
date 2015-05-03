@@ -28,44 +28,44 @@ public class Main
 	{
 		try{
 		Song ssss = new Song("\"\\sdj<>*ks/a|mfks:.asd", "\"\\sdj<>*ksa|mf?ks:.asd");
-		ssss.Print();
+		ssss.print();
 		
 		//Example of the use of Graph class
 		songGraph = new SongGraph();
 
-		Song a = new Song("A", "A"); songGraph.AddNode(a);
-		Song b = new Song("B", "A"); songGraph.AddNode(b);
-		Song c = new Song("C", "A"); songGraph.AddNode(c);
-		Song e = new Song("E", "A"); songGraph.AddNode(e);
-		Song f = new Song("F", "A"); songGraph.AddNode(f);
-		Song g = new Song("G", "A"); songGraph.AddNode(g);
-		Song h = new Song("H", "A"); songGraph.AddNode(h);
-		Song i = new Song("I", "A"); songGraph.AddNode(i);
-		Song j = new Song("J", "A"); songGraph.AddNode(j);
-		Song k = new Song("K", "A"); songGraph.AddNode(k);
-		Song l = new Song("L", "A"); songGraph.AddNode(l);
-		Song m = new Song("M", "A"); songGraph.AddNode(m);
-		Song x = new Song("X", "A"); songGraph.AddNode(x);
-		Song y = new Song("Y", "A"); songGraph.AddNode(y);
+		Song a = new Song("A", "A"); songGraph.addNode(a);
+		Song b = new Song("B", "A"); songGraph.addNode(b);
+		Song c = new Song("C", "A"); songGraph.addNode(c);
+		Song e = new Song("E", "A"); songGraph.addNode(e);
+		Song f = new Song("F", "A"); songGraph.addNode(f);
+		Song g = new Song("G", "A"); songGraph.addNode(g);
+		Song h = new Song("H", "A"); songGraph.addNode(h);
+		Song i = new Song("I", "A"); songGraph.addNode(i);
+		Song j = new Song("J", "A"); songGraph.addNode(j);
+		Song k = new Song("K", "A"); songGraph.addNode(k);
+		Song l = new Song("L", "A"); songGraph.addNode(l);
+		Song m = new Song("M", "A"); songGraph.addNode(m);
+		Song x = new Song("X", "A"); songGraph.addNode(x);
+		Song y = new Song("Y", "A"); songGraph.addNode(y);
 		
-		songGraph.AddEdge(a, b, new SongRelation());
-		songGraph.AddEdge(a, c, new SongRelation());
-		songGraph.AddEdge(b, c, new SongRelation());
-		songGraph.AddEdge(e, f, new SongRelation());
-		songGraph.AddEdge(e, g, new SongRelation());
-		songGraph.AddEdge(g, f, new SongRelation());
-		songGraph.AddEdge(h, i, new SongRelation());
-		songGraph.AddEdge(h, j, new SongRelation());
-		songGraph.AddEdge(j, i, new SongRelation());
-		songGraph.AddEdge(k, l, new SongRelation());
-		songGraph.AddEdge(k, m, new SongRelation());
-		songGraph.AddEdge(l, m, new SongRelation());
-		songGraph.AddEdge(x, c, new SongRelation());
-		songGraph.AddEdge(x, e, new SongRelation());
-		songGraph.AddEdge(y, h, new SongRelation());
-		songGraph.AddEdge(y, k, new SongRelation());
+		songGraph.addEdge(a, b, new SongRelation());
+		songGraph.addEdge(a, c, new SongRelation());
+		songGraph.addEdge(b, c, new SongRelation());
+		songGraph.addEdge(e, f, new SongRelation());
+		songGraph.addEdge(e, g, new SongRelation());
+		songGraph.addEdge(g, f, new SongRelation());
+		songGraph.addEdge(h, i, new SongRelation());
+		songGraph.addEdge(h, j, new SongRelation());
+		songGraph.addEdge(j, i, new SongRelation());
+		songGraph.addEdge(k, l, new SongRelation());
+		songGraph.addEdge(k, m, new SongRelation());
+		songGraph.addEdge(l, m, new SongRelation());
+		songGraph.addEdge(x, c, new SongRelation());
+		songGraph.addEdge(x, e, new SongRelation());
+		songGraph.addEdge(y, h, new SongRelation());
+		songGraph.addEdge(y, k, new SongRelation());
 		SongRelation sr = new SongRelation();
-		songGraph.AddEdge(x, y, sr);
+		songGraph.addEdge(x, y, sr);
 		
     	System.out.println(" ");
 
@@ -79,12 +79,12 @@ public class Main
     	System.out.println("********************* ");
     	*/
 
-    	ArrayList< Set<Song> > rawSolution = GirvanNewman.GetSolution(songGraph, 6); //Get el conjunt de llistes de Songs
+    	ArrayList< Set<Song> > rawSolution = GirvanNewman.getSolution(songGraph, 6); //Get el conjunt de llistes de Songs
 		int foo = 0;
 		for(Set<Song> songList : rawSolution)
 		{
 			System.out.println("Song List " + (++foo) + ":");
-			for(Song s : songList) System.out.println("-" + s.GetId());
+			for(Song s : songList) System.out.println("-" + s.getId());
 			System.out.println(" ");
 		}
 		
@@ -100,14 +100,14 @@ public class Main
 		
 		SongGraph s = new SongGraph();
 		try {
-			s.LoadSongs();
+			s.loadSongs();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		s.Print();
+		s.print();
 		
-		for(Song songu : SongManager.GetSongs("data/songs/songs.txt")) songu.Print();
-		for(User user : UserManager.GetUsers("data/users/users.txt", "data/reproductions")) user.Print();
+		for(Song songu : SongManager.getSongs("data/songs/songs.txt")) songu.print();
+		for(User user : UserManager.getUsers("data/users/users.txt", "data/reproductions")) user.print();
 		
 		System.out.println("*********************");
 		System.out.println("*********************");

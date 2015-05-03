@@ -23,41 +23,41 @@ public class GirvanNewmanTest extends TestCase
 		try{
 		Graph<Song, SongRelation> g = new Graph<Song, SongRelation>();
 		
-		Song a = new Song("A","A"); g.AddNode(a);
-		Song b = new Song("B","B"); g.AddNode(b);
-		Song c = new Song("C","C"); g.AddNode(c);
-		Song d = new Song("D","D"); g.AddNode(d);
-		Song e = new Song("E","E"); g.AddNode(e);
-		Song f = new Song("F","F"); g.AddNode(f);
-		Song h = new Song("H","H"); g.AddNode(h);
-		Song i = new Song("I","I"); g.AddNode(i);
-		Song j = new Song("J","J"); g.AddNode(j);
-		Song k = new Song("K","K"); g.AddNode(k);
-		Song l = new Song("L","L"); g.AddNode(l);
-		Song m = new Song("M","M"); g.AddNode(m);
-		Song x = new Song("X","X"); g.AddNode(x);
-		Song y = new Song("Y","Y"); g.AddNode(y);
+		Song a = new Song("A","A"); g.addNode(a);
+		Song b = new Song("B","B"); g.addNode(b);
+		Song c = new Song("C","C"); g.addNode(c);
+		Song d = new Song("D","D"); g.addNode(d);
+		Song e = new Song("E","E"); g.addNode(e);
+		Song f = new Song("F","F"); g.addNode(f);
+		Song h = new Song("H","H"); g.addNode(h);
+		Song i = new Song("I","I"); g.addNode(i);
+		Song j = new Song("J","J"); g.addNode(j);
+		Song k = new Song("K","K"); g.addNode(k);
+		Song l = new Song("L","L"); g.addNode(l);
+		Song m = new Song("M","M"); g.addNode(m);
+		Song x = new Song("X","X"); g.addNode(x);
+		Song y = new Song("Y","Y"); g.addNode(y);
 		
-		g.AddEdge(a, b, new SongRelation());
-		g.AddEdge(a, c, new SongRelation());
-		g.AddEdge(b, c, new SongRelation());
-		g.AddEdge(e, f, new SongRelation());
-		g.AddEdge(e, d, new SongRelation());
-		g.AddEdge(d, f, new SongRelation());
-		g.AddEdge(h, i, new SongRelation());
-		g.AddEdge(h, j, new SongRelation());
-		g.AddEdge(j, i, new SongRelation());
-		g.AddEdge(k, l, new SongRelation());
-		g.AddEdge(k, m, new SongRelation());
-		g.AddEdge(l, m, new SongRelation());
-		g.AddEdge(x, c, new SongRelation());
-		g.AddEdge(x, e, new SongRelation());
-		g.AddEdge(y, h, new SongRelation());
-		g.AddEdge(y, k, new SongRelation());
-		g.AddEdge(x, y, new SongRelation());
+		g.addEdge(a, b, new SongRelation());
+		g.addEdge(a, c, new SongRelation());
+		g.addEdge(b, c, new SongRelation());
+		g.addEdge(e, f, new SongRelation());
+		g.addEdge(e, d, new SongRelation());
+		g.addEdge(d, f, new SongRelation());
+		g.addEdge(h, i, new SongRelation());
+		g.addEdge(h, j, new SongRelation());
+		g.addEdge(j, i, new SongRelation());
+		g.addEdge(k, l, new SongRelation());
+		g.addEdge(k, m, new SongRelation());
+		g.addEdge(l, m, new SongRelation());
+		g.addEdge(x, c, new SongRelation());
+		g.addEdge(x, e, new SongRelation());
+		g.addEdge(y, h, new SongRelation());
+		g.addEdge(y, k, new SongRelation());
+		g.addEdge(x, y, new SongRelation());
 		
 		/// Una comunitat 
-		ArrayList< Set<Song> > result1 = GirvanNewman.GetSolution(g, 1);
+		ArrayList< Set<Song> > result1 = GirvanNewman.getSolution(g, 1);
 		ArrayList< Set<Song> > expectedResult1 = new ArrayList<Set<Song>>();
 		Set<Song> set = new HashSet<Song>();
 		set.add(a);
@@ -80,7 +80,7 @@ public class GirvanNewmanTest extends TestCase
 		
 		
 		// Dues comunitats
-		ArrayList< Set<Song> > result2 = GirvanNewman.GetSolution(g, 2);
+		ArrayList< Set<Song> > result2 = GirvanNewman.getSolution(g, 2);
 		ArrayList< Set<Song> > expectedResult2 = new ArrayList<Set<Song>>();
 		Set<Song> set1 = new HashSet<Song>();
 		set1.add(a);
@@ -107,7 +107,7 @@ public class GirvanNewmanTest extends TestCase
 		
 		
 		// Sis comunitats
-		ArrayList< Set<Song> > result6 = GirvanNewman.GetSolution(g, 6);
+		ArrayList< Set<Song> > result6 = GirvanNewman.getSolution(g, 6);
 		ArrayList< Set<Song> > expectedResult6 = new ArrayList<Set<Song>>();
 		set1 = new HashSet<Song>();
 		set1.add(a);

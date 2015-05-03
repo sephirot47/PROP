@@ -22,59 +22,59 @@ public class UserManagerTest extends TestCase
 	{
 		try{
 		//TEST 1
-		Set<User> usersRead = UserManager.GetUsers("tests/users1.txt", "tests"); //read from file
+		Set<User> usersRead = UserManager.getUsers("tests/users1.txt", "tests"); //read from file
 		Set<User> users = new HashSet<User>(); //created by us
 
 		assertFalse(users.equals(usersRead));
 		
 		User u = new User("a", 12);
-		u.AddReproduction(new Reproduction("a", "b", 20));
-		u.AddReproduction(new Reproduction("a", "b", 30));
+		u.addReproduction(new Reproduction("a", "b", 20));
+		u.addReproduction(new Reproduction("a", "b", 30));
 		users.add(u);
-		assertFalse(SetsEquals(users, usersRead));
+		assertFalse(setsEquals(users, usersRead));
 		
-		u.AddReproduction(new Reproduction("a", "b", 592));
-		assertTrue(SetsEquals(users, usersRead));
+		u.addReproduction(new Reproduction("a", "b", 592));
+		assertTrue(setsEquals(users, usersRead));
 		
 		users.add(new User("xza", 123));
-		assertFalse(SetsEquals(users, usersRead));
+		assertFalse(setsEquals(users, usersRead));
 		
 		//TEST 2
 		usersRead.clear();
-		usersRead  = UserManager.GetUsers("tests/users2.txt", "tests"); //read from file
+		usersRead  = UserManager.getUsers("tests/users2.txt", "tests"); //read from file
 		users.clear();
 
 		User u2 = new User("BbsdA124^!", 78);
-		u2.AddReproduction(new Reproduction("xcvxcv", "xcvvc", 20));
-		u2.AddReproduction(new Reproduction("xcvxcv", "ioppoi", 30));
+		u2.addReproduction(new Reproduction("xcvxcv", "xcvvc", 20));
+		u2.addReproduction(new Reproduction("xcvxcv", "ioppoi", 30));
 		users.add(u2);
-		assertFalse(SetsEquals(users, usersRead));
+		assertFalse(setsEquals(users, usersRead));
 		
 		User u3 = new User("a", 12);
-		u3.AddReproduction(new Reproduction("a", "b", 20));
-		u3.AddReproduction(new Reproduction("a", "b", 30));
-		u3.AddReproduction(new Reproduction("a", "b", 592));
+		u3.addReproduction(new Reproduction("a", "b", 20));
+		u3.addReproduction(new Reproduction("a", "b", 30));
+		u3.addReproduction(new Reproduction("a", "b", 592));
 		users.add(u3);
-		assertFalse(SetsEquals(users, usersRead));
+		assertFalse(setsEquals(users, usersRead));
 
 		User u4 = new User("cxcvxcv asdas", 25);
 		users.add(u4);
-		assertFalse(SetsEquals(users, usersRead));
+		assertFalse(setsEquals(users, usersRead));
 		
-		u4.AddReproduction(new Reproduction("jkll", "kl", 20));
-		u4.AddReproduction(new Reproduction("jjjj", "jk", 30));
-		assertTrue(SetsEquals(users, usersRead));
+		u4.addReproduction(new Reproduction("jkll", "kl", 20));
+		u4.addReproduction(new Reproduction("jjjj", "jk", 30));
+		assertTrue(setsEquals(users, usersRead));
 
 		users.add(new User("asdsad", 2));
-		assertFalse(SetsEquals(users, usersRead));
+		assertFalse(setsEquals(users, usersRead));
 		
 		users.clear();
 		users.add(new User("xccvxxcv", 6));
-		assertFalse(SetsEquals(users, usersRead));
+		assertFalse(setsEquals(users, usersRead));
 		} catch(Exception e) {}
 	}
 	
-	public <T> boolean SetsEquals(Set<T> ss1, Set<T> ss2)
+	public <T> boolean setsEquals(Set<T> ss1, Set<T> ss2)
 	{
 		//S'ha de passar a ArrayList perque si no, al comparar sets amb set.equals(set2), tambe compara
 		//els hashcodes, i nomes volem que compari amb la funcio T.equals, per aixo aquesta conversio.

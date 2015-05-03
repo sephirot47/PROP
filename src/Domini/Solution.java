@@ -19,20 +19,20 @@ public class Solution
 		generationTime = genTime;
 	}
 
-	public void SetEntrada(SongGraph entrada) { this.entrada = entrada; }
-	public void SetAlgorisme(String algorisme) { this.algorisme = algorisme; }
-	public void SetSongCommunities(ArrayList<Set<Song>> songCommunities) { this.songCommunities = songCommunities; }
-	public void SetGenerationTime(float generationTime) { this.generationTime = generationTime; }
+	public void setEntrada(SongGraph entrada) { this.entrada = entrada; }
+	public void setAlgorisme(String algorisme) { this.algorisme = algorisme; }
+	public void setSongCommunities(ArrayList<Set<Song>> songCommunities) { this.songCommunities = songCommunities; }
+	public void setGenerationTime(float generationTime) { this.generationTime = generationTime; }
 
-	public String GetAlgorisme() { return algorisme; }
-	public float GetGenerationTime() { return generationTime; }
-	public SongGraph GetEntrada() { return entrada; }
-	public ArrayList<Set<Song>> GetSongCommunities() { return songCommunities; }
+	public String getAlgorisme() { return algorisme; }
+	public float getGenerationTime() { return generationTime; }
+	public SongGraph getEntrada() { return entrada; }
+	public ArrayList<Set<Song>> getSongCommunities() { return songCommunities; }
 	
-	public void Print()
+	public void print()
 	{
 		System.out.println("Entrada: ---");
-		entrada.Print();
+		entrada.print();
 		System.out.println("---");
 		System.out.println("Sortida(comunitats): ---");
 		int i = 0;
@@ -41,7 +41,7 @@ public class Solution
 			System.out.println("Comunitat " + (++i));
 			for(Song s : ss)
 			{
-				s.Print();
+				s.print();
 				System.out.println("-");
 			}
 		}

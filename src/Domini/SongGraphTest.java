@@ -26,14 +26,14 @@ public class SongGraphTest extends TestCase
 	
 	class N extends Node
 	{
-		public String GetId() { return "potato"; }
+		public String getId() { return "potato"; }
 	}
 	
 	class E extends Edge
 	{
 		float weight;
-		public float GetWeight() { return weight;}
-		public void SetWeight(float weight) { this.weight = weight; }
+		public float getWeight() { return weight;}
+		public void setWeight(float weight) { this.weight = weight; }
 	}
 	public void testGenerateEdges()
 	{
@@ -51,14 +51,14 @@ public class SongGraphTest extends TestCase
 		Song s3 = new Song("AC/DC","Hells Bells",1980,style,312);
 		Song s4 = new Song("AC/DC","T.N.T",1975,style,214);
 
-		p.SetAuthor(9);
-		p.SetDuration(8);
-		p.SetStyle(10);
-		p.SetUserAge(1);
-		p.SetNearbyReproductions(0);
+		p.setAuthor(9);
+		p.setDuration(8);
+		p.setStyle(10);
+		p.setUserAge(1);
+		p.setNearbyReproductions(0);
 		
-		sg.AddNode(s);
-		sg.AddNode(s1);
+		sg.addNode(s);
+		sg.addNode(s1);
 		//sg.AddNode(s2);
 		//sg.AddNode(s3);
 		//sg.AddNode(s4);
@@ -70,10 +70,10 @@ public class SongGraphTest extends TestCase
 		ss.add(0, songs);
 		
 		
-		sg.GenerateEdges(p);
-		ArrayList<Set<Song>> Cjs = sg.GetConnectedComponents();
+		sg.generateEdges(p);
+		ArrayList<Set<Song>> Cjs = sg.getConnectedComponents();
 		
-		sg.GetAllEdges();
+		sg.getAllEdges();
 		
 		assertEquals(Cjs,ss);
 		} catch(Exception e) {}
@@ -93,7 +93,7 @@ public class SongGraphTest extends TestCase
 		style.add("ioroYOLO");
 		Song s1 = new Song("jfons","tramboliko",1867,style,45);
 		
-		assertEquals(sg.GetNearbyReproductionsAportation(s, s1),0.5f);
+		assertEquals(sg.getNearbyReproductionsAportation(s, s1),0.5f);
 		} catch(Exception e) {}
 	}
 }

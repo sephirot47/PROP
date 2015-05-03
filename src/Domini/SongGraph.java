@@ -14,16 +14,16 @@ public class SongGraph extends Graph<Song, SongRelation>
 		super();
 	}
 	
-	public void LoadSongs() throws IOException
+	public void loadSongs() throws IOException
 	{
 	}
 	
-	public void GenerateEdges(Ponderations p)
+	public void generateEdges(Ponderations p)
 	{
-		RemoveAllEdges();
-		float threshold = (p.GetThreshold()*0.1f)/2;
+		removeAllEdges();
+		float threshold = (p.getThreshold()*0.1f)/2;
 		
-		Set<Song> songs = GetAllNodes();
+		Set<Song> songs = getAllNodes();
 		//Set<User> users = UserManager.GetUsers("data/users/users.txt", "data/reproductions");
 		for(Song s : songs)
 		{
@@ -37,12 +37,12 @@ public class SongGraph extends Graph<Song, SongRelation>
 					authorAportation = styleAportation = durationAportation = yearAportation = userAgeAportation = nearbyReproductionsAportation = 0;
 					
 					//Autor
-					if(s.GetAuthor().equalsIgnoreCase(s2.GetAuthor())) authorAportation = ((float) p.GetAuthor()*0.1f);
+					if(s.getAuthor().equalsIgnoreCase(s2.getAuthor())) authorAportation = ((float) p.getAuthor()*0.1f);
 					else authorAportation = 0.0f;
 					//
 					
 					//Estils
-					ArrayList<String> styles1 = s.GetStyles(), styles2 = s2.GetStyles();
+					ArrayList<String> styles1 = s.getStyles(), styles2 = s2.getStyles();
 					float sameStyles = 0;
 					for(String st1 : styles1)
 						for(String st2 : styles2)
@@ -50,46 +50,46 @@ public class SongGraph extends Graph<Song, SongRelation>
 								sameStyles++;
 							
 
-					styleAportation = (sameStyles/styles1.size())*((float) p.GetStyle()*0.1f); //0.0, 0.33, 0.66 o 1.0
+					styleAportation = (sameStyles/styles1.size())*((float) p.getStyle()*0.1f); //0.0, 0.33, 0.66 o 1.0
 					//
 					
 					//DurationAportation
-					float durationDistance = Math.abs(s.GetDuration() - s2.GetDuration());
-					durationAportation = (30.0f / durationDistance) * ((float) p.GetDuration()*0.1f);
-					if(durationAportation > 1.0f) durationAportation = p.GetDuration()*0.1f;
+					float durationDistance = Math.abs(s.getDuration() - s2.getDuration());
+					durationAportation = (30.0f / durationDistance) * ((float) p.getDuration()*0.1f);
+					if(durationAportation > 1.0f) durationAportation = p.getDuration()*0.1f;
 					//
 					
 					//Year
-					float yearDistance = Math.abs(s.GetYear() - s2.GetYear());
-					yearAportation = (3.0f / yearDistance)*((float) p.GetYear()*0.1f);
-					if(yearAportation > 1.0f) yearAportation = p.GetYear()*0.1f;
+					float yearDistance = Math.abs(s.getYear() - s2.getYear());
+					yearAportation = (3.0f / yearDistance)*((float) p.getYear()*0.1f);
+					if(yearAportation > 1.0f) yearAportation = p.getYear()*0.1f;
 					//
 					
 					//User Ages
-					float userAgeDistance = Math.abs(s.GetMeanUserAge() - s2.GetMeanUserAge());
-					userAgeAportation = (5.0f / userAgeDistance)*((float) p.GetUserAge()*0.1f);
-					if(userAgeAportation > 1.0f) userAgeAportation = p.GetUserAge()*0.1f;
+					float userAgeDistance = Math.abs(s.getMeanUserAge() - s2.getMeanUserAge());
+					userAgeAportation = (5.0f / userAgeDistance)*((float) p.getUserAge()*0.1f);
+					if(userAgeAportation > 1.0f) userAgeAportation = p.getUserAge()*0.1f;
 					//
 					
 					//Nearby Reproductions 
-					nearbyReproductionsAportation = (GetNearbyReproductionsAportation(s,s2)) * ((float) p.GetNearbyReproductions()*0.1f);
+					nearbyReproductionsAportation = (getNearbyReproductionsAportation(s,s2)) * ((float) p.getNearbyReproductions()*0.1f);
 					
 					affinity =  (authorAportation + styleAportation + durationAportation + yearAportation + userAgeAportation + nearbyReproductionsAportation)/(float) 6;
 					
 				
 					SongRelation edge = new SongRelation();
-					edge.SetWeight(affinity);
-					if(affinity >= threshold) AddEdge(s, s2, edge);
+					edge.setWeight(affinity);
+					if(affinity >= threshold) addEdge(s, s2, edge);
 				}
 			}
 		}
 	}
 	
-	public float GetNearbyReproductionsAportation(Song s1, Song s2) //Entre 0.0f y 1.0f
+	public float getNearbyReproductionsAportation(Song s1, Song s2) //Entre 0.0f y 1.0f
 	{
 		float aportation = 0.0f;
 		try{
-		Set<User> users = UserManager.GetUsers("data/users/users.txt", "data/reproductions");
+		Set<User> users = UserManager.getUsers("data/users/users.txt", "data/reproductions");
 		for(User u : users)
 		{
 			boolean findit1 = false;
@@ -97,15 +97,15 @@ public class SongGraph extends Graph<Song, SongRelation>
 			
 			Reproduction r1 = new Reproduction("buit","buit",0);
 			Reproduction r2 = new Reproduction("buit","buit",0);
-			ArrayList<Reproduction> repros = u.GetReproductions();
+			ArrayList<Reproduction> repros = u.getReproductions();
 			for(Reproduction r : repros)
 			{				
-				if(r.GetSongAuthor().equals(s1.GetAuthor()) && r.GetSongTitle().equals(s1.GetTitle())){
+				if(r.getSongAuthor().equals(s1.getAuthor()) && r.getSongTitle().equals(s1.getTitle())){
 					findit1 = true;
 					r1 = r;
 					
 				}
-				if(r.GetSongAuthor().equals(s2.GetAuthor()) && r.GetSongTitle().equals(s2.GetTitle())){
+				if(r.getSongAuthor().equals(s2.getAuthor()) && r.getSongTitle().equals(s2.getTitle())){
 					findit2 = true;
 					r2 = r;
 				}
@@ -130,7 +130,7 @@ public class SongGraph extends Graph<Song, SongRelation>
 			//if((findit1 && findit2)&&())
 				
 			}
-			if((findit1&&findit2)&&(Math.abs(r1.GetTime() - r2.GetTime()) <= 180000)){
+			if((findit1&&findit2)&&(Math.abs(r1.getTime() - r2.getTime()) <= 180000)){
 				aportation += 1.0/(float) users.size();
 			}
 		}

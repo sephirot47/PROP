@@ -17,14 +17,14 @@ public class SongRelationTest extends TestCase
 	public void testGetWeight() 
 	{
 		SongRelation sr = new SongRelation();
-		sr.SetWeight(30.0f);
-		assertEquals(30.0f, sr.GetWeight());
+		sr.setWeight(30.0f);
+		assertEquals(30.0f, sr.getWeight());
 	}
 	
 	public void testSetWeight() 
 	{
 		SongRelation sr = new SongRelation();
-		sr.SetWeight(30.0f);
-		assertEquals(30.0f, sr.GetWeight());
+		sr.setWeight(30.0f);
+		assertEquals(30.0f, sr.getWeight());
 	}
 }

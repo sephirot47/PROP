@@ -24,14 +24,14 @@ public class Graph <N extends Node, E extends Edge>
 	 * Add a new disconnected node (without edges to any node). The node mustn't exist in the graph before adding it.
 	 * @param node The node to be added
 	 */
-	public void AddNode(N node)
+	public void addNode(N node)
 	{
 		if(graph.containsKey(node)) //Si son la misma instancia
 		{
 			System.err.println("Can't add repeated nodes, create a new Node instead. Ignoring the AddNode");
 			return;
 		}      
-		else if(new ArrayList<Node>(GetAllNodes()).contains(node)) //Si tienen la misma id
+		else if(new ArrayList<Node>(getAllNodes()).contains(node)) //Si tienen la misma id
 		{
 			System.err.println("Can't add two nodes with the same id.");
 			return;
@@ -43,7 +43,7 @@ public class Graph <N extends Node, E extends Edge>
 	/**
 	 * Returns a set of nodes the given node is connected(adjacent) to. 
 	 */
-	public Set<N> GetAdjacentNodesTo(N node)
+	public Set<N> getAdjacentNodesTo(N node)
 	{
 		if(!graph.containsKey(node)) { System.err.println("The graph doesn't contain the node."); return null; }
 		return graph.get(node).keySet();
@@ -52,11 +52,11 @@ public class Graph <N extends Node, E extends Edge>
 	/**
 	 * Returns the two nodes connected by the edge e
 	 */
-	public Pair<N, N> GetNodesConnectedBy(E e)
+	public Pair<N, N> getNodesConnectedBy(E e)
 	{
 		for(N n1 : graph.keySet())
 			for(N n2 : graph.get(n1).keySet())
-				if(GetEdge(n1, n2) == e) 
+				if(getEdge(n1, n2) == e) 
 					return new Pair<N, N>(n1, n2);
 		return null;
 	}
@@ -64,7 +64,7 @@ public class Graph <N extends Node, E extends Edge>
 	/**
 	 * Returns a set of all the nodes in the graph
 	 */
-	public Set<N> GetAllNodes()
+	public Set<N> getAllNodes()
 	{
 		return graph.keySet();
 	}
@@ -73,7 +73,7 @@ public class Graph <N extends Node, E extends Edge>
 	 * Remove a node and all its connections
 	 * @param node The node to be removed
 	 */
-	public void RemoveNode(N node)
+	public void removeNode(N node)
 	{	
 		if(!graph.containsKey(node)) return;
 		
@@ -98,14 +98,14 @@ public class Graph <N extends Node, E extends Edge>
 	 * @param node2 The second node to be connected
 	 * @param edge The edge that will connect node1 and node2
 	 */
-	public void AddEdge(N node1, N node2, E edge)
+	public void addEdge(N node1, N node2, E edge)
 	{
 		if(!graph.containsKey(node1) || !graph.containsKey(node2))
 		{
 			System.err.println("node1 or node2 don't exist in the graph.");
 			return;
 		}
-		else if(GetAllEdges().contains(edge))
+		else if(getAllEdges().contains(edge))
 		{
 			System.err.println("Can't add repeated edges. Use a new instance of Edge instead.");
 			return;
@@ -119,9 +119,9 @@ public class Graph <N extends Node, E extends Edge>
 	 * Returns the edge between node1 and node2. 
 	 * Returns null in case it doesn't exist.
 	 */
-	public E GetEdge(N node1, N node2)
+	public E getEdge(N node1, N node2)
 	{
-		Set<N> allEdges = GetAllNodes();
+		Set<N> allEdges = getAllNodes();
 		if(!allEdges.contains(node1) || !allEdges.contains(node2)) return null;
 		
 		return graph.get(node1).get(node2);
@@ -130,15 +130,15 @@ public class Graph <N extends Node, E extends Edge>
 	/*
 	 * Returns a set of all the edges. (Consequently, there aren't repeated edges)
 	 */
-	public Set<E> GetAllEdges()
+	public Set<E> getAllEdges()
 	{
 		Set<E> edges = new HashSet<E>();
-		Set<N> nodes =  GetAllNodes();
+		Set<N> nodes =  getAllNodes();
 		for(N n : nodes)
 		{
 			for(N n2 : nodes)
 			{
-				E edge = GetEdge(n, n2);
+				E edge = getEdge(n, n2);
 				if(edge != null && !edges.contains(edge)) edges.add(edge);
 			}
 		}
@@ -149,7 +149,7 @@ public class Graph <N extends Node, E extends Edge>
 	 * Removes a  given edge.
 	 * @param edge The edge that will be removed
 	 */
-	public void RemoveEdge(E edge)
+	public void removeEdge(E edge)
 	{
 		//We need to use iterators because we are removing while iterating items
 		Iterator it1 = graph.values().iterator();
@@ -167,10 +167,10 @@ public class Graph <N extends Node, E extends Edge>
 	/**
 	 * Removes all the edges.
 	 */
-	public void RemoveAllEdges()
+	public void removeAllEdges()
 	{
-		Set<E> edges = GetAllEdges();
-		for(E e : edges) RemoveEdge(e);
+		Set<E> edges = getAllEdges();
+		for(E e : edges) removeEdge(e);
 	}
 	//////////////////////////////////////////////////////////////////////
 	
@@ -181,7 +181,7 @@ public class Graph <N extends Node, E extends Edge>
 	/**
 	 * Returns the connected components in the graph
 	 */
-	public ArrayList< Set<N> > GetConnectedComponents()
+	public ArrayList< Set<N> > getConnectedComponents()
 	{
 		ArrayList< Set<N> > connectedComponents = new ArrayList< Set<N> >();
 		Set<N> visitedNodes = new HashSet<N>();
@@ -245,12 +245,12 @@ public class Graph <N extends Node, E extends Edge>
 						{
 							if(nAdjThis.equals(nAdjG))
 							{
-								E eG = g.GetEdge(nG, nAdjG);
-								E eThis = this.GetEdge(nThis, nAdjThis);
+								E eG = g.getEdge(nG, nAdjG);
+								E eThis = this.getEdge(nThis, nAdjThis);
 								if(eG == null && eThis == null) break;
 								if(eG == null && eThis != null) return false;
 								if(eG != null && eThis == null) return false;
-								if(eG.GetWeight() != eThis.GetWeight()) return false;
+								if(eG.getWeight() != eThis.getWeight()) return false;
 								break;
 							}
 						}
@@ -262,15 +262,15 @@ public class Graph <N extends Node, E extends Edge>
 	}
 	
 	//// UTILS ////////////
-	public void Print()
+	public void print()
 	{
-		for(N n1 : GetAllNodes())
+		for(N n1 : getAllNodes())
 		{
-			System.out.print(n1.GetId() + ": ");
-			for(N n2 : GetAdjacentNodesTo(n1))
+			System.out.print(n1.getId() + ": ");
+			for(N n2 : getAdjacentNodesTo(n1))
 			{
-				E e = GetEdge(n1, n2);
-				System.out.print("(" + n2.GetId() + ", " + e.GetWeight() + "), ");
+				E e = getEdge(n1, n2);
+				System.out.print("(" + n2.getId() + ", " + e.getWeight() + "), ");
 			}
 			System.out.println(""); // :3
 		}

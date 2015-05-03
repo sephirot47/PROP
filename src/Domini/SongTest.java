@@ -22,8 +22,8 @@ public class SongTest extends TestCase
 		String author = "Manolo Escobar";
 		String song = "La rumbera";
 		Song s = new Song(author, song);
-		assertEquals("Manolo Escobar", s.GetAuthor());
-		assertEquals("La rumbera", s.GetTitle());
+		assertEquals("Manolo Escobar", s.getAuthor());
+		assertEquals("La rumbera", s.getTitle());
 		} catch(Exception e) {}
 	}
 	
@@ -39,13 +39,13 @@ public class SongTest extends TestCase
 		styles.add("Film Music");
 		styles.add("Orchestral");
 		Song s = new Song (author, title, year, styles, duration);
-		assertEquals("John Powell", s.GetAuthor());
-		assertEquals("Horton Suite", s.GetTitle());
-		assertEquals(2008, s.GetYear());
-		assertEquals(461, s.GetDuration());
-		assertEquals("OST", s.GetStyles().get(0));
-		assertEquals("Film Music", s.GetStyles().get(1));
-		assertEquals("Orchestral", s.GetStyles().get(2));
+		assertEquals("John Powell", s.getAuthor());
+		assertEquals("Horton Suite", s.getTitle());
+		assertEquals(2008, s.getYear());
+		assertEquals(461, s.getDuration());
+		assertEquals("OST", s.getStyles().get(0));
+		assertEquals("Film Music", s.getStyles().get(1));
+		assertEquals("Orchestral", s.getStyles().get(2));
 		} catch(Exception e) {}
 	}
 
@@ -57,11 +57,11 @@ public class SongTest extends TestCase
 		styles.add("OST");
 		String author = "Jerry Goldsmith";
 		String title = "I'll Make A Man Out of You";
-		s.SetAuthorTitle(author, title);
-		s.AddStyles(styles);
-		assertEquals("OST", s.GetStyles().get(0));
-		assertEquals("Jerry Goldsmith", s.GetAuthor());
-		assertEquals("I'll Make A Man Out of You", s.GetTitle());
+		s.setAuthorTitle(author, title);
+		s.addStyles(styles);
+		assertEquals("OST", s.getStyles().get(0));
+		assertEquals("Jerry Goldsmith", s.getAuthor());
+		assertEquals("I'll Make A Man Out of You", s.getTitle());
 		} catch(Exception e) {}
 	}
 	
@@ -75,8 +75,8 @@ public class SongTest extends TestCase
 		String song = "Rasputin";
 		Song s = new Song(author, song);
 		Reproduction r = new Reproduction(author, song, 3390);
-		u.AddReproduction(r);
-		assertEquals(33, s.GetMeanUserAge());
+		u.addReproduction(r);
+		assertEquals(33, s.getMeanUserAge());
 		} catch(Exception e) {}
 	}
 }

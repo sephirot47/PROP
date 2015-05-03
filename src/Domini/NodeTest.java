@@ -18,10 +18,10 @@ public class NodeTest extends TestCase
 	{
 		class TestNode extends Node
 		{
-			public String GetId() { return "potato"; }
+			public String getId() { return "potato"; }
 		}
 		
 		TestNode n = new TestNode();
-		assertEquals("potato", n.GetId());
+		assertEquals("potato", n.getId());
 	}
 }

@@ -20,78 +20,78 @@ public class PonderationsTest extends TestCase
 	{
 		Ponderations t = new Ponderations();
 		
-		assertEquals(5.0f,t.GetThreshold());
+		assertEquals(5.0f,t.getThreshold());
 	}
 
 	public void testGetDuration() {
 		
 		Ponderations t = new Ponderations();
-		assertEquals(5,t.GetDuration());
+		assertEquals(5,t.getDuration());
 	
 	}
 
 	public void testSetDuration() {
 		Ponderations t = new Ponderations();
 		
-		t.SetDuration(8);
-		assertEquals(8,t.GetDuration());
+		t.setDuration(8);
+		assertEquals(8,t.getDuration());
 		
 	}
 
 	public void testGetYear() {
 		Ponderations t = new Ponderations();
-		assertEquals(5,t.GetYear());
+		assertEquals(5,t.getYear());
 		
 	}
 
 	public void testSetYear() {
 		Ponderations t = new Ponderations();
-		t.SetYear(8);
-		assertEquals(8,t.GetYear());
+		t.setYear(8);
+		assertEquals(8,t.getYear());
 	}
 
 	public void testGetStyle() {
 		Ponderations t = new Ponderations();
-		assertEquals(5, t.GetStyle());
+		assertEquals(5, t.getStyle());
 	}
 
 	public void testSetStyle() {
 		Ponderations t = new Ponderations();
-		t.SetStyle(8);
-		assertEquals(8,t.GetStyle());
+		t.setStyle(8);
+		assertEquals(8,t.getStyle());
 	}
 
 	public void testGetUserAge() {
 		Ponderations t = new Ponderations();
-		assertEquals(5,t.GetUserAge());
+		assertEquals(5,t.getUserAge());
 	}
 
 	public void testSetUserAge() {
 		Ponderations t = new Ponderations();
-		t.SetUserAge(33);
-		assertEquals(33,t.GetUserAge());
+		t.setUserAge(33);
+		assertEquals(33,t.getUserAge());
 	}
 
 	public void testGetNearbyReproductions() {
 		Ponderations t = new Ponderations();
-		assertEquals(5,t.GetNearbyReproductions());
+		assertEquals(5,t.getNearbyReproductions());
 	}
 
 	public void testSetNearbyReproductions() {
 		Ponderations t = new Ponderations();
-		t.SetNearbyReproductions(8);
-		assertEquals(8,t.GetNearbyReproductions());
+		t.setNearbyReproductions(8);
+		assertEquals(8,t.getNearbyReproductions());
 	}
 
 	public void testGetAuthor() {
 		Ponderations t = new Ponderations();
-		assertEquals(5,t.GetAuthor());
+		assertEquals(5,t.getAuthor());
 	}
 
 	public void testSetAuthor() {
 		Ponderations t = new Ponderations();
-		t.SetAuthor(25);
-		assertEquals(25,t.GetAuthor());
+		t.setAuthor(25);
+		assertEquals(25,t.getAuthor());
 	}
 
 }
