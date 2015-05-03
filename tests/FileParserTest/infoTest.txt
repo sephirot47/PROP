@@ -15,15 +15,43 @@ Stubs:
 
 
 Fitxers de dades necessaris:
-  
-
-
-Valors estudiats:
-  
+  data/users1.txt
+  data/users2.txt
+  data/songs1.txt
+  data/songs2.txt
+  data/repros1.txt
+  data/repros2.txt
+  data/graph1.txt
+  data/graph2.txt
+  data/cxcvxcv asdasReproductions.txt
+  data/BbsdA124^!Reproductions.txt
+  data/aReproductions.txt
 
 
 Efectes estudiats:
-  
+  testGetUsers:
+  Obte els usuaris de "data/users1.txt" i de "data/users2.txt" i comprova que els ha carregat correctament. A més, fa diverses operacions de afegir, modificar i borrar, i comprova que tot s'actualitza correctament.
+
+  testGetSongs:
+  Obte les cançons de "data/songs1.txt" i de "data/songs2.txt" i comprova que els ha carregat correctament. A més, fa diverses operacions de afegir, modificar i borrar, i comprova que tot s'actualitza correctament.
+
+  testGetReproductions:
+  Obte les reproduccions de "data/repros1.txt" i de "data/repros2.txt" i comprova que els ha carregat correctament. A més, fa diverses operacions de afegir, modificar i borrar, i comprova que tot s'actualitza correctament.
+
+  testGetReproductions:
+  Obte les reproduccions de "data/repros1.txt" i de "data/repros2.txt" i comprova que els ha carregat correctament. A més, fa diverses operacions de afegir i comprova que tot s'actualitza correctament.
+
+  testGetGraph:
+  Obte els grafs de "data/graph1.txt" i de "data/graph2.txt" i comprova que els ha carregat correctament.
+
+  testGetUser:
+  Obte un usuari a partir d'un string amb el format correcte,  i comprova que s'ha creat correctament.
+
+  testGetReproduction:
+  Obte una reproduccio a partir d'un string amb el format correcte,  i comprova que s'ha creat correctament.
+
+  testGetSong:
+  Obte una canço a partir d'un string amb el format correcte,  i comprova que s'ha creat correctament.
 
 Operativa:
   Entra el numero del metode (indicat al mateix programa) que es vol provar
