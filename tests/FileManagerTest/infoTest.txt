@@ -1,13 +1,13 @@
 Objecte de la prova:
-  
+  Comprovar que funcionin tots els metodes de la classe FileManager
 
 
 Altres elements integrats a la prova:
-  
+  Classes Reproduction, Song i User.
 
 
 Drivers:
-  
+  Un unic driver: FileManagerTest.jar 
 
 
 Stubs: 
@@ -15,15 +15,64 @@ Stubs:
 
 
 Fitxers de dades necessaris:
-  
-
-
-Valors estudiats:
-  
-
+  testfileload.txt
+  FileManagerLoadTest.txt
+  testfile.txt
+  testfileadd.txt
+  userSaveProva1.txt
+  userSaveProva2.txt
+  songSaveProva1.txt
+  songSaveProva2.txt
+  reproductionSaveProva1.txt
+  reproductionSaveProva2.txt
+  usersRemoveTest.txt
+  songsRemoveTest.txt
 
 Efectes estudiats:
+  testLoadData:
+  Carrega les linies d'un arxiu("testfileload.txt") i comprova que son correctes. En aquest cas, l'arxiu nomes conte una linia.
+
+  testLoadData2:
+  Carrega les linies d'un arxiu("FileManagerLoadTest.txt") i comprova que son correctes.En aquest cas, l'arxiu conte 3 linies.
+
+  testSaveData:
+  Guarda 3 linies a "testfile.txt", i comprova que l'arxiu ha estat creat correctament.
+
+
+  testSaveData2:
+  Guarda 3 linies a "testfile.txt", i comprova que l'arxiu ha estat creat correctament, i que té el contingut correcte.
+
+  testEraseData:
+  Esborra un arxiu. Comprova que l'arxiu ha estat esborrat correctament.
+
+  testAddData:
+  Afegeix dades a "testfileadd.txt". Comprova que l'arxiu te les linies que li corresponen.
+
+  testSaveUser:
+  Guarda 3 usuaris a "userSaveProva1.txt", un per un,i comprova que s'han guardat correctament. A més, va modificant els seus noms, i arriba fins a 4 usuaris, i comprova que els canvis de nom s'han fet correctament.
+
+  testSaveUsers:
+  Guarda un array de usuaris, tots de cop, a "userSaveProva2.txt", i comprova que s'han guardat correctament.
+
+  testSaveSong:
+  Guarda diverses cançons, una per una, a "songSaveProva1.txt", i comprova que s'han guardat correctament.   A més, va modificant dades de les cançons, i comprova que els canvis també s'han fet correctament.
+
+  testSaveSongs:
+  Guarda un array de cançons, totes de cop, a "songSaveProva2.txt", i comprova que s'han guardat correctament.
+
+  testSaveReproduction:
+  Guarda diverses reproduccions, una per una, a "reproductionSaveProva1.txt", i comprova que s'han guardat correctament.
+
+  testSaveReproduction:
+  Guarda un array de reproduccions, totes de cop, a "reproductionSaveProva2.txt", i comprova que s'han guardat correctament.
+
+  testRemoveUser:
+  Esborra diversos usuaris de "usersRemoveTest.txt", i comprova que totes les operacions s'han fet correctament.
+
+  testRemoveSong:
+  Esborra diverses cançons de "songsRemoveTest.txt", i comprova que totes les operacions s'han fet correctament.
   
 
 Operativa:
-  
+  Entra el numero del metode (indicat al mateix programa) que es vol provar
+  o (numero de metodes)+1 per provar-los tots.

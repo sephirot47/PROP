@@ -36,6 +36,8 @@ public class FileManagerTest extends TestCase
 		ArrayList<String> prefabtest = FileManager.loadData("tests/FileManagerLoadTest.txt");
 		ArrayList<String> expectedResult = new ArrayList<String>();
 		expectedResult.add("This is the test file for the Load function in the file manager");
+		expectedResult.add("aaa");
+		expectedResult.add("bbb");
 		assertEquals(expectedResult, prefabtest);		
 	}
 	
@@ -50,7 +52,7 @@ public class FileManagerTest extends TestCase
 		l.add(l3);
 		String path = "testfile.txt";
 		FileManager.saveData(path, l);		
-		assertEquals(true, FileManager.exists(path));
+		assertEquals(FileManager.loadData("testfile.txt"), l);
 	}
 	
 	public void testSaveData2() throws IOException 
