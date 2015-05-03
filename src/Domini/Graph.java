@@ -22,21 +22,11 @@ public class Graph <N extends Node, E extends Edge>
 	///// NODES STUFF /////////////////////////////////////////////////////
 	/**
 	 * Add a new disconnected node (without edges to any node). The node mustn't exist in the graph before adding it.
+	 * No node with the same id as the parameter node must exist in the graph.
 	 * @param node The node to be added
 	 */
 	public void addNode(N node)
 	{
-		if(graph.containsKey(node)) //Si son la misma instancia
-		{
-			System.err.println("Can't add repeated nodes, create a new Node instead. Ignoring the AddNode");
-			return;
-		}      
-		else if(new ArrayList<Node>(getAllNodes()).contains(node)) //Si tienen la misma id
-		{
-			System.err.println("Can't add two nodes with the same id.");
-			return;
-		}
-		
 		graph.put(node, new HashMap<N, E>()); //Tot correcte, es pot afegir el node
 	}
 
@@ -100,17 +90,6 @@ public class Graph <N extends Node, E extends Edge>
 	 */
 	public void addEdge(N node1, N node2, E edge)
 	{
-		if(!graph.containsKey(node1) || !graph.containsKey(node2))
-		{
-			System.err.println("node1 or node2 don't exist in the graph.");
-			return;
-		}
-		else if(getAllEdges().contains(edge))
-		{
-			System.err.println("Can't add repeated edges. Use a new instance of Edge instead.");
-			return;
-		}
-
 		graph.get(node1).put(node2, edge);
 		graph.get(node2).put(node1, edge);
 	}
