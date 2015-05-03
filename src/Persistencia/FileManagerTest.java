@@ -270,6 +270,7 @@ public class FileManagerTest extends TestCase
 		 FileManager.SaveReproductions("tests/reproductionSaveProva2.txt", writtenReproductions);
 		 assertEquals(FileManager.LoadData("tests/reproductionSaveProva2.txt"), reproductionsLines);
 	 }
+	 
 	 public static void testRemoveSong() throws IOException
 	 {
 		 ArrayList<String> songsLines = new ArrayList<String>();
@@ -303,12 +304,5 @@ public class FileManagerTest extends TestCase
 		 long time = 214;
 		 FileManager.RemoveReproduction(User, time);
 		 assertEquals(FileManager.LoadData("data/reproductions/abrahamReproductions.txt"), reproductionsLines);
-	 }
-	 public static void testRemoveSolution() throws IOException
-	 {
-		 String nomSolucio = "solution_01-05-2015 00,10,53,681";
-		 FileManager.RemoveSolution(nomSolucio);
-		 File solucio = new File("tests/" + nomSolucio);
-		 assertFalse(solucio.exists());
 	 }
 }

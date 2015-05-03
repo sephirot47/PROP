@@ -73,27 +73,6 @@ public class FileManager
         writer.close();    
     }
     
-    public static void SaveSolution(Solution s) throws IOException
-    {
-    	String date = new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date());
-    	String filedir = "data/solutions/solution_" + date + "/";
-    	
-    	//arxiu de Graph(entrada)
-    	SaveEntradaSolution(filedir, s.GetEntrada());
-
-    	//arxiu de solucio(communities)
-        SaveCommunitiesSolution(filedir, s.GetSongCommunities());
-    	
-    	//arxiu de info extra
-    	{
-    	ArrayList<String> lines = new ArrayList<String>();
-    	lines.add( s.GetAlgorisme() ); //Algorisme usat
-    	lines.add( String.valueOf( s.GetEntrada().GetAllNodes().size() ) ); //Nombre de cancons processades
-    	lines.add( String.valueOf( s.GetGenerationTime() ) ); //Temps que ha tardat a generar la solucio
-    	SaveData(filedir + "info.txt", lines);
-    	}
-    }
-    
     public static void SaveEntradaSolution(String filedir, SongGraph entrada) throws IOException
     {
     	ArrayList<String> lines = new ArrayList<String>();
@@ -146,7 +125,7 @@ public class FileManager
 	    		lines.add(line);
 	    	}
     	}
-		SaveData(filedir + "communitiesSolution.txt",  lines);
+		SaveData(filedir + "comunitats.txt",  lines);
     }
     
     //path es un path a un fitxer existent
@@ -369,19 +348,6 @@ public class FileManager
         repros.delete();
    
         tempFile.renameTo(repros);
-    }
-
-    public static void RemoveSolution(String nomSolucio) throws IOException
-    {
-    	File communities = new File("tests/" + nomSolucio + "/communities.txt");
-    	File entrada = new File("tests/" + nomSolucio + "/entrada.txt");
-    	File info = new File("tests/"+ nomSolucio + "/generationInfo.txt");
-    	communities.delete();
-    	entrada.delete();
-    	info.delete();
-    	File folder = new File("tests/" + nomSolucio);
-    	folder.delete();
-    	
     }
 
 }
