@@ -234,16 +234,27 @@ public class Graph <N extends Node, E extends Edge>
 			{
 				if(nG.equals(nThis))
 				{
-					ArrayList<N> nsAdjG =  new ArrayList<N>(g.graph.get(nG).keySet());
-					ArrayList<E> esAdjG =  new ArrayList<E>(g.graph.get(nG).values());
+					ArrayList<N> nsAdjG = new ArrayList<N>(g.graph.get(nG).keySet());
 					ArrayList<N> nsAdjThis =  new ArrayList<N>(this.graph.get(nThis).keySet());
-					ArrayList<E> esAdjThis =  new ArrayList<E>(this.graph.get(nThis).values());
 					
-					//Els nodes adjacents a nG han de ser els mateixos
+					//Els nodes adjacents a nG han de ser els mateixos (mateixa id)
 					if(!nsAdjG.containsAll(nsAdjThis) || !nsAdjThis.containsAll(nsAdjG)) return false;
-					
-					//Els edges tambe
-					if(!esAdjG.containsAll(esAdjThis) || !esAdjThis.containsAll(esAdjG)) return false;
+					for(N nAdjG : nsAdjG)
+					{
+						for(N nAdjThis : nsAdjThis)
+						{
+							if(nAdjThis.equals(nAdjG))
+							{
+								E eG = g.GetEdge(nG, nAdjG);
+								E eThis = this.GetEdge(nThis, nAdjThis);
+								if(eG == null && eThis == null) break;
+								if(eG == null && eThis != null) return false;
+								if(eG != null && eThis == null) return false;
+								if(eG.GetWeight() != eThis.GetWeight()) return false;
+								break;
+							}
+						}
+					}
 				}
 			}
 		}
