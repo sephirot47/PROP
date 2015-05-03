@@ -21,23 +21,15 @@ public class Graph <N extends Node, E extends Edge>
 
 	///// NODES STUFF /////////////////////////////////////////////////////
 	/**
-	 * Add a new disconnected node (without edges to any node). The node mustn't exist in the graph before adding it.
+	 * Add a new disconnected node (without edges to any node). 
+	 * PRE: The node mustn't exist in the graph before adding it(always add a new Node), 
+	 * 	    neither a node with the same id.
+	 * 		If you add a node and don't take this into account, the graph may not work properly.
 	 * @param node The node to be added
 	 */
 	public void AddNode(N node)
 	{
-		if(graph.containsKey(node)) //Si son la misma instancia
-		{
-			System.err.println("Can't add repeated nodes, create a new Node instead. Ignoring the AddNode");
-			return;
-		}      
-		else if(new ArrayList<Node>(GetAllNodes()).contains(node)) //Si tienen la misma id
-		{
-			System.err.println("Can't add two nodes with the same id.");
-			return;
-		}
-		
-		graph.put(node, new HashMap<N, E>()); //Tot correcte, es pot afegir el node
+		graph.put(node, new HashMap<N, E>());
 	}
 
 	/**
@@ -93,7 +85,9 @@ public class Graph <N extends Node, E extends Edge>
 	
 	///// EDGE STUFF /////////////////////////////////////////////////////
 	/**
-	 * Add a new edge between two nodes. The edge passed as parameter mustn't exist in the graph before adding it.
+	 * Add a new edge between two nodes. 
+	 * PRE: The edge passed as parameter mustn't exist in the graph before adding it.
+	 *      Always add a new Edge.
 	 * @param node1 The first node to be connected
 	 * @param node2 The second node to be connected
 	 * @param edge The edge that will connect node1 and node2
@@ -103,11 +97,6 @@ public class Graph <N extends Node, E extends Edge>
 		if(!graph.containsKey(node1) || !graph.containsKey(node2))
 		{
 			System.err.println("node1 or node2 don't exist in the graph.");
-			return;
-		}
-		else if(GetAllEdges().contains(edge))
-		{
-			System.err.println("Can't add repeated edges. Use a new instance of Edge instead.");
 			return;
 		}
 
@@ -235,15 +224,26 @@ public class Graph <N extends Node, E extends Edge>
 				if(nG.equals(nThis))
 				{
 					ArrayList<N> nsAdjG =  new ArrayList<N>(g.graph.get(nG).keySet());
-					ArrayList<E> esAdjG =  new ArrayList<E>(g.graph.get(nG).values());
 					ArrayList<N> nsAdjThis =  new ArrayList<N>(this.graph.get(nThis).keySet());
-					ArrayList<E> esAdjThis =  new ArrayList<E>(this.graph.get(nThis).values());
 					
-					//Els nodes adjacents a nG han de ser els mateixos
+					//Els nodes adjacents a nG han de ser els mateixos (mateixa id)
 					if(!nsAdjG.containsAll(nsAdjThis) || !nsAdjThis.containsAll(nsAdjG)) return false;
-					
-					//Els edges tambe
-					if(!esAdjG.containsAll(esAdjThis) || !esAdjThis.containsAll(esAdjG)) return false;
+					for(N nAdjG : nsAdjG)
+					{
+						for(N nAdjThis : nsAdjThis)
+						{
+							if(nAdjThis.equals(nAdjG))
+							{
+								E eG = g.GetEdge(nG, nAdjG);
+								E eThis = this.GetEdge(nThis, nAdjThis);
+								if(eG == null && eThis == null) break;
+								if(eG == null && eThis != null) return false;
+								if(eG != null && eThis == null) return false;
+								if(eG.GetWeight() != eThis.GetWeight()) return false;
+								break;
+							}
+						}
+					}
 				}
 			}
 		}
