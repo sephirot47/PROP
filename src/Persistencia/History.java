@@ -78,13 +78,14 @@ public class History {
 
 	public static void removeSolution(String nomSolucio) throws IOException 
 	{
-		File communities = new File("tests/" + nomSolucio + "/communities.txt");
-		File entrada = new File("tests/" + nomSolucio + "/entrada.txt");
-		File info = new File("tests/" + nomSolucio + "/generationInfo.txt");
+		File communities = new File("data/solutions/" + nomSolucio + "/comunitats.txt");
+		File entrada = new File("data/solutions/" + nomSolucio + "/entrada.txt");
+		File info = new File("data/solutions/" + nomSolucio + "/info.txt");
+
 		communities.delete();
 		entrada.delete();
 		info.delete();
-		File folder = new File("tests/" + nomSolucio);
+		File folder = new File("data/solutions/" + nomSolucio);
 		folder.delete();
 
 	}

@@ -3,7 +3,7 @@ Objecte de la prova:
 
 
 Altres elements integrats a la prova:
-  
+  Song i Solution
 
 
 Drivers:
@@ -15,15 +15,15 @@ Stubs:
 
 
 Fitxers de dades necessaris:
-  
-
-
-Valors estudiats:
-  
-
+  carpeta: /data/solutions/solution_test
+  arxius dins d'aquesta carpeta:
+  		comunitats.txt
+  		entrada.txt
+  		info.txt
 
 Efectes estudiats:
-  
+	RemoveSolution: donat un String, comprova si borra una solució en la carpeta /data/solutions/"String" que li pasa.
+	SaveSolution: donat una solució i un String, comprova si guarda la solució a la carpeta /data/solutions/"String" que li pasa.
 
 Operativa:
   Entra el numero del metode (indicat al mateix programa) que es vol provar

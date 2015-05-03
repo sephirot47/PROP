@@ -58,7 +58,7 @@ public class GraphTest extends TestCase
 		E e1 = new E();
 		e.setWeight(3.14f);
 		e1.setWeight(3.14f);
-		//Set<N> p = new HashSet<N>(Arrays.asList(n,n2));
+		
 		
 		g.addNode(n);
 		g.addNode(n1);

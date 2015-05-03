@@ -1,13 +1,13 @@
 Objecte de la prova:
-  
+Comprovar que funcionin tots els metodes de la classe SongRelation  
 
 
 Altres elements integrats a la prova:
-  
+  Cap
 
 
 Drivers:
-  
+  SongRelationTest.jar
 
 
 Stubs: 
@@ -15,15 +15,20 @@ Stubs:
 
 
 Fitxers de dades necessaris:
-  
-
-
-Valors estudiats:
-  
+  Cap
 
 
 Efectes estudiats:
+  testSetWeight:
+  Es comprova que setWeight functiona correctament. Per aixo assignem el valor 30.0 (float) com a pes d'un SongRelation, i despres comprovem que s'ha modificat correctament.
+
+  testGetWeight:
+  Comprovem si el getWeight, per obtenir el pes d'una aresta funciona be. Per aixo, assignem el valor 30.0f (float) com a pes d'un SongRelation, i després comprovem que retorna el mateix valor.
   
 
+
 Operativa:
+  Entra el número del metode (indicat al mateix programa) que es vol provar
+  o (numero de metodes)+1 per provar-los tots.
+
   

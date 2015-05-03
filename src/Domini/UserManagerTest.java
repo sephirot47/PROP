@@ -22,7 +22,7 @@ public class UserManagerTest extends TestCase
 	{
 		try{
 		//TEST 1
-		Set<User> usersRead = UserManager.getUsers("data/users1.txt", "tests"); //read from file
+		Set<User> usersRead = UserManager.getUsers("tests/users1.txt", "tests"); //read from file
 		Set<User> users = new HashSet<User>(); //created by us
 
 		assertFalse(users.equals(usersRead));
@@ -41,7 +41,7 @@ public class UserManagerTest extends TestCase
 		
 		//TEST 2
 		usersRead.clear();
-		usersRead  = UserManager.getUsers("data/users2.txt", "tests"); //read from file
+		usersRead  = UserManager.getUsers("tests/users2.txt", "tests"); //read from file
 		users.clear();
 
 		User u2 = new User("BbsdA124^!", 78);

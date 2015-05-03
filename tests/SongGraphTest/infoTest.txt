@@ -30,7 +30,8 @@ Efectes estudiats:
     durada semblant i el mateix autor.
 
   testGetNearbyReproductionsAportation:
-    Es creen dues canÃ§ons
+    Es creen dues cançons i comprova si amb aquestes hi ha una relació de proximitat o no. Si i és, 
+    el pes de l'aresta serà la proximitat que tenen entre elles, si no, no farà res.
 
 Operativa:
   Entra el numero del metode (indicat al mateix programa) que es vol provar
