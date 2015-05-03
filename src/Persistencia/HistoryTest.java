@@ -88,9 +88,9 @@ public class HistoryTest extends TestCase {
 	}
 
 	public static void testRemoveSolution() throws IOException {
-		String nomSolucio = "solution_01-05-2015 00,10,53,681";
+		String nomSolucio = "solution_test";
 		History.removeSolution(nomSolucio);
-		File solucio = new File("tests/" + nomSolucio);
+		File solucio = new File("data/solutions/" + nomSolucio);
 		assertFalse(solucio.exists());
 	}
 }

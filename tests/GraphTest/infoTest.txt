@@ -3,7 +3,7 @@ Objecte de la prova:
 
 
 Altres elements integrats a la prova:
-  
+  Node, Edge  
 
 
 Drivers:
@@ -15,15 +15,49 @@ Stubs:
 
 
 Fitxers de dades necessaris:
-  
-
-
-Valors estudiats:
-  
+  Cap  
 
 
 Efectes estudiats:
+  GetAdjacentNodesTo:
+  	Comprovar que donat un node, es retorna els nodes únicament adjecents a ell.
+  	
+  GetNodesConnectedBy:
+    Comprovar que donat una aresta, es retorna els el parell de nodes connectats amb l'aresta.
+    
+  RemoveAllEdges:
+    Comprovar que quan es crida aquesta funció, s'esborren tots les arestes que conté el graf.
+    
+  GetConnectedComponents:
+  	Comprovar que quan es crida aquesta funció, es retorna una arrayList que conté el conjunt de nodes connectats entre ells.
   
+  AddNode:
+  	Comprovar que donat un node, aquest s'afegeix correctament al graf.
+  	
+  AddEdge:
+    Comprovar que donat una aresta, aquesta s'afegeix correctament al graf.
+    
+  GetAllNodes:
+  	Comprovar que quan es crida aquesta funció, es retornen tots els nodes del graf.
+  	
+  RemoveNode:
+  	Comprovar que donat un node, aquest s'esborra del graf, amb les seves adjecències corresponents.
+  
+  GetEdge:
+  	Comprovar que donat dos nodes, es retorna en el cas de que existeixi, l'aresta corresponent.
+  	
+  GetAllEdges:
+  	Comprovar que quan es crida aquesta funció, es retornen totes les arestes del graf.
+  
+  RemoveEdge:
+  	Comprovar que donada una aresta, aquesta s'esborra del graf en cas de que existeixi.
+  
+  Print:
+  	Comprovar que es mostra per pantalla tots els nodes i arestes del graf.
+  
+  Equals:
+  	Comprovar que donat un graf diferent, es retorna un boolea, indicant si són iguals o no.
+
 
 Operativa:
   Entra el numero del metode (indicat al mateix programa) que es vol provar

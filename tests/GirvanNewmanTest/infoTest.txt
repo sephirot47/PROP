@@ -3,7 +3,7 @@ Objecte de la prova:
 
 
 Altres elements integrats a la prova:
-  
+  Node, Edge
 
 
 Drivers:
@@ -15,15 +15,14 @@ Stubs:
 
 
 Fitxers de dades necessaris:
-  
-
-
-Valors estudiats:
-  
-
+  Cap
 
 Efectes estudiats:
-  
+  GetSolution.
+  	Cal dir en primer lloc que GetSolution incorpora totes les altres funcions privades de la mateixa classe, 
+  per tant quan provem aquesta funció, en realitat les estem provant totes.  
+	Donada una entrada que és un graph amb nodes i arestes i un integer que representa el número de comunitats que volem obtenir,
+	comprovar que la solució és correcte i que a més dona el número de comunitats desitjats.
 
 Operativa:
   Entra el numero del metode (indicat al mateix programa) que es vol provar
