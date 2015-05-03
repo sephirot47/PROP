@@ -55,7 +55,8 @@ public class History {
 		return result;
 	}
 
-	public static void saveSolution(Solution s, String id) throws IOException {
+	public static void saveSolution(Solution s, String id) throws IOException 
+	{
 		//String date = new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date());
 		String filedir = "data/solutions/solution_" + id + "/";
 
@@ -75,7 +76,8 @@ public class History {
 		}
 	}
 
-	public static void removeSolution(String nomSolucio) throws IOException {
+	public static void removeSolution(String nomSolucio) throws IOException 
+	{
 		File communities = new File("tests/" + nomSolucio + "/communities.txt");
 		File entrada = new File("tests/" + nomSolucio + "/entrada.txt");
 		File info = new File("tests/" + nomSolucio + "/generationInfo.txt");

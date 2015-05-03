@@ -48,10 +48,12 @@ Efectes estudiats:
   Si per exemple, vull que llegeixi les reproduccions del arxiu "directori/aaa/pepeReproductions", quan el programa demana el directori haure d'escriure "directori/aaa" i quan demani el nom d'usuari hauré d'escriure "pepe".  
   A l'output s'imprimiran tots les reproduccions llegides. Mitjançant l'output es pot comprovar que tot ha funcionat correctament.
 
-  testReadSolutions:
-  Llegeix totes les solucions d'un directori indicat. A l'output s'imprimira les solucions llegides. Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
-  Si per exemple tinc 100 solucions guardades a la carpeta "solucions/les_meves_solucions" hauré d'indicar-li aquesta carpeta, i dins d'aquesta carpeta, per cada solució, ha d'haver una carpeta amb els 3 arxius que s'especifiquen als formats dels arxius.
-
+  testGenerateSolution:
+  Donat un graf d'entrada, troba comunitats usant GirvanNewman i les mostra per la pantalla, a més de guardar la solució.
+  Primer s'haura d'introduir el graf d'entrada. Ha de ser un arxiu de text que segueixi el format. Tot i així, hi ha un arxiu de exemple de entrada que es pot usar a "data/exempleEntrada.txt".
+  Després se li ha d'indicar al algorisme el nombre mínim de comunitats desitjat.
+  Finalment, cal indicar-li un identificador per la solució (un string).
+  IMPORTANT: la solució es generarà a la carpeta "data/solution_id", on id és la id introduida. Es generarà una solució seguint el format descrit al document de formats.
 
 Operativa:
   Entra el numero del metode (indicat al mateix programa) que es vol provar. A partir d'aqui cal seguir les instruccions per introduir el input que es demana, i es rebra feedback mitjançant el output.

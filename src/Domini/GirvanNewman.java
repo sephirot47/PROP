@@ -1,11 +1,13 @@
 package Domini;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
+import java.util.TimeZone;
 
 
 public class GirvanNewman
@@ -17,6 +19,8 @@ public class GirvanNewman
 	 */
 	public static <N extends Node> ArrayList< Set<N> > getSolution(Graph g, int n)
 	{
+		long startTime = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis();
+		
 		if(n > g.getAllNodes().size())
 		{
 			System.err.println("The number of communities can't be greater than the number of nodes.");
@@ -71,6 +75,7 @@ public class GirvanNewman
 		}
 		//
 		
+		long genTime = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis() - startTime;
 		return connectedComponents;
 	}
 	

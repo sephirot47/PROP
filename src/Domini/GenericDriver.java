@@ -36,7 +36,8 @@ public class GenericDriver
 							"Borrar User de arxiu",
 							"Afegir Reproduccio a User",
 							"Llegir Reproduccions de User",
-							"Llegir carpeta de Solucions"};
+							"Llegir carpeta de Solucions",
+							"Generar solucio"};
 		
 		while(true)
 		{
@@ -64,11 +65,12 @@ public class GenericDriver
 		case 8: testReadReproductions(); break;
 		
 		case 9: testReadSolutions(); break;
+		case 10: testGenerateSolution(); break;
 		}
 		
 		}
 	}
-	
+
 	public static void testAddSongToFile()
 	{
 		String author, title;
@@ -398,5 +400,48 @@ public class GenericDriver
 		pl(":::::::::::::::::::::::::::::::::::::::::");
 		pl(":::::::::::::::::::::::::::::::::::::::::");
 		pl("");
+	}
+
+	public static void testGenerateSolution() 
+	{
+		String graphFilepath;
+		int n;
+		String id;
+		
+		p("Introdueixi el path relatiu del arxiu del graf d'entrada: ");  graphFilepath = sc.next(); pl("");
+		p("Introdueixi el nombre minim de comunitats que desitja: ");  n = sc.nextInt(); pl("");
+		p("Introdueixi un identificador per la solucio: ");  id = sc.next(); pl("");
+
+		SongGraph songGraph;
+		try 
+		{
+			songGraph = FileParser.getGraph(graphFilepath);
+		} 
+		catch (Exception e) 
+		{
+			pl("************");pl("*** Error: " + e.getMessage() + " ***"); pl("************"); return;
+		}
+
+
+		long startTime = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis();
+    	ArrayList< Set<Song> > rawSolution = GirvanNewman.getSolution(songGraph, n); //Get el conjunt de llistes de Songs
+		int foo = 0;
+		for(Set<Song> songList : rawSolution)
+		{
+			System.out.println("Song List " + (++foo) + ":");
+			for(Song s : songList) System.out.println("-" + s.getId());
+			System.out.println(" ");
+		}
+		long genTime = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis() - startTime;
+		
+		Solution s = new Solution(songGraph, "GirvanNewman", rawSolution, genTime);
+		try 
+		{
+			History.saveSolution(s, id);
+		} 
+		catch (IOException e) 
+		{
+			pl("************");pl("*** Error: " + e.getMessage() + " ***"); pl("************"); return;
+		}
 	}
 }
