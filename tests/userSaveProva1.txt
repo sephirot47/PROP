@@ -1,4 +1,0 @@
-usuari1;23
-usuari2;656
-usuari3;45
-usuari567;5478
