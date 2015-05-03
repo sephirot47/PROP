@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import Persistencia.FileManager;
+import Persistencia.History;
 
 public class TurmoDriver 
 {
@@ -32,7 +33,8 @@ public class TurmoDriver
 							"Borrar Song de arxiu",
 							"Afegir User a arxiu",
 							"Llegir arxiu de Users",
-							"Borrar User de arxiu"};
+							"Borrar User de arxiu",
+							"Llegir carpeta de Solucions"};
 		
 		pl("--------------- Menu de test ----------------");
 		pl("");
@@ -47,9 +49,12 @@ public class TurmoDriver
 		case 1: TestAddSongToFile(); break;
 		case 2: TestReadSongFile(); break;
 		case 3: TestRemoveSongOfFile(); break;
+		
 		case 4: TestAddUserToFile(); break;
 		case 5: TestReadUserFile(); break;
 		case 6: TestRemoveUserOfFile(); break;
+		
+		case 7: TestReadSolutions(); break;
 		}
 		
 		}
@@ -121,7 +126,7 @@ public class TurmoDriver
 			e.printStackTrace();
 		}
 
-		pl("*********** Cancons llegides ***********");
+		pl("::::::::::: Cancons llegides :::::::::::");
 		int i = 0;
 		for(Song s : songs)
 		{
@@ -129,7 +134,7 @@ public class TurmoDriver
 			s.Print();
 			pl("");
 		}
-		pl("***************************************");
+		pl(":::::::::::::::::::::::::::::::::::::::");
 		pl("");
 	}
 	
@@ -222,7 +227,7 @@ public class TurmoDriver
 			e.printStackTrace();
 		}
 
-		pl("*********** Users llegits ***********");
+		pl("::::::::::: Users llegits :::::::::::");
 		int i = 0;
 		for(User u : users)
 		{
@@ -230,7 +235,7 @@ public class TurmoDriver
 			u.Print();
 			pl("");
 		}
-		pl("***************************************");
+		pl(":::::::::::::::::::::::::::::::::::::::");
 		pl("");
 	}
 	
@@ -255,5 +260,44 @@ public class TurmoDriver
 		}
 
 		pl("El user amb nom \"" + username +  "\" ja no existeix al arxiu \"" + filepath + "\""); pl("");
+	}
+	
+	public static void TestReadSolutions()
+	{
+		pl(""); pl("");
+		pl("TEST: Llegir Solucions:");
+		
+		String filepath; 
+		p("Introdueixi el DIRECTORI on son les carpetes de les solucions: ");  filepath = sc.next(); pl("");
+		
+		ArrayList<Solution> solutions = null;
+		try 
+		{
+			solutions = History.GetSolutions(filepath);
+		} 
+		catch (Exception e) 
+		{
+
+			e.printStackTrace();
+		}
+		
+		pl("");
+		pl("Solucions llegides:");
+		pl("::::::::::: Solucions llegits :::::::::::");
+		pl(":::::::::::::::::::::::::::::::::::::::::");
+		pl(":::::::::::::::::::::::::::::::::::::::::");
+		int i = 0;
+		for(Solution s : solutions)
+		{
+			pl("");
+			pl(":::::: Solucio " + (++i) + " :::::::");
+			pl(":::::::::::::::::::::::::::");
+			s.Print();
+			pl(":::::::::::::::::::::::::::");
+			pl("");
+		}
+		pl(":::::::::::::::::::::::::::::::::::::::::");
+		pl(":::::::::::::::::::::::::::::::::::::::::");
+		pl("");
 	}
 }

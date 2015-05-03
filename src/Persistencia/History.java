@@ -14,7 +14,8 @@ import Domini.Song;
 
 public class History {
 
-	public static ArrayList<Solution> GetSolutions(String solutionsDir) throws Exception {
+	public static ArrayList<Solution> GetSolutions(String solutionsDir) throws Exception 
+	{
 		ArrayList<Solution> result = new ArrayList<Solution>();
 
 		File baseDir = new File(solutionsDir);

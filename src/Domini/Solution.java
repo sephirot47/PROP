@@ -28,4 +28,25 @@ public class Solution
 	public float GetGenerationTime() { return generationTime; }
 	public SongGraph GetEntrada() { return entrada; }
 	public ArrayList<Set<Song>> GetSongCommunities() { return songCommunities; }
+	
+	public void Print()
+	{
+		System.out.println("Entrada: ---");
+		entrada.Print();
+		System.out.println("---");
+		System.out.println("Sortida(comunitats): ---");
+		int i = 0;
+		for(Set<Song> ss : songCommunities)
+		{
+			System.out.println("Comunitat " + (++i));
+			for(Song s : ss)
+			{
+				s.Print();
+				System.out.println("-");
+			}
+		}
+		System.out.println("---");
+		System.out.print("Algorisme: "); System.out.println("algorisme");
+		System.out.print("Temps generacio: "); System.out.println("generationTime");
+	}
 }
