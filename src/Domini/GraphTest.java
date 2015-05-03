@@ -490,27 +490,5 @@ public class GraphTest extends TestCase
 
 		g5.AddNode(n2);
 		assertTrue(g5.equals(g6)); //Ara si son iguals ^^
-
-		System.out.println("----------------------");
-		//EVEN MOAAAAR
-		Graph<N, E> g7 = new Graph<N, E>();
-		Graph<N, E> g8 = new Graph<N, E>();
-		g7.AddNode(n);
-		g7.AddNode(n2);
-		g7.AddNode(n3);
-		
-		g8.AddNode(n);
-		g8.AddNode(n2);
-		g8.AddNode(n3);
-
-		g7.AddEdge(n, n2, new E(1.0f));
-		g8.AddEdge(n, n2, new E(2.0f));
-		
-		assertFalse(g7.equals(g8));
-		
-		g7.AddEdge(n, n3, new E(2.0f));
-		g8.AddEdge(n, n3, new E(1.0f));
-		
-		assertFalse(g7.equals(g8));
 	}
 }

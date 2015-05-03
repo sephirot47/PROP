@@ -21,15 +21,23 @@ public class Graph <N extends Node, E extends Edge>
 
 	///// NODES STUFF /////////////////////////////////////////////////////
 	/**
-	 * Add a new disconnected node (without edges to any node). 
-	 * PRE: The node mustn't exist in the graph before adding it(always add a new Node), 
-	 * 	    neither a node with the same id.
-	 * 		If you add a node and don't take this into account, the graph may not work properly.
+	 * Add a new disconnected node (without edges to any node). The node mustn't exist in the graph before adding it.
 	 * @param node The node to be added
 	 */
 	public void AddNode(N node)
 	{
-		graph.put(node, new HashMap<N, E>());
+		if(graph.containsKey(node)) //Si son la misma instancia
+		{
+			System.err.println("Can't add repeated nodes, create a new Node instead. Ignoring the AddNode");
+			return;
+		}      
+		else if(new ArrayList<Node>(GetAllNodes()).contains(node)) //Si tienen la misma id
+		{
+			System.err.println("Can't add two nodes with the same id.");
+			return;
+		}
+		
+		graph.put(node, new HashMap<N, E>()); //Tot correcte, es pot afegir el node
 	}
 
 	/**
@@ -85,9 +93,7 @@ public class Graph <N extends Node, E extends Edge>
 	
 	///// EDGE STUFF /////////////////////////////////////////////////////
 	/**
-	 * Add a new edge between two nodes. 
-	 * PRE: The edge passed as parameter mustn't exist in the graph before adding it.
-	 *      Always add a new Edge.
+	 * Add a new edge between two nodes. The edge passed as parameter mustn't exist in the graph before adding it.
 	 * @param node1 The first node to be connected
 	 * @param node2 The second node to be connected
 	 * @param edge The edge that will connect node1 and node2
@@ -97,6 +103,11 @@ public class Graph <N extends Node, E extends Edge>
 		if(!graph.containsKey(node1) || !graph.containsKey(node2))
 		{
 			System.err.println("node1 or node2 don't exist in the graph.");
+			return;
+		}
+		else if(GetAllEdges().contains(edge))
+		{
+			System.err.println("Can't add repeated edges. Use a new instance of Edge instead.");
 			return;
 		}
 
