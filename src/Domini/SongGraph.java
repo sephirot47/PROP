@@ -109,25 +109,6 @@ public class SongGraph extends Graph<Song, SongRelation>
 					findit2 = true;
 					r2 = r;
 				}
-								
-				/*{
-					float minTimeBetweenReproductions = Float.POSITIVE_INFINITY; 
-					for(Reproduction r2 : repros)
-					{
-						if(r == r2) continue;
-						if(r2.GetSongAuthor().equals(s2.GetAuthor()) && r2.GetSongTitle().equals(s2.GetTitle()))
-						{
-							float t1 = r.GetTime(), t2 = r2.GetTime();
-							float timeBetweenRepros = Math.abs(t1 - t2);
-							if(timeBetweenRepros < minTimeBetweenReproductions)
-								minTimeBetweenReproductions = timeBetweenRepros;
-						}
-					}
-					++userCoincidences;
-					userAportation += minTimeBetweenReproductions;
-				}*/
-
-			//if((findit1 && findit2)&&())
 				
 			}
 			if((findit1&&findit2)&&(Math.abs(r1.getTime() - r2.getTime()) <= 180000)){
