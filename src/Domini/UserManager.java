@@ -11,18 +11,15 @@ public class UserManager
 {
 	private static Set<User> users = new HashSet<User>();
 	
-	public static Set<User> GetUsers(String filepath, String reprosDir)
+	public static Set<User> GetUsers(String filepath, String reprosDir) throws Exception
 	{
 		users.clear();
 		
 		if(users.size() == 0)
 		{
 			ArrayList<User> usersArray = new ArrayList<User>();
-			try 
-			{
-				usersArray = FileParser.GetUsers(filepath, reprosDir);
-			} 
-			catch (IOException e) { e.printStackTrace(); }
+			
+			usersArray = FileParser.GetUsers(filepath, reprosDir);
 			
 			for(User u : usersArray)
 			{

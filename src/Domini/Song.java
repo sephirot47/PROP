@@ -106,7 +106,16 @@ public class Song extends Node
 		float sum = 0.0f;
 		int usersWhoHaveListenedToThisAwesomeOneHourSong = 0;
 		
-		Set<User> users = UserManager.GetUsers("data/users/users.txt", "data/reproductions");
+		Set<User> users = null;
+		try 
+		{
+			users = UserManager.GetUsers("data/users/users.txt", "data/reproductions");
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		
 		for(User u : users)
 		{
 			ArrayList<Reproduction> repros = u.GetReproductions();

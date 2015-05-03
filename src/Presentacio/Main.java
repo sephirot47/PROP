@@ -88,16 +88,6 @@ public class Main
 			System.out.println(" ");
 		}
 		
-		Solution solution = new Solution(songGraph, "GirvanNewman", rawSolution, 0.5f);
-		try 
-		{
-			FileManager.SaveSolution(solution);
-		} 
-		catch (IOException e3) 
-		{
-			e3.printStackTrace();
-		}
-		
 		/*
 		SongGraph entrada = null;
 		try {

@@ -256,7 +256,7 @@ public class FileManagerTest extends TestCase
 	 {
 		 ArrayList<Reproduction> writtenReproductions = new ArrayList<Reproduction>();
 		 ArrayList<String> reproductionsLines = new ArrayList<String>();
-		 
+
 		 FileManager.EraseData("tests/reproductionSaveProva2.txt"); //Comencem amb larxiu buit
 		
 		 writtenReproductions.add(new Reproduction("autor1", "titol1", 1));
@@ -270,27 +270,51 @@ public class FileManagerTest extends TestCase
 		 FileManager.SaveReproductions("tests/reproductionSaveProva2.txt", writtenReproductions);
 		 assertEquals(FileManager.LoadData("tests/reproductionSaveProva2.txt"), reproductionsLines);
 	 }
+	 
+	 public static void testRemoveUser() throws IOException
+	 {
+		 ArrayList<String> usersLines = new ArrayList<String>();
+		 
+		 usersLines.add("victor;20"); //0
+		 usersLines.add("aaa;45"); //1
+		 usersLines.add("bbb;10"); //2
+		 usersLines.add("xxx;102"); //3
+
+		 FileManager.EraseData("tests/usersRemoveTest.txt");
+		 FileManager.SaveData("tests/usersRemoveTest.txt", usersLines);
+
+		 usersLines.remove(2);
+		 FileManager.RemoveUser("tests/usersRemoveTest.txt", "bbb");
+		 assertEquals(FileManager.LoadData("tests/usersRemoveTest.txt"), usersLines);
+
+		 usersLines.remove(1);
+		 FileManager.RemoveUser("tests/usersRemoveTest.txt", "aaa");
+		 assertEquals(FileManager.LoadData("tests/usersRemoveTest.txt"), usersLines);
+	 }
+	 
 	 public static void testRemoveSong() throws IOException
 	 {
 		 ArrayList<String> songsLines = new ArrayList<String>();
 		 
-		 songsLines.add("victor;cuando sarpa el hamor;2015;-;-;flamenquillo del weno;180");
-		 songsLines.add("jfons;tramboliko;1867;dubstep;-;ioroYOLO;45");
-		 songsLines.add("abraham;AC/DC;Thunderstruck;1990;Rock;292");
-		 songsLines.add("abraham;AC/DC;Highway to Hell;1979;Rock;284");
-		 songsLines.add("abraham;AC/DC;You Shook Me All Night Long;1980;Rock;212");
-		 songsLines.add("abraham;AC/DC;Hells Bells;1980;Rock;312");
-		 
-		 String Author = "AC/DC";
-		 String Title = "T.N.T";
-		 FileManager.RemoveSong(Author, Title);
-		 assertEquals(FileManager.LoadData("data/songs/songs.txt"), songsLines);
+		 songsLines.add("Camela;cuando sarpa el hamor;2015;-;-;flamenquillo del weno;180"); //0
+		 songsLines.add("SoyTanSutil;tramboliko;1867;dubstep;-;ioroYOLO;45"); //1
+		 songsLines.add("AC/DC;Thunderstruck;1990;Rock;-;-;292"); //2
+		 songsLines.add("AC/DC;Highway to Hell;1979;Rock;-;-;284"); //3
+		 songsLines.add("AC/DC;You Shook Me All Night Long;1980;Rock;-;-;212"); //4
+		 songsLines.add("AC/DC;T.N.T;1980;Rock;-;-;312"); //5
+		 songsLines.add("AC/DC;Hells Bells;1980;Rock;-;-;312"); //6
+
+		 FileManager.EraseData("tests/songsRemoveTest.txt");
+		 FileManager.SaveData("tests/songsRemoveTest.txt", songsLines);
+
+		 songsLines.remove(5);
+		 FileManager.RemoveSong("tests/songsRemoveTest.txt", "AC/DC", "T.N.T");
+		 assertEquals(FileManager.LoadData("tests/songsRemoveTest.txt"), songsLines);
 	 }
 	 
-	 public static void testRemoveReproduction() throws IOException
+	 public static void testRemoveReproductions() throws IOException
 	 {
 		 ArrayList<String> reproductionsLines = new ArrayList<String>();
-		 
 		 
 		 reproductionsLines.add("victor;cuando sarpa el hamor;30");
 		 reproductionsLines.add("AC/DC;Thunderstruck;292");
@@ -301,14 +325,7 @@ public class FileManagerTest extends TestCase
 		 
 		 String User = "abraham";
 		 long time = 214;
-		 FileManager.RemoveReproduction(User, time);
-		 assertEquals(FileManager.LoadData("data/reproductions/abrahamReproductions.txt"), reproductionsLines);
-	 }
-	 public static void testRemoveSolution() throws IOException
-	 {
-		 String nomSolucio = "solution_01-05-2015 00,10,53,681";
-		 FileManager.RemoveSolution(nomSolucio);
-		 File solucio = new File("tests/" + nomSolucio);
-		 assertFalse(solucio.exists());
+		 FileManager.RemoveReproductions("tests/", User, time);
+		 assertEquals(FileManager.LoadData("tests/abrahamReproductions.txt"), reproductionsLines);
 	 }
 }

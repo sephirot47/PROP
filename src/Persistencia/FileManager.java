@@ -73,27 +73,6 @@ public class FileManager
         writer.close();    
     }
     
-    public static void SaveSolution(Solution s) throws IOException
-    {
-    	String date = new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date());
-    	String filedir = "data/solutions/solution_" + date + "/";
-    	
-    	//arxiu de Graph(entrada)
-    	SaveEntradaSolution(filedir, s.GetEntrada());
-
-    	//arxiu de solucio(communities)
-        SaveCommunitiesSolution(filedir, s.GetSongCommunities());
-    	
-    	//arxiu de info extra
-    	{
-    	ArrayList<String> lines = new ArrayList<String>();
-    	lines.add( s.GetAlgorisme() ); //Algorisme usat
-    	lines.add( String.valueOf( s.GetEntrada().GetAllNodes().size() ) ); //Nombre de cancons processades
-    	lines.add( String.valueOf( s.GetGenerationTime() ) ); //Temps que ha tardat a generar la solucio
-    	SaveData(filedir + "info.txt", lines);
-    	}
-    }
-    
     public static void SaveEntradaSolution(String filedir, SongGraph entrada) throws IOException
     {
     	ArrayList<String> lines = new ArrayList<String>();
@@ -146,7 +125,7 @@ public class FileManager
 	    		lines.add(line);
 	    	}
     	}
-		SaveData(filedir + "communitiesSolution.txt",  lines);
+		SaveData(filedir + "comunitats.txt",  lines);
     }
     
     //path es un path a un fitxer existent
@@ -318,40 +297,42 @@ public class FileManager
     
     //REMOVE AND ERASE
     
-    public static void RemoveSong(String Author, String Title) throws IOException
+    public static void RemoveUser(String filepath, String username) throws IOException
+    {
+    	String search = username;
+	
+    	ArrayList<String> lines = LoadData(filepath);
+    	for(int i = 0; i < lines.size(); ++i)
+    	{
+    		String line = lines.get(i);
+    		if(line.startsWith(search)) lines.remove(i);
+    	}
+    	
+    	SaveData(filepath, lines);
+    }
+    
+    public static void RemoveSong(String filepath, String Author, String Title) throws IOException
     {
     	String search = Author+";"+Title;
 	
-		File tempFile = new File("data/songs/songs2.txt");
-    	BufferedReader br;
-		br = new BufferedReader(new FileReader("data/songs/songs.txt"));
-		PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
-        
-        String line = "";
-        while ((line = br.readLine()) != null) {
-        	
-            if (!line.contains(search)) {
-                pw.println(line);
-                pw.flush();
-            }
-        }
-        pw.close();
-        br.close();
-        
-        File songs = new File("data/songs/songs.txt");
-        songs.delete();
-   
-        tempFile.renameTo(songs);
+    	ArrayList<String> lines = LoadData(filepath);
+    	for(int i = 0; i < lines.size(); ++i)
+    	{
+    		String line = lines.get(i);
+    		if(line.startsWith(search)) lines.remove(i);
+    	}
+    	
+    	SaveData(filepath, lines);
     }
     
     
-    public static void RemoveReproduction(String user, long time) throws IOException
+    public static void RemoveReproductions(String filedir, String username, long time) throws IOException
     {
     	String search = String.valueOf(time);
 	
-		File tempFile = new File("data/reproductions/"+ user + "Reproductions2.txt");
+		File tempFile = new File(filedir + username + "Reproductions2.txt");
     	BufferedReader br;
-		br = new BufferedReader(new FileReader("data/reproductions/"+ user + "Reproductions.txt"));
+		br = new BufferedReader(new FileReader(filedir + username + "Reproductions.txt"));
 		PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
         
         String line = "";
@@ -365,23 +346,10 @@ public class FileManager
         pw.close();
         br.close();
         
-        File repros = new File("data/reproductions/"+ user + "Reproductions.txt");
+        File repros = new File(filedir + username + "Reproductions.txt");
         repros.delete();
    
         tempFile.renameTo(repros);
-    }
-
-    public static void RemoveSolution(String nomSolucio) throws IOException
-    {
-    	File communities = new File("tests/" + nomSolucio + "/communities.txt");
-    	File entrada = new File("tests/" + nomSolucio + "/entrada.txt");
-    	File info = new File("tests/"+ nomSolucio + "/generationInfo.txt");
-    	communities.delete();
-    	entrada.delete();
-    	info.delete();
-    	File folder = new File("tests/" + nomSolucio);
-    	folder.delete();
-    	
     }
 
 }
