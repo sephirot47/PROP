@@ -256,7 +256,7 @@ public class FileManagerTest extends TestCase
 	 {
 		 ArrayList<Reproduction> writtenReproductions = new ArrayList<Reproduction>();
 		 ArrayList<String> reproductionsLines = new ArrayList<String>();
-		 
+
 		 FileManager.EraseData("tests/reproductionSaveProva2.txt"); //Comencem amb larxiu buit
 		
 		 writtenReproductions.add(new Reproduction("autor1", "titol1", 1));
@@ -271,6 +271,27 @@ public class FileManagerTest extends TestCase
 		 assertEquals(FileManager.LoadData("tests/reproductionSaveProva2.txt"), reproductionsLines);
 	 }
 	 
+	 public static void testRemoveUser() throws IOException
+	 {
+		 ArrayList<String> usersLines = new ArrayList<String>();
+		 
+		 usersLines.add("victor;20"); //0
+		 usersLines.add("aaa;45"); //1
+		 usersLines.add("bbb;10"); //2
+		 usersLines.add("xxx;102"); //3
+
+		 FileManager.EraseData("tests/usersRemoveTest.txt");
+		 FileManager.SaveData("tests/usersRemoveTest.txt", usersLines);
+
+		 usersLines.remove(2);
+		 FileManager.RemoveUser("tests/usersRemoveTest.txt", "bbb");
+		 assertEquals(FileManager.LoadData("tests/usersRemoveTest.txt"), usersLines);
+
+		 usersLines.remove(1);
+		 FileManager.RemoveUser("tests/usersRemoveTest.txt", "aaa");
+		 assertEquals(FileManager.LoadData("tests/usersRemoveTest.txt"), usersLines);
+	 }
+	 
 	 public static void testRemoveSong() throws IOException
 	 {
 		 ArrayList<String> songsLines = new ArrayList<String>();
@@ -282,7 +303,8 @@ public class FileManagerTest extends TestCase
 		 songsLines.add("AC/DC;You Shook Me All Night Long;1980;Rock;-;-;212"); //4
 		 songsLines.add("AC/DC;T.N.T;1980;Rock;-;-;312"); //5
 		 songsLines.add("AC/DC;Hells Bells;1980;Rock;-;-;312"); //6
-		 
+
+		 FileManager.EraseData("tests/songsRemoveTest.txt");
 		 FileManager.SaveData("tests/songsRemoveTest.txt", songsLines);
 
 		 songsLines.remove(5);

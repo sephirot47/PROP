@@ -297,6 +297,20 @@ public class FileManager
     
     //REMOVE AND ERASE
     
+    public static void RemoveUser(String filepath, String username) throws IOException
+    {
+    	String search = username;
+	
+    	ArrayList<String> lines = LoadData(filepath);
+    	for(int i = 0; i < lines.size(); ++i)
+    	{
+    		String line = lines.get(i);
+    		if(line.startsWith(search)) lines.remove(i);
+    	}
+    	
+    	SaveData(filepath, lines);
+    }
+    
     public static void RemoveSong(String filepath, String Author, String Title) throws IOException
     {
     	String search = Author+";"+Title;
