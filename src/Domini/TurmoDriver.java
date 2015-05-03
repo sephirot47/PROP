@@ -2,10 +2,13 @@ package Domini;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TimeZone;
 
 import Persistencia.FileManager;
+import Persistencia.FileParser;
 import Persistencia.History;
 
 public class TurmoDriver 
@@ -34,6 +37,8 @@ public class TurmoDriver
 							"Afegir User a arxiu",
 							"Llegir arxiu de Users",
 							"Borrar User de arxiu",
+							"Afegir Reproduccio a User",
+							"Llegir Reproduccions de User",
 							"Llegir carpeta de Solucions"};
 		
 		pl("--------------- Menu de test ----------------");
@@ -54,7 +59,10 @@ public class TurmoDriver
 		case 5: TestReadUserFile(); break;
 		case 6: TestRemoveUserOfFile(); break;
 		
-		case 7: TestReadSolutions(); break;
+		case 7: TestAddReproductionToFile(); break;
+		case 8: TestReadReproductions(); break;
+		
+		case 9: TestReadSolutions(); break;
 		}
 		
 		}
@@ -260,6 +268,97 @@ public class TurmoDriver
 		}
 
 		pl("El user amb nom \"" + username +  "\" ja no existeix al arxiu \"" + filepath + "\""); pl("");
+	}
+	
+	public static void TestAddReproductionToFile()
+	{
+		String username;
+		
+		pl(""); pl("");
+		pl("TEST: Afegir Reproduccio a user");
+		pl("");pl("");
+				
+		String filepath; 
+		p("Introdueixi el nom del DIRECTORI on vol guardar la reproduccio: ");  filepath = sc.next(); pl("");
+		p("Introdueixi el nom del user al qual vol afegir una reproduccio: ");  username = sc.next(); pl("");
+		
+		String songAuthor, songTitle;
+		p("Introdueixi el nom del autor de la reproduccio: "); songAuthor = sc.next(); pl("");
+		p("Introdueixi el nom del autor de la reproduccio: "); songTitle = sc.next(); pl("");
+
+		
+		pl(""); pl("Afegint reproduccio a user " + username + "...");
+		
+		Reproduction r = null;
+		try
+		{
+			long milis = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis() / 1000L;
+			r = new Reproduction(songAuthor, songTitle, milis);
+		}
+		catch(Exception e)
+		{
+			pl("Alguna dada entrada no es valida!!! ");
+			e.printStackTrace();
+		}
+		
+		try
+		{
+			FileManager.SaveReproduction(filepath + "/" + username + "Reproductions.txt", r);
+		}
+		catch(IOException e)
+		{
+			pl("Sembla que hi ha algun problema amb el arxiu que ha entrat!");
+			e.printStackTrace();
+		}
+		
+		
+		pl("Reproduccio afegida amb exit!!!!");
+	}
+	
+	public static void TestReadReproductions()
+	{
+		String username;
+		
+		pl(""); pl("");
+		pl("TEST: Llegir Reproduccions de user");
+		pl("");pl("");
+				
+		String filepath; 
+		p("Introdueixi el nom del DIRECTORI on esta guardada llegir les reproduccions: ");  filepath = sc.next(); pl("");
+		p("Introdueixi el nom del user del que vol llegir una reproduccio: ");  username = sc.next(); pl("");
+		
+		User user = null;
+		try
+		{
+			user = new User(username, 0);
+		}
+		catch(Exception e)
+		{
+			pl("Sembla que hi ha algun problema amb nom del user que ha entrat!");
+			e.printStackTrace();
+		}
+		
+		ArrayList<Reproduction> userReproductions = new ArrayList<Reproduction>();
+		try //Si no existeix el seu arxiu de repros pues no te repros
+		{ 
+			//Afegim al user llegit les reproduccions corresponents
+			String reproductionsFilepath = filepath + "/" + user.GetName() + "Reproductions.txt";
+			userReproductions = FileParser.GetReproductions(reproductionsFilepath);
+		}
+		catch(Exception e){}
+
+		int i = 0;
+		pl(":::::::::::::::::::::::::::::::::::::::");
+		pl("Number of reproductions: " + userReproductions.size() );
+		pl("");
+		for(Reproduction r : userReproductions)
+		{
+			pl("Reproduction " + (++i) + ":");
+			r.Print();
+			pl("");
+		}
+		pl(":::::::::::::::::::::::::::::::::::::::");
+		pl("");
 	}
 	
 	public static void TestReadSolutions()

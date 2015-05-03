@@ -1,11 +1,24 @@
 package Domini;
 
+import java.util.Calendar;
+import java.util.TimeZone;
+
 public class Reproduction
 {
 	private String songAuthor, songTitle;
-	private int time; //en segons
+	private long time; //en segons
 	
-	public Reproduction(String author,String title, int time) throws Exception
+	public Reproduction(String author,String title) throws Exception
+	{
+		CheckString(author); CheckString(title);
+		songAuthor = author;
+		songTitle = title;
+		
+		long milis = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis();
+		this.time = milis;
+	}
+	
+	public Reproduction(String author,String title, long time) throws Exception
 	{
 		CheckString(author); CheckString(title);
 		songAuthor = author;
@@ -38,7 +51,8 @@ public class Reproduction
 		this.songTitle = songTitle;
 	}
 
-	public int GetTime() {
+	public long GetTime() 
+	{
 		return time;
 	}
 
