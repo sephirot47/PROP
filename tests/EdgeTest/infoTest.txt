@@ -1,0 +1,29 @@
+Objecte de la prova:
+  
+
+
+Altres elements integrats a la prova:
+  
+
+
+Drivers:
+  
+
+
+Stubs: 
+  Cap
+
+
+Fitxers de dades necessaris:
+  
+
+
+Valors estudiats:
+  
+
+
+Efectes estudiats:
+  
+
+Operativa:
+  

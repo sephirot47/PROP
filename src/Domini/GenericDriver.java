@@ -29,14 +29,14 @@ public class GenericDriver
 	{
 		sc = new Scanner(System.in);
 		String[] options = {"Afegir Song a arxiu", 
-				"Llegir arxiu de Songs",
-				"Borrar Song de arxiu",
-				"Afegir User a arxiu",
-				"Llegir arxiu de Users",
-				"Borrar User de arxiu",
-				"Afegir Reproduccio a User",
-				"Llegir Reproduccions de User",
-				"Llegir carpeta de Solucions"};
+							"Llegir arxiu de Songs",
+							"Borrar Song de arxiu",
+							"Afegir User a arxiu",
+							"Llegir arxiu de Users",
+							"Borrar User de arxiu",
+							"Afegir Reproduccio a User",
+							"Llegir Reproduccions de User",
+							"Llegir carpeta de Solucions"};
 		
 		while(true)
 		{
