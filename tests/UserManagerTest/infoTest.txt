@@ -1,13 +1,13 @@
 Objecte de la prova:
-  
+  Comprovar que funcionin tots els metodes de la classe UserManager
 
 
 Altres elements integrats a la prova:
-  
+  User
 
 
 Drivers:
-  
+  Un unic driver: UserManagerTest.jar 
 
 
 Stubs: 
@@ -15,15 +15,13 @@ Stubs:
 
 
 Fitxers de dades necessaris:
-  
-
-
-Valors estudiats:
-  
-
+  data/users1.txt
+  data/users2.txt
 
 Efectes estudiats:
-  
+  testGetUsers:
+  Obté users dels arxius "data/users1.txt" i "data/users2.txt". Comprova que aquests s'han carregat correctament.
 
 Operativa:
-  
+  Entra el numero del metode (indicat al mateix programa) que es vol provar
+  o (numero de metodes)+1 per provar-los tots.

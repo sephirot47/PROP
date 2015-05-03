@@ -1,13 +1,14 @@
 Objecte de la prova:
-  
+  Comprovar que funcionin tots els metodes de la classe SongGraph
 
 
 Altres elements integrats a la prova:
-  
+  Node
+  Edge
 
 
 Drivers:
-  
+  Un unic driver: SongGraphTest.jar 
 
 
 Stubs: 
@@ -15,15 +16,22 @@ Stubs:
 
 
 Fitxers de dades necessaris:
-  
+  Cap
 
 
 Valors estudiats:
-  
+  testGenerateEdges
 
 
 Efectes estudiats:
-  
+  testGenerateEdges:
+    Es crea un SongGraph amb dues cançons, s'estableixen uns criteris i es generen les arestes,
+    despres es comprova que les dues cançons s'han connectat per un aaresta ja que tenen els mateixos estils,
+    durada semblant i el mateix autor.
+
+  testGetNearbyReproductionsAportation:
+    Es creen dues cançons
 
 Operativa:
-  
+  Entra el numero del metode (indicat al mateix programa) que es vol provar
+  o (numero de metodes)+1 per provar-los tots.

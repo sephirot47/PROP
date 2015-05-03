@@ -15,15 +15,52 @@ Stubs:
 
 
 Fitxers de dades necessaris:
-  
-
-
-Valors estudiats:
-  
+  Cap
 
 
 Efectes estudiats:
-  
+
+  testGetThreshold:
+  Crea una nova ponderació. Comprova que el threshold és el correcte, que per definició, i de moment, és 5.0. Entenem per threshold el valor de relació/afinitat que s'ha de superar entre dues cançons perquè es crei una arista entre elles.
+
+  testGetDuration:
+  Crea una nova ponderació. Comprova que obtenir la aportacio de la duracio retorna el seu valor per defecte(5), i per tant, que el get funciona correctament.
+
+  testSetDuration:
+  Crea una nova ponderació. Li assigna una ponderació de 8. Comprova que obtenir la aportacio de la duracio retorna 8.
+
+  testGetYear:
+  Crea una nova ponderació. Comprova que obtenir la aportacio de l'any retorna el seu valor per defecte(5), i per tant, que el get funciona correctament.
+
+  testSetYear:
+  Crea una nova ponderació. Li assigna una ponderació de 8. Comprova que obtenir la aportacio de l'any retorna 8.
+
+  testGetStyle:
+  Crea una nova ponderació. Comprova que obtenir la aportacio dels estils retorna el seu valor per defecte(5), i per tant, que el get funciona correctament.
+
+  testSetStyle:
+  Crea una nova ponderació. Li assigna una ponderació de 8. Comprova que obtenir la aportacio dels estils retorna 8.
+
+  testGetUserAge:
+  Crea una nova ponderació. Comprova que obtenir la aportacio de la mitjana de les edats dels usuaris que han escoltat la cançó retorna el seu valor per defecte(5), i per tant, que el get funciona correctament.
+
+  testSetUserAge:
+  Crea una nova ponderació. Li assigna una ponderació de 8. Comprova que obtenir la aportacio la mitjana de les edats dels usuaris que han escoltat la cançó retorna 8.
+
+  testGetNearbyReproductions:
+  Crea una nova ponderació. Comprova que obtenir la aportacio de que dues cançons hagin estat reproduides en un curt interval de temps retorna el seu valor per defecte(5), i per tant, que el get funciona correctament.
+
+  testSetNearbyReproductions:
+  Crea una nova ponderació. Li assigna una ponderació de 8. Comprova que obtenir la aportacio de que dues cançons hagin estat reproduides en un curt interval de temps retorna 8.
+
+  testGetAuthor:
+  Crea una nova ponderació. Comprova que obtenir la aportacio de la edat del autor retorna el seu valor per defecte(5), i per tant, que el get funciona correctament.
+
+  testSetAuthor:
+  Crea una nova ponderació. Li assigna una ponderació de 8. Comprova que obtenir la aportacio de la edat del autor retorna 8.
+
+
+
 
 Operativa:
   Entra el numero del metode (indicat al mateix programa) que es vol provar

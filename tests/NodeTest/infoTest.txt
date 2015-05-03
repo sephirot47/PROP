@@ -3,7 +3,7 @@ Objecte de la prova:
 
 
 Altres elements integrats a la prova:
-  
+  Cap
 
 
 Drivers:
@@ -15,15 +15,13 @@ Stubs:
 
 
 Fitxers de dades necessaris:
-  
-
-
-Valors estudiats:
-  
+  Cap
 
 
 Efectes estudiats:
-  
+  testGetId:
+  Crea una subclasse de node, overridejant el metode getId(). Comprova que retorni "potato", per definició de la nova classe creada.
+
 
 Operativa:
   Entra el numero del metode (indicat al mateix programa) que es vol provar

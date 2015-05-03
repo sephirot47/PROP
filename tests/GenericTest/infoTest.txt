@@ -3,7 +3,9 @@ Objecte de la prova:
 
 
 Altres elements integrats a la prova:
-  
+  FileManager
+  FileParser
+  History
 
 
 Drivers:
@@ -15,16 +17,41 @@ Stubs:
 
 
 Fitxers de dades necessaris:
-  
-
-
-Valors estudiats:
-  
+  Cap
 
 
 Efectes estudiats:
-  
+
+  testAddSongToFile:
+  Afegeix o modifica una canço al arxiu indicat. Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
+
+  testReadSongFile:
+  Llegeix les cançons d'un arxiu indicat. A l'output s'imprimiran totes les cançons llegides. Mitjançant l'output es pot comprovar que tot ha funcionat correctament.
+
+  testRemoveSongOfFile:
+  Esborra una canço d'un arxiu indicat. Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
+
+  testAddUserToFile:
+  Afegeix o modifica un user al arxiu indicat. Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
+
+  testReadUserFile:
+  Llegeix els usuaris d'un arxiu indicat. A l'output s'imprimiran tots els usuaris llegits. Mitjançant l'output es pot comprovar que tot ha funcionat correctament.
+
+  testRemoveUserOfFile:
+  Esborra un usuari d'un arxiu indicat. Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
+
+  testAddReproductionToFile:
+  Afegeix o modifica una reproduccio al arxiu indicat. Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
+
+  testReadReproductions:
+  Llegeix les reproduccions d'un usuari indicat, a un directori determinat.
+  Si per exemple, vull que llegeixi les reproduccions del arxiu "directori/aaa/pepeReproductions", quan el programa demana el directori haure d'escriure "directori/aaa" i quan demani el nom d'usuari hauré d'escriure "pepe".  
+  A l'output s'imprimiran tots les reproduccions llegides. Mitjançant l'output es pot comprovar que tot ha funcionat correctament.
+
+  testReadSolutions:
+  Llegeix totes les solucions d'un directori indicat. A l'output s'imprimira les solucions llegides. Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
+  Si per exemple tinc 100 solucions guardades a la carpeta "solucions/les_meves_solucions" hauré d'indicar-li aquesta carpeta, i dins d'aquesta carpeta, per cada solució, ha d'haver una carpeta amb els 3 arxius que s'especifiquen als formats dels arxius.
+
 
 Operativa:
-  Entra el numero del metode (indicat al mateix programa) que es vol provar
-  o (numero de metodes)+1 per provar-los tots.
+  Entra el numero del metode (indicat al mateix programa) que es vol provar. A partir d'aqui cal seguir les instruccions per introduir el input que es demana, i es rebra feedback mitjançant el output.
