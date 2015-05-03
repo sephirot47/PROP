@@ -324,11 +324,5 @@ public class FileManager
     	
     	saveData(filepath, lines);
     }
-    
-    
-    public static void removeReproductions(String filedir, String username) throws IOException
-    {
-		eraseData(filedir + "/" + username + "Reproductions.txt");
-    }
 
 }

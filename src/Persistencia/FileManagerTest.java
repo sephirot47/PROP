@@ -290,7 +290,7 @@ public class FileManagerTest extends TestCase
 		 assertEquals(FileManager.loadData("data/usersRemoveTest.txt"), usersLines);
 
 		 usersLines.remove(1);
-		 FileManager.removeUser("data/sersRemoveTest.txt", "aaa");
+		 FileManager.removeUser("data/usersRemoveTest.txt", "aaa");
 		 assertEquals(FileManager.loadData("data/usersRemoveTest.txt"), usersLines);
 	 }
 	 
@@ -312,21 +312,5 @@ public class FileManagerTest extends TestCase
 		 songsLines.remove(5);
 		 FileManager.removeSong("data/songsRemoveTest.txt", "AC/DC", "T.N.T");
 		 assertEquals(FileManager.loadData("data/songsRemoveTest.txt"), songsLines);
-	 }
-	 
-	 public static void testRemoveReproductions() throws IOException
-	 {
-		 ArrayList<String> reproductionsLines = new ArrayList<String>();
-		 
-		 reproductionsLines.add("victor;cuando sarpa el hamor;30");
-		 reproductionsLines.add("AC/DC;Thunderstruck;292");
-		 reproductionsLines.add("AC/DC;Highway to Hell;284");
-		 reproductionsLines.add("AC/DC;You Shook Me All Night Long;212");
-		 reproductionsLines.add("jfons;tramboliko;20");
-		 reproductionsLines.add("AC/DC;Hells Bells;312");
-		 
-		 FileManager.saveData("data/abrahamReproductions.txt", reproductionsLines);
-		 FileManager.removeReproductions("data", "abraham");
-		 assertEquals(FileManager.loadData("data/abrahamReproductions.txt"), reproductionsLines);
 	 }
 }
