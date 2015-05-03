@@ -80,11 +80,11 @@ public class TurmoDriver
 		String filepath; 
 		p("Introdueixi el arxiu on vol afegir/modificar la canco: ");  filepath = sc.next(); pl("");
 		
-		p("Introdueixi un autor per la canço: ");  author = sc.next();
-		p("Introdueixi un titol per la canço: ");  title = sc.next();
-		p("Introdueixi el primer estil de la canco ( \"-\" si no vol cap ): ");  styles.add(sc.next());
-		p("Introdueixi el segon estil de la canco ( \"-\" si no vol cap ): ");  styles.add(sc.next());
-		p("Introdueixi el tercer estil de la canco ( \"-\" si no vol cap ): ");  styles.add(sc.next());
+		p("Introdueixi un autor per la canï¿½o: ");  author = sc.next();
+		p("Introdueixi un titol per la canï¿½o: ");  title = sc.next();
+		p("Introdueixi el primer estil de la canco ( \"-\" si no en vol cap ): ");  styles.add(sc.next());
+		p("Introdueixi el segon estil de la canco ( \"-\" si no en vol cap ): ");  styles.add(sc.next());
+		p("Introdueixi el tercer estil de la canco ( \"-\" si no en vol cap ): ");  styles.add(sc.next());
 		p("Introdueixi l'any de la canco: ");  year = sc.nextInt();
 		p("Introdueixi la duracio en segons de la canco: ");  duration = sc.nextInt();
 		
@@ -142,7 +142,7 @@ public class TurmoDriver
 			s.Print();
 			pl("");
 		}
-		pl(":::::::::::::::::::::::::::::::::::::::");
+		pl(":::::::::::::::::::::::::::::::::::::::::");
 		pl("");
 	}
 	
@@ -155,8 +155,8 @@ public class TurmoDriver
 		p("Introdueixi el arxiu d'on vol borrar una canco: ");  filepath = sc.next(); pl("");
 		
 		String author, title;
-		p("Introdueixi el autor de la canço que vol borrar: ");  author = sc.next();
-		p("Introdueixi el titol de la canço que vol borrar: ");  title = sc.next();
+		p("Introdueixi el autor de la canï¿½o que vol borrar: ");  author = sc.next();
+		p("Introdueixi el titol de la canï¿½o que vol borrar: ");  title = sc.next();
 		
 		try 
 		{
@@ -243,7 +243,7 @@ public class TurmoDriver
 			u.Print();
 			pl("");
 		}
-		pl(":::::::::::::::::::::::::::::::::::::::");
+		pl(":::::::::::::::::::::::::::::::::::::");
 		pl("");
 	}
 	

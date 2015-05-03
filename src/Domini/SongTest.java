@@ -69,7 +69,7 @@ public class SongTest extends TestCase
 	{
 		try{
 		User u = null;
-		try { u = new User("Austin Powers", 33); } catch (Exception e) { e.printStackTrace(); }
+		u = new User("Austin Powers", 33); 
 		
 		String author = "Boney-M";
 		String song = "Rasputin";
