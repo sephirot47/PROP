@@ -104,7 +104,7 @@ public class Song extends Node
 	public float getMeanUserAge()
 	{
 		float sum = 0.0f;
-		int usersWhoHaveListenedToThisAwesomeOneHourSong = 0;
+		int numUsers = 0;
 		
 		Set<User> users = null;
 		try 
@@ -115,7 +115,7 @@ public class Song extends Node
 		{
 			e.printStackTrace();
 		}
-		
+
 		for(User u : users)
 		{
 			ArrayList<Reproduction> repros = u.getReproductions();
@@ -124,13 +124,13 @@ public class Song extends Node
 				if(r.getSongAuthor().equals(author) && r.getSongTitle().equals(title))
 				{
 					sum += u.getAge();
-					++usersWhoHaveListenedToThisAwesomeOneHourSong;
+					++numUsers;
 					break; //Nomes suma una vegada per user
 				}
 			}
 		}
 		
-		return sum / usersWhoHaveListenedToThisAwesomeOneHourSong;
+		return sum / numUsers;
 	}
 	
 	private void checkString(String str) throws Exception
