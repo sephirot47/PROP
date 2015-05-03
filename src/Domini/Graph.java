@@ -223,7 +223,7 @@ public class Graph <N extends Node, E extends Edge>
 			{
 				if(nG.equals(nThis))
 				{
-					ArrayList<N> nsAdjG =  new ArrayList<N>(g.graph.get(nG).keySet());
+					ArrayList<N> nsAdjG = new ArrayList<N>(g.graph.get(nG).keySet());
 					ArrayList<N> nsAdjThis =  new ArrayList<N>(this.graph.get(nThis).keySet());
 					
 					//Els nodes adjacents a nG han de ser els mateixos (mateixa id)
