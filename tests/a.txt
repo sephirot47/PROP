@@ -1,0 +1,2 @@
+aaa;bbb;122;a;b;c;12
+jjj;bbb;122;a;b;c;12

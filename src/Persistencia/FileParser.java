@@ -42,16 +42,14 @@ public class FileParser
 		return users;
 	}
 
-	public static ArrayList<Song> GetSongs(String filepath) throws IOException
+	public static ArrayList<Song> GetSongs(String filepath) throws Exception
 	{
 		ArrayList<Song> songs = new ArrayList<Song>();
 		
 		ArrayList<String> fileLines = FileManager.LoadData(filepath);
 		for(String line : fileLines)
 		{
-			try{
-				songs.add(FileParser.GetSong(line));
-			}catch(Exception e){}
+			songs.add(FileParser.GetSong(line));
 		}
 		
 		return songs;

@@ -11,18 +11,15 @@ public class SongManager
 {
 	private static Set<Song> songs = new HashSet<Song>();
 	
-	public static Set<Song> GetSongs(String filepath)
+	public static Set<Song> GetSongs(String filepath) throws Exception
 	{
 		songs.clear();
 		
 		if(songs.size() == 0)
 		{
 			ArrayList<Song> songsArray = new ArrayList<Song>();
-			try 
-			{
-				songsArray = FileParser.GetSongs(filepath);
-			} 
-			catch (IOException e) { e.printStackTrace(); }
+			
+			songsArray = FileParser.GetSongs(filepath);
 			
 			for(Song s : songsArray)
 			{
