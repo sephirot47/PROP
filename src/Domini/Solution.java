@@ -1,52 +1,82 @@
 package Domini;
 
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.Calendar;
 
-public class Solution
-{
-	SongGraph entrada;
-	ArrayList<Set<Song>> songCommunities;
-	
-	String algorisme;
-	float generationTime;
-	
-	public Solution(SongGraph entrada, String algorisme, ArrayList<Set<Song>> solution, float genTime)
-	{
-		this.entrada = entrada;
-		this.algorisme = algorisme;
-		songCommunities = solution;
-		generationTime = genTime;
+public class Solution {
+	private ArrayList<Community> communities;
+	private double time;
+	private int memory;
+	private String algorithm;
+	private int id;
+
+	public Solution() {}
+
+	public void setTime(double time) throws IllegalArgumentException {
+		if (time <= 0)
+			throw new IllegalArgumentException();
+		this.time = time;
 	}
 
-	public void setEntrada(SongGraph entrada) { this.entrada = entrada; }
-	public void setAlgorisme(String algorisme) { this.algorisme = algorisme; }
-	public void setSongCommunities(ArrayList<Set<Song>> songCommunities) { this.songCommunities = songCommunities; }
-	public void setGenerationTime(float generationTime) { this.generationTime = generationTime; }
+	/* Get the time taken to obtain the solution */
+	public double getTime() {
+		return time;
+	}
 
-	public String getAlgorisme() { return algorisme; }
-	public float getGenerationTime() { return generationTime; }
-	public SongGraph getEntrada() { return entrada; }
-	public ArrayList<Set<Song>> getSongCommunities() { return songCommunities; }
-	
-	public void print()
-	{
-		System.out.println("Entrada: ---");
-		entrada.print();
-		System.out.println("---");
-		System.out.println("Sortida(comunitats): ---");
-		int i = 0;
-		for(Set<Song> ss : songCommunities)
-		{
-			System.out.println("Comunitat " + (++i));
-			for(Song s : ss)
-			{
-				s.print();
-				System.out.println("-");
-			}
-		}
-		System.out.println("---");
-		System.out.print("Algorisme: "); System.out.println("algorisme");
-		System.out.print("Temps generacio: "); System.out.println("generationTime");
+	public double getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	// alg = C, G, L
+	public void setAlg(String alg) {
+		this.algorithm = alg;
+	}
+
+	public String getAlg() {
+		return algorithm;
+	}
+
+	/*
+	 * Set the time taken to obtain the solution. memory must be a positive
+	 * number
+	 */
+	public void setMemory(int memory) throws IllegalArgumentException {
+		if (memory <= 0)
+			throw new IllegalArgumentException();
+		this.memory = memory;
+	}
+
+	/* Get the time taken to obtain the solution */
+	public int getMemory() {
+		return memory;
+	}
+
+	/* Get the number of communities that form the solution */
+	public int getNumCommunities() {
+		return communities.size();
+	}
+
+	/* Get the number of nodes that form the solution */
+	public int getNumNodes() {
+		int numNodes = 0;
+		for (int i = 0; i < communities.size(); ++i)
+			numNodes += communities.get(i).getNumberOfNodes();
+		return numNodes;
+	}
+
+	public ArrayList<Community> getCommunities() {
+		return communities;
+	}
+
+	public void removeCommunity(Community C) {
+		boolean r = communities.remove(C);
+	}
+
+	public void addCommunity(Community C) {
+		boolean r = communities.add(C);
 	}
 }

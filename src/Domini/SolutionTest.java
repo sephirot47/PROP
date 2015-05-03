@@ -56,7 +56,7 @@ public class SolutionTest extends TestCase
 		sg.addNode(s3);
 		sg.addNode(s4);
 		
-		so.setEntrada(sg);
+		so.setGraph(sg);
 		
 		assertEquals(sg,so.getEntrada());
 		} catch(Exception e) {}
@@ -172,7 +172,7 @@ public class SolutionTest extends TestCase
 		sg.addNode(s3);
 		sg.addNode(s4);
 		
-		so.setEntrada(sg);
+		so.setGraph(sg);
 		
 		assertEquals(sg,so.getEntrada());
 		} catch(Exception e) {}
