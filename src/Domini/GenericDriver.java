@@ -11,9 +11,8 @@ import Persistencia.FileManager;
 import Persistencia.FileParser;
 import Persistencia.History;
 
-public class TurmoDriver 
+public class GenericDriver 
 {
-
 	static Scanner sc;
 	
 	public static void pl(String msg)
@@ -29,18 +28,20 @@ public class TurmoDriver
 	public static void main(String[] args)
 	{
 		sc = new Scanner(System.in);
+		String[] options = {"Afegir Song a arxiu", 
+				"Llegir arxiu de Songs",
+				"Borrar Song de arxiu",
+				"Afegir User a arxiu",
+				"Llegir arxiu de Users",
+				"Borrar User de arxiu",
+				"Afegir Reproduccio a User",
+				"Llegir Reproduccions de User",
+				"Llegir carpeta de Solucions"};
+		
 		while(true)
 		{
-		String[] options = {"Afegir Song a arxiu", 
-							"Llegir arxiu de Songs",
-							"Borrar Song de arxiu",
-							"Afegir User a arxiu",
-							"Llegir arxiu de Users",
-							"Borrar User de arxiu",
-							"Afegir Reproduccio a User",
-							"Llegir Reproduccions de User",
-							"Llegir carpeta de Solucions"};
 		
+		pl("");
 		pl("--------------- Menu de test ----------------");
 		pl("");
 		int i = 0;
@@ -98,7 +99,7 @@ public class TurmoDriver
 		catch(Exception e)
 		{
 			pl("Alguna dada entrada no es valida!!! ");
-			e.printStackTrace();
+			pl("************");pl("*** Error: " + e.getMessage() + " ***"); pl("************"); return;
 		}
 		
 		try
@@ -108,7 +109,7 @@ public class TurmoDriver
 		catch(IOException e)
 		{
 			pl("Sembla que hi ha algun problema amb el arxiu que ha entrat!");
-			e.printStackTrace();
+			pl("************");pl("*** Error: " + e.getMessage() + " ***"); pl("************"); return;
 		}
 		
 		
@@ -131,7 +132,7 @@ public class TurmoDriver
 		catch(Exception e)
 		{
 			pl("Sembla que hi ha algun problema amb el arxiu que ha entrat!");
-			e.printStackTrace();
+			pl("************");pl("*** Error: " + e.getMessage() + " ***"); pl("************"); return;
 		}
 
 		pl("::::::::::: Cancons llegides :::::::::::");
@@ -164,7 +165,7 @@ public class TurmoDriver
 		} 
 		catch (IOException e) 
 		{
-			e.printStackTrace();
+			pl("************");pl("*** Error: " + e.getMessage() + " ***"); pl("************"); return;
 		}
 
 		pl("La canco amb autor \"" + author + 
@@ -197,7 +198,7 @@ public class TurmoDriver
 		catch(Exception e)
 		{
 			pl("Alguna dada entrada no es valida!!! ");
-			e.printStackTrace();
+			pl("************");pl("*** Error: " + e.getMessage() + " ***"); pl("************"); return;
 		}
 		
 		try
@@ -207,7 +208,7 @@ public class TurmoDriver
 		catch(IOException e)
 		{
 			pl("Sembla que hi ha algun problema amb el arxiu que ha entrat!");
-			e.printStackTrace();
+			pl("************");pl("*** Error: " + e.getMessage() + " ***"); pl("************"); return;
 		}
 		
 		
@@ -232,7 +233,7 @@ public class TurmoDriver
 		catch(Exception e)
 		{
 			pl("Sembla que hi ha algun problema amb el arxiu que ha entrat!");
-			e.printStackTrace();
+			pl("************");pl("*** Error: " + e.getMessage() + " ***"); pl("************"); return;
 		}
 
 		pl("::::::::::: Users llegits :::::::::::");
@@ -264,7 +265,7 @@ public class TurmoDriver
 		} 
 		catch (IOException e) 
 		{
-			e.printStackTrace();
+			pl("************");pl("*** Error: " + e.getMessage() + " ***"); pl("************"); return;
 		}
 
 		pl("El user amb nom \"" + username +  "\" ja no existeix al arxiu \"" + filepath + "\""); pl("");
@@ -298,7 +299,7 @@ public class TurmoDriver
 		catch(Exception e)
 		{
 			pl("Alguna dada entrada no es valida!!! ");
-			e.printStackTrace();
+			pl("************");pl("*** Error: " + e.getMessage() + " ***"); pl("************"); return;
 		}
 		
 		try
@@ -308,7 +309,7 @@ public class TurmoDriver
 		catch(IOException e)
 		{
 			pl("Sembla que hi ha algun problema amb el arxiu que ha entrat!");
-			e.printStackTrace();
+			pl("************");pl("*** Error: " + e.getMessage() + " ***"); pl("************"); return;
 		}
 		
 		
@@ -335,7 +336,7 @@ public class TurmoDriver
 		catch(Exception e)
 		{
 			pl("Sembla que hi ha algun problema amb nom del user que ha entrat!");
-			e.printStackTrace();
+			pl("************");pl("*** Error: " + e.getMessage() + " ***"); pl("************"); return;
 		}
 		
 		ArrayList<Reproduction> userReproductions = new ArrayList<Reproduction>();
@@ -376,8 +377,7 @@ public class TurmoDriver
 		} 
 		catch (Exception e) 
 		{
-
-			e.printStackTrace();
+			pl("************");pl("*** Error: " + e.getMessage() + " ***"); pl("************"); return;
 		}
 		
 		pl("");
