@@ -5,7 +5,9 @@ Objecte de la prova:
 Altres elements integrats a la prova:
   Node
   Edge
-
+  Song
+  Graph
+  FileManager
 
 Drivers:
   Un unic driver: SongGraphTest.jar 
@@ -16,7 +18,11 @@ Stubs:
 
 
 Fitxers de dades necessaris:
-  Cap
+  data/users/users.txt
+  data/reproductions/abrahamReproductions.txt
+  data/reproductions/ainaReproductions.txt
+  data/reproductions/jfonsReproductions.txt
+  data/reproductions/victorReproductions.txt
 
 
 Valors estudiats:
@@ -25,8 +31,8 @@ Valors estudiats:
 
 Efectes estudiats:
   testGenerateEdges:
-    Es crea un SongGraph amb dues canÃ§ons, s'estableixen uns criteris i es generen les arestes,
-    despres es comprova que les dues canÃ§ons s'han connectat per un aaresta ja que tenen els mateixos estils,
+    Es crea un SongGraph amb dues cançons, s'estableixen uns criteris i es generen les arestes,
+    despres es comprova que les dues cacçons s'han connectat per un aaresta ja que tenen els mateixos estils,
     durada semblant i el mateix autor.
 
   testGetNearbyReproductionsAportation:
