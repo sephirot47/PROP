@@ -17,31 +17,39 @@ Stubs:
 
 
 Fitxers de dades necessaris:
-  Cap
+  data/exempleEntrada.txt (exemple d'entrada d'un graf per poder generar una solució)
+  data/solution/solution_entrada/* (solucio d'exemple per poder ser llegida)
 
 
 Efectes estudiats:
 
   testAddSongToFile:
-  Afegeix o modifica una canço al arxiu indicat. Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
+  Afegeix o modifica una canço al arxiu indicat. 
+  Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
 
   testReadSongFile:
-  Llegeix les cançons d'un arxiu indicat. A l'output s'imprimiran totes les cançons llegides. Mitjançant l'output es pot comprovar que tot ha funcionat correctament.
+  Llegeix les cançons d'un arxiu indicat. A l'output s'imprimiran totes les cançons llegides. 
+  Mitjançant l'output es pot comprovar que tot ha funcionat correctament.
 
   testRemoveSongOfFile:
-  Esborra una canço d'un arxiu indicat. Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
+  Esborra una canço d'un arxiu indicat. 
+  Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
 
   testAddUserToFile:
-  Afegeix o modifica un user al arxiu indicat. Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
+  Afegeix o modifica un user al arxiu indicat. 
+  Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
 
   testReadUserFile:
-  Llegeix els usuaris d'un arxiu indicat. A l'output s'imprimiran tots els usuaris llegits. Mitjançant l'output es pot comprovar que tot ha funcionat correctament.
+  Llegeix els usuaris d'un arxiu indicat. A l'output s'imprimiran tots els usuaris llegits. 
+  Mitjançant l'output es pot comprovar que tot ha funcionat correctament.
 
   testRemoveUserOfFile:
-  Esborra un usuari d'un arxiu indicat. Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
+  Esborra un usuari d'un arxiu indicat. 
+  Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
 
   testAddReproductionToFile:
-  Afegeix o modifica una reproduccio al arxiu indicat. Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
+  Afegeix o modifica una reproduccio al arxiu indicat. 
+  Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
 
   testReadReproductions:
   Llegeix les reproduccions d'un usuari indicat, a un directori determinat.

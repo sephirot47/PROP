@@ -289,7 +289,7 @@ public class GenericDriver
 		
 		String songAuthor, songTitle;
 		p("Introdueixi el nom del autor de la reproduccio: "); songAuthor = sc.next(); pl("");
-		p("Introdueixi el nom del autor de la reproduccio: "); songTitle = sc.next(); pl("");
+		p("Introdueixi el nom del titol de la reproduccio: "); songTitle = sc.next(); pl("");
 
 		
 		pl(""); pl("Afegint reproduccio a user " + username + "...");
