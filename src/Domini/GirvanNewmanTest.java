@@ -84,7 +84,10 @@ public class GirvanNewmanTest extends TestCase
 					    resultCom.get(iii).getCommunity().containsAll(expectedCom.get(iii).getCommunity()) );
 		}
 
-		
+		System.out.println("SEGON TEST *********************************");
+		System.out.println("SEGON TEST *********************************");
+		System.out.println("SEGON TEST *********************************");
+		System.out.println("SEGON TEST *********************************");
 		// Dues comunitats
 		Solution result2 = new GirvanNewman().getSolution(g, 2);
 		Solution expectedResult2 = new Solution();
@@ -115,7 +118,11 @@ public class GirvanNewmanTest extends TestCase
 			assertTrue( expectedCom.get(iii).getCommunity().containsAll(resultCom.get(iii).getCommunity()) && 
 					    resultCom.get(iii).getCommunity().containsAll(expectedCom.get(iii).getCommunity()) );
 		}
-		
+
+		System.out.println("*******************************************");
+		System.out.println("*******************************************");
+		System.out.println("*******************************************");
+		System.out.println("*******************************************");
 		
 		// Sis comunitats
 		Solution result6 = new GirvanNewman().getSolution(g, 6);
