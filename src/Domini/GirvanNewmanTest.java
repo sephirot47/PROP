@@ -80,14 +80,20 @@ public class GirvanNewmanTest extends TestCase
 		ArrayList<Community> resultCom = result1.getCommunities();
 		for(int iii = 0; iii < expectedCom.size(); ++iii)
 		{
-			assertTrue( expectedCom.get(iii).getCommunity().containsAll(resultCom.get(iii).getCommunity()) && 
-					    resultCom.get(iii).getCommunity().containsAll(expectedCom.get(iii).getCommunity()) );
+			boolean found = false;
+			for(int jjj = 0; jjj < resultCom.size(); ++jjj)
+			{
+				if( expectedCom.get(iii).getCommunity().containsAll(resultCom.get(jjj).getCommunity()) && 
+					resultCom.get(jjj).getCommunity().containsAll(expectedCom.get(iii).getCommunity()) ) 
+					{
+						found = true;
+						break;
+					}
+			}
+			assertTrue(found);
 		}
 
-		System.out.println("SEGON TEST *********************************");
-		System.out.println("SEGON TEST *********************************");
-		System.out.println("SEGON TEST *********************************");
-		System.out.println("SEGON TEST *********************************");
+
 		// Dues comunitats
 		Solution result2 = new GirvanNewman().getSolution(g, 2);
 		Solution expectedResult2 = new Solution();
@@ -111,18 +117,23 @@ public class GirvanNewmanTest extends TestCase
 		set2.addNode(m);
 		expectedResult2.addCommunity(set2);
 
+		
 		expectedCom = expectedResult2.getCommunities();
 		resultCom = result2.getCommunities();
 		for(int iii = 0; iii < expectedCom.size(); ++iii)
 		{
-			assertTrue( expectedCom.get(iii).getCommunity().containsAll(resultCom.get(iii).getCommunity()) && 
-					    resultCom.get(iii).getCommunity().containsAll(expectedCom.get(iii).getCommunity()) );
+			boolean found = false;
+			for(int jjj = 0; jjj < resultCom.size(); ++jjj)
+			{
+				if( expectedCom.get(iii).getCommunity().containsAll(resultCom.get(jjj).getCommunity()) && 
+					resultCom.get(jjj).getCommunity().containsAll(expectedCom.get(iii).getCommunity()) ) 
+					{
+						found = true;
+						break;
+					}
+			}
+			assertTrue(found);
 		}
-
-		System.out.println("*******************************************");
-		System.out.println("*******************************************");
-		System.out.println("*******************************************");
-		System.out.println("*******************************************");
 		
 		// Sis comunitats
 		Solution result6 = new GirvanNewman().getSolution(g, 6);
@@ -160,14 +171,22 @@ public class GirvanNewmanTest extends TestCase
 		expectedResult6.addCommunity(set5);
 		expectedResult6.addCommunity(set6);
 
-		expectedCom = expectedResult2.getCommunities();
-		resultCom = result2.getCommunities();
+		expectedCom = expectedResult6.getCommunities();
+		resultCom = result6.getCommunities();
 		for(int iii = 0; iii < expectedCom.size(); ++iii)
 		{
-			assertTrue( expectedCom.get(iii).getCommunity().containsAll(resultCom.get(iii).getCommunity()) && 
-					    resultCom.get(iii).getCommunity().containsAll(expectedCom.get(iii).getCommunity()) );
+			boolean found = false;
+			for(int jjj = 0; jjj < resultCom.size(); ++jjj)
+			{
+				if( expectedCom.get(iii).getCommunity().containsAll(resultCom.get(jjj).getCommunity()) && 
+					resultCom.get(jjj).getCommunity().containsAll(expectedCom.get(iii).getCommunity()) ) 
+					{
+						found = true;
+						break;
+					}
+			}
+			assertTrue(found);
 		}
-		
 		}
 		catch(Exception e){}
 	}

@@ -68,11 +68,7 @@ public class GirvanNewman extends Algorithm
 			//Count the connected components again, in order to know if we must continue
 			//removing edges or not
 			connectedComponents = getConnectedComponents(g);
-			g.print();
-			System.out.println("__________________________________________");
-			System.out.println("__________________________________________");
-			System.out.println("__________________________________________");
-			System.out.println("__________________________________________");
+
 		}
 
 		//Restore the original weights !!!!!
