@@ -152,8 +152,14 @@ public class GirvanNewmanTest extends TestCase
 		expectedResult6.addCommunity(set4);
 		expectedResult6.addCommunity(set5);
 		expectedResult6.addCommunity(set6);
-		
-		assertTrue(expectedResult6.getCommunities().containsAll(result6.getCommunities()) && result6.getCommunities().containsAll(expectedResult6.getCommunities()));
+
+		expectedCom = expectedResult6.getCommunities();
+		resultCom = result6.getCommunities();
+		for(int iii = 0; iii < expectedCom.size(); ++iii)
+		{
+			assertTrue( expectedCom.get(iii).getCommunity().containsAll(resultCom.get(iii).getCommunity()) && 
+					    resultCom.get(iii).getCommunity().containsAll(expectedCom.get(iii).getCommunity()) );
+		}
 		}
 		catch(Exception e){}
 	}

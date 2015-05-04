@@ -19,12 +19,6 @@ public class GirvanNewman extends Algorithm
 	 * @param graph The graph to be processed
 	 * @param comNumber The number of communities that you want at least
 	 */
-
-	public Solution getSolution(Graph g)
-	{
-		return getSolution(g, 4);
-	}
-	
 	public Solution getSolution(Graph g, int n)
 	{
 		long startTime = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis();
@@ -43,8 +37,7 @@ public class GirvanNewman extends Algorithm
 				
 		clearEdgeBetweenness(g); //ALL edges to zero betweenness
 		updateEdgeBetweenness(g); //Weight the edges
-		ArrayList<Community> connectedComponents = g.getConnectedComponents();
-		
+		ArrayList< Set<Node> > connectedComponents = GirvanNewman.getConnectedComponents(g);
 		while(connectedComponents.size() < n)
 		{	
 			//Search for the edge with maximum betweenness
@@ -74,7 +67,7 @@ public class GirvanNewman extends Algorithm
 			
 			//Count the connected components again, in order to know if we must continue
 			//removing edges or not
-			connectedComponents = g.getConnectedComponents();
+			connectedComponents = getConnectedComponents(g);
 		}
 
 		//Restore the original weights !!!!!
@@ -84,9 +77,18 @@ public class GirvanNewman extends Algorithm
 		}
 		//
 		
+		ArrayList<Community> communities = new ArrayList<Community>();
+		for(Set<Node> setNodes : connectedComponents)
+		{
+			Community com = new Community();
+			for(Node nodo : setNodes) com.addNode(nodo);
+			communities.add(com);
+		}
+		
 		long genTime = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis() - startTime;
-		return new Solution(connectedComponents, genTime, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()));
+		return new Solution(communities, genTime, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()));
 	}
+
 
 	/**
 	 * Returns the connected components in the graph, but it doesn't
@@ -95,9 +97,9 @@ public class GirvanNewman extends Algorithm
 	 * so this a way to preserve the edges and not doing copies of the graph. 
 	 * Pene.
 	 */
-	private static <N extends Node> Solution getConnectedComponents(Graph g)
+	private static <N extends Node> ArrayList< Set<N> > getConnectedComponents(Graph g)
 	{
-		Solution connectedComponents = new Solution();
+		ArrayList<Set<N>> connectedComponents = new ArrayList< Set<N> >();
 		HashSet<N> visitedNodes = new HashSet<N>();
 		Set<N> nodes = g.getAllNodes();
 		for(N origin : nodes)
@@ -107,8 +109,8 @@ public class GirvanNewman extends Algorithm
 			LinkedList<N> nextNodes = new LinkedList<N>();
 			N currentNode = origin; nextNodes.push(origin);
 			
-			Community cc = new Community();
-			connectedComponents.addCommunity(cc); cc.addNode(origin);
+			HashSet<N> cc = new HashSet<N>();
+			connectedComponents.add(cc); cc.add(origin);
 			while(nextNodes.size() > 0)
 			{
 				currentNode = nextNodes.get(0); nextNodes.remove(0);
@@ -118,7 +120,7 @@ public class GirvanNewman extends Algorithm
 			    	if(g.getEdge(currentNode, n).getWeight() >= 0 && //The only line that changes
 			    	   !visitedNodes.contains(n))
 			    	{	
-						cc.addNode(n);
+						cc.add(n);
 						visitedNodes.add(n);
 				    	nextNodes.add(nextNodes.size(), n);
 				    }
@@ -127,6 +129,7 @@ public class GirvanNewman extends Algorithm
 		}
 		return connectedComponents;
 	}
+
 
 	/**
 	 * Sets the weight of all edges to 0
@@ -137,6 +140,14 @@ public class GirvanNewman extends Algorithm
 		for(Edge e : edges)  e.setWeight(0);
 	}
 
+	/**
+	 * We had to put this function here in order to be able to extend the Algorithm class........
+	 */
+	public Solution getSolution(Graph g)
+	{
+		return getSolution(g, 4);
+	}
+	
 	/**
 	 * Sets the weight of all edges to 0, except the negative ones
 	 */
