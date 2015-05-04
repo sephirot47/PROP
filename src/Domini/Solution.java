@@ -1,52 +1,86 @@
 package Domini;
 
 import java.util.ArrayList;
-import java.util.Set;
 
-public class Solution
+public class Solution 
 {
-	SongGraph entrada;
-	ArrayList<Set<Song>> songCommunities;
-	
-	String algorisme;
-	float generationTime;
-	
-	public Solution(SongGraph entrada, String algorisme, ArrayList<Set<Song>> solution, float genTime)
+	protected ArrayList<Community> communities;
+	protected double time;
+	protected String algorithm, id;
+
+	public Solution()
 	{
-		this.entrada = entrada;
-		this.algorisme = algorisme;
-		songCommunities = solution;
-		generationTime = genTime;
+		communities = new ArrayList<Community>();
+		time = 0.0;
+		algorithm = id = "";
+	}
+	
+	public Solution(ArrayList<Community> communities, double time, String algorithm, String id)
+	{
+		this.communities = communities;
+		this.time = time;
+		this.algorithm = algorithm;
+		this.id = id;
 	}
 
-	public void setEntrada(SongGraph entrada) { this.entrada = entrada; }
-	public void setAlgorisme(String algorisme) { this.algorisme = algorisme; }
-	public void setSongCommunities(ArrayList<Set<Song>> songCommunities) { this.songCommunities = songCommunities; }
-	public void setGenerationTime(float generationTime) { this.generationTime = generationTime; }
-
-	public String getAlgorisme() { return algorisme; }
-	public float getGenerationTime() { return generationTime; }
-	public SongGraph getEntrada() { return entrada; }
-	public ArrayList<Set<Song>> getSongCommunities() { return songCommunities; }
-	
-	public void print()
+	public void setTime(double time)
 	{
-		System.out.println("Entrada: ---");
-		entrada.print();
-		System.out.println("---");
-		System.out.println("Sortida(comunitats): ---");
-		int i = 0;
-		for(Set<Song> ss : songCommunities)
+		this.time = time;
+	}
+
+	public double getTime() 
+	{
+		return time;
+	}
+
+	public String getId() 
+	{
+		return id;
+	}
+
+	public void setId(String id) 
+	{
+		this.id = id;
+	}
+
+	public void setAlg(String alg) 
+	{
+		this.algorithm = alg;
+	}
+
+	public String getAlg() 
+	{
+		return algorithm;
+	}
+
+	/* Get the number of communities that form the solution */
+	public int getNumCommunities() 
+	{
+		return communities.size();
+	}
+
+	public int getNumNodes() 
+	{
+		int n = 0;
+		for (int i = 0; i < communities.size(); ++i)
 		{
-			System.out.println("Comunitat " + (++i));
-			for(Song s : ss)
-			{
-				s.print();
-				System.out.println("-");
-			}
+			n += communities.get(i).getNumberOfNodes();
 		}
-		System.out.println("---");
-		System.out.print("Algorisme: "); System.out.println(algorisme);
-		System.out.print("Temps generacio: "); System.out.println(generationTime);
+		return n;
+	}
+
+	public ArrayList<Community> getCommunities() 
+	{
+		return communities;
+	}
+
+	public void removeCommunity(Community C) 
+	{
+		communities.remove(C);
+	}
+
+	public void addCommunity(Community C) 
+	{
+		communities.add(C);
 	}
 }

@@ -57,92 +57,92 @@ public class GirvanNewmanTest extends TestCase
 		g.addEdge(x, y, new SongRelation());
 		
 		/// Una comunitat 
-		ArrayList< Set<Song> > result1 = GirvanNewman.getSolution(g, 1);
-		ArrayList< Set<Song> > expectedResult1 = new ArrayList<Set<Song>>();
-		Set<Song> set = new HashSet<Song>();
-		set.add(a);
-		set.add(b);
-		set.add(c);
-		set.add(x);
-		set.add(e);
-		set.add(f);
-		set.add(d);
-		set.add(h);
-		set.add(i);
-		set.add(j);
-		set.add(y);
-		set.add(k);
-		set.add(l);
-		set.add(m);
-		expectedResult1.add(set);
+		Solution result1 = new GirvanNewman().getSolution(g, 1);
+		Solution expectedResult1 = new Solution();
+		Community set = new Community();
+		set.addNode(a);
+		set.addNode(b);
+		set.addNode(c);
+		set.addNode(x);
+		set.addNode(e);
+		set.addNode(f);
+		set.addNode(d);
+		set.addNode(h);
+		set.addNode(i);
+		set.addNode(j);
+		set.addNode(y);
+		set.addNode(k);
+		set.addNode(l);
+		set.addNode(m);
+		expectedResult1.addCommunity(set);
 		
-		assertTrue(expectedResult1.containsAll(result1) && result1.containsAll(expectedResult1));
+		assertTrue(expectedResult1.getCommunities().containsAll(result1.getCommunities()) && result1.getCommunities().containsAll(expectedResult1.getCommunities()));
 		
 		
 		// Dues comunitats
-		ArrayList< Set<Song> > result2 = GirvanNewman.getSolution(g, 2);
-		ArrayList< Set<Song> > expectedResult2 = new ArrayList<Set<Song>>();
-		Set<Song> set1 = new HashSet<Song>();
-		set1.add(a);
-		set1.add(b);
-		set1.add(c);
-		set1.add(x);
-		set1.add(e);
-		set1.add(f);
-		set1.add(d);
-		expectedResult2.add(set1);
+		Solution result2 = new GirvanNewman().getSolution(g, 2);
+		Solution expectedResult2 = new Solution();
+		Community set1 = new Community();
+		set1.addNode(a);
+		set1.addNode(b);
+		set1.addNode(c);
+		set1.addNode(x);
+		set1.addNode(e);
+		set1.addNode(f);
+		set1.addNode(d);
+		expectedResult2.addCommunity(set1);
 		
-		Set<Song> set2 = new HashSet<Song>();
-		set2.add(h);
-		set2.add(i);
-		set2.add(j);
-		set2.add(y);
-		set2.add(k);
-		set2.add(l);
-		set2.add(m);
-		expectedResult2.add(set2);
+		Community set2 = new Community();
+		set2.addNode(h);
+		set2.addNode(i);
+		set2.addNode(j);
+		set2.addNode(y);
+		set2.addNode(k);
+		set2.addNode(l);
+		set2.addNode(m);
+		expectedResult2.addCommunity(set2);
 
 		
-		assertTrue(expectedResult2.containsAll(result2) && result2.containsAll(expectedResult2));
+		assertTrue(expectedResult2.getCommunities().containsAll(result2.getCommunities()) && result2.getCommunities().containsAll(expectedResult2.getCommunities()));
 		
 		
 		// Sis comunitats
-		ArrayList< Set<Song> > result6 = GirvanNewman.getSolution(g, 6);
-		ArrayList< Set<Song> > expectedResult6 = new ArrayList<Set<Song>>();
-		set1 = new HashSet<Song>();
-		set1.add(a);
-		set1.add(b);
-		set1.add(c);
+		Solution result6 = new GirvanNewman().getSolution(g, 6);
+		Solution expectedResult6 = new Solution();
+		set1 = new Community();
+		set1.addNode(a);
+		set1.addNode(b);
+		set1.addNode(c);
 		
-		set2 = new HashSet<Song>();
-		set2.add(d);
-		set2.add(e);
-		set2.add(f);
+		set2 = new Community();
+		set2.addNode(d);
+		set2.addNode(e);
+		set2.addNode(f);
 		
-		Set<Song> set3 = new HashSet<Song>();
-		set3.add(h);
-		set3.add(i);
-		set3.add(j);
+		Community set3 = new Community();
+		set3.addNode(h);
+		set3.addNode(i);
+		set3.addNode(j);
 		
-		Set<Song> set4 = new HashSet<Song>();
-		set4.add(k);
-		set4.add(l);
-		set4.add(m);
+		Community set4 = new Community();
+		set4.addNode(k);
+		set4.addNode(l);
+		set4.addNode(m);
 		
-		Set<Song> set5 = new HashSet<Song>();
-		set5.add(x);
+		Community set5 = new Community();
+		set5.addNode(x);
 		
-		Set<Song> set6 = new HashSet<Song>();
-		set6.add(y);
+		Community set6 = new Community();
+		set6.addNode(y);
 		
-		expectedResult6.add(set1);
-		expectedResult6.add(set2);
-		expectedResult6.add(set3);
-		expectedResult6.add(set4);
-		expectedResult6.add(set5);
-		expectedResult6.add(set6);
+		expectedResult6.addCommunity(set1);
+		expectedResult6.addCommunity(set2);
+		expectedResult6.addCommunity(set3);
+		expectedResult6.addCommunity(set4);
+		expectedResult6.addCommunity(set5);
+		expectedResult6.addCommunity(set6);
 		
-		assertTrue(expectedResult6.containsAll(result6) && result6.containsAll(expectedResult6));
+		assertTrue(expectedResult6.getCommunities().containsAll(result6.getCommunities()) && result6.getCommunities().containsAll(expectedResult6.getCommunities()));
 		}
 		catch(Exception e){}
 	}

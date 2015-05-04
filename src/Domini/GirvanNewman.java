@@ -1,7 +1,9 @@
 package Domini;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -10,14 +12,20 @@ import java.util.Set;
 import java.util.TimeZone;
 
 
-public class GirvanNewman
+public class GirvanNewman extends Algorithm
 {
 	/**
 	 * Returns communities in the graph, using the GirvanNewman algorithm
 	 * @param graph The graph to be processed
 	 * @param comNumber The number of communities that you want at least
 	 */
-	public static <N extends Node> ArrayList< Set<N> > getSolution(Graph g, int n)
+
+	public Solution getSolution(Graph g)
+	{
+		return getSolution(g, 4);
+	}
+	
+	public Solution getSolution(Graph g, int n)
 	{
 		long startTime = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis();
 		
@@ -35,17 +43,17 @@ public class GirvanNewman
 				
 		clearEdgeBetweenness(g); //ALL edges to zero betweenness
 		updateEdgeBetweenness(g); //Weight the edges
-		ArrayList< Set<N> > connectedComponents = GirvanNewman.getConnectedComponents(g);
+		ArrayList<Community> connectedComponents = g.getConnectedComponents();
 		while(connectedComponents.size() < n)
 		{	
 			//Search for the edge with maximum betweenness
 			Edge edgeToRemove = null;
 			float maxEdgeBetweenness = 0;
-			Set<N> nodes = g.getAllNodes();
-			for(N node1 : nodes)
+			Set<Node> nodes = g.getAllNodes();
+			for(Node node1 : nodes)
 			{
-				Set<N> adjNodes = g.getAdjacentNodesTo(node1);
-				for(N node2 : adjNodes)
+				Set<Node> adjNodes = g.getAdjacentNodesTo(node1);
+				for(Node node2 : adjNodes)
 				{
 					Edge currentEdge = g.getEdge(node1, node2);
 					if(currentEdge.getWeight() > maxEdgeBetweenness)
@@ -65,7 +73,7 @@ public class GirvanNewman
 			
 			//Count the connected components again, in order to know if we must continue
 			//removing edges or not
-			connectedComponents = getConnectedComponents(g);
+			connectedComponents = g.getConnectedComponents();
 		}
 
 		//Restore the original weights !!!!!
@@ -76,10 +84,8 @@ public class GirvanNewman
 		//
 		
 		long genTime = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis() - startTime;
-		return connectedComponents;
+		return new Solution(connectedComponents, genTime, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()));
 	}
-	
-
 
 	/**
 	 * Returns the connected components in the graph, but it doesn't
@@ -88,9 +94,9 @@ public class GirvanNewman
 	 * so this a way to preserve the edges and not doing copies of the graph. 
 	 * Pene.
 	 */
-	private static <N extends Node> ArrayList< Set<N> > getConnectedComponents(Graph g)
+	private static <N extends Node> Solution getConnectedComponents(Graph g)
 	{
-		ArrayList<Set<N>> connectedComponents = new ArrayList< Set<N> >();
+		Solution connectedComponents = new Solution();
 		HashSet<N> visitedNodes = new HashSet<N>();
 		Set<N> nodes = g.getAllNodes();
 		for(N origin : nodes)
@@ -100,8 +106,8 @@ public class GirvanNewman
 			LinkedList<N> nextNodes = new LinkedList<N>();
 			N currentNode = origin; nextNodes.push(origin);
 			
-			HashSet<N> cc = new HashSet<N>();
-			connectedComponents.add(cc); cc.add(origin);
+			Community cc = new Community();
+			connectedComponents.addCommunity(cc); cc.addNode(origin);
 			while(nextNodes.size() > 0)
 			{
 				currentNode = nextNodes.get(0); nextNodes.remove(0);
@@ -111,7 +117,7 @@ public class GirvanNewman
 			    	if(g.getEdge(currentNode, n).getWeight() >= 0 && //The only line that changes
 			    	   !visitedNodes.contains(n))
 			    	{	
-						cc.add(n);
+						cc.addNode(n);
 						visitedNodes.add(n);
 				    	nextNodes.add(nextNodes.size(), n);
 				    }

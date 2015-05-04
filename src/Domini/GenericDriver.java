@@ -1,8 +1,10 @@
 package Domini;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TimeZone;
@@ -372,7 +374,7 @@ public class GenericDriver
 		String filepath; 
 		p("Introdueixi el DIRECTORI on son les carpetes de les solucions: ");  filepath = sc.next(); pl("");
 		
-		ArrayList<Solution> solutions = null;
+		ArrayList<SongSolution> solutions = null;
 		try 
 		{
 			solutions = History.getSolutions(filepath);
@@ -388,7 +390,7 @@ public class GenericDriver
 		pl(":::::::::::::::::::::::::::::::::::::::::");
 		pl(":::::::::::::::::::::::::::::::::::::::::");
 		int i = 0;
-		for(Solution s : solutions)
+		for(SongSolution s : solutions)
 		{
 			pl("");
 			pl(":::::: Solucio " + (++i) + " :::::::");
@@ -424,17 +426,17 @@ public class GenericDriver
 
 
 		long startTime = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis();
-    	ArrayList< Set<Song> > rawSolution = GirvanNewman.getSolution(songGraph, n); //Get el conjunt de llistes de Songs
+    	Solution rawSolution = new GirvanNewman().getSolution(songGraph, n); //Get el conjunt de llistes de Songs
 		int foo = 0;
-		for(Set<Song> songList : rawSolution)
+		for(Community com : rawSolution.getCommunities())
 		{
 			System.out.println("Song List " + (++foo) + ":");
-			for(Song s : songList) System.out.println("-" + s.getId());
+			for(Node node : com.getCommunity()) System.out.println("-" + ((Song)node).getId());
 			System.out.println(" ");
 		}
 		long genTime = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis() - startTime;
 		
-		Solution s = new Solution(songGraph, "GirvanNewman", rawSolution, genTime);
+		SongSolution s = new SongSolution(songGraph, rawSolution, genTime, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()));
 		try 
 		{
 			History.saveSolution(s, id);

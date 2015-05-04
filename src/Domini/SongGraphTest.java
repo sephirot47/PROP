@@ -71,7 +71,7 @@ public class SongGraphTest extends TestCase
 		
 		
 		sg.generateEdges(p);
-		ArrayList<Set<Song>> Cjs = sg.getConnectedComponents();
+		ArrayList<Community> Cjs = sg.getConnectedComponents();
 		
 		sg.getAllEdges();
 		

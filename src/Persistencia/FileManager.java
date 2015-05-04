@@ -16,9 +16,12 @@ import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import Domini.Community;
+import Domini.Node;
 import Domini.Pair;
 import Domini.Reproduction;
 import Domini.Solution;
+import Domini.SongSolution;
 import Domini.Song;
 import Domini.SongGraph;
 import Domini.SongRelation;
@@ -111,16 +114,17 @@ public class FileManager
     	 */
     }
 
-    public static void saveCommunitiesSolution(String filedir, ArrayList<Set<Song>> songCommunities) throws IOException
+    public static void saveCommunitiesSolution(String filedir, Solution songCommunities) throws IOException
     {
     	ArrayList<String> lines = new ArrayList<String>();
     	
     	int i = 0;
-    	for(Set<Song> songs : songCommunities)
+    	for(Community com : songCommunities.getCommunities())
     	{
     		lines.add( String.valueOf(i++) );
-	    	for(Song s : songs)
+	    	for(Node n : com.getCommunity())
 	    	{
+	    		Song s = (Song) n;
 	    		String line = "(" + s.getAuthor() + ", " + s.getTitle() + ")";
 	    		lines.add(line);
 	    	}

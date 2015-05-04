@@ -160,9 +160,9 @@ public class Graph <N extends Node, E extends Edge>
 	/**
 	 * Returns the connected components in the graph
 	 */
-	public ArrayList< Set<N> > getConnectedComponents()
+	public ArrayList<Community> getConnectedComponents()
 	{
-		ArrayList< Set<N> > connectedComponents = new ArrayList< Set<N> >();
+		ArrayList<Community> connectedComponents = new ArrayList<Community>();
 		Set<N> visitedNodes = new HashSet<N>();
 		
 		for(N origin : graph.keySet())
@@ -172,8 +172,9 @@ public class Graph <N extends Node, E extends Edge>
 			LinkedList<N> nextNodes = new LinkedList<N>();
 			N currentNode = origin; nextNodes.push(origin);
 			
-			Set<N> cc = new HashSet<N>();
-			connectedComponents.add(cc); cc.add(origin);
+			Community cc = new Community();
+			connectedComponents.add(cc); 
+			cc.addNode(origin);
 			while(nextNodes.size() > 0)
 			{
 				currentNode = nextNodes.get(0); nextNodes.remove(0);
@@ -181,7 +182,7 @@ public class Graph <N extends Node, E extends Edge>
 			    {
 			    	if(!visitedNodes.contains(n))
 			    	{	
-						cc.add(n);
+						cc.addNode(n);
 						visitedNodes.add(n);
 				    	nextNodes.add(nextNodes.size(), n);
 				    }

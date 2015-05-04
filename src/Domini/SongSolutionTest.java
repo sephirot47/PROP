@@ -1,15 +1,18 @@
 package Domini;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import junit.framework.TestCase;
 
-public class SolutionTest extends TestCase 
+public class SongSolutionTest extends TestCase 
 {
-	public SolutionTest()
+	public SongSolutionTest()
 	{
 		super("SolutionTest");
 	}
@@ -46,9 +49,8 @@ public class SolutionTest extends TestCase
 		Song s3 = new Song("AC/DC","Hells Bells",1980,style,312);
 		Song s4 = new Song("AC/DC","T.N.T",1975,style,214);
 		
-		ArrayList<Set<Song>> songs = new ArrayList<Set<Song>>();
-		
-		Solution so = new Solution(sg,"Girvan Newman",songs,0.01f);
+		Solution songs = new Solution();
+		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
 		
 		sg.addNode(s);
 		sg.addNode(s1);
@@ -61,19 +63,20 @@ public class SolutionTest extends TestCase
 		assertEquals(sg,so.getEntrada());
 		} catch(Exception e) {}
 	}
-	public void testsetAlgorisme()
+	public void testsetAlg()
 	{
 		SongGraph sg = new SongGraph();
 		
-		ArrayList<Set<Song>> songs = new ArrayList<Set<Song>>();
+		Solution songs = new Solution();
 		
-		Solution so = new Solution(sg,"Girvan Newman",songs,0.01f);
-		so.setAlgorisme("Just Do It");
-		assertEquals("Just Do It",so.getAlgorisme());
+		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
+
+		so.setAlg("Just Do It");
+		assertEquals("Just Do It",so.getAlg());
 		
 	}
 	
-	public void testSetSongCommunities()
+	public void testSetCommunities()
 	{
 		try
 		{
@@ -96,19 +99,22 @@ public class SolutionTest extends TestCase
 		Song s6 = new Song("jfons","tramboliko",1867,style,45);
 		
 		
+		Community ss = new Community();
+		for(Song songuru : Arrays.asList(s,s1,s2,s3,s4)) ss.addNode(songuru);
+		Community ss2 = new Community();
+		for(Song songuru : Arrays.asList(s5,s6)) ss2.addNode(songuru);
 		
-		Set<Song> ss = new HashSet<Song>(Arrays.asList(s,s1,s2,s3,s4));
-		Set<Song> ss2 = new HashSet<Song>(Arrays.asList(s5,s6));
-		ArrayList<Set<Song>> songs = new ArrayList<Set<Song>>();
+		Solution songs = new Solution();
 		
-		Solution so = new Solution(sg,"Girvan Newman",songs,0.01f);
+		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
+
+		songs.addCommunity(ss);
+		songs.addCommunity(ss2);
 		
-		songs.add(0,ss);
-		songs.add(1,ss2);
+		so.addCommunity(ss);
+		so.addCommunity(ss2);
 		
-		so.setSongCommunities(songs);
-		
-		assertEquals(songs,so.getSongCommunities());
+		assertEquals(songs,so.getCommunities());
 		} catch(Exception e) {}
 	}
 	
@@ -116,36 +122,39 @@ public class SolutionTest extends TestCase
 	{
 		SongGraph sg = new SongGraph();
 		
-		ArrayList<Set<Song>> songs = new ArrayList<Set<Song>>();
+		Solution songs = new Solution();
 		
-		Solution so = new Solution(sg,"Girvan Newman",songs,0.01f);
-		so.setGenerationTime(0.15f);
+		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
+
+		so.setTime(0.15f);
 		
-		assertEquals(0.15f,so.getGenerationTime());
+		assertEquals(0.15f,so.getTime());
 	}
 
 	public void testGetAlgorisme()
 	{
 		SongGraph sg = new SongGraph();
 		
-		ArrayList<Set<Song>> songs = new ArrayList<Set<Song>>();
+		Solution songs = new Solution();
 		
-		Solution so = new Solution(sg,"Girvan Newman",songs,0.01f);
-		so.setGenerationTime(0.15f);
+		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
+
+		so.setTime(0.15f);
 		
-		assertEquals(0.15f,so.getGenerationTime());
+		assertEquals(0.15f,so.getTime());
 	}
 	
-	public void testGetGenerationTime()
+	public void testGetTime()
 	{
 		SongGraph sg = new SongGraph();
 		
-		ArrayList<Set<Song>> songs = new ArrayList<Set<Song>>();
+		Solution songs = new Solution();
 		
-		Solution so = new Solution(sg,"Girvan Newman",songs,0.01f);
-		so.setGenerationTime(1.3131313131f);
+		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
+
+		so.setTime(1.3131313131f);
 		
-		assertEquals(1.3131313131f,so.getGenerationTime());
+		assertEquals(1.3131313131f,so.getTime());
 	}
 	
 	public void testGetEntrada()
@@ -162,9 +171,10 @@ public class SolutionTest extends TestCase
 		Song s3 = new Song("AC/DC","Hells Bells",1980,style,312);
 		Song s4 = new Song("AC/DC","T.N.T",1975,style,214);
 		
-		ArrayList<Set<Song>> songs = new ArrayList<Set<Song>>();
+		Solution songs = new Solution();
 		
-		Solution so = new Solution(sg,"Girvan Newman",songs,0.01f);
+		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
+
 		
 		sg.addNode(s);
 		sg.addNode(s1);
@@ -178,7 +188,7 @@ public class SolutionTest extends TestCase
 		} catch(Exception e) {}
 	}
 	
-	public void testGetSongCommunities()
+	public void testGetCommunities()
 	{
 		try {
 		SongGraph sg = new SongGraph();
@@ -199,20 +209,24 @@ public class SolutionTest extends TestCase
 		style.add("ioroYOLO");
 		Song s6 = new Song("jfons","tramboliko",1867,style,45);
 		
+		Community ss = new Community();
+		for(Song songuru : Arrays.asList(s,s1,s2,s3,s4)) ss.addNode(songuru);
+		Community ss2 = new Community();
+		for(Song songuru : Arrays.asList(s5,s6)) ss2.addNode(songuru);
 		
+		Solution songs = new Solution();
 		
-		Set<Song> ss = new HashSet<Song>(Arrays.asList(s,s1,s2,s3,s4));
-		Set<Song> ss2 = new HashSet<Song>(Arrays.asList(s5,s6));
-		ArrayList<Set<Song>> songs = new ArrayList<Set<Song>>();
+		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
 		
-		Solution so = new Solution(sg,"Girvan Newman",songs,0.01f);
+		songs.addCommunity(ss);
+		songs.addCommunity(ss2);
 		
-		songs.add(0,ss);
-		songs.add(1,ss2);
+		for(Community com : songs.getCommunities())
+		{
+			so.addCommunity(com);
+		}
 		
-		so.setSongCommunities(songs);
-		
-		assertEquals(songs,so.getSongCommunities());	
+		assertEquals(songs,so.getCommunities());	
 		} catch(Exception e) {}	
 	}
 }

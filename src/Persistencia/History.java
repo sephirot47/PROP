@@ -8,15 +8,17 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import Domini.Community;
 import Domini.Solution;
+import Domini.SongSolution;
 import Domini.SongGraph;
 import Domini.Song;
 
 public class History {
 
-	public static ArrayList<Solution> getSolutions(String solutionsDir) throws Exception 
+	public static ArrayList<SongSolution> getSolutions(String solutionsDir) throws Exception 
 	{
-		ArrayList<Solution> result = new ArrayList<Solution>();
+		ArrayList<SongSolution> result = new ArrayList<SongSolution>();
 
 		File baseDir = new File(solutionsDir);
 		File[] solutions = baseDir.listFiles();
@@ -28,8 +30,8 @@ public class History {
 
 			// Llegir les comunitats
 			ArrayList<String> resultLines = FileManager.loadData(dir.getPath() + "/comunitats.txt");
-			ArrayList<Set<Song>> comunities = new ArrayList<Set<Song>>();
-			Set<Song> set = new HashSet<Song>();
+			Solution comunities = new Solution();
+			Community com = new Community();
 
 			for (String line : resultLines) {
 				if (line.equals("0"))
@@ -37,25 +39,25 @@ public class History {
 				if (line.charAt(0) == '(') {
 					String author = line.substring(1, line.indexOf(','));
 					String title = line.substring(line.indexOf(',') + 1, line.indexOf(')'));
-					set.add(new Song(author, title));
+					com.addNode(new Song(author, title));
 				} else {
-					comunities.add(set);
-					set = new HashSet<Song>();
+					comunities.addCommunity(com);
+					com = new Community();
 				}
 			}
-			comunities.add(set);
+			comunities.addCommunity(com);
 
 			// Llegir info
 			ArrayList<String> infoLines = FileManager.loadData(dir.getPath() + "/info.txt");
 
-			result.add(new Solution(graph, infoLines.get(0), comunities, Float.parseFloat(infoLines.get(2))));
-
+			String id = new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date());
+			result.add(new SongSolution(graph, comunities, Double.parseDouble(infoLines.get(2)), infoLines.get(0), id));
 		}
 
 		return result;
 	}
 
-	public static void saveSolution(Solution s, String id) throws IOException 
+	public static void saveSolution(SongSolution s, String id) throws IOException 
 	{
 		//String date = new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date());
 		String filedir = "data/solutions/solution_" + id + "/";
@@ -64,14 +66,14 @@ public class History {
 		FileManager.saveEntradaSolution(filedir, s.getEntrada());
 
 		// arxiu de solucio(communities)
-		FileManager.saveCommunitiesSolution(filedir, s.getSongCommunities());
+		FileManager.saveCommunitiesSolution(filedir, s);
 
 		// arxiu de info extra
 		{
 			ArrayList<String> lines = new ArrayList<String>();
-			lines.add(s.getAlgorisme()); // Algorisme usat
+			lines.add(s.getAlg()); // Alg usat
 			lines.add(String.valueOf(s.getEntrada().getAllNodes().size())); // Nombre de cancons processades
-			lines.add(String.valueOf(s.getGenerationTime())); // Temps que ha tardat a generar la solucio
+			lines.add(String.valueOf(s.getTime())); // Temps que ha tardat a generar la solucio
 			FileManager.saveData(filedir + "info.txt", lines);
 		}
 	}

@@ -2,12 +2,16 @@ package Persistencia;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import Domini.Community;
 import Domini.Reproduction;
 import Domini.Solution;
+import Domini.SongSolution;
 import Domini.Song;
 import Domini.SongGraph;
 import Domini.SongRelation;
@@ -51,14 +55,14 @@ public class HistoryTest extends TestCase {
 		expectedGraph.add("0;1;0.0");
 
 		// Generem comunitats
-		ArrayList<Set<Song>> comunities = new ArrayList<Set<Song>>();
-		Set<Song> set = new HashSet<Song>();
-		set.add(s1);
-		comunities.add(set);
-		set = new HashSet<Song>();
-		set.add(s2);
-		set.add(s3);
-		comunities.add(set);
+		Solution comunities = new Solution();
+		Community set = new Community();
+		set.addNode(s1);
+		comunities.addCommunity(set);
+		set = new Community();
+		set.addNode(s2);
+		set.addNode(s3);
+		comunities.addCommunity(set);
 
 		// Resultat esperat per comunitats.txt
 		ArrayList<String> expectedComunities = new ArrayList<String>();
@@ -74,7 +78,7 @@ public class HistoryTest extends TestCase {
 		expectedInfo.add("3");
 		expectedInfo.add("0.45");
 
-		Solution s = new Solution(g, "GirvanNewman", comunities, 0.45f);
+		SongSolution s = new SongSolution(g, comunities, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
 
 		History.saveSolution(s, "test");
 		
