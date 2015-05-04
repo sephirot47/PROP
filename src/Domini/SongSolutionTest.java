@@ -113,8 +113,24 @@ public class SongSolutionTest extends TestCase
 		
 		so.addCommunity(ss);
 		so.addCommunity(ss2);
+
+		ArrayList<Set<Song>> setsSongs = new ArrayList<Set<Song>>();
+		for(Community com : so.getCommunities())
+		{
+			Set<Song> set = new HashSet<Song>();
+			for(Node n : com.getCommunity()) set.add((Song)n);
+			setsSongs.add(set);
+		}
 		
-		assertEquals(songs,so.getCommunities());
+		ArrayList<Set<Song>> setsSo = new ArrayList<Set<Song>>();
+		for(Community com : so.getCommunities())
+		{
+			Set<Song> set = new HashSet<Song>();
+			for(Node n : com.getCommunity()) set.add((Song)n);
+			setsSo.add(set);
+		}
+		
+		assertEquals(setsSongs, setsSo);
 		} catch(Exception e) {}
 	}
 	
@@ -126,9 +142,9 @@ public class SongSolutionTest extends TestCase
 		
 		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
 
-		so.setTime(0.15f);
+		so.setTime(0.15);
 		
-		assertEquals(0.15f,so.getTime());
+		assertEquals(0.15, so.getTime());
 	}
 
 	public void testGetAlgorisme()
@@ -138,10 +154,7 @@ public class SongSolutionTest extends TestCase
 		Solution songs = new Solution();
 		
 		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
-
-		so.setTime(0.15f);
-		
-		assertEquals(0.15f,so.getTime());
+		assertEquals("GirvanNewman", so.getAlg());
 	}
 	
 	public void testGetTime()
@@ -151,10 +164,8 @@ public class SongSolutionTest extends TestCase
 		Solution songs = new Solution();
 		
 		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
-
-		so.setTime(1.3131313131f);
-		
-		assertEquals(1.3131313131f,so.getTime());
+		so.setAlg("aaaa");
+		assertEquals("aaaa", so.getAlg());
 	}
 	
 	public void testGetEntrada()
