@@ -1,7 +1,0 @@
-Per executar cada test, s'ha d'accedir a la carpeta en qüestió. Si no, degut a que els paths dels arxius de dades necessaris son relatius, no funcionarà.
-És a dir:
-
-  java -jar EdgeTest/EdgeTest.jar  //MALAMENT, ERROR
-
-  cd EdgeTest
-  java -jar EdgeTest.jar //BE!!

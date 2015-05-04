@@ -232,7 +232,7 @@ public class GenericDriver
 		Set<User> users = null;
 		try
 		{
-			users = UserManager.getUsers(filepath, reprosFilepath.equals("-") ? "tests/" : reprosFilepath);
+			users = UserManager.getUsers(filepath, reprosFilepath.equals("-") ? "" : reprosFilepath);
 		}
 		catch(Exception e)
 		{

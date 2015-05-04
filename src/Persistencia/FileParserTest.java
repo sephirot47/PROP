@@ -31,7 +31,7 @@ public class FileParserTest extends TestCase
 
 	public void testGetUsers() throws Exception
 	{
-		Set<User> usersRead = UserManager.getUsers("tests/users1.txt", "tests"); //read from file
+		Set<User> usersRead = UserManager.getUsers("data/users1.txt", "data"); //read from file
 		Set<User> users = new HashSet<User>(); //created by us
 
 		assertFalse(users.equals(usersRead));
@@ -50,7 +50,7 @@ public class FileParserTest extends TestCase
 		
 		//TEST 2
 		usersRead.clear();
-		usersRead  = UserManager.getUsers("tests/users2.txt", "tests"); //read from file
+		usersRead  = UserManager.getUsers("data/users2.txt", "data"); //read from file
 		users.clear();
 
 		User u2 = new User("BbsdA124^!", 78);
@@ -85,7 +85,7 @@ public class FileParserTest extends TestCase
 	public void testGetSongs() throws Exception
 	{
 		//TEST 1
-		Set<Song> songsRead = SongManager.getSongs("tests/songs1.txt"); //read from file
+		Set<Song> songsRead = SongManager.getSongs("data/songs1.txt"); //read from file
 		Set<Song> songs = new HashSet<Song>(); //created by us
 
 		assertFalse(setsEquals(songs, songsRead)); 
@@ -100,7 +100,7 @@ public class FileParserTest extends TestCase
 		
 		//TEST 2
 		songsRead.clear();
-		songsRead = SongManager.getSongs("tests/songs2.txt"); //read from file
+		songsRead = SongManager.getSongs("data/songs2.txt"); //read from file
 		songs.clear();
 		
 		ArrayList<String> styles20 = new ArrayList<String>(); 
@@ -125,7 +125,7 @@ public class FileParserTest extends TestCase
 
 	public void testGetReproductions() throws Exception
 	{
-		ArrayList<Reproduction> reprosRead = FileParser.getReproductions("tests/repros1.txt");
+		ArrayList<Reproduction> reprosRead = FileParser.getReproductions("data/repros1.txt");
 		ArrayList<Reproduction> repros = new ArrayList<Reproduction>();
 		
 		repros.add(new Reproduction("jkll", "kl", 20));
@@ -139,7 +139,7 @@ public class FileParserTest extends TestCase
 		
 		
 		//TEST2
-		reprosRead = FileParser.getReproductions("tests/repros2.txt");
+		reprosRead = FileParser.getReproductions("data/repros2.txt");
 		repros = new ArrayList<Reproduction>();
 		
 		//Molts i en desordre
@@ -182,7 +182,7 @@ public class FileParserTest extends TestCase
 		g1.addNode(s2);
 		g1.addNode(s3);
 		
-		SongGraph g2 = FileParser.getGraph("tests/graph1.txt");
+		SongGraph g2 = FileParser.getGraph("data/graph1.txt");
 		
 		assertEquals(g1, g2);
 		
@@ -201,7 +201,7 @@ public class FileParserTest extends TestCase
 		
 		//
 		
-		g2 = FileParser.getGraph("tests/graph2.txt");
+		g2 = FileParser.getGraph("data/graph2.txt");
 		
 		assertEquals(g1, g2);
 	}

@@ -23,7 +23,7 @@ public class SongManagerTest extends TestCase
 	{
 		try {
 		//TEST 1
-		Set<Song> songsRead = SongManager.getSongs("tests/songs1.txt"); //read from file
+		Set<Song> songsRead = SongManager.getSongs("data/songs1.txt"); //read from file
 		Set<Song> songs = new HashSet<Song>(); //created by us
 
 		assertFalse(setsEquals(songs, songsRead)); 
@@ -38,7 +38,7 @@ public class SongManagerTest extends TestCase
 		
 		//TEST 2
 		songsRead.clear();
-		songsRead = SongManager.getSongs("tests/songs2.txt"); //read from file
+		songsRead = SongManager.getSongs("data/songs2.txt"); //read from file
 		songs.clear();
 		
 		ArrayList<String> styles20 = new ArrayList<String>(); 
