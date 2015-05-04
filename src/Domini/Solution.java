@@ -46,7 +46,7 @@ public class Solution
 			}
 		}
 		System.out.println("---");
-		System.out.print("Algorisme: "); System.out.println("algorisme");
-		System.out.print("Temps generacio: "); System.out.println("generationTime");
+		System.out.print("Algorisme: "); System.out.println(algorisme);
+		System.out.print("Temps generacio: "); System.out.println(generationTime);
 	}
 }
