@@ -11,7 +11,8 @@ public class Community
 
 	// Pre: true
 	// Post: Creates an empty community 
-	public Community() {
+	public Community() 
+	{
 		com = new HashMap<String, Node>();
 	} 
 

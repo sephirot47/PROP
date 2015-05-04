@@ -48,10 +48,10 @@ public class HistoryTest extends TestCase {
 		// Resultat esperat per entrada.txt
 		ArrayList<String> expectedGraph = new ArrayList<String>();
 		expectedGraph.add("(A,B)");
-		expectedGraph.add("(E,F)");
 		expectedGraph.add("(C,D)");
-		expectedGraph.add("0;2;0.0");
+		expectedGraph.add("(E,F)");
 		expectedGraph.add("1;2;0.0");
+		expectedGraph.add("0;2;0.0");
 		expectedGraph.add("0;1;0.0");
 
 		// Generem comunitats
@@ -76,8 +76,8 @@ public class HistoryTest extends TestCase {
 		ArrayList<String> expectedInfo = new ArrayList<String>();
 		expectedInfo.add("GirvanNewman");
 		expectedInfo.add("3");
-		expectedInfo.add("0.45");
-
+		expectedInfo.add("0.01");
+		
 		SongSolution s = new SongSolution(g, comunities, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
 
 		History.saveSolution(s, "test");
@@ -86,12 +86,13 @@ public class HistoryTest extends TestCase {
 		assertTrue(realGraph.containsAll(expectedGraph) && expectedGraph.containsAll(realGraph));
 		
 		ArrayList<String> realComunities = FileManager.loadData("data/solutions/solution_test/comunitats.txt");
-		assertEquals(realComunities.subList(0, 2), expectedComunities.subList(0, 2)); //Mirem que les 3 primeres linies siguin iguals
+		assertTrue(realComunities.containsAll(expectedComunities) && expectedComunities.containsAll(realComunities)); //Mirem que les 3 primeres linies siguin iguals
 		assertTrue(realComunities.containsAll(expectedComunities) && expectedComunities.containsAll(realComunities));
-		assertEquals(FileManager.loadData("data/solutions/solution_test/info.txt"), expectedInfo);
+		assertTrue(FileManager.loadData("data/solutions/solution_test/info.txt").containsAll(expectedInfo) &&  expectedInfo.containsAll(FileManager.loadData("data/solutions/solution_test/info.txt")));
 	}
 
-	public static void testRemoveSolution() throws IOException {
+	public static void testRemoveSolution() throws IOException 
+	{
 		String nomSolucio = "solution_test";
 		History.removeSolution(nomSolucio);
 		File solucio = new File("data/solutions/" + nomSolucio);

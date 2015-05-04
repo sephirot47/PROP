@@ -76,8 +76,14 @@ public class GirvanNewmanTest extends TestCase
 		set.addNode(m);
 		expectedResult1.addCommunity(set);
 		
-		assertTrue(expectedResult1.getCommunities().containsAll(result1.getCommunities()) && result1.getCommunities().containsAll(expectedResult1.getCommunities()));
-		
+		ArrayList<Community> expectedCom = expectedResult1.getCommunities();
+		ArrayList<Community> resultCom = result1.getCommunities();
+		for(int iii = 0; iii < expectedCom.size(); ++iii)
+		{
+			assertTrue( expectedCom.get(iii).getCommunity().containsAll(resultCom.get(iii).getCommunity()) && 
+					    resultCom.get(iii).getCommunity().containsAll(expectedCom.get(iii).getCommunity()) );
+		}
+
 		
 		// Dues comunitats
 		Solution result2 = new GirvanNewman().getSolution(g, 2);
@@ -102,8 +108,13 @@ public class GirvanNewmanTest extends TestCase
 		set2.addNode(m);
 		expectedResult2.addCommunity(set2);
 
-		
-		assertTrue(expectedResult2.getCommunities().containsAll(result2.getCommunities()) && result2.getCommunities().containsAll(expectedResult2.getCommunities()));
+		expectedCom = expectedResult2.getCommunities();
+		resultCom = result2.getCommunities();
+		for(int iii = 0; iii < expectedCom.size(); ++iii)
+		{
+			assertTrue( expectedCom.get(iii).getCommunity().containsAll(resultCom.get(iii).getCommunity()) && 
+					    resultCom.get(iii).getCommunity().containsAll(expectedCom.get(iii).getCommunity()) );
+		}
 		
 		
 		// Sis comunitats

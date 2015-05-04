@@ -44,6 +44,7 @@ public class GirvanNewman extends Algorithm
 		clearEdgeBetweenness(g); //ALL edges to zero betweenness
 		updateEdgeBetweenness(g); //Weight the edges
 		ArrayList<Community> connectedComponents = g.getConnectedComponents();
+		
 		while(connectedComponents.size() < n)
 		{	
 			//Search for the edge with maximum betweenness

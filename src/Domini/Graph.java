@@ -162,35 +162,41 @@ public class Graph <N extends Node, E extends Edge>
 	 */
 	public ArrayList<Community> getConnectedComponents()
 	{
-		ArrayList<Community> connectedComponents = new ArrayList<Community>();
+		ArrayList< Set<N> > connectedComponents = new ArrayList< Set<N> >();
 		Set<N> visitedNodes = new HashSet<N>();
-		
 		for(N origin : graph.keySet())
 		{
 			if(visitedNodes.contains(origin)) continue;
 			
 			LinkedList<N> nextNodes = new LinkedList<N>();
 			N currentNode = origin; nextNodes.push(origin);
-			
-			Community cc = new Community();
-			connectedComponents.add(cc); 
-			cc.addNode(origin);
+			Set<N> cc = new HashSet<N>();
+			connectedComponents.add(cc); cc.add(origin);
 			while(nextNodes.size() > 0)
 			{
 				currentNode = nextNodes.get(0); nextNodes.remove(0);
-			    for(N n : graph.get(currentNode).keySet())
-			    {
-			    	if(!visitedNodes.contains(n))
-			    	{	
-						cc.addNode(n);
+				for(N n : graph.get(currentNode).keySet())
+				{
+					if(!visitedNodes.contains(n))
+					{
+						cc.add(n);
 						visitedNodes.add(n);
-				    	nextNodes.add(nextNodes.size(), n);
-				    }
-			    }
+						nextNodes.add(nextNodes.size(), n);
+					}
+				}
 			}
 		}
 		
-		return connectedComponents;
+		ArrayList<Community> comunities = new ArrayList<Community>();
+		for(Set<N> setNodes : connectedComponents)
+		{
+			Community com = new Community();
+			for(N node : setNodes) com.addNode(node);
+			
+			comunities.add(com);
+		}
+		
+		return comunities;
 	}
 	//////////////////////////////////////////////////////////////////////
 	

@@ -307,15 +307,15 @@ public class GraphTest extends TestCase
 		e3.setWeight(3.1415f);
 		e4.setWeight(3.14159f);
 		
-		Set<Node> p = new HashSet<Node>(Arrays.asList(n,n1,n2));
-		Set<Node> p2 = new HashSet<Node>(Arrays.asList(n3,n4));
+		Set<N> p = new HashSet<N>(Arrays.asList(n,n1,n2));
+		Set<N> p2 = new HashSet<N>(Arrays.asList(n3,n4));
 		
-		ArrayList< Set<Node> > result = new ArrayList< Set<Node> >();
+		ArrayList< Set<N> > result = new ArrayList< Set<N> >();
 		
 		result.add(p);
 		result.add(p2);
 		
-		ArrayList< Set<Node> > result2 = new ArrayList< Set<Node> >();
+		ArrayList< Set<N> > result2 = new ArrayList< Set<N> >();
 		
 		result2.add(p2);
 		result2.add(p);
@@ -329,12 +329,18 @@ public class GraphTest extends TestCase
 		g.addEdge(n1, n2, e1);
 		g.addEdge(n3, n4, e3);
 		
+		ArrayList< Set<N> > realResult =	new ArrayList< Set<N> >();
+		for(Community com : g.getConnectedComponents())
+		{
+			Set<N> set = new HashSet<N>();
+			for(Node nodo : com.getCommunity())
+			{
+				set.add((N)nodo);
+			}
+			realResult.add(set);
+		}
 		
-		assertEquals(result.equals(g.getConnectedComponents()) || result2.equals(g.getConnectedComponents()), true);
-		
-		if(result.equals(g.getConnectedComponents())) System.out.println("Equals");
-		else if(result2.equals(g.getConnectedComponents())) System.out.println("Equals");
-		else System.out.println("Not equals");
+		assertTrue(result.containsAll(realResult) && realResult.containsAll(result));
 	}
 	
 	public void testPrint()
