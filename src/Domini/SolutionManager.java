@@ -1,21 +1,16 @@
-package Persistencia;
+package Domini;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
-import Domini.Community;
-import Domini.Solution;
-import Domini.SongSolution;
-import Domini.SongGraph;
-import Domini.Song;
+import Persistencia.FileManager;
 
-public class History {
-
+public class SolutionManager 
+{
 	public static ArrayList<SongSolution> getSolutions(String solutionsDir) throws Exception 
 	{
 		ArrayList<SongSolution> result = new ArrayList<SongSolution>();
@@ -26,7 +21,7 @@ public class History {
 		for (File dir : solutions) {
 
 			// Legir el graph
-			SongGraph graph = FileParser.getGraph(dir.getPath() + "/entrada.txt");
+			Graph<Song> graph = GraphManager.getGraph(dir.getPath() + "/entrada.txt");
 
 			// Llegir les comunitats
 			ArrayList<String> resultLines = FileManager.loadData(dir.getPath() + "/comunitats.txt");
@@ -63,10 +58,10 @@ public class History {
 		String filedir = "data/solutions/solution_" + id + "/";
 
 		// arxiu de Graph(entrada)
-		FileManager.saveEntradaSolution(filedir, s.getEntrada());
+		SolutionManager.saveEntradaSolution(filedir, s.getEntrada());
 
 		// arxiu de solucio(communities)
-		FileManager.saveCommunitiesSolution(filedir, s);
+		SolutionManager.saveCommunitiesSolution(filedir, s);
 
 		// arxiu de info extra
 		{
@@ -78,6 +73,63 @@ public class History {
 		}
 	}
 
+
+    public static void saveEntradaSolution(String filedir, Graph<Song> entrada) throws IOException
+    {
+    	ArrayList<String> lines = new ArrayList<String>();
+    	
+    	Set<Song> songs = entrada.getAllNodes();
+    	ArrayList<Song> songsArray = new ArrayList<Song>();
+    	for(Song s : songs) //Nodes pels que esta format el graph
+    	{
+    		String line = "(" + s.getAuthor() + "," + s.getTitle() + ")";
+    		lines.add(line);
+    		
+    		songsArray.add(s);
+    	}
+    	
+    	
+    	Set<Edge> edges = entrada.getAllEdges();
+    	for(Edge e : edges)
+    	{
+    		Pair<Song, Song> songSong = entrada.getNodesConnectedBy(e);
+    		Song s1 = songSong.getFirst(), s2 = songSong.getSecond();
+    		
+    		String line = songsArray.indexOf(s1) + ";" + songsArray.indexOf(s2) + ";" + e.getWeight();
+    		lines.add(line);
+    	}
+    	
+    	FileManager.saveData(filedir + "entrada.txt",  lines);
+    	
+    	//Se guardara, por ejemplo:
+    	/*
+    	 * (victor, cuando sarpa el hamor)
+    	 * (jfons, tramboliko)
+    	 * (aina, mesigualno?)
+    	 * 0;1;0.5    //del 0 al 1, con peso 0.5
+    	 * 1;2;1.3	  //del 1 al 2, con peso 1.3
+    	 * (hi ha un edge de la canco del victor al jfons, i del jfons a l'aina)
+    	 */
+    }
+
+    public static void saveCommunitiesSolution(String filedir, Solution songCommunities) throws IOException
+    {
+    	ArrayList<String> lines = new ArrayList<String>();
+    	
+    	int i = 0;
+    	for(Community com : songCommunities.getCommunities())
+    	{
+    		lines.add( String.valueOf(i++) );
+	    	for(Node n : com.getCommunity())
+	    	{
+	    		Song s = (Song) n;
+	    		String line = "(" + s.getAuthor() + ", " + s.getTitle() + ")";
+	    		lines.add(line);
+	    	}
+    	}
+		FileManager.saveData(filedir + "comunitats.txt",  lines);
+    }
+    
 	public static void removeSolution(String nomSolucio) throws IOException 
 	{
 		File communities = new File("data/solutions/" + nomSolucio + "/comunitats.txt");

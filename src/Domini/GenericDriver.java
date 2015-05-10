@@ -10,8 +10,6 @@ import java.util.Set;
 import java.util.TimeZone;
 
 import Persistencia.FileManager;
-import Persistencia.FileParser;
-import Persistencia.History;
 
 public class GenericDriver 
 {
@@ -108,7 +106,7 @@ public class GenericDriver
 		
 		try
 		{
-			FileManager.saveSong(filepath, s);
+			SongManager.saveSong(filepath, s);
 		}
 		catch(IOException e)
 		{
@@ -144,7 +142,7 @@ public class GenericDriver
 		for(Song s : songs)
 		{
 			pl("Canco " + (++i));
-			s.print();
+			//s.print();
 			pl("");
 		}
 		pl(":::::::::::::::::::::::::::::::::::::::::");
@@ -160,12 +158,12 @@ public class GenericDriver
 		p("Introdueixi el arxiu d'on vol borrar una canco: ");  filepath = sc.next(); pl("");
 		
 		String author, title;
-		p("Introdueixi el autor de la can�o que vol borrar: ");  author = sc.next();
-		p("Introdueixi el titol de la can�o que vol borrar: ");  title = sc.next();
+		p("Introdueixi el autor de la canco que vol borrar: ");  author = sc.next();
+		p("Introdueixi el titol de la canco que vol borrar: ");  title = sc.next();
 		
 		try 
 		{
-			FileManager.removeSong(filepath, author, title);
+			SongManager.removeSong(filepath, author, title);
 		} 
 		catch (IOException e) 
 		{
@@ -207,7 +205,7 @@ public class GenericDriver
 		
 		try
 		{
-			FileManager.saveUser(filepath, u);
+			UserManager.saveUser(filepath, u);
 		}
 		catch(IOException e)
 		{
@@ -245,7 +243,7 @@ public class GenericDriver
 		for(User u : users)
 		{
 			pl("User " + (++i));
-			u.print();
+			//u.print();
 			pl("");
 		}
 		pl(":::::::::::::::::::::::::::::::::::::");
@@ -265,7 +263,7 @@ public class GenericDriver
 		
 		try 
 		{
-			FileManager.removeUser(filepath, username);
+			UserManager.removeUser(filepath, username);
 		} 
 		catch (IOException e) 
 		{
@@ -308,7 +306,7 @@ public class GenericDriver
 		
 		try
 		{
-			FileManager.saveReproduction(filepath + "/" + username + "Reproductions.txt", r);
+			UserManager.saveReproduction(filepath + "/" + username + "Reproductions.txt", r);
 		}
 		catch(IOException e)
 		{
@@ -348,7 +346,7 @@ public class GenericDriver
 		{ 
 			//Afegim al user llegit les reproduccions corresponents
 			String reproductionsFilepath = filepath + "/" + user.getName() + "Reproductions.txt";
-			userReproductions = FileParser.getReproductions(reproductionsFilepath);
+			userReproductions = UserManager.getReproductions(reproductionsFilepath);
 		}
 		catch(Exception e){}
 
@@ -359,7 +357,7 @@ public class GenericDriver
 		for(Reproduction r : userReproductions)
 		{
 			pl("Reproduction " + (++i) + ":");
-			r.print();
+			//r.print();
 			pl("");
 		}
 		pl(":::::::::::::::::::::::::::::::::::::::");
@@ -377,7 +375,7 @@ public class GenericDriver
 		ArrayList<SongSolution> solutions = null;
 		try 
 		{
-			solutions = History.getSolutions(filepath);
+			solutions = SolutionManager.getSolutions(filepath);
 		} 
 		catch (Exception e) 
 		{
@@ -395,7 +393,7 @@ public class GenericDriver
 			pl("");
 			pl(":::::: Solucio " + (++i) + " :::::::");
 			pl(":::::::::::::::::::::::::::");
-			s.print();
+			//s.print();
 			pl(":::::::::::::::::::::::::::");
 			pl("");
 		}
@@ -414,10 +412,10 @@ public class GenericDriver
 		p("Introdueixi el nombre minim de comunitats que desitja: ");  n = sc.nextInt(); pl("");
 		p("Introdueixi un identificador per la solucio: ");  id = sc.next(); pl("");
 
-		SongGraph songGraph;
+		Graph<Song> songGraph;
 		try 
 		{
-			songGraph = FileParser.getGraph(graphFilepath);
+			songGraph = GraphManager.getGraph(graphFilepath);
 		} 
 		catch (Exception e) 
 		{
@@ -439,7 +437,7 @@ public class GenericDriver
 		SongSolution s = new SongSolution(songGraph, rawSolution, genTime, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()));
 		try 
 		{
-			History.saveSolution(s, id);
+			SolutionManager.saveSolution(s, id);
 		} 
 		catch (IOException e) 
 		{

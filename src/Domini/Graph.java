@@ -7,15 +7,15 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 
-public class Graph <N extends Node, E extends Edge>
+public class Graph <N extends Node>
 {
 	//For every node, there will be a hash containing
 	//the nodes it's connected to and its corresponding edges
-	private HashMap<N, HashMap<N, E>> graph; 
+	private HashMap<N, HashMap<N, Edge>> graph; 
 	
 	public Graph()
 	{
-		graph = new HashMap<N, HashMap<N, E>>();
+		graph = new HashMap<N, HashMap<N, Edge>>();
 	}
 
 
@@ -27,7 +27,7 @@ public class Graph <N extends Node, E extends Edge>
 	 */
 	public void addNode(N node)
 	{
-		graph.put(node, new HashMap<N, E>()); //Tot correcte, es pot afegir el node
+		graph.put(node, new HashMap<N, Edge>()); //Tot correcte, es pot afegir el node
 	}
 
 	/**
@@ -35,14 +35,14 @@ public class Graph <N extends Node, E extends Edge>
 	 */
 	public Set<N> getAdjacentNodesTo(N node)
 	{
-		if(!graph.containsKey(node)) { System.err.println("The graph doesn't contain the node."); return null; }
+		if(!graph.containsKey(node)) return null;
 		return graph.get(node).keySet();
 	}
 
 	/**
 	 * Returns the two nodes connected by the edge e
 	 */
-	public Pair<N, N> getNodesConnectedBy(E e)
+	public Pair<N, N> getNodesConnectedBy(Edge e)
 	{
 		for(N n1 : graph.keySet())
 			for(N n2 : graph.get(n1).keySet())
@@ -88,7 +88,7 @@ public class Graph <N extends Node, E extends Edge>
 	 * @param node2 The second node to be connected
 	 * @param edge The edge that will connect node1 and node2
 	 */
-	public void addEdge(N node1, N node2, E edge)
+	public void addEdge(N node1, N node2, Edge edge)
 	{
 		graph.get(node1).put(node2, edge);
 		graph.get(node2).put(node1, edge);
@@ -98,7 +98,7 @@ public class Graph <N extends Node, E extends Edge>
 	 * Returns the edge between node1 and node2. 
 	 * Returns null in case it doesn't exist.
 	 */
-	public E getEdge(N node1, N node2)
+	public Edge getEdge(N node1, N node2)
 	{
 		Set<N> allEdges = getAllNodes();
 		if(!allEdges.contains(node1) || !allEdges.contains(node2)) return null;
@@ -109,15 +109,15 @@ public class Graph <N extends Node, E extends Edge>
 	/*
 	 * Returns a set of all the edges. (Consequently, there aren't repeated edges)
 	 */
-	public Set<E> getAllEdges()
+	public Set<Edge> getAllEdges()
 	{
-		Set<E> edges = new HashSet<E>();
+		Set<Edge> edges = new HashSet<Edge>();
 		Set<N> nodes =  getAllNodes();
 		for(N n : nodes)
 		{
 			for(N n2 : nodes)
 			{
-				E edge = getEdge(n, n2);
+				Edge edge = getEdge(n, n2);
 				if(edge != null && !edges.contains(edge)) edges.add(edge);
 			}
 		}
@@ -128,13 +128,13 @@ public class Graph <N extends Node, E extends Edge>
 	 * Removes a  given edge.
 	 * @param edge The edge that will be removed
 	 */
-	public void removeEdge(E edge)
+	public void removeEdge(Edge edge)
 	{
 		//We need to use iterators because we are removing while iterating items
 		Iterator it1 = graph.values().iterator();
 		while(it1.hasNext())
 		{
-			HashMap<N,E> adjList = (HashMap<N,E>) it1.next();
+			HashMap<N,Edge> adjList = (HashMap<N,Edge>) it1.next();
 			Iterator it2 = adjList.keySet().iterator();
 			while(it2.hasNext())
 			{
@@ -148,8 +148,8 @@ public class Graph <N extends Node, E extends Edge>
 	 */
 	public void removeAllEdges()
 	{
-		Set<E> edges = getAllEdges();
-		for(E e : edges) removeEdge(e);
+		Set<Edge> edges = getAllEdges();
+		for(Edge e : edges) removeEdge(e);
 	}
 	//////////////////////////////////////////////////////////////////////
 	
@@ -202,7 +202,7 @@ public class Graph <N extends Node, E extends Edge>
 	
 	public boolean equals(Object o)
 	{
-		Graph<N,E> g = (Graph<N,E>) o;
+		Graph<N> g = (Graph<N>) o;
 		
 		//S'ha de passar a ArrayList perque si no, al comparar sets amb set.equals(set2), tambe compara
 		//els hashcodes, i nomes volem que compari amb la funcio (Node/Edge).equals, 
@@ -231,8 +231,8 @@ public class Graph <N extends Node, E extends Edge>
 						{
 							if(nAdjThis.equals(nAdjG))
 							{
-								E eG = g.getEdge(nG, nAdjG);
-								E eThis = this.getEdge(nThis, nAdjThis);
+								Edge eG = g.getEdge(nG, nAdjG);
+								Edge eThis = this.getEdge(nThis, nAdjThis);
 								if(eG == null && eThis == null) break;
 								if(eG == null && eThis != null) return false;
 								if(eG != null && eThis == null) return false;
@@ -247,19 +247,5 @@ public class Graph <N extends Node, E extends Edge>
 		return true;
 	}
 	
-	//// UTILS ////////////
-	public void print()
-	{
-		for(N n1 : getAllNodes())
-		{
-			System.out.print(n1.getId() + ": ");
-			for(N n2 : getAdjacentNodesTo(n1))
-			{
-				E e = getEdge(n1, n2);
-				System.out.print("(" + n2.getId() + ", " + e.getWeight() + "), ");
-			}
-			System.out.println(""); // :3
-		}
-	}
 	////////////////////////////////////////////////////////////////////////////
 }

@@ -38,7 +38,7 @@ public class SongSolutionTest extends TestCase
 	{
 		try
 		{
-		SongGraph sg = new SongGraph();	
+		Graph<Song> sg = new Graph<Song>();	
 		
 		ArrayList<String> style = new ArrayList<String>();		
 		style.add("Rock");
@@ -65,7 +65,7 @@ public class SongSolutionTest extends TestCase
 	}
 	public void testsetAlg()
 	{
-		SongGraph sg = new SongGraph();
+		Graph<Song> sg = new Graph<Song>();
 		
 		Solution songs = new Solution();
 		
@@ -80,7 +80,7 @@ public class SongSolutionTest extends TestCase
 	{
 		try
 		{
-		SongGraph sg = new SongGraph();
+		Graph<Song> sg = new Graph<Song>();
 		
 		ArrayList<String> style = new ArrayList<String>();		
 		style.add("Rock");
@@ -136,7 +136,7 @@ public class SongSolutionTest extends TestCase
 	
 	public void testSetGenerationtime()
 	{
-		SongGraph sg = new SongGraph();
+		Graph<Song> sg = new Graph<Song>();
 		
 		Solution songs = new Solution();
 		
@@ -149,7 +149,7 @@ public class SongSolutionTest extends TestCase
 
 	public void testGetAlgorisme()
 	{
-		SongGraph sg = new SongGraph();
+		Graph<Song> sg = new Graph<Song>();
 		
 		Solution songs = new Solution();
 		
@@ -159,7 +159,7 @@ public class SongSolutionTest extends TestCase
 	
 	public void testGetTime()
 	{
-		SongGraph sg = new SongGraph();
+		Graph<Song> sg = new Graph<Song>();
 		
 		Solution songs = new Solution();
 		
@@ -171,7 +171,7 @@ public class SongSolutionTest extends TestCase
 	public void testGetEntrada()
 	{
 		try {
-		SongGraph sg = new SongGraph();	
+		Graph<Song> sg = new Graph<Song>();	
 		
 		ArrayList<String> style = new ArrayList<String>();		
 		style.add("Rock");
@@ -202,7 +202,7 @@ public class SongSolutionTest extends TestCase
 	public void testGetCommunities()
 	{
 		try {
-		SongGraph sg = new SongGraph();
+		Graph<Song> sg = new Graph<Song>();
 		
 		ArrayList<String> style = new ArrayList<String>();		
 		style.add("Rock");

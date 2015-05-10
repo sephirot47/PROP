@@ -1,9 +1,12 @@
 package Domini;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
+import Persistencia.FileManager;
 
 import junit.framework.TestCase;
 
@@ -62,6 +65,93 @@ public class SongManagerTest extends TestCase
 
 		} catch(Exception e) {}
 	}
+
+	 
+	 public static void testSaveSong() throws Exception
+	 {
+		Song s1 = new Song("autor1", "titol1", 2014, new ArrayList<String>(), 100);
+		Song s2 = new Song("autor2", "titol2", 222, new ArrayList<String>(), 200);
+		Song s3 = new Song("autor3", "titol3", 333, new ArrayList<String>(), 300);
+		ArrayList<String> songsLines = new ArrayList<String>();
+
+		FileManager.eraseData("data/songSaveProva1.txt"); //Comencem amb larxiu buit
+		
+		SongManager.saveSong("data/songSaveProva1.txt", s1);
+		songsLines.add("autor1;titol1;2014;-;-;-;100");
+		assertEquals(FileManager.loadData("data/songSaveProva1.txt"), songsLines);
+		
+		SongManager.saveSong("data/songSaveProva1.txt", s2);
+		songsLines.add("autor2;titol2;222;-;-;-;200");
+		assertEquals(FileManager.loadData("data/songSaveProva1.txt"), songsLines);
+		
+		SongManager.saveSong("data/songSaveProva1.txt", s3);
+		songsLines.add("autor3;titol3;333;-;-;-;300");
+		assertEquals(FileManager.loadData("data/songSaveProva1.txt"), songsLines);
+		
+		s2.setDuration(5478); //Si canviem la primary key, es considera un nou user
+		s2.setAuthorTitle("aaa", "bbb");
+		SongManager.saveSong("data/songSaveProva1.txt", s2);
+		assertFalse(FileManager.loadData("data/songSaveProva1.txt").equals(songsLines));
+		songsLines.add("aaa;bbb;222;-;-;-;5478");
+		assertEquals(FileManager.loadData("data/songSaveProva1.txt"), songsLines);
+		
+		//Afegim estils, per veure si els guarda be
+		ArrayList<String> styles = new ArrayList<String>();
+		styles.add("Nightcore");
+		s3.addStyles(styles);
+		SongManager.saveSong("data/songSaveProva1.txt", s3);
+		assertFalse(FileManager.loadData("data/songSaveProva1.txt").equals(songsLines));
+		songsLines.set(2, "autor3;titol3;333;Nightcore;-;-;300");
+		assertEquals(FileManager.loadData("data/songSaveProva1.txt"), songsLines);
+
+		//Guardar sense modificar no afecta
+		SongManager.saveSong("data/songSaveProva1.txt", s1);
+		SongManager.saveSong("data/songSaveProva1.txt", s2);
+		SongManager.saveSong("data/songSaveProva1.txt", s3);
+		SongManager.saveSong("data/songSaveProva1.txt", s1);
+		SongManager.saveSong("data/songSaveProva1.txt", s2);
+		SongManager.saveSong("data/songSaveProva1.txt", s3);
+		assertEquals(FileManager.loadData("data/songSaveProva1.txt"), songsLines);
+	 }
+	 
+	 public static void testSaveSongs() throws Exception
+	 {
+		 ArrayList<Song> writtenSongs = new ArrayList<Song>();
+		 ArrayList<String> songsLines = new ArrayList<String>();
+		 
+		 FileManager.eraseData("data/songSaveProva2.txt"); //Comencem amb larxiu buit
+		
+		 writtenSongs.add(new Song("autor1", "titol1", 2014, new ArrayList<String>(), 120));
+		 writtenSongs.add(new Song("autor2", "titol1", 1997, new ArrayList<String>(), 180));
+		 writtenSongs.add(new Song("autor3", "titol123", 1870, new ArrayList<String>(), 60));
+		 
+		 songsLines.add("autor1;titol1;2014;-;-;-;120");
+		 songsLines.add("autor2;titol1;1997;-;-;-;180");
+		 songsLines.add("autor3;titol123;1870;-;-;-;60");
+		 
+		 SongManager.saveSongs("data/songSaveProva2.txt", writtenSongs);
+		 assertEquals(FileManager.loadData("data/songSaveProva2.txt"), songsLines);
+	 }
+
+	 public static void testRemoveSong() throws IOException
+	 {
+		 ArrayList<String> songsLines = new ArrayList<String>();
+		 
+		 songsLines.add("Camela;cuando sarpa el hamor;2015;-;-;flamenquillo del weno;180"); //0
+		 songsLines.add("SoyTanSutil;tramboliko;1867;dubstep;-;ioroYOLO;45"); //1
+		 songsLines.add("AC/DC;Thunderstruck;1990;Rock;-;-;292"); //2
+		 songsLines.add("AC/DC;Highway to Hell;1979;Rock;-;-;284"); //3
+		 songsLines.add("AC/DC;You Shook Me All Night Long;1980;Rock;-;-;212"); //4
+		 songsLines.add("AC/DC;T.N.T;1980;Rock;-;-;312"); //5
+		 songsLines.add("AC/DC;Hells Bells;1980;Rock;-;-;312"); //6
+
+		 FileManager.eraseData("data/songsRemoveTest.txt");
+		 FileManager.saveData("data/songsRemoveTest.txt", songsLines);
+
+		 songsLines.remove(5);
+		 SongManager.removeSong("data/songsRemoveTest.txt", "AC/DC", "T.N.T");
+		 assertEquals(FileManager.loadData("data/songsRemoveTest.txt"), songsLines);
+	 }
 	
 	public <T> boolean setsEquals(Set<T> ss1, Set<T> ss2)
 	{

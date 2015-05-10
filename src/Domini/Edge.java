@@ -1,7 +1,10 @@
 package Domini;
 
-public abstract class Edge
+public class Edge
 {
-	public abstract float getWeight();
-	public abstract void  setWeight(float weight);
+	float weight;
+	public Edge() { weight = 0.0f; } 
+	public Edge(float weight) { this.weight = weight; } 
+	public float getWeight() { return weight; };
+	public void  setWeight(float weight) {this.weight = weight; } ;
 }

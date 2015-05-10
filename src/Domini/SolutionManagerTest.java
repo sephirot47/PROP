@@ -1,26 +1,18 @@
-package Persistencia;
+package Domini;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import Domini.Community;
-import Domini.Reproduction;
-import Domini.Solution;
-import Domini.SongSolution;
-import Domini.Song;
-import Domini.SongGraph;
-import Domini.SongRelation;
 import junit.framework.TestCase;
+import Persistencia.FileManager;
 
-public class HistoryTest extends TestCase {
+public class SolutionManagerTest  extends TestCase {
 
-	public HistoryTest() {
-		super("HistoryTest");
+	public SolutionManagerTest() {
+		super("SolutionManagerTest");
 	}
 
 	protected void setUp() throws Exception {
@@ -29,7 +21,7 @@ public class HistoryTest extends TestCase {
 
 	public static void testSaveSolution() throws Exception {
 		// Generem graf
-		SongGraph g = new SongGraph();
+		Graph<Song> g = new Graph<Song>();
 		Song s1 = new Song("A", "B");
 		Song s2 = new Song("C", "D");
 		Song s3 = new Song("E", "F");
@@ -37,9 +29,9 @@ public class HistoryTest extends TestCase {
 		g.addNode(s2);
 		g.addNode(s3);
 
-		SongRelation e1 = new SongRelation();
-		SongRelation e2 = new SongRelation();
-		SongRelation e3 = new SongRelation();
+		Edge e1 = new Edge();
+		Edge e2 = new Edge();
+		Edge e3 = new Edge();
 
 		g.addEdge(s1, s2, e1);
 		g.addEdge(s2, s3, e2);
@@ -80,7 +72,7 @@ public class HistoryTest extends TestCase {
 		
 		SongSolution s = new SongSolution(g, comunities, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
 
-		History.saveSolution(s, "test");
+		SolutionManager.saveSolution(s, "test");
 		
 		ArrayList<String> realGraph = FileManager.loadData("data/solutions/solution_test/entrada.txt");
 		assertTrue(realGraph.containsAll(expectedGraph) && expectedGraph.containsAll(realGraph));
@@ -94,7 +86,7 @@ public class HistoryTest extends TestCase {
 	public static void testRemoveSolution() throws IOException 
 	{
 		String nomSolucio = "solution_test";
-		History.removeSolution(nomSolucio);
+		SolutionManager.removeSolution(nomSolucio);
 		File solucio = new File("data/solutions/" + nomSolucio);
 		assertFalse(solucio.exists());
 	}

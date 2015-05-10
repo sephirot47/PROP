@@ -86,18 +86,6 @@ public class Song extends Node
 	public int getYear() { return year; }
 	public ArrayList<String> getStyles() { return styles; }
 	
-	public void print()
-	{
-    	System.out.println("------");
-		System.out.println("Author: " + author);
-		System.out.println("Title: " + title);
-		System.out.println("Duration: " + duration);
-		System.out.println("Year: " + year);
-		for(int i = 0; i < styles.size(); ++i) 
-			System.out.println("Style " + i + ": " + styles.get(i));
-    	System.out.println("------");
-	}
-	
 	/*
 	 * Returns the mean of the age of all the users who have listened to this song
 	 */

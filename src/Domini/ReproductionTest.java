@@ -14,12 +14,6 @@ public class ReproductionTest extends TestCase
 		super.setUp();
 	}
 
-	public void testPrint() throws Exception
-	{
-		Reproduction r = new Reproduction("AC/DC","T.N.T",101);
-		r.print();
-	}
-	
 	public void testGetSongAuthor() throws Exception 
 	{
 		Reproduction r = new Reproduction("AC/DC","T.N.T",101);

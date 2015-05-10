@@ -26,13 +26,6 @@ public class Reproduction
 		this.time = time;
 	}
 	
-	public void print()
-	{
-		System.out.println(songAuthor);
-		System.out.println(songTitle);
-		System.out.println(time);
-	}
-	
 	public String getSongAuthor() {
 		return songAuthor;
 	}

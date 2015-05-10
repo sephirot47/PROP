@@ -20,15 +20,6 @@ public class GraphTest extends TestCase
 		public N(String idd) { id = idd; }
 		public String getId() { return id; }
 	}
-	
-	class E extends Edge
-	{
-		float weight;
-		public E() { weight = 1.0f; }
-		public E(float w) { weight = w; }
-		public float getWeight() { return weight;}
-		public void setWeight(float weight) { this.weight = weight; }
-	}
 
 	protected void setUp() throws Exception 
 	{
@@ -37,7 +28,7 @@ public class GraphTest extends TestCase
 
 	public void testAddNode() 
 	{
-		Graph<Node,Edge> g = new Graph<Node,Edge>();
+		Graph<Node> g = new Graph<Node>();
 		N n = new N("node");
 		
 		Set<N> p = new HashSet<N>(Arrays.asList(n));
@@ -49,13 +40,13 @@ public class GraphTest extends TestCase
 	}
 	public void testGetAdjacentNodesTo()
 	{
-		Graph<Node,Edge> g = new Graph<Node,Edge>();
+		Graph<Node> g = new Graph<Node>();
 		N n = new N("node");
 		N n1 = new N("node2");
 		N n2 = new N("node3");
 		
-		E e = new E();
-		E e1 = new E();
+		Edge e = new Edge();
+		Edge e1 = new Edge();
 		e.setWeight(3.14f);
 		e1.setWeight(3.14f);
 		
@@ -72,10 +63,10 @@ public class GraphTest extends TestCase
 	}
 	public void testGetNodesConnectedBy()
 	{
-		Graph<Node,Edge> g = new Graph<Node,Edge>();
+		Graph<Node> g = new Graph<Node>();
 		N n = new N("node3");
 		N n1 = new N("node2");
-		E e = new E();
+		Edge e = new Edge();
 		
 		g.addNode(n);
 		g.addNode(n1);
@@ -89,23 +80,23 @@ public class GraphTest extends TestCase
 	}
 	public void testAddEdge()
 	{
-		Graph<Node,Edge> g = new Graph<Node,Edge>();
+		Graph<Node> g = new Graph<Node>();
 		N n = new N("node1");
 		N n1 = new N("node2");
 		
-		E e = new E();
+		Edge e = new Edge();
 		e.setWeight(3.14f);
 		g.addNode(n);
 		g.addNode(n1);
 		
-		Set<E> p = new HashSet<E>(Arrays.asList(e));
+		Set<Edge> p = new HashSet<Edge>(Arrays.asList(e));
 		g.addEdge(n, n1, e);
 		
 		assertEquals(p,g.getAllEdges());
 	}
 	public void testGetAllNodes()
 	{
-		Graph<Node,Edge> g = new Graph<Node,Edge>();
+		Graph<Node> g = new Graph<Node>();
 		N n = new N("node1");
 		N n1 = new N("node2");
 		N n2 = new N("node3");
@@ -126,7 +117,7 @@ public class GraphTest extends TestCase
 	
 	public void testRemoveNode()
 	{
-		Graph<Node,Edge> g = new Graph<Node,Edge>();
+		Graph<Node> g = new Graph<Node>();
 		N n = new N("node1");
 		N n1 = new N("node2");
 		N n2 = new N("node3");
@@ -148,11 +139,11 @@ public class GraphTest extends TestCase
 	}
 	public void testGetEdge()
 	{
-		Graph<Node,Edge> g = new Graph<Node,Edge>();
+		Graph<Node> g = new Graph<Node>();
 		N n = new N("node1");
 		N n1 = new N("node2");
 		
-		E e = new E();
+		Edge e = new Edge();
 		e.setWeight(3.14f);
 		
 		g.addNode(n);
@@ -164,18 +155,18 @@ public class GraphTest extends TestCase
 	}
 	public void testGetAllEdges()
 	{
-		Graph<Node,Edge> g = new Graph<Node,Edge>();
+		Graph<Node> g = new Graph<Node>();
 		N n = new N("node1");
 		N n1 = new N("node2");
 		N n2 = new N("node3");
 		N n3 = new N("node4");
 		N n4 = new N("node5");
 		
-		E e = new E();
-		E e1 = new E();
-		E e2 = new E();
-		E e3 = new E();
-		E e4 = new E();
+		Edge e = new Edge();
+		Edge e1 = new Edge();
+		Edge e2 = new Edge();
+		Edge e3 = new Edge();
+		Edge e4 = new Edge();
 		
 		g.addNode(n);
 		g.addNode(n1);
@@ -195,7 +186,7 @@ public class GraphTest extends TestCase
 		g.addEdge(n3, n4, e3);
 		g.addEdge(n4, n, e4);
 		
-		Set<E> p = new HashSet<E>(Arrays.asList(e1,e2,e3));
+		Set<Edge> p = new HashSet<Edge>(Arrays.asList(e1,e2,e3));
 		
 		g.removeNode(n);
 		
@@ -204,18 +195,18 @@ public class GraphTest extends TestCase
 	
 	public void testRemoveEdge()
 	{
-		Graph<Node,Edge> g = new Graph<Node,Edge>();
+		Graph<Node> g = new Graph<Node>();
 		N n = new N("node1");
 		N n1 = new N("node2");
 		N n2 = new N("node3");
 		N n3 = new N("node4");
 		N n4 = new N("node5");
 		
-		E e = new E();
-		E e1 = new E();
-		E e2 = new E();
-		E e3 = new E();
-		E e4 = new E();
+		Edge e = new Edge();
+		Edge e1 = new Edge();
+		Edge e2 = new Edge();
+		Edge e3 = new Edge();
+		Edge e4 = new Edge();
 		
 		e.setWeight(3.1f);
 		e1.setWeight(3.14f);
@@ -245,18 +236,18 @@ public class GraphTest extends TestCase
 	
 	public void testRemoveAllEdges()
 	{
-		Graph<Node,Edge> g = new Graph<Node,Edge>();
+		Graph<Node> g = new Graph<Node>();
 		N n = new N("node1");
 		N n1 = new N("node2");
 		N n2 = new N("node3");
 		N n3 = new N("node4");
 		N n4 = new N("node5");
 		
-		E e = new E();
-		E e1 = new E();
-		E e2 = new E();
-		E e3 = new E();
-		E e4 = new E();
+		Edge e = new Edge();
+		Edge e1 = new Edge();
+		Edge e2 = new Edge();
+		Edge e3 = new Edge();
+		Edge e4 = new Edge();
 		
 		e.setWeight(3.1f);
 		e1.setWeight(3.14f);
@@ -278,28 +269,28 @@ public class GraphTest extends TestCase
 		
 		g.removeAllEdges();
 		
-		E e5 = new E();
+		Edge e5 = new Edge();
 		e4.setWeight(5f);
 		g.addEdge(n4, n, e5);
 		
-		Set<E> p = new HashSet<E>(Arrays.asList(e5));
+		Set<Edge> p = new HashSet<Edge>(Arrays.asList(e5));
 		assertEquals(p,g.getAllEdges());
 	}
 	
 	public void testGetConnectedComponents()
 	{
-		Graph<Node,Edge> g = new Graph<Node,Edge>();
+		Graph<Node> g = new Graph<Node>();
 		N n = new N("node1");
 		N n1 = new N("node2");
 		N n2 = new N("node3");
 		N n3 = new N("node4");
 		N n4 = new N("node5");
 		
-		E e = new E();
-		E e1 = new E();
-		E e2 = new E();
-		E e3 = new E();
-		E e4 = new E();
+		Edge e = new Edge();
+		Edge e1 = new Edge();
+		Edge e2 = new Edge();
+		Edge e3 = new Edge();
+		Edge e4 = new Edge();
 		
 		e.setWeight(3.1f);
 		e1.setWeight(3.14f);
@@ -345,18 +336,18 @@ public class GraphTest extends TestCase
 	
 	public void testPrint()
 	{
-		Graph<Node,Edge> g = new Graph<Node,Edge>();
+		Graph<Node> g = new Graph<Node>();
 		N n = new N("node1");
 		N n1 = new N("node2");
 		N n2 = new N("node3");
 		N n3 = new N("node4");
 		N n4 = new N("node5");
 		
-		E e = new E();
-		E e1 = new E();
-		E e2 = new E();
-		E e3 = new E();
-		E e4 = new E();
+		Edge e = new Edge();
+		Edge e1 = new Edge();
+		Edge e2 = new Edge();
+		Edge e3 = new Edge();
+		Edge e4 = new Edge();
 		
 		e.setWeight(3.1f);
 		e1.setWeight(3.14f);
@@ -376,8 +367,6 @@ public class GraphTest extends TestCase
 		g.addEdge(n2, n3, e2);
 		g.addEdge(n3, n4, e3);
 		g.addEdge(n4, n, e4);
-		
-		g.print();
 	}
 	
 	public void testEquals() 
@@ -388,11 +377,11 @@ public class GraphTest extends TestCase
 		N n3 = new N("node4");
 		N n4 = new N("node5");
 		
-		E e = new E();
-		E e1 = new E();
-		E e2 = new E();
-		E e3 = new E();
-		E e4 = new E();
+		Edge e = new Edge();
+		Edge e1 = new Edge();
+		Edge e2 = new Edge();
+		Edge e3 = new Edge();
+		Edge e4 = new Edge();
 		
 		e.setWeight(3.1f);
 		e1.setWeight(3.14f);
@@ -400,7 +389,7 @@ public class GraphTest extends TestCase
 		e3.setWeight(3.1415f);
 		e4.setWeight(3.14159f);
 		
-		Graph<N, E> g1 = new Graph<N, E>();
+		Graph<N> g1 = new Graph<N>();
 		g1.addNode(n);
 		g1.addNode(n1);
 		g1.addNode(n2);
@@ -413,7 +402,7 @@ public class GraphTest extends TestCase
 		g1.addEdge(n3, n4, e3);
 		g1.addEdge(n4, n, e4);
 		
-		Graph<N, E> g2 = new Graph<N, E>();
+		Graph<N> g2 = new Graph<N>();
 		//ELS AFEGIM EN DESORDRE
 		g2.addNode(n4);
 		g2.addNode(n2);
@@ -429,7 +418,7 @@ public class GraphTest extends TestCase
 		g2.addEdge(n2, n3, e2);
 		
 		//MORE TESTS
-		Graph<N, E> g3 = new Graph<N, E>();
+		Graph<N> g3 = new Graph<N>();
 		g3.addNode(n);
 		g3.addNode(n1);
 		g3.addNode(n2);
@@ -437,16 +426,16 @@ public class GraphTest extends TestCase
 		g3.addNode(n4);
 		
 		//A LOT OF EDGES
-		g3.addEdge(n, n1, new E(1.0f));
-		g3.addEdge(n, n2, new E(1.1f));
-		g3.addEdge(n, n3, new E(1.2f));
-		g3.addEdge(n, n4, new E(1.3f));
-		g3.addEdge(n2, n3, new E(1.4f));
-		g3.addEdge(n3, n4, new E(1.5f));
-		g3.addEdge(n4, n, new E(1.6f));
+		g3.addEdge(n, n1, new Edge(1.0f));
+		g3.addEdge(n, n2, new Edge(1.1f));
+		g3.addEdge(n, n3, new Edge(1.2f));
+		g3.addEdge(n, n4, new Edge(1.3f));
+		g3.addEdge(n2, n3, new Edge(1.4f));
+		g3.addEdge(n3, n4, new Edge(1.5f));
+		g3.addEdge(n4, n, new Edge(1.6f));
 		g3.addEdge(n4, n2, e);
 		
-		Graph<N, E> g4 = new Graph<N, E>();
+		Graph<N> g4 = new Graph<N>();
 		//ELS AFEGIM EN DESORDRE
 		g4.addNode(n4);
 		g4.addNode(n2);
@@ -455,13 +444,13 @@ public class GraphTest extends TestCase
 		g4.addNode(n1);
  
 		//ELS AFEGIM EN DESORDRE
-		g4.addEdge(n, n1, new E(1.0f));
-		g4.addEdge(n2, n3, new E(1.4f));
-		g4.addEdge(n, n3, new E(1.2f));
-		g4.addEdge(n, n4, new E(1.3f));
-		g4.addEdge(n4, n, new E(1.6f));
-		g4.addEdge(n, n2, new E(1.1f));
-		g4.addEdge(n3, n4, new E(1.5f));
+		g4.addEdge(n, n1, new Edge(1.0f));
+		g4.addEdge(n2, n3, new Edge(1.4f));
+		g4.addEdge(n, n3, new Edge(1.2f));
+		g4.addEdge(n, n4, new Edge(1.3f));
+		g4.addEdge(n4, n, new Edge(1.6f));
+		g4.addEdge(n, n2, new Edge(1.1f));
+		g4.addEdge(n3, n4, new Edge(1.5f));
 
 		//Hauria de donar que son diferents, ja que a g4 li falta un edge (e)
 		assertFalse(g3.equals(g4));
@@ -478,8 +467,8 @@ public class GraphTest extends TestCase
 		
 		
 		//MOOOOOOOOORE TESTS (just nodes now)
-		Graph<N, E> g5 = new Graph<N, E>();
-		Graph<N, E> g6 = new Graph<N, E>();
+		Graph<N> g5 = new Graph<N>();
+		Graph<N> g6 = new Graph<N>();
 		
 		g5.addNode(n);
 		g6.addNode(n);

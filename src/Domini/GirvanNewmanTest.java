@@ -21,7 +21,7 @@ public class GirvanNewmanTest extends TestCase
 	public void testGetSolution() 
 	{
 		try{
-		Graph<Song, SongRelation> g = new Graph<Song, SongRelation>();
+		Graph<Song> g = new Graph<Song>();
 		
 		Song a = new Song("A","A"); g.addNode(a);
 		Song b = new Song("B","B"); g.addNode(b);
@@ -38,23 +38,23 @@ public class GirvanNewmanTest extends TestCase
 		Song x = new Song("X","X"); g.addNode(x);
 		Song y = new Song("Y","Y"); g.addNode(y);
 		
-		g.addEdge(a, b, new SongRelation());
-		g.addEdge(a, c, new SongRelation());
-		g.addEdge(b, c, new SongRelation());
-		g.addEdge(e, f, new SongRelation());
-		g.addEdge(e, d, new SongRelation());
-		g.addEdge(d, f, new SongRelation());
-		g.addEdge(h, i, new SongRelation());
-		g.addEdge(h, j, new SongRelation());
-		g.addEdge(j, i, new SongRelation());
-		g.addEdge(k, l, new SongRelation());
-		g.addEdge(k, m, new SongRelation());
-		g.addEdge(l, m, new SongRelation());
-		g.addEdge(x, c, new SongRelation());
-		g.addEdge(x, e, new SongRelation());
-		g.addEdge(y, h, new SongRelation());
-		g.addEdge(y, k, new SongRelation());
-		g.addEdge(x, y, new SongRelation());
+		g.addEdge(a, b, new Edge());
+		g.addEdge(a, c, new Edge());
+		g.addEdge(b, c, new Edge());
+		g.addEdge(e, f, new Edge());
+		g.addEdge(e, d, new Edge());
+		g.addEdge(d, f, new Edge());
+		g.addEdge(h, i, new Edge());
+		g.addEdge(h, j, new Edge());
+		g.addEdge(j, i, new Edge());
+		g.addEdge(k, l, new Edge());
+		g.addEdge(k, m, new Edge());
+		g.addEdge(l, m, new Edge());
+		g.addEdge(x, c, new Edge());
+		g.addEdge(x, e, new Edge());
+		g.addEdge(y, h, new Edge());
+		g.addEdge(y, k, new Edge());
+		g.addEdge(x, y, new Edge());
 		
 		/// Una comunitat 
 		Solution result1 = new GirvanNewman().getSolution(g, 1);

@@ -1,29 +1,46 @@
 package Domini;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
 
 import Persistencia.FileManager;
-import Persistencia.FileParser;
 
-public class SongGraph extends Graph<Song, SongRelation>
+public class GraphManager 
 {
-	public SongGraph()
+	public static Graph<Song> getGraph(String filepath) throws Exception
 	{
-		super();
+		Graph<Song> g = new Graph<Song>();
+		ArrayList<String> lines = FileManager.loadData(filepath);
+		ArrayList<Song> songs = new ArrayList<Song>(); //2 be able to get the index of each node
+		for(String line : lines)
+		{
+			if(line.charAt(0) == '(') //nodes (author,title)
+			{
+				String author = line.substring(1, line.indexOf(','));
+				String title = line.substring(line.indexOf(',') + 1, line.indexOf(')'));
+				Song s = new Song(author, title);
+				g.addNode(s);
+				songs.add(s);
+			}
+			else //edges
+			{
+				String fields[] = line.split(";");
+				int index0 = Integer.parseInt(fields[0]), index1 = Integer.parseInt(fields[1]);
+				float weight = Float.parseFloat(fields[2]);
+				Edge e = new Edge();
+				e.setWeight(weight);
+				g.addEdge(songs.get(index0), songs.get(index1), e);	
+			}
+		}
+		return g;
 	}
-	
-	public void loadSongs() throws IOException
+
+	public static void generateEdges(Graph<Song> g, Ponderations p)
 	{
-	}
-	
-	public void generateEdges(Ponderations p)
-	{
-		removeAllEdges();
+		g.removeAllEdges();
 		float threshold = (p.getThreshold()*0.1f)/2;
 		
-		Set<Song> songs = getAllNodes();
+		Set<Song> songs = g.getAllNodes();
 		//Set<User> users = UserManager.GetUsers("data/users/users.txt", "data/reproductions");
 		for(Song s : songs)
 		{
@@ -72,20 +89,20 @@ public class SongGraph extends Graph<Song, SongRelation>
 					//
 					
 					//Nearby Reproductions 
-					nearbyReproductionsAportation = (getNearbyReproductionsAportation(s,s2)) * ((float) p.getNearbyReproductions()*0.1f);
+					nearbyReproductionsAportation = (getNearbyReproductionsAportation(g, s,s2)) * ((float) p.getNearbyReproductions()*0.1f);
 					
 					affinity =  (authorAportation + styleAportation + durationAportation + yearAportation + userAgeAportation + nearbyReproductionsAportation)/(float) 6;
 					
 				
-					SongRelation edge = new SongRelation();
+					Edge edge = new Edge();
 					edge.setWeight(affinity);
-					if(affinity >= threshold) addEdge(s, s2, edge);
+					if(affinity >= threshold) g.addEdge(s, s2, edge);
 				}
 			}
 		}
 	}
 	
-	public float getNearbyReproductionsAportation(Song s1, Song s2) //Entre 0.0f y 1.0f
+	public static float getNearbyReproductionsAportation(Graph<Song> g, Song s1, Song s2) //Entre 0.0f y 1.0f
 	{
 		float aportation = 0.0f;
 		try{

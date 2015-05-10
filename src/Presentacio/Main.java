@@ -14,26 +14,25 @@ import Domini.Node;
 import Domini.Solution;
 import Domini.SongSolution;
 import Domini.Song;
-import Domini.SongGraph;
+import Domini.GraphManager;
 import Domini.SongManager;
-import Domini.SongRelation;
+import Domini.Edge;
 import Domini.User;
 import Domini.UserManager;
 import Persistencia.FileManager;
-import Persistencia.FileParser;
 
 public class Main 
 {
-	private static SongGraph songGraph;
+	private static Graph<Song> songGraph;
 	
 	public static void main(String[] args)
 	{
 		try{
 		Song ssss = new Song("\"\\sdj<>*ks/a|mfks:.asd", "\"\\sdj<>*ksa|mf?ks:.asd");
-		ssss.print();
+		//ssss.print();
 		
 		//Example of the use of Graph class
-		songGraph = new SongGraph();
+		songGraph = new Graph<Song>();
 
 		Song a = new Song("A", "A"); songGraph.addNode(a);
 		Song b = new Song("B", "A"); songGraph.addNode(b);
@@ -50,23 +49,23 @@ public class Main
 		Song x = new Song("X", "A"); songGraph.addNode(x);
 		Song y = new Song("Y", "A"); songGraph.addNode(y);
 		
-		songGraph.addEdge(a, b, new SongRelation());
-		songGraph.addEdge(a, c, new SongRelation());
-		songGraph.addEdge(b, c, new SongRelation());
-		songGraph.addEdge(e, f, new SongRelation());
-		songGraph.addEdge(e, g, new SongRelation());
-		songGraph.addEdge(g, f, new SongRelation());
-		songGraph.addEdge(h, i, new SongRelation());
-		songGraph.addEdge(h, j, new SongRelation());
-		songGraph.addEdge(j, i, new SongRelation());
-		songGraph.addEdge(k, l, new SongRelation());
-		songGraph.addEdge(k, m, new SongRelation());
-		songGraph.addEdge(l, m, new SongRelation());
-		songGraph.addEdge(x, c, new SongRelation());
-		songGraph.addEdge(x, e, new SongRelation());
-		songGraph.addEdge(y, h, new SongRelation());
-		songGraph.addEdge(y, k, new SongRelation());
-		SongRelation sr = new SongRelation();
+		songGraph.addEdge(a, b, new Edge());
+		songGraph.addEdge(a, c, new Edge());
+		songGraph.addEdge(b, c, new Edge());
+		songGraph.addEdge(e, f, new Edge());
+		songGraph.addEdge(e, g, new Edge());
+		songGraph.addEdge(g, f, new Edge());
+		songGraph.addEdge(h, i, new Edge());
+		songGraph.addEdge(h, j, new Edge());
+		songGraph.addEdge(j, i, new Edge());
+		songGraph.addEdge(k, l, new Edge());
+		songGraph.addEdge(k, m, new Edge());
+		songGraph.addEdge(l, m, new Edge());
+		songGraph.addEdge(x, c, new Edge());
+		songGraph.addEdge(x, e, new Edge());
+		songGraph.addEdge(y, h, new Edge());
+		songGraph.addEdge(y, k, new Edge());
+		Edge sr = new Edge();
 		songGraph.addEdge(x, y, sr);
 		
     	System.out.println(" ");
@@ -91,7 +90,7 @@ public class Main
 		}
 		
 		/*
-		SongGraph entrada = null;
+		Graph<Song> entrada = null;
 		try {
 			entrada = FileParser.GetGraph("data/solutions/solution_27-04-2015 13:43:12.647/entrada.txt");
 		} catch (IOException e1) {
@@ -99,17 +98,10 @@ public class Main
 		}
 		entrada.Print();
 		*/
+
 		
-		SongGraph s = new SongGraph();
-		try {
-			s.loadSongs();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		s.print();
-		
-		for(Song songu : SongManager.getSongs("data/songs/songs.txt")) songu.print();
-		for(User user : UserManager.getUsers("data/users/users.txt", "data/reproductions")) user.print();
+		//for(Song songu : SongManager.getSongs("data/songs/songs.txt")) songu.print();
+		//for(User user : UserManager.getUsers("data/users/users.txt", "data/reproductions")) user.print();
 		
 		System.out.println("*********************");
 		System.out.println("*********************");

@@ -62,21 +62,6 @@ public class User
 		return reproductions;
 	}
     
-    public void print()
-    {
-    	System.out.println("--- User ----------");
-    	System.out.println("Name: " + name);
-    	System.out.println("Age: " + age);
-    	System.out.println("Reproductions of " + name + ":");
-		System.out.println("_____");
-    	for(Reproduction r : reproductions)
-    	{
-    		r.print();
-    		System.out.println("_____");
-    	}
-    	System.out.println("------");
-    	System.out.println("");
-    }
     
     private void checkUsername(String name) throws Exception
     {
