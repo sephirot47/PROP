@@ -26,9 +26,8 @@ import javax.swing.JLabel;
 
 public class MainWindow {
 
-	private static JFrame frmYoutube;
+	public static JFrame frmYoutube;
 	private JButton sortir;
-	private JPanel GestioCancons, GestioUsuaris, Recomanacions, Estadistiques, Credits;
 	private static final String title = "Youtube Mix";
 	
 	/**
@@ -169,6 +168,7 @@ public class MainWindow {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ChangeCard("Crèdits");
+				WarningDialogue.show("Ostia!", "Estás mirando los créditos...");
 			}
 		});
 		credits.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -193,124 +193,11 @@ public class MainWindow {
 		});
 		panel.add(sortir);
 
-		{
-			String name = "Gestió Cançons";
-			JPanel gestioCancons = new JPanel();
-			gestioCancons.setName(name);
-			frmYoutube.getContentPane().add(gestioCancons, name);
-			gestioCancons.setLayout(new BorderLayout(0, 0));
-			JPanel BackButtonpanel = new JPanel();
-			BackButtonpanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-			gestioCancons.add(BackButtonpanel, BorderLayout.SOUTH);
-			BackButtonpanel.setLayout(new BoxLayout(BackButtonpanel, BoxLayout.X_AXIS));
-			JButton btnEnrerepanel = new JButton("Enrere");
-			btnEnrerepanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnEnrerepanel.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					ChangeCard("Main");
-				}
-			});
-			btnEnrerepanel.setHorizontalAlignment(SwingConstants.LEFT);
-			BackButtonpanel.add(btnEnrerepanel);
-			GestioCancons =gestioCancons;
-		}
-
-		{
-			String name = "Estadístiques";
-			JPanel estadistiques = new JPanel();
-			estadistiques.setName(name);
-			frmYoutube.getContentPane().add(estadistiques, name);
-			estadistiques.setLayout(new BorderLayout(0, 0));
-			JPanel BackButtonpanel = new JPanel();
-			BackButtonpanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-			estadistiques.add(BackButtonpanel, BorderLayout.SOUTH);
-			BackButtonpanel.setLayout(new BoxLayout(BackButtonpanel, BoxLayout.X_AXIS));
-			JButton btnEnrerepanel = new JButton("Enrere");
-			btnEnrerepanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnEnrerepanel.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					ChangeCard("Main");
-				}
-			});
-			btnEnrerepanel.setHorizontalAlignment(SwingConstants.LEFT);
-			BackButtonpanel.add(btnEnrerepanel);
-			Estadistiques =estadistiques;
-		}
-
-		{
-			String name = "Gestió Usuaris";
-			JPanel gestioUsuaris = new JPanel();
-			gestioUsuaris.setName(name);
-			frmYoutube.getContentPane().add(gestioUsuaris, name);
-			gestioUsuaris.setLayout(new BorderLayout(0, 0));
-			JPanel BackButtonpanel = new JPanel();
-			BackButtonpanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-			gestioUsuaris.add(BackButtonpanel, BorderLayout.SOUTH);
-			BackButtonpanel.setLayout(new BoxLayout(BackButtonpanel, BoxLayout.X_AXIS));
-			JButton btnEnrerepanel = new JButton("Enrere");
-			btnEnrerepanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnEnrerepanel.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					ChangeCard("Main");
-				}
-			});
-			btnEnrerepanel.setHorizontalAlignment(SwingConstants.LEFT);
-			BackButtonpanel.add(btnEnrerepanel);
-			GestioUsuaris = gestioUsuaris;
-		}
-
-		{
-			String name = "Recomanacions";
-			JPanel recomanacions = new JPanel();
-			recomanacions.setName(name);
-			frmYoutube.getContentPane().add(recomanacions, name);
-			recomanacions.setLayout(new BorderLayout(0, 0));
-			JPanel BackButtonpanel = new JPanel();
-			BackButtonpanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-			recomanacions.add(BackButtonpanel, BorderLayout.SOUTH);
-			BackButtonpanel.setLayout(new BoxLayout(BackButtonpanel, BoxLayout.X_AXIS));
-			JButton btnEnrerepanel = new JButton("Enrere");
-			btnEnrerepanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnEnrerepanel.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					ChangeCard("Main");
-				}
-			});
-			btnEnrerepanel.setHorizontalAlignment(SwingConstants.LEFT);
-			BackButtonpanel.add(btnEnrerepanel);
-			Recomanacions = recomanacions;
-		}
-
-		{
-			String name = "Crèdits";
-			JPanel creditsPanel = new JPanel();
-			creditsPanel.setName(name);
-			frmYoutube.getContentPane().add(creditsPanel, name);
-			creditsPanel.setLayout(new BorderLayout(0, 0));
-			JPanel BackButtonpanel = new JPanel();
-			BackButtonpanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-			creditsPanel.add(BackButtonpanel, BorderLayout.SOUTH);
-			BackButtonpanel.setLayout(new BoxLayout(BackButtonpanel, BoxLayout.X_AXIS));
-			JButton btnEnrerepanel = new JButton("Enrere");
-			btnEnrerepanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnEnrerepanel.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					ChangeCard("Main");
-				}
-			});
-			btnEnrerepanel.setHorizontalAlignment(SwingConstants.LEFT);
-			BackButtonpanel.add(btnEnrerepanel);
-			Credits =creditsPanel;
-			
-			JLabel lblcCredits = new JLabel("<html>Crèdits<br><br>Víctor Antón Domínguez<br>Joan Fons<br>Abraham<br>Aina Soler");
-			lblcCredits.setHorizontalAlignment(SwingConstants.CENTER);
-			creditsPanel.add(lblcCredits, BorderLayout.CENTER);
-		}
+		GestioCanconsPanel gcp = new GestioCanconsPanel();
+		GestioUsuarisPanel gup = new GestioUsuarisPanel();
+		RecomanacionsPanel recp = new RecomanacionsPanel();
+		EstadistiquesPanel estp = new EstadistiquesPanel();
+		CreditsPanel credp = new CreditsPanel();
 	}
 	
 	public static void ChangeCard(String cardName)
