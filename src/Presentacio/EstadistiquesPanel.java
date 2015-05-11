@@ -6,8 +6,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
-public class EstadistiquesPanel extends TemplatePanel {
+public class EstadistiquesPanel extends JPanel {
 
 	public EstadistiquesPanel()
 	{

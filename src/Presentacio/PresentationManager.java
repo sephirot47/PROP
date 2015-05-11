@@ -4,6 +4,8 @@ import java.awt.CardLayout;
 import java.awt.EventQueue;
 import java.util.Stack;
 
+import javax.swing.JPanel;
+
 public class PresentationManager 
 {
 	private static Stack<String> windowHistory;
@@ -37,8 +39,23 @@ public class PresentationManager
 	
 	private static void changeCard(String cardName)
 	{
-		CardLayout cl = (CardLayout) (window.frmYoutube.getContentPane().getLayout());
-		cl.show(window.frmYoutube.getContentPane(), cardName);
+		if(cardName.equals("MainPanel"))
+		{
+			JPanel p = (JPanel) MainWindow.frmYoutube.getContentPane();
+			CardLayout cl = (CardLayout) (p.getLayout());
+			cl.show(p, cardName);
+		}
+		else
+		{
+			JPanel p = (JPanel) MainWindow.frmYoutube.getContentPane();
+			CardLayout cl = (CardLayout) (p.getLayout());
+			cl.show(p, ViewPanel.class.getSimpleName());
+			
+			p = (JPanel) ViewPanel.viewPanel.cardContainer;
+			cl = (CardLayout) (p.getLayout());
+			cl.show(p, cardName);
+		}
+		
 	}
 	
 	public static void goBack()

@@ -1,6 +1,8 @@
 package Presentacio;
 
-public class GestioCanconsPanel extends TemplatePanel
+import javax.swing.JPanel;
+
+public class GestioCanconsPanel extends JPanel
 {
 	public GestioCanconsPanel()
 	{

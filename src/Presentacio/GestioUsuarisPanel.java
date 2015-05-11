@@ -1,6 +1,8 @@
 package Presentacio;
 
-public class GestioUsuarisPanel extends TemplatePanel
+import javax.swing.JPanel;
+
+public class GestioUsuarisPanel extends JPanel
 {
 	public GestioUsuarisPanel()
 	{
