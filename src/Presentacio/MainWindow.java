@@ -24,8 +24,10 @@ import javax.swing.JEditorPane;
 
 public class MainWindow {
 
-	private JFrame frmYoutube;
+	private static JFrame frmYoutube;
 	private JButton sortir;
+	private JPanel GestioCancons;
+	private JPanel GestioUsuaris;
 
 	/**
 	 * Launch the application.
@@ -64,7 +66,7 @@ public class MainWindow {
 		
 		JPanel Main = new JPanel();
 		Main.setName("Main");
-		frmYoutube.getContentPane().add(Main, "name_1597726804701");
+		frmYoutube.getContentPane().add(Main, "Main");
 		Main.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelCosaArriba = new JPanel();
@@ -84,6 +86,12 @@ public class MainWindow {
 		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
 		
 		JButton btnNewButton = new JButton("Gestionar cançons");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ChangeCard("GestioCancons");
+			}
+		});
 		panel_2.add(btnNewButton);
 		btnNewButton.setMaximumSize(new Dimension(999, 25));
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -100,8 +108,7 @@ public class MainWindow {
 			@Override
 			public void mouseClicked(MouseEvent e) 
 			{
-				CardLayout cl = (CardLayout) (frmYoutube.getContentPane().getLayout());
-				cl.show(frmYoutube.getContentPane(), "GestioUsuaris");
+				ChangeCard("GestioUsuaris");
 			}
 		});
 		panel_3.add(btnGestionarUsuaris);
@@ -166,13 +173,72 @@ public class MainWindow {
 		});
 		panel.add(sortir);
 		
+
+		GestioCancons = new JPanel();
+		GestioCancons.setName("GestioCancons");
+		frmYoutube.getContentPane().add(GestioCancons, "GestioCancons");
+		GestioCancons.setLayout(new BorderLayout(0, 0));
+		JPanel BackButtonGestioCancons = new JPanel();
+		BackButtonGestioCancons.setBorder(new EmptyBorder(10, 10, 10, 10));
+		GestioCancons.add(BackButtonGestioCancons, BorderLayout.SOUTH);
+		BackButtonGestioCancons.setLayout(new BoxLayout(BackButtonGestioCancons, BoxLayout.X_AXIS));
+		JButton btnEnrereGestioCancons = new JButton("Enrere");
+		btnEnrereGestioCancons.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnEnrereGestioCancons.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ChangeCard("Main");
+			}
+		});
+		btnEnrereGestioCancons.setHorizontalAlignment(SwingConstants.LEFT);
+		BackButtonGestioCancons.add(btnEnrereGestioCancons);
 		
-		
-		JPanel GestioUsuaris = new JPanel();
+		GestioUsuaris = new JPanel();
 		GestioUsuaris.setName("GestioUsuaris");
 		frmYoutube.getContentPane().add(GestioUsuaris, "GestioUsuaris");
+		GestioUsuaris.setLayout(new BorderLayout(0, 0));
+		JPanel BackButtonGestioUsuaris = new JPanel();
+		BackButtonGestioUsuaris.setBorder(new EmptyBorder(10, 10, 10, 10));
+		GestioUsuaris.add(BackButtonGestioUsuaris, BorderLayout.SOUTH);
+		BackButtonGestioUsuaris.setLayout(new BoxLayout(BackButtonGestioUsuaris, BoxLayout.X_AXIS));
+		JButton btnEnrereGestioUsuaris = new JButton("Enrere");
+		btnEnrereGestioUsuaris.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnEnrereGestioUsuaris.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ChangeCard("Main");
+			}
+		});
+		btnEnrereGestioUsuaris.setHorizontalAlignment(SwingConstants.LEFT);
+		BackButtonGestioUsuaris.add(btnEnrereGestioUsuaris);
 		
-		JButton btnAsdasdadsasd = new JButton("ASDASDADSASD");
-		GestioUsuaris.add(btnAsdasdadsasd);
+		//TEMPLATE ***************************************
+		/*
+		JPanel Template = new JPanel();
+		Template.setName("Template");
+		frmYoutube.getContentPane().add(Template, "Template");
+		Template.setLayout(new BorderLayout(0, 0));
+		JPanel BackButton = new JPanel();
+		BackButton.setBorder(new EmptyBorder(10, 10, 10, 10));
+		Template.add(BackButton, BorderLayout.SOUTH);
+		BackButton.setLayout(new BoxLayout(BackButton, BoxLayout.X_AXIS));
+		JButton btnEnrere = new JButton("Enrere");
+		btnEnrere.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnEnrere.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ChangeCard("Main");
+			}
+		});
+		btnEnrere.setHorizontalAlignment(SwingConstants.LEFT);
+		BackButton.add(btnEnrere);
+		//FIN TEMPLATE ***************************************
+		*/
+	}
+	
+	public static void ChangeCard(String cardName)
+	{
+		CardLayout cl = (CardLayout) (frmYoutube.getContentPane().getLayout());
+		cl.show(frmYoutube.getContentPane(), cardName);
 	}
 }
