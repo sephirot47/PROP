@@ -26,9 +26,9 @@ public class MainWindow {
 
 	private static JFrame frmYoutube;
 	private JButton sortir;
-	private JPanel GestioCancons;
-	private JPanel GestioUsuaris;
-
+	private JPanel GestioCancons, GestioUsuaris, Recomanacions, Estadistiques, Credits;
+	private static final String title = "Youtube Mix";
+	
 	/**
 	 * Launch the application.
 	 */
@@ -59,7 +59,7 @@ public class MainWindow {
 	{
 		frmYoutube = new JFrame();
 		frmYoutube.setResizable(false);
-		frmYoutube.setTitle("Youtube Mix");
+		frmYoutube.setTitle(title);
 		frmYoutube.setBounds(100, 100, 1000, 500);
 		frmYoutube.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmYoutube.getContentPane().setLayout(new CardLayout(0, 0));
@@ -89,7 +89,7 @@ public class MainWindow {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ChangeCard("GestioCancons");
+				ChangeCard("Gestió Cançons");
 			}
 		});
 		panel_2.add(btnNewButton);
@@ -108,25 +108,13 @@ public class MainWindow {
 			@Override
 			public void mouseClicked(MouseEvent e) 
 			{
-				ChangeCard("GestioUsuaris");
+				ChangeCard("Gestió Usuaris");
 			}
 		});
 		panel_3.add(btnGestionarUsuaris);
 		btnGestionarUsuaris.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnGestionarUsuaris.setMaximumSize(new Dimension(999, 25));
 		btnGestionarUsuaris.setAlignmentY(0.0f);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setMaximumSize(new Dimension(32000, 30));
-		panel_4.setAlignmentY(0.0f);
-		panelBotonesIzquierda.add(panel_4);
-		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
-		
-		JButton btnEstadstiques = new JButton("Estadístiques");
-		panel_4.add(btnEstadstiques);
-		btnEstadstiques.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEstadstiques.setMaximumSize(new Dimension(999, 25));
-		btnEstadstiques.setAlignmentY(0.0f);
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setMaximumSize(new Dimension(32000, 30));
@@ -135,10 +123,34 @@ public class MainWindow {
 		panel_5.setLayout(new BoxLayout(panel_5, BoxLayout.X_AXIS));
 		
 		JButton btnRecomanacions = new JButton("Recomanacions");
+		btnRecomanacions.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ChangeCard("Recomanacions");
+			}
+		});
 		panel_5.add(btnRecomanacions);
 		btnRecomanacions.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRecomanacions.setMaximumSize(new Dimension(999, 25));
 		btnRecomanacions.setAlignmentY(0.0f);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setMaximumSize(new Dimension(32000, 30));
+		panel_4.setAlignmentY(0.0f);
+		panelBotonesIzquierda.add(panel_4);
+		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
+		
+		JButton btnEstadstiques = new JButton("Estadístiques");
+		btnEstadstiques.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ChangeCard("Estadístiques");
+			}
+		});
+		panel_4.add(btnEstadstiques);
+		btnEstadstiques.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnEstadstiques.setMaximumSize(new Dimension(999, 25));
+		btnEstadstiques.setAlignmentY(0.0f);
 		
 		JPanel panelBotonesAbajo = new JPanel();
 		Main.add(panelBotonesAbajo, BorderLayout.SOUTH);
@@ -172,73 +184,45 @@ public class MainWindow {
 			}
 		});
 		panel.add(sortir);
-		
 
-		GestioCancons = new JPanel();
-		GestioCancons.setName("GestioCancons");
-		frmYoutube.getContentPane().add(GestioCancons, "GestioCancons");
-		GestioCancons.setLayout(new BorderLayout(0, 0));
-		JPanel BackButtonGestioCancons = new JPanel();
-		BackButtonGestioCancons.setBorder(new EmptyBorder(10, 10, 10, 10));
-		GestioCancons.add(BackButtonGestioCancons, BorderLayout.SOUTH);
-		BackButtonGestioCancons.setLayout(new BoxLayout(BackButtonGestioCancons, BoxLayout.X_AXIS));
-		JButton btnEnrereGestioCancons = new JButton("Enrere");
-		btnEnrereGestioCancons.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEnrereGestioCancons.addMouseListener(new MouseAdapter() {
+		GestioCancons = CreateStandardTemplateFrame("Gestió Cançons");
+		Recomanacions = CreateStandardTemplateFrame("Recomanacions");
+		Estadistiques = CreateStandardTemplateFrame("Estadístiques");
+		GestioUsuaris = CreateStandardTemplateFrame("Gestió Usuaris");
+	}
+	
+	public static JPanel CreateStandardTemplateFrame(String name)
+	{
+		JPanel panel = new JPanel();
+		panel.setName(name);
+		frmYoutube.getContentPane().add(panel, name);
+		panel.setLayout(new BorderLayout(0, 0));
+		JPanel BackButtonpanel = new JPanel();
+		BackButtonpanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		panel.add(BackButtonpanel, BorderLayout.SOUTH);
+		BackButtonpanel.setLayout(new BoxLayout(BackButtonpanel, BoxLayout.X_AXIS));
+		JButton btnEnrerepanel = new JButton("Enrere");
+		btnEnrerepanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnEnrerepanel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ChangeCard("Main");
 			}
 		});
-		btnEnrereGestioCancons.setHorizontalAlignment(SwingConstants.LEFT);
-		BackButtonGestioCancons.add(btnEnrereGestioCancons);
-		
-		GestioUsuaris = new JPanel();
-		GestioUsuaris.setName("GestioUsuaris");
-		frmYoutube.getContentPane().add(GestioUsuaris, "GestioUsuaris");
-		GestioUsuaris.setLayout(new BorderLayout(0, 0));
-		JPanel BackButtonGestioUsuaris = new JPanel();
-		BackButtonGestioUsuaris.setBorder(new EmptyBorder(10, 10, 10, 10));
-		GestioUsuaris.add(BackButtonGestioUsuaris, BorderLayout.SOUTH);
-		BackButtonGestioUsuaris.setLayout(new BoxLayout(BackButtonGestioUsuaris, BoxLayout.X_AXIS));
-		JButton btnEnrereGestioUsuaris = new JButton("Enrere");
-		btnEnrereGestioUsuaris.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEnrereGestioUsuaris.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				ChangeCard("Main");
-			}
-		});
-		btnEnrereGestioUsuaris.setHorizontalAlignment(SwingConstants.LEFT);
-		BackButtonGestioUsuaris.add(btnEnrereGestioUsuaris);
-		
-		//TEMPLATE ***************************************
-		/*
-		JPanel Template = new JPanel();
-		Template.setName("Template");
-		frmYoutube.getContentPane().add(Template, "Template");
-		Template.setLayout(new BorderLayout(0, 0));
-		JPanel BackButton = new JPanel();
-		BackButton.setBorder(new EmptyBorder(10, 10, 10, 10));
-		Template.add(BackButton, BorderLayout.SOUTH);
-		BackButton.setLayout(new BoxLayout(BackButton, BoxLayout.X_AXIS));
-		JButton btnEnrere = new JButton("Enrere");
-		btnEnrere.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEnrere.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				ChangeCard("Main");
-			}
-		});
-		btnEnrere.setHorizontalAlignment(SwingConstants.LEFT);
-		BackButton.add(btnEnrere);
-		//FIN TEMPLATE ***************************************
-		*/
+		btnEnrerepanel.setHorizontalAlignment(SwingConstants.LEFT);
+		BackButtonpanel.add(btnEnrerepanel);
+		return panel;
 	}
 	
 	public static void ChangeCard(String cardName)
 	{
 		CardLayout cl = (CardLayout) (frmYoutube.getContentPane().getLayout());
 		cl.show(frmYoutube.getContentPane(), cardName);
+		
+		if(!cardName.equals("Main"))
+		{
+			frmYoutube.setTitle(title + " - " + cardName);
+		}
+		else frmYoutube.setTitle(title); 
 	}
 }
