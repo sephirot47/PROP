@@ -14,7 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Cursor;
 
-public class WarningDialogue extends JDialog {
+public class WarningDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblMsg;
@@ -23,7 +23,7 @@ public class WarningDialogue extends JDialog {
 	{
 		try 
 		{
-			WarningDialogue dialog = new WarningDialogue();
+			WarningDialog dialog = new WarningDialog();
 			dialog.setTitle(title);
 			dialog.setMessage(msg);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -37,7 +37,7 @@ public class WarningDialogue extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public WarningDialogue() 
+	public WarningDialog() 
 	{
 		setBounds(100, 100, 450, 200);
 		getContentPane().setLayout(new BorderLayout());

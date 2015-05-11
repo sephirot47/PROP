@@ -20,32 +20,18 @@ import javax.swing.Action;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.CardLayout;
+import java.util.Stack;
+
 import javax.swing.JEditorPane;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
 
-public class MainWindow {
-
+public class MainWindow 
+{
 	public static JFrame frmYoutube;
 	private JButton sortir;
-	private static final String title = "Youtube Mix";
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainWindow window = new MainWindow();
-					window.frmYoutube.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	public static final String title = "Youtube mix";
 	/**
 	 * Create the application.
 	 */
@@ -57,7 +43,7 @@ public class MainWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() 
-	{
+	{		
 		frmYoutube = new JFrame();
 		frmYoutube.setResizable(false);
 		frmYoutube.setTitle(title);
@@ -90,7 +76,7 @@ public class MainWindow {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ChangeCard("Gestió Cançons");
+				PresentationManager.goToCard(GestioCanconsPanel.class.getSimpleName());
 			}
 		});
 		panel_2.add(btnNewButton);
@@ -109,7 +95,7 @@ public class MainWindow {
 			@Override
 			public void mouseClicked(MouseEvent e) 
 			{
-				ChangeCard("Gestió Usuaris");
+				PresentationManager.goToCard(GestioUsuarisPanel.class.getSimpleName());
 			}
 		});
 		panel_3.add(btnGestionarUsuaris);
@@ -123,17 +109,17 @@ public class MainWindow {
 		panelBotonesIzquierda.add(panel_5);
 		panel_5.setLayout(new BoxLayout(panel_5, BoxLayout.X_AXIS));
 		
-		JButton btnRecomanacions = new JButton("Recomanacions");
-		btnRecomanacions.addMouseListener(new MouseAdapter() {
+		JButton btnGenerarLlistes = new JButton("Generar llistes");
+		btnGenerarLlistes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ChangeCard("Recomanacions");
+				PresentationManager.goToCard(GenerarLlistesPanel.class.getSimpleName());
 			}
 		});
-		panel_5.add(btnRecomanacions);
-		btnRecomanacions.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRecomanacions.setMaximumSize(new Dimension(999, 25));
-		btnRecomanacions.setAlignmentY(0.0f);
+		panel_5.add(btnGenerarLlistes);
+		btnGenerarLlistes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnGenerarLlistes.setMaximumSize(new Dimension(999, 25));
+		btnGenerarLlistes.setAlignmentY(0.0f);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setMaximumSize(new Dimension(32000, 30));
@@ -141,11 +127,11 @@ public class MainWindow {
 		panelBotonesIzquierda.add(panel_4);
 		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
 		
-		JButton btnEstadstiques = new JButton("Estadístiques");
+		JButton btnEstadstiques = new JButton("Estadistiques");
 		btnEstadstiques.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ChangeCard("Estadístiques");
+				PresentationManager.goToCard(EstadistiquesPanel.class.getSimpleName());
 			}
 		});
 		panel_4.add(btnEstadstiques);
@@ -163,12 +149,12 @@ public class MainWindow {
 		panelBotonesAbajo.add(panel_1);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
 		
-		JButton credits = new JButton("Crèdits");
+		JButton credits = new JButton("Credits");
 		credits.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ChangeCard("Crèdits");
-				WarningDialogue.show("Ostia!", "Estás mirando los créditos...");
+				PresentationManager.goToCard(CreditsPanel.class.getSimpleName());
+				//WarningDialog.show("Ostia!", "Estás mirando los créditos...");
 			}
 		});
 		credits.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -192,23 +178,15 @@ public class MainWindow {
 			}
 		});
 		panel.add(sortir);
+		
+		JPanel GestioCancons = new JPanel();
+		frmYoutube.getContentPane().add(GestioCancons, "name_1966631645589");
+		GestioCancons.setLayout(new BorderLayout(0, 0));
 
 		GestioCanconsPanel gcp = new GestioCanconsPanel();
 		GestioUsuarisPanel gup = new GestioUsuarisPanel();
-		RecomanacionsPanel recp = new RecomanacionsPanel();
+		GenerarLlistesPanel recp = new GenerarLlistesPanel();
 		EstadistiquesPanel estp = new EstadistiquesPanel();
 		CreditsPanel credp = new CreditsPanel();
-	}
-	
-	public static void ChangeCard(String cardName)
-	{
-		CardLayout cl = (CardLayout) (frmYoutube.getContentPane().getLayout());
-		cl.show(frmYoutube.getContentPane(), cardName);
-		
-		if(!cardName.equals("Main"))
-		{
-			frmYoutube.setTitle(title + " - " + cardName);
-		}
-		else frmYoutube.setTitle(title); 
 	}
 }

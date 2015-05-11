@@ -13,8 +13,9 @@ import javax.swing.border.EmptyBorder;
 
 public class TemplatePanel extends JPanel
 {
-	public TemplatePanel(String name)
+	public TemplatePanel()
 	{
+		String name = getClass().getSimpleName(); 
 		setName(name);
 		MainWindow.frmYoutube.getContentPane().add(this, name);
 		setLayout(new BorderLayout(0, 0));
@@ -29,7 +30,7 @@ public class TemplatePanel extends JPanel
 			@Override
 			public void mouseClicked(MouseEvent e) 
 			{
-				MainWindow.ChangeCard("Main");
+				PresentationManager.goBack();
 			}
 		});
 		btnEnrerepanel.setHorizontalAlignment(SwingConstants.LEFT);

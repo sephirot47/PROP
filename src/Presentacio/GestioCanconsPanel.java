@@ -4,6 +4,6 @@ public class GestioCanconsPanel extends TemplatePanel
 {
 	public GestioCanconsPanel()
 	{
-		super("Gestió Cançons");
+		super();
 	}
 }
