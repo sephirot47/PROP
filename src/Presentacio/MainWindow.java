@@ -47,7 +47,7 @@ public class MainWindow
 		frmYoutube = new JFrame();
 		frmYoutube.setResizable(false);
 		frmYoutube.setTitle(title);
-		frmYoutube.setBounds(100, 100, 1000, 500);
+		frmYoutube.setBounds(100, 100, 1000, 600);
 		frmYoutube.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmYoutube.getContentPane().setLayout(new CardLayout(0, 0));
 		

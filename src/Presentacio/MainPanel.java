@@ -42,17 +42,23 @@ public class MainPanel extends JPanel {
 	 */
 	public MainPanel() 
 	{
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		JPanel Main = new JPanel();
+		Main.setPreferredSize(new Dimension(1000, 10));
+		Main.setMinimumSize(new Dimension(1000, 10));
 		Main.setName("Main");
-		add(Main, "Main");
+		add(Main);
 		Main.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelCosaArriba = new JPanel();
+		panelCosaArriba.setPreferredSize(new Dimension(1000, 166));
 		Main.add(panelCosaArriba, BorderLayout.NORTH);
 		FlowLayout fl_panelCosaArriba = (FlowLayout) panelCosaArriba.getLayout();
 		fl_panelCosaArriba.setVgap(100);
 		
 		JPanel panelBotonesIzquierda = new JPanel();
+		panelBotonesIzquierda.setMinimumSize(new Dimension(10, 0));
+		panelBotonesIzquierda.setPreferredSize(new Dimension(200, 200));
 		Main.add(panelBotonesIzquierda, BorderLayout.WEST);
 		panelBotonesIzquierda.setBorder(new EmptyBorder(10, 10, 0, 0));
 		panelBotonesIzquierda.setLayout(new BoxLayout(panelBotonesIzquierda, BoxLayout.Y_AXIS));
