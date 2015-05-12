@@ -2,9 +2,14 @@ package Presentacio;
 
 import java.awt.CardLayout;
 import java.awt.EventQueue;
+import java.util.ArrayList;
 import java.util.Stack;
 
 import javax.swing.JPanel;
+
+import Domini.Pair;
+import Domini.User;
+import Domini.UserManager;
 
 public class PresentationManager 
 {
@@ -29,6 +34,26 @@ public class PresentationManager
 				}
 			}
 		});
+	}
+	
+	public static void initialize()
+	{
+		PresentationManager.goToCard(MainPanel.class.getSimpleName());
+	}
+	
+	public static ArrayList<String> getUsersNames()
+	{
+		return UserManager.getUsersNames();
+	}
+	
+	public static int getUserAge(String username)
+	{
+		return UserManager.getUserAge(username);
+	}
+	
+	public static ArrayList<Pair<String, Long>> getUserReproductions(String username) throws Exception
+	{
+		return UserManager.getUserReproductions(username);
 	}
 	
 	public static void goToCard(String cardName)

@@ -57,6 +57,6 @@ public class MainWindow
 		ViewPanel vp = new ViewPanel();
 		frmYoutube.getContentPane().add(vp, ViewPanel.class.getSimpleName());
 		
-		PresentationManager.goToCard(MainPanel.class.getSimpleName());
+		PresentationManager.initialize();
 	}
 }

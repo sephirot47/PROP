@@ -2,17 +2,34 @@ package Presentacio;
 
 import javax.swing.JPanel;
 import java.awt.Dimension;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
+
+import Domini.Pair;
+import Domini.UserManager;
+
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class GestioUsuarisPanel extends JPanel
 {
-	private JTextField txtBuscar;
+	final private JTextField txtBuscar;
+	final private JLabel labelNomValue, labelEdatValue;
+	final private JList listUsers, listReproductions;
+	
 	public GestioUsuarisPanel()
 	{
 		super();
@@ -25,14 +42,38 @@ public class GestioUsuarisPanel extends JPanel
 		panelUsers.setLayout(null);
 		
 		txtBuscar = new JTextField();
+		txtBuscar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) 
+			{
+				
+				new Thread(new Runnable()
+				{
+					public void run() 
+					{
+						try{ Thread.sleep(100); } catch(Exception e){}
+						refreshUserList();
+					}
+				}
+                ).start();
+			}
+		});
 		txtBuscar.setBounds(12, 36, 216, 19);
 		panelUsers.add(txtBuscar);
 		txtBuscar.setColumns(10);
 		
-		JList list = new JList();
-		list.setBorder(new LineBorder(new Color(0, 0, 0)));
-		list.setBounds(12, 67, 278, 369);
-		panelUsers.add(list);
+		listUsers = new JList();
+		listUsers.addListSelectionListener(new ListSelectionListener() 
+		{
+			public void valueChanged(ListSelectionEvent arg0) 
+			{
+				String username = (String) listUsers.getSelectedValue();
+				populateUserDetails(username == null ? "" : username);
+			}
+		});
+		listUsers.setBorder(new LineBorder(new Color(0, 0, 0)));
+		listUsers.setBounds(12, 67, 278, 369);
+		panelUsers.add(listUsers);
 		
 		JButton btnNouUsuari = new JButton("Nou usuari");
 		btnNouUsuari.setBounds(12, 448, 111, 25);
@@ -63,19 +104,19 @@ public class GestioUsuarisPanel extends JPanel
 		lblReproduccions.setBounds(12, 93, 119, 20);
 		panelUserDetail.add(lblReproduccions);
 		
-		JList list_1 = new JList();
-		list_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		list_1.setBounds(12, 127, 340, 304);
-		panelUserDetail.add(list_1);
+		listReproductions = new JList();
+		listReproductions.setBorder(new LineBorder(new Color(0, 0, 0)));
+		listReproductions.setBounds(12, 127, 340, 304);
+		panelUserDetail.add(listReproductions);
 		
-		JLabel labelEdatValue = new JLabel("20");
+		labelEdatValue = new JLabel("-");
 		labelEdatValue.setFont(new Font("Dialog", Font.PLAIN, 12));
 		labelEdatValue.setBounds(72, 61, 48, 20);
 		panelUserDetail.add(labelEdatValue);
 		
-		JLabel labelNomValue = new JLabel("Victor");
+		labelNomValue = new JLabel("-");
 		labelNomValue.setFont(new Font("Dialog", Font.PLAIN, 12));
-		labelNomValue.setBounds(72, 33, 48, 20);
+		labelNomValue.setBounds(72, 33, 198, 20);
 		panelUserDetail.add(labelNomValue);
 		
 		JButton buttonEditarUsuari = new JButton("Editar usuari");
@@ -89,5 +130,69 @@ public class GestioUsuarisPanel extends JPanel
 		JLabel lblDetallsUsuari = new JLabel("Detalls usuari:");
 		lblDetallsUsuari.setBounds(122, 0, 114, 20);
 		panelUserDetail.add(lblDetallsUsuari);
+		
+		try 
+		{
+			UserManager.loadUsers();
+		} 
+		catch (Exception e) 
+		{
+			WarningDialog.show("Error", "Could not load users. File not found.");
+			e.printStackTrace();
+		}
+		
+		refreshUserList();
+	}
+	
+	public void refreshUserList()
+	{	
+		DefaultListModel dlm = new DefaultListModel();
+		dlm.clear();
+
+		ArrayList<String> names = PresentationManager.getUsersNames();
+		Collections.sort(names);
+		
+		for(String name : names)
+		{
+			String search = txtBuscar.getText();
+			boolean addIt = search.equals("") || name.contains(search);
+			if(addIt) dlm.addElement(name);
+		}
+		
+		listUsers.setModel(dlm);
+
+		if(listUsers.getModel().getSize() > 0)
+			listUsers.setSelectedIndex(0);
+	}
+	
+	public void populateUserDetails(String username)
+	{
+		DefaultListModel dlm = new DefaultListModel();
+		dlm.clear();
+
+		int userAge = PresentationManager.getUserAge(username);
+		labelNomValue.setText(username.equals("") ? "-" : username);
+		labelEdatValue.setText(userAge == 0 ? "-" : String.valueOf(userAge));
+		
+		ArrayList<Pair<String, Long>> repros = new ArrayList<Pair<String, Long>>();
+		try 
+		{
+			repros = PresentationManager.getUserReproductions(username);
+		} 
+		catch (Exception e) 
+		{
+			WarningDialog.show("Error", "Could not load user reproductions. File not found.");
+			e.printStackTrace();
+		}
+		
+		if(repros != null)
+		{
+			for(Pair<String, Long> r : repros)
+			{
+				dlm.addElement(r.getFirst() + ", " + String.valueOf(r.getSecond()) );
+			}
+		}
+		
+		listReproductions.setModel(dlm);
 	}
 }

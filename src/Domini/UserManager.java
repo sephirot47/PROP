@@ -11,6 +11,33 @@ public class UserManager
 {
 	private static Set<User> users = new HashSet<User>();
 	
+	public static void loadUsers() throws Exception
+	{
+		users.clear();
+		
+		if(users.size() == 0)
+		{
+			ArrayList<User> usersArray = new ArrayList<User>();
+			usersArray = UserManager.getUsersArray("data/users/users.txt", "");
+			
+			for(User u : usersArray)
+			{
+				users.add(u);
+			}
+		}
+	}
+
+	public static void addUsersFrom(String filepath) throws Exception
+	{
+		ArrayList<User> usersArray = new ArrayList<User>();
+		usersArray = UserManager.getUsersArray(filepath, "");
+		
+		for(User u : usersArray)
+		{
+			users.add(u);
+		}
+	}
+	
 	public static Set<User> getUsers(String filepath, String reprosDir) throws Exception
 	{
 		users.clear();
@@ -26,6 +53,42 @@ public class UserManager
 			}
 		}
 		return users;
+	}
+	
+	public static ArrayList<String> getUsersNames()
+	{
+		ArrayList<String> list = new ArrayList<String>();
+		for(User u : users)
+		{
+			list.add(u.getName());
+		}
+		return list;
+	}
+	
+	public static int getUserAge(String username)
+	{
+		for(User u : users)
+		{
+			if(u.getName().equals(username))
+				return u.getAge();
+		}
+		return 0;
+	}
+	
+	public static ArrayList<Pair<String, Long>> getUserReproductions(String username) throws Exception
+	{
+		ArrayList<Pair<String, Long>> result = new ArrayList<Pair<String, Long>>();
+		for(User u : users)
+		{
+			if(u.getName().equals(username))
+			{
+				ArrayList<Reproduction> repros = getReproductions("data/reproductions/" + username + "Reproductions.txt");
+				for(Reproduction r : repros)
+					result.add(new Pair<String, Long>(r.getSongAuthor() + ", " + r.getSongTitle(), r.getTime()));
+				return result;
+			}
+		}
+		return null;
 	}
 	
 	 public static void saveUser(String filepath, User u) throws IOException
@@ -62,10 +125,22 @@ public class UserManager
 	    	}
 	    }
 	    
-	    public static void saveUsers(String filepath, ArrayList<User> songs) throws IOException
+
+	    public static void saveCurrentUsers() throws IOException
 	    {
 	    	ArrayList<String> fileLines = new ArrayList<String>();
-	    	for(User u : songs)
+	    	for(User u : users)
+	    	{
+	    		String songLine = u.getName() + ";" + u.getAge();
+	    		fileLines.add(songLine);
+	    	}
+	    	FileManager.saveData("data/users/users.txt", fileLines);
+	    }
+	 
+	    public static void saveUsers(String filepath, ArrayList<User> users) throws IOException
+	    {
+	    	ArrayList<String> fileLines = new ArrayList<String>();
+	    	for(User u : users)
 	    	{
 	    		String songLine = u.getName() + ";" + u.getAge();
 	    		fileLines.add(songLine);
@@ -149,14 +224,17 @@ public class UserManager
 			{
 				User u = UserManager.getUser(line);
 				
-				try //Si no existeix el seu arxiu de repros pues no te repros
-				{ 
-					//Afegim al user llegit les reproduccions corresponents
-					String reproductionsFilepath = reprosDir + "/" + u.getName() + "Reproductions.txt";
-					ArrayList<Reproduction> userReproductions = UserManager.getReproductions(reproductionsFilepath);
-					u.addReproductions(userReproductions);
+				if(!reprosDir.equals(""))
+				{
+					try //Si no existeix el seu arxiu de repros pues no te repros
+					{ 
+						//Afegim al user llegit les reproduccions corresponents
+						String reproductionsFilepath = reprosDir + "/" + u.getName() + "Reproductions.txt";
+						ArrayList<Reproduction> userReproductions = UserManager.getReproductions(reproductionsFilepath);
+						u.addReproductions(userReproductions);
+					}
+					catch(Exception e){}
 				}
-				catch(Exception e){}
 				
 				users.add(u);
 			}
