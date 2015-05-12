@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.FlowLayout;
+
+import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
 import javax.swing.BoxLayout;
 import javax.swing.JToolBar;
@@ -14,16 +16,28 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.EmptyBorder;
 import java.awt.Dimension;
 import javax.swing.JLabel;
-import javax.swing.JSlider;
 import java.awt.Font;
 import java.awt.Cursor;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
 
 public class GenerarLlistesPanel extends JPanel {
 
+	JLabel labelSliderDuracio = null, 
+			labelSliderAny = null, 
+			labelSliderEstil = null,
+			labelSliderPublic = null,
+			labelSliderProximitat = null,
+			labelSliderAutor = null;
+	
 	public GenerarLlistesPanel()
 	{
 		super();
-		setPreferredSize(new Dimension(1000, 400));
+		setPreferredSize(new Dimension(1100, 410));
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelLeft = new JPanel();
@@ -31,12 +45,13 @@ public class GenerarLlistesPanel extends JPanel {
 		add(panelLeft, BorderLayout.WEST);
 		
 		JPanel panelCriteris = new JPanel();
-		panelCriteris.setPreferredSize(new Dimension(400, 470));
+		panelCriteris.setPreferredSize(new Dimension(410, 470));
 		panelCriteris.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelLeft.add(panelCriteris);
 		panelCriteris.setLayout(new BoxLayout(panelCriteris, BoxLayout.Y_AXIS));
 		
 		JPanel panelLabelCriteris = new JPanel();
+		panelLabelCriteris.setBackground(Color.LIGHT_GRAY);
 		panelLabelCriteris.setMaximumSize(new Dimension(32767, 30));
 		panelCriteris.add(panelLabelCriteris);
 		panelLabelCriteris.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -62,7 +77,7 @@ public class GenerarLlistesPanel extends JPanel {
 		panelDuracio.add(lblCanonsAmbRelacio);
 		lblCanonsAmbRelacio.setFont(new Font("Dialog", Font.PLAIN, 12));
 		
-		JSlider sliderDuracio = new JSlider();
+		final JSlider sliderDuracio = new JSlider();
 		sliderDuracio.setBounds(0, 40, 332, 16);
 		panelDuracio.add(sliderDuracio);
 		sliderDuracio.setMajorTickSpacing(1);
@@ -70,7 +85,7 @@ public class GenerarLlistesPanel extends JPanel {
 		sliderDuracio.setMaximum(10);
 		sliderDuracio.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
 		
-		JLabel labelSliderDuracio = new JLabel("00");
+		labelSliderDuracio = new JLabel("10");
 		labelSliderDuracio.setBounds(350, 40, 31, 15);
 		panelDuracio.add(labelSliderDuracio);
 		labelSliderDuracio.setFont(new Font("Dialog", Font.PLAIN, 12));
@@ -89,14 +104,14 @@ public class GenerarLlistesPanel extends JPanel {
 		lblCanonsAmbAnys.setBounds(5, 22, 374, 15);
 		panelAny.add(lblCanonsAmbAnys);
 		
-		JSlider sliderAny = new JSlider();
+		final JSlider sliderAny = new JSlider();
 		sliderAny.setMinorTickSpacing(1);
 		sliderAny.setMaximum(10);
 		sliderAny.setMajorTickSpacing(1);
 		sliderAny.setBounds(0, 40, 332, 16);
 		panelAny.add(sliderAny);
 		
-		JLabel labelSliderAny = new JLabel("00");
+		labelSliderAny = new JLabel("10");
 		labelSliderAny.setFont(new Font("Dialog", Font.PLAIN, 12));
 		labelSliderAny.setBounds(350, 40, 31, 15);
 		panelAny.add(labelSliderAny);
@@ -115,14 +130,14 @@ public class GenerarLlistesPanel extends JPanel {
 		lblCanonsAmbEstil.setBounds(5, 22, 374, 15);
 		panelEstil.add(lblCanonsAmbEstil);
 		
-		JSlider sliderEstil = new JSlider();
+		final JSlider sliderEstil = new JSlider();
 		sliderEstil.setMinorTickSpacing(1);
 		sliderEstil.setMaximum(10);
 		sliderEstil.setMajorTickSpacing(1);
 		sliderEstil.setBounds(0, 40, 332, 16);
 		panelEstil.add(sliderEstil);
 		
-		JLabel labelSliderEstil = new JLabel("00");
+		labelSliderEstil = new JLabel("10");
 		labelSliderEstil.setFont(new Font("Dialog", Font.PLAIN, 12));
 		labelSliderEstil.setBounds(350, 40, 31, 15);
 		panelEstil.add(labelSliderEstil);
@@ -141,14 +156,14 @@ public class GenerarLlistesPanel extends JPanel {
 		lblCanonsAmbPublic.setBounds(5, 22, 374, 15);
 		panelPublic.add(lblCanonsAmbPublic);
 		
-		JSlider sliderPublic = new JSlider();
+		final JSlider sliderPublic = new JSlider();
 		sliderPublic.setMinorTickSpacing(1);
 		sliderPublic.setMaximum(10);
 		sliderPublic.setMajorTickSpacing(1);
 		sliderPublic.setBounds(0, 40, 332, 16);
 		panelPublic.add(sliderPublic);
 		
-		JLabel labelSliderPublic = new JLabel("00");
+		labelSliderPublic = new JLabel("10");
 		labelSliderPublic.setFont(new Font("Dialog", Font.PLAIN, 12));
 		labelSliderPublic.setBounds(350, 40, 31, 15);
 		panelPublic.add(labelSliderPublic);
@@ -167,14 +182,14 @@ public class GenerarLlistesPanel extends JPanel {
 		lblCanonsEscoltadesNormalment.setBounds(5, 22, 374, 15);
 		panelProximitat.add(lblCanonsEscoltadesNormalment);
 		
-		JSlider sliderProximitat = new JSlider();
+		final JSlider sliderProximitat = new JSlider();
 		sliderProximitat.setMinorTickSpacing(1);
 		sliderProximitat.setMaximum(10);
 		sliderProximitat.setMajorTickSpacing(1);
 		sliderProximitat.setBounds(0, 40, 332, 16);
 		panelProximitat.add(sliderProximitat);
 		
-		JLabel labelSliderProximitat = new JLabel("00");
+		labelSliderProximitat = new JLabel("10");
 		labelSliderProximitat.setFont(new Font("Dialog", Font.PLAIN, 12));
 		labelSliderProximitat.setBounds(350, 40, 31, 15);
 		panelProximitat.add(labelSliderProximitat);
@@ -193,26 +208,82 @@ public class GenerarLlistesPanel extends JPanel {
 		lblCanonsAmbMateix.setBounds(5, 22, 374, 15);
 		panelAutor.add(lblCanonsAmbMateix);
 		
-		JSlider sliderAutor = new JSlider();
+		final JSlider sliderAutor = new JSlider();
 		sliderAutor.setMinorTickSpacing(1);
 		sliderAutor.setMaximum(10);
 		sliderAutor.setMajorTickSpacing(1);
 		sliderAutor.setBounds(0, 40, 332, 16);
 		panelAutor.add(sliderAutor);
 		
-		JLabel labelSliderAutor = new JLabel("00");
+		labelSliderAutor = new JLabel("10");
 		labelSliderAutor.setFont(new Font("Dialog", Font.PLAIN, 12));
 		labelSliderAutor.setBounds(350, 40, 31, 15);
 		panelAutor.add(labelSliderAutor);
 		
 		JPanel panelRight = new JPanel();
+		panelRight.setBorder(new EmptyBorder(40, 40, 40, 40));
 		add(panelRight, BorderLayout.EAST);
+		panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(250, 410));
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelRight.add(panel);
 		
 		JButton btnNewButton = new JButton("Generar");
+		panel.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		panelRight.add(btnNewButton);
+		
+
+		sliderDuracio.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) 
+			{
+				if(labelSliderDuracio != null)
+					labelSliderDuracio.setText( String.valueOf(sliderDuracio.getValue()) );
+			}
+		});
+
+		sliderAny.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) 
+			{
+				if(labelSliderAny != null)
+					labelSliderAny.setText( String.valueOf(sliderAny.getValue()) );
+			}
+		});
+
+		sliderEstil.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) 
+			{
+				if(labelSliderEstil != null)
+					labelSliderEstil.setText( String.valueOf(sliderEstil.getValue()) );
+			}
+		});
+
+		sliderPublic.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) 
+			{
+				if(labelSliderPublic != null)
+					labelSliderPublic.setText( String.valueOf(sliderPublic.getValue()) );
+			}
+		});
+
+		sliderProximitat.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) 
+			{
+				if(labelSliderProximitat!= null)
+					labelSliderProximitat.setText( String.valueOf(sliderProximitat.getValue()) );
+			}
+		});
+
+		sliderAutor.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) 
+			{
+				if(labelSliderAutor!= null)
+					labelSliderAutor.setText( String.valueOf(sliderAutor.getValue()) );
+			}
+		});
 	}
 }
