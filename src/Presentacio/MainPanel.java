@@ -33,6 +33,7 @@ import javax.swing.JLabel;
 
 
 import java.awt.event.ActionListener;
+import java.awt.Color;
 
 
 public class MainPanel extends JPanel {
@@ -44,23 +45,25 @@ public class MainPanel extends JPanel {
 	{
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		JPanel Main = new JPanel();
-		Main.setPreferredSize(new Dimension(1000, 10));
+		Main.setPreferredSize(new Dimension(800, 10));
 		Main.setMinimumSize(new Dimension(1000, 10));
 		Main.setName("Main");
 		add(Main);
 		Main.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelCosaArriba = new JPanel();
-		panelCosaArriba.setPreferredSize(new Dimension(1000, 166));
+		panelCosaArriba.setBorder(new EmptyBorder(20, 20, 20, 20));
+		panelCosaArriba.setBackground(Color.LIGHT_GRAY);
+		panelCosaArriba.setForeground(Color.BLUE);
+		panelCosaArriba.setPreferredSize(new Dimension(1000, 250));
 		Main.add(panelCosaArriba, BorderLayout.NORTH);
-		FlowLayout fl_panelCosaArriba = (FlowLayout) panelCosaArriba.getLayout();
-		fl_panelCosaArriba.setVgap(100);
+		panelCosaArriba.setLayout(new BoxLayout(panelCosaArriba, BoxLayout.X_AXIS));
 		
 		JPanel panelBotonesIzquierda = new JPanel();
 		panelBotonesIzquierda.setMinimumSize(new Dimension(10, 0));
 		panelBotonesIzquierda.setPreferredSize(new Dimension(200, 200));
 		Main.add(panelBotonesIzquierda, BorderLayout.WEST);
-		panelBotonesIzquierda.setBorder(new EmptyBorder(10, 10, 0, 0));
+		panelBotonesIzquierda.setBorder(new EmptyBorder(50, 10, 0, 0));
 		panelBotonesIzquierda.setLayout(new BoxLayout(panelBotonesIzquierda, BoxLayout.Y_AXIS));
 		
 		JPanel panel_2 = new JPanel();
@@ -138,13 +141,17 @@ public class MainPanel extends JPanel {
 		btnEstadstiques.setAlignmentY(0.0f);
 		
 		JPanel panelBotonesAbajo = new JPanel();
+		panelBotonesAbajo.setPreferredSize(new Dimension(800, 50));
+		panelBotonesAbajo.setMaximumSize(new Dimension(800, 50));
 		Main.add(panelBotonesAbajo, BorderLayout.SOUTH);
 		panelBotonesAbajo.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panelBotonesAbajo.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setMaximumSize(new Dimension(100, 50));
+		panel_1.setPreferredSize(new Dimension(100, 30));
 		panel_1.setAlignmentX(0.0f);
-		panelBotonesAbajo.add(panel_1);
+		panelBotonesAbajo.add(panel_1, BorderLayout.WEST);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
 		
 		JButton credits = new JButton("Credits");
@@ -159,13 +166,12 @@ public class MainPanel extends JPanel {
 		panel_1.add(credits);
 		
 		JPanel panel = new JPanel();
-		panel.setAlignmentX(1.0f);
+		panel.setMaximumSize(new Dimension(200, 30));
+		panel.setAlignmentX(0.0f);
 		panelBotonesAbajo.add(panel, BorderLayout.EAST);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		
 		
 		JButton sortir = new JButton("Desar sessió i sortir");
-		sortir.setAlignmentX(1.0f);
 		sortir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		sortir.setHorizontalAlignment(SwingConstants.RIGHT);
 		sortir.addMouseListener(new MouseAdapter() {
@@ -175,6 +181,7 @@ public class MainPanel extends JPanel {
 				System.exit(0);
 			}
 		});
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		panel.add(sortir);
 	}
 
