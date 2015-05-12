@@ -20,6 +20,7 @@ public class User
     public User(String name, int age, ArrayList<Reproduction> r) throws Exception
     {
     	checkUsername(name);
+    	checkAge(age);
         this.name = name;
         this.age = age;
         reproductions = new ArrayList<Reproduction>();
@@ -29,6 +30,7 @@ public class User
     public User(String name, int age) throws Exception
     {
     	checkUsername(name);
+    	checkAge(age);
         this.name = name;
         this.age = age;
         reproductions = new ArrayList<Reproduction>();
@@ -71,8 +73,16 @@ public class User
 			String characters = ""; 
 			for(String c2 : forbiddenCharacters) 
 				characters += "\"" + c2 + "\",  ";
-			throw new Exception("A user can't contain any of these characters: " + characters);
+			throw new Exception("Un nom d'usuari nomes pot contenir caracters alfanumerics");
 		}
+    }
+    
+    private void checkAge(int age) throws Exception
+    {
+        if(age <= 0)
+        {
+        	throw new Exception("La edat d'un usuari ha de ser > 0");
+        }
     }
     
     public boolean equals(Object obj)

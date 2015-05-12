@@ -29,13 +29,12 @@ import java.awt.Cursor;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-public class GestioUsuarisPanel extends JPanel
+
+public class EditarUsuarisPanel extends JPanel
 {
-	final private JTextField txtBuscar;
-	final private JLabel labelNomValue, labelEdatValue;
-	final private JList listUsers, listReproductions;
+	final private JList listReproductions;
 	
-	public GestioUsuarisPanel()
+	public EditarUsuarisPanel()
 	{
 		super();
 		addComponentListener(new ComponentAdapter() {
@@ -48,68 +47,8 @@ public class GestioUsuarisPanel extends JPanel
 		setPreferredSize(new Dimension(800, 561));
 		setLayout(null);
 		
-		JPanel panelUsers = new JPanel();
-		panelUsers.setBounds(30, 29, 311, 497);
-		add(panelUsers);
-		panelUsers.setLayout(null);
-		
-		txtBuscar = new JTextField();
-		txtBuscar.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) 
-			{
-				
-				new Thread(new Runnable()
-				{
-					public void run() 
-					{
-						try{ Thread.sleep(100); } catch(Exception e){}
-						refreshUserList();
-					}
-				}
-                ).start();
-			}
-		});
-		txtBuscar.setBounds(12, 36, 216, 19);
-		panelUsers.add(txtBuscar);
-		txtBuscar.setColumns(10);
-		
-		listUsers = new JList();
-		listUsers.addListSelectionListener(new ListSelectionListener() 
-		{
-			public void valueChanged(ListSelectionEvent arg0) 
-			{
-				String username = (String) listUsers.getSelectedValue();
-				populateUserDetails(username == null ? "" : username);
-			}
-		});
-		listUsers.setBorder(new LineBorder(new Color(0, 0, 0)));
-		listUsers.setBounds(12, 67, 278, 369);
-		panelUsers.add(listUsers);
-		
-		JButton btnNouUsuari = new JButton("Nou usuari");
-		btnNouUsuari.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNouUsuari.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) 
-			{
-				PresentationManager.goToCard(NouUsuariPanel.class.getSimpleName());
-			}
-		});
-		btnNouUsuari.setBounds(12, 448, 111, 25);
-		panelUsers.add(btnNouUsuari);
-		
-		JButton btnImportarFitxer = new JButton("Importar fitxer");
-		btnImportarFitxer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnImportarFitxer.setBounds(135, 448, 161, 25);
-		panelUsers.add(btnImportarFitxer);
-		
-		JLabel lblBuscar = new JLabel("Buscar usuari:");
-		lblBuscar.setBounds(12, 12, 145, 20);
-		panelUsers.add(lblBuscar);
-		
 		JPanel panelUserDetail = new JPanel();
-		panelUserDetail.setBounds(408, 29, 364, 497);
+		panelUserDetail.setBounds(0, 30, 364, 497);
 		add(panelUserDetail);
 		panelUserDetail.setLayout(null);
 		
@@ -130,16 +69,6 @@ public class GestioUsuarisPanel extends JPanel
 		listReproductions.setBounds(12, 127, 340, 304);
 		panelUserDetail.add(listReproductions);
 		
-		labelEdatValue = new JLabel("-");
-		labelEdatValue.setFont(new Font("Dialog", Font.PLAIN, 12));
-		labelEdatValue.setBounds(72, 61, 48, 20);
-		panelUserDetail.add(labelEdatValue);
-		
-		labelNomValue = new JLabel("-");
-		labelNomValue.setFont(new Font("Dialog", Font.PLAIN, 12));
-		labelNomValue.setBounds(72, 33, 198, 20);
-		panelUserDetail.add(labelNomValue);
-		
 		JButton buttonEditarUsuari = new JButton("Editar usuari");
 		buttonEditarUsuari.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonEditarUsuari.setBounds(12, 443, 161, 25);
@@ -153,6 +82,11 @@ public class GestioUsuarisPanel extends JPanel
 		JLabel lblDetallsUsuari = new JLabel("Detalls usuari:");
 		lblDetallsUsuari.setBounds(122, 0, 114, 20);
 		panelUserDetail.add(lblDetallsUsuari);
+		
+		JPanel panelUsers = new JPanel();
+		panelUsers.setBounds(400, 29, 311, 497);
+		add(panelUsers);
+		panelUsers.setLayout(null);
 		
 		try 
 		{
@@ -181,8 +115,6 @@ public class GestioUsuarisPanel extends JPanel
 			boolean addIt = search.equals("") || name.contains(search);
 			if(addIt) dlm.addElement(name);
 		}
-		
-		listUsers.setModel(dlm);
 
 		if(listUsers.getModel().getSize() > 0)
 			listUsers.setSelectedIndex(0);

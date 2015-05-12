@@ -41,6 +41,11 @@ public class PresentationManager
 		PresentationManager.goToCard(MainPanel.class.getSimpleName());
 	}
 	
+	public static void createUser(String username, int edat) throws Exception
+	{
+		UserManager.createUser(username, edat);
+	}
+	
 	public static ArrayList<String> getUsersNames()
 	{
 		return UserManager.getUsersNames();

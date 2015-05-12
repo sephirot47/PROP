@@ -1,4 +1,6 @@
-victor;20;
-jfons;40;
-aina;10;
-abraham;30;
+aina;10
+asd;23
+Jordi Turmo;18
+victor;20
+abraham;30
+jfons;40

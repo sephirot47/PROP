@@ -53,14 +53,14 @@ public class ViewPanel extends JPanel {
 		GenerarLlistesPanel recp = new GenerarLlistesPanel();
 		EstadistiquesPanel estp = new EstadistiquesPanel();
 		CreditsPanel credp = new CreditsPanel();
-		PanelPrueba ppp = new PanelPrueba();
+		NouUsuariPanel nup = new NouUsuariPanel();
 		
 		cardContainer.add(gcp, GestioCanconsPanel.class.getSimpleName());
 		cardContainer.add(gup, GestioUsuarisPanel.class.getSimpleName());
 		cardContainer.add(recp, GenerarLlistesPanel.class.getSimpleName());
 		cardContainer.add(estp, EstadistiquesPanel.class.getSimpleName());
 		cardContainer.add(credp, CreditsPanel.class.getSimpleName());
-		cardContainer.add(ppp, PanelPrueba.class.getSimpleName());
+		cardContainer.add(nup, NouUsuariPanel.class.getSimpleName());
 	}
 
 }

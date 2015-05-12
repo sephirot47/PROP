@@ -38,6 +38,24 @@ public class UserManager
 		}
 	}
 	
+	public static void createUser(String username, int edat) throws Exception 
+	{
+		for(User u: users)
+		{
+			if(u.getName().equals(username))
+			{
+				Exception e = new Exception("El nom d'usuari ja existeix");
+			}
+		}
+		
+		User u = new User(username, edat);
+		users.add(u);
+		
+		saveReproductions("data/reproductions/" + username + "Reproductions.txt", new ArrayList<Reproduction>());
+		
+		saveCurrentUsers();
+	}
+	
 	public static Set<User> getUsers(String filepath, String reprosDir) throws Exception
 	{
 		users.clear();
