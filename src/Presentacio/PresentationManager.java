@@ -67,6 +67,12 @@ public class PresentationManager
 		windowHistory.push(cardName);
 	}
 	
+	public static void goToEditUsuarisPanel(String username)
+	{
+		EditarUsuarisPanel.currentUsername = username;
+		goToCard(EditarUsuarisPanel.class.getSimpleName());
+	}
+	
 	private static void changeCard(String cardName)
 	{
 		if(cardName.equals("MainPanel"))

@@ -28,11 +28,16 @@ import java.awt.event.MouseEvent;
 import java.awt.Cursor;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import javax.swing.ListSelectionModel;
 
 
 public class EditarUsuarisPanel extends JPanel
 {
+	public static String currentUsername = "";
 	final private JList listReproductions;
+	private JTextField textNom;
+	private JTextField textEdat;
+	private JButton btnEliminarReproduccio;
 	
 	public EditarUsuarisPanel()
 	{
@@ -41,14 +46,14 @@ public class EditarUsuarisPanel extends JPanel
 			@Override
 			public void componentShown(ComponentEvent e) 
 			{
-					refreshUserList();
+					refreshAll();
 			}
 		});
 		setPreferredSize(new Dimension(800, 561));
 		setLayout(null);
 		
 		JPanel panelUserDetail = new JPanel();
-		panelUserDetail.setBounds(0, 30, 364, 497);
+		panelUserDetail.setBounds(0, 30, 364, 498);
 		add(panelUserDetail);
 		panelUserDetail.setLayout(null);
 		
@@ -65,74 +70,82 @@ public class EditarUsuarisPanel extends JPanel
 		panelUserDetail.add(lblReproduccions);
 		
 		listReproductions = new JList();
+		listReproductions.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		listReproductions.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) 
+			{
+				System.out.println(arg0.getFirstIndex());
+			}
+		});
 		listReproductions.setBorder(new LineBorder(new Color(0, 0, 0)));
 		listReproductions.setBounds(12, 127, 340, 304);
 		panelUserDetail.add(listReproductions);
 		
-		JButton buttonEditarUsuari = new JButton("Editar usuari");
-		buttonEditarUsuari.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		buttonEditarUsuari.setBounds(12, 443, 161, 25);
-		panelUserDetail.add(buttonEditarUsuari);
-		
-		JButton btnEliminarUsuari = new JButton("Eliminar usuari");
-		btnEliminarUsuari.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEliminarUsuari.setBounds(191, 443, 161, 25);
-		panelUserDetail.add(btnEliminarUsuari);
+		btnEliminarReproduccio = new JButton("Eliminar reproduccio");
+		btnEliminarReproduccio.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				deleteSelectedReproduction();
+			}
+		});
+		btnEliminarReproduccio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnEliminarReproduccio.setBounds(154, 443, 198, 25);
+		panelUserDetail.add(btnEliminarReproduccio);
 		
 		JLabel lblDetallsUsuari = new JLabel("Detalls usuari:");
 		lblDetallsUsuari.setBounds(122, 0, 114, 20);
 		panelUserDetail.add(lblDetallsUsuari);
+		
+		textNom = new JTextField();
+		textNom.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) 
+			{
+				refreshAll();
+			}
+		});
+		textNom.setBounds(59, 34, 114, 19);
+		panelUserDetail.add(textNom);
+		textNom.setColumns(10);
+		
+		textEdat = new JTextField();
+		textEdat.setColumns(10);
+		textEdat.setBounds(59, 62, 114, 19);
+		panelUserDetail.add(textEdat);
 		
 		JPanel panelUsers = new JPanel();
 		panelUsers.setBounds(400, 29, 311, 497);
 		add(panelUsers);
 		panelUsers.setLayout(null);
 		
-		try 
-		{
-			UserManager.loadUsers();
-		} 
-		catch (Exception e) 
-		{
-			WarningDialog.show("Error", "No es troba l'arxiu de carregar usuaris");
-			e.printStackTrace();
-		}
-		
-		refreshUserList();
+		refreshAll();
 	}
 	
-	public void refreshUserList()
+	public void refreshAll()
+	{
+		refreshReproductionsList();
+		refreshTexts();
+	}
+	
+	public void refreshTexts()
+	{
+		textNom.setText(currentUsername);
+		
+		int age = PresentationManager.getUserAge(currentUsername);
+		textEdat.setText( String.valueOf(age) );
+	}
+	
+	
+	private void refreshReproductionsList()
 	{	
 		DefaultListModel dlm = new DefaultListModel();
 		dlm.clear();
-
-		ArrayList<String> names = PresentationManager.getUsersNames();
-		Collections.sort(names);
-		
-		for(String name : names)
-		{
-			String search = txtBuscar.getText();
-			boolean addIt = search.equals("") || name.contains(search);
-			if(addIt) dlm.addElement(name);
-		}
-
-		if(listUsers.getModel().getSize() > 0)
-			listUsers.setSelectedIndex(0);
-	}
-	
-	public void populateUserDetails(String username)
-	{
-		DefaultListModel dlm = new DefaultListModel();
-		dlm.clear();
-
-		int userAge = PresentationManager.getUserAge(username);
-		labelNomValue.setText(username.equals("") ? "-" : username);
-		labelEdatValue.setText(userAge == 0 ? "-" : String.valueOf(userAge));
 		
 		ArrayList<Pair<String, Long>> repros = new ArrayList<Pair<String, Long>>();
 		try 
 		{
-			repros = PresentationManager.getUserReproductions(username);
+			repros = PresentationManager.getUserReproductions(currentUsername);
 		} 
 		catch (Exception e) 
 		{
@@ -149,5 +162,58 @@ public class EditarUsuarisPanel extends JPanel
 		}
 		
 		listReproductions.setModel(dlm);
+		refreshDeleteReproductionsButton();
+	}
+	
+	private void refreshDeleteReproductionsButton()
+	{
+		DefaultListModel dlm = ((DefaultListModel)listReproductions.getModel());
+
+		if(dlm.getSize() <= 0) btnEliminarReproduccio.setEnabled(false);
+		else
+		{
+			listReproductions.setSelectedIndex(0);
+			btnEliminarReproduccio.setEnabled(true);
+		}
+	}
+	
+	private void deleteSelectedReproduction()
+	{
+		int firstIndex = listReproductions.getMinSelectionIndex();
+		int lastIndex = listReproductions.getMaxSelectionIndex();
+		DefaultListModel dlm = ((DefaultListModel)listReproductions.getModel());
+		if(firstIndex >= 0)
+		{
+			dlm.removeRange(firstIndex, lastIndex);
+		}
+		refreshDeleteReproductionsButton();
+	}
+	
+	private void onSaveChangesClicked()
+	{
+		String name = textNom.getText();
+		int age = 0;
+		
+		try
+		{
+			age  = Integer.parseInt(textEdat.getText());
+		}
+		catch(NumberFormatException e)
+		{
+			WarningDialog.show("Error", "La edat ha de ser un numero valid.");
+			return;
+		}
+		
+		try
+		{
+			PresentationManager.createUser(name, age);	
+		}
+		catch(Exception e)
+		{
+			WarningDialog.show("Error", e.getMessage());
+			return;
+		}
+		
+		PresentationManager.goBack();
 	}
 }

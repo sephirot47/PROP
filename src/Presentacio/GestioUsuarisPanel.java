@@ -141,6 +141,17 @@ public class GestioUsuarisPanel extends JPanel
 		panelUserDetail.add(labelNomValue);
 		
 		JButton buttonEditarUsuari = new JButton("Editar usuari");
+		buttonEditarUsuari.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				String username = (String) listUsers.getSelectedValue();
+				if(listUsers.getSelectedIndex() != -1 && username != null)
+				{
+					PresentationManager.goToEditUsuarisPanel(username);
+				}
+			}
+		});
 		buttonEditarUsuari.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonEditarUsuari.setBounds(12, 443, 161, 25);
 		panelUserDetail.add(buttonEditarUsuari);

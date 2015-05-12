@@ -67,12 +67,6 @@ public class NouUsuariPanel extends JPanel {
 	void onCreateUserClicked()
 	{
 		String name = textNom.getText();
-		if(name.equals(""))
-		{
-			WarningDialog.show("Error", "El nom no pot ser buit.");
-			return;
-		}
-		
 		int age = 0;
 		
 		try

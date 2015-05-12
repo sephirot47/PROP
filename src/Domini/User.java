@@ -67,6 +67,11 @@ public class User
     
     private void checkUsername(String name) throws Exception
     {
+    	if(name.equals(""))
+    	{
+    		throw new Exception("Un nom d'usuari no pot ser buit");
+    	}
+    	
     	for(String c : forbiddenCharacters)
 		if(name.contains(c)) 
 		{
