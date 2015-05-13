@@ -8,6 +8,8 @@ import java.util.Stack;
 import javax.swing.JPanel;
 
 import Domini.Pair;
+import Domini.SolutionManager;
+import Domini.SongSolution;
 import Domini.User;
 import Domini.UserManager;
 
@@ -59,6 +61,11 @@ public class PresentationManager
 	public static ArrayList<Pair<String, Long>> getUserReproductions(String username) throws Exception
 	{
 		return UserManager.getUserReproductions(username);
+	}
+	
+	public static ArrayList<Double[]> getInfos() throws Exception
+	{
+		return SolutionManager.getInfos("data/solucions");
 	}
 	
 	public static void goToCard(String cardName)

@@ -11,6 +11,41 @@ import Persistencia.FileManager;
 
 public class SolutionManager 
 {
+	public static ArrayList<Double[]> getInfos(String SolutionsDir) throws Exception
+	{
+		ArrayList<Double[]> result = new ArrayList<Double[]>();
+		
+		ArrayList<SongSolution> solutions = new ArrayList<SongSolution>();
+		solutions = getSolutions(SolutionsDir);
+		File baseDir = new File(SolutionsDir);
+		
+		Double[] Girvan = new Double[(baseDir.listFiles()).length];
+		Double[] Clique = new Double[(baseDir.listFiles()).length];
+		Double[] Louvain = new Double[(baseDir.listFiles()).length];
+		
+		for(int i = 0; i < (baseDir.listFiles()).length; i++)
+		{
+			if(solutions.get(i).getAlg() == 'G'){
+				Girvan[i] = solutions.get(i).getTime();
+				Clique[i] = -1.0;
+				Louvain[i] = -1.0;
+			}
+			else if(solutions.get(i).getAlg() == 'L'){
+				Girvan[i] = -1.0;
+				Clique[i] = solutions.get(i).getTime();
+				Louvain[i] = -1.0;
+			}
+			else
+			{
+				Girvan[i] = -1.0;
+				Clique[i] = -1.0;
+				Louvain[i] = solutions.get(i).getTime();
+			}
+			
+		}
+		
+		return result;
+	}
 	public static ArrayList<SongSolution> getSolutions(String solutionsDir) throws Exception 
 	{
 		ArrayList<SongSolution> result = new ArrayList<SongSolution>();
