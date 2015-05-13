@@ -7,9 +7,13 @@ public class SongSolution extends Solution
 {
 	Graph<Song> entrada;
 	
-	public SongSolution(Graph<Song> entrada, Solution solution,  double genTime, String algorisme, String id)
+	public SongSolution(Graph<Song> entrada, Solution solution,  double genTime, char algorisme)
 	{
-		super(solution.getCommunities(), genTime, algorisme, id);
+		super();
+		for(Community c : solution.getCommunities()) addCommunity(c);
+		setTime(genTime);
+		setAlg(algorisme);
+		
 		this.entrada = entrada;
 	}
 

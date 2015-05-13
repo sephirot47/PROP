@@ -50,7 +50,7 @@ public class SongSolutionTest extends TestCase
 		Song s4 = new Song("AC/DC","T.N.T",1975,style,214);
 		
 		Solution songs = new Solution();
-		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
+		SongSolution so = new SongSolution(sg, songs, 0.01, 'G' );
 		
 		sg.addNode(s);
 		sg.addNode(s1);
@@ -69,10 +69,10 @@ public class SongSolutionTest extends TestCase
 		
 		Solution songs = new Solution();
 		
-		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
+		SongSolution so = new SongSolution(sg, songs, 0.01, 'G' );
 
-		so.setAlg("Just Do It");
-		assertEquals("Just Do It",so.getAlg());
+		so.setAlg('J');
+		assertEquals('J',so.getAlg());
 		
 	}
 	
@@ -106,7 +106,7 @@ public class SongSolutionTest extends TestCase
 		
 		Solution songs = new Solution();
 		
-		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
+		SongSolution so = new SongSolution(sg, songs, 0.01, 'G' );
 
 		songs.addCommunity(ss);
 		songs.addCommunity(ss2);
@@ -140,7 +140,7 @@ public class SongSolutionTest extends TestCase
 		
 		Solution songs = new Solution();
 		
-		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
+		SongSolution so = new SongSolution(sg, songs, 0.01, 'G' );
 
 		so.setTime(0.15);
 		
@@ -153,7 +153,7 @@ public class SongSolutionTest extends TestCase
 		
 		Solution songs = new Solution();
 		
-		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
+		SongSolution so = new SongSolution(sg, songs, 0.01, 'G' );
 		assertEquals("GirvanNewman", so.getAlg());
 	}
 	
@@ -163,9 +163,9 @@ public class SongSolutionTest extends TestCase
 		
 		Solution songs = new Solution();
 		
-		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
-		so.setAlg("aaaa");
-		assertEquals("aaaa", so.getAlg());
+		SongSolution so = new SongSolution(sg, songs, 0.01, 'G' );
+		so.setAlg('G');
+		assertEquals('G', so.getAlg());
 	}
 	
 	public void testGetEntrada()
@@ -184,7 +184,7 @@ public class SongSolutionTest extends TestCase
 		
 		Solution songs = new Solution();
 		
-		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
+		SongSolution so = new SongSolution(sg, songs, 0.01, 'G' );
 
 		
 		sg.addNode(s);
@@ -227,7 +227,7 @@ public class SongSolutionTest extends TestCase
 		
 		Solution songs = new Solution();
 		
-		SongSolution so = new SongSolution(sg, songs, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
+		SongSolution so = new SongSolution(sg, songs, 0.01, 'G' );
 		
 		songs.addCommunity(ss);
 		songs.addCommunity(ss2);

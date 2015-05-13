@@ -87,7 +87,11 @@ public class GirvanNewman extends Algorithm
 		}
 		
 		long genTime = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis() - startTime;
-		return new Solution(communities, genTime, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()));
+		Solution s = new Solution();
+		for(Community c : communities) s.addCommunity(c);
+		s.setTime(genTime);
+		s.setAlg('G');
+		return s;
 	}
 
 

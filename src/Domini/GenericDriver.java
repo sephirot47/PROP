@@ -434,7 +434,7 @@ public class GenericDriver
 		}
 		long genTime = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis() - startTime;
 		
-		SongSolution s = new SongSolution(songGraph, rawSolution, genTime, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()));
+		SongSolution s = new SongSolution(songGraph, rawSolution, genTime, 'G');
 		try 
 		{
 			SolutionManager.saveSolution(s, id);

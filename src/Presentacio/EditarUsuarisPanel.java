@@ -32,7 +32,6 @@ import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-
 public class EditarUsuarisPanel extends JPanel
 {
 	public static String currentUsername = "";

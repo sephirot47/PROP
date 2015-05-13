@@ -70,7 +70,7 @@ public class SolutionManagerTest  extends TestCase {
 		expectedInfo.add("3");
 		expectedInfo.add("0.01");
 		
-		SongSolution s = new SongSolution(g, comunities, 0.01, "GirvanNewman", new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()) );
+		SongSolution s = new SongSolution(g, comunities, 0.01, 'G');
 
 		SolutionManager.saveSolution(s, "test");
 		

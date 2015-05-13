@@ -46,7 +46,7 @@ public class SolutionManager
 			ArrayList<String> infoLines = FileManager.loadData(dir.getPath() + "/info.txt");
 
 			String id = new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date());
-			result.add(new SongSolution(graph, comunities, Double.parseDouble(infoLines.get(2)), infoLines.get(0), id));
+			result.add(new SongSolution(graph, comunities, Double.parseDouble(infoLines.get(2)), infoLines.get(0).charAt(0)));
 		}
 
 		return result;
@@ -66,7 +66,7 @@ public class SolutionManager
 		// arxiu de info extra
 		{
 			ArrayList<String> lines = new ArrayList<String>();
-			lines.add(s.getAlg()); // Alg usat
+			lines.add(String.valueOf(s.getAlg())); // Alg usat
 			lines.add(String.valueOf(s.getEntrada().getAllNodes().size())); // Nombre de cancons processades
 			lines.add(String.valueOf(s.getTime())); // Temps que ha tardat a generar la solucio
 			FileManager.saveData(filedir + "info.txt", lines);

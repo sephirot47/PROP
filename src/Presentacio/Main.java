@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import Domini.Clique;
 import Domini.Community;
 import Domini.GirvanNewman;
 import Domini.Graph;
 import Domini.Edge;
+import Domini.Louvain;
 import Domini.Node;
 import Domini.Solution;
 import Domini.SongSolution;
@@ -80,7 +82,7 @@ public class Main
     	System.out.println("********************* ");
     	*/
 
-    	Solution rawSolution = new GirvanNewman().getSolution(songGraph, 6); //Get el conjunt de llistes de Songs
+    	Solution rawSolution = new Clique().getSolution(songGraph); //Get el conjunt de llistes de Songs
 		int foo = 0;
 		for(Community songList : rawSolution.getCommunities())
 		{
