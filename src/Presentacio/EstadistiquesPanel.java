@@ -7,7 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import org.jgrapht.graph.*;
+//import org.jgrapht.graph.*; //Aina: He comentat esto perque em deixes compilar. Si l'useu descomenteu ;)
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -40,7 +40,7 @@ public class EstadistiquesPanel extends JPanel {
 		add(panelRight, BorderLayout.EAST);
 		panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
 		
-		JButton btnEstadstiques = new JButton("Go to crèdits");
+		JButton btnEstadstiques = new JButton("Go to crï¿½dits");
 		btnEstadstiques.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

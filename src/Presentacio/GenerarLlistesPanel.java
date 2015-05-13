@@ -83,7 +83,7 @@ public class GenerarLlistesPanel extends JPanel {
 		sliderDuracio.setMajorTickSpacing(1);
 		sliderDuracio.setMinorTickSpacing(1);
 		sliderDuracio.setMaximum(10);
-		sliderDuracio.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+		sliderDuracio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		labelSliderDuracio = new JLabel("10");
 		labelSliderDuracio.setBounds(350, 40, 31, 15);
@@ -105,6 +105,7 @@ public class GenerarLlistesPanel extends JPanel {
 		panelAny.add(lblCanonsAmbAnys);
 		
 		final JSlider sliderAny = new JSlider();
+		sliderAny.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		sliderAny.setMinorTickSpacing(1);
 		sliderAny.setMaximum(10);
 		sliderAny.setMajorTickSpacing(1);
@@ -131,6 +132,7 @@ public class GenerarLlistesPanel extends JPanel {
 		panelEstil.add(lblCanonsAmbEstil);
 		
 		final JSlider sliderEstil = new JSlider();
+		sliderEstil.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		sliderEstil.setMinorTickSpacing(1);
 		sliderEstil.setMaximum(10);
 		sliderEstil.setMajorTickSpacing(1);
@@ -157,6 +159,7 @@ public class GenerarLlistesPanel extends JPanel {
 		panelPublic.add(lblCanonsAmbPublic);
 		
 		final JSlider sliderPublic = new JSlider();
+		sliderPublic.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		sliderPublic.setMinorTickSpacing(1);
 		sliderPublic.setMaximum(10);
 		sliderPublic.setMajorTickSpacing(1);
@@ -183,6 +186,7 @@ public class GenerarLlistesPanel extends JPanel {
 		panelProximitat.add(lblCanonsEscoltadesNormalment);
 		
 		final JSlider sliderProximitat = new JSlider();
+		sliderProximitat.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		sliderProximitat.setMinorTickSpacing(1);
 		sliderProximitat.setMaximum(10);
 		sliderProximitat.setMajorTickSpacing(1);
