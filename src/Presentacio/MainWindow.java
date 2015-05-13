@@ -36,6 +36,7 @@ public class MainWindow
 	 * Create the application.
 	 */
 	public MainWindow() {
+	  
 		initialize();
 	}
 

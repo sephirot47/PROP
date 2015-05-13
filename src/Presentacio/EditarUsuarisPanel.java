@@ -29,6 +29,8 @@ import java.awt.Cursor;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import javax.swing.ListSelectionModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class EditarUsuarisPanel extends JPanel
@@ -38,6 +40,8 @@ public class EditarUsuarisPanel extends JPanel
 	private JTextField textNom;
 	private JTextField textEdat;
 	private JButton btnEliminarReproduccio;
+	private JTextField textField;
+	private JTextField textField_1;
 	
 	public EditarUsuarisPanel()
 	{
@@ -115,9 +119,44 @@ public class EditarUsuarisPanel extends JPanel
 		panelUserDetail.add(textEdat);
 		
 		JPanel panelUsers = new JPanel();
-		panelUsers.setBounds(400, 29, 311, 497);
+		panelUsers.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelUsers.setBounds(406, 155, 311, 142);
 		add(panelUsers);
 		panelUsers.setLayout(null);
+		
+		JLabel lblTitol = new JLabel("Titol:");
+		lblTitol.setBounds(12, 41, 70, 15);
+		panelUsers.add(lblTitol);
+		
+		JLabel lblAutor = new JLabel("Autor:");
+		lblAutor.setBounds(12, 70, 70, 15);
+		panelUsers.add(lblAutor);
+		
+		textField = new JTextField();
+		textField.setBounds(66, 39, 233, 19);
+		panelUsers.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(66, 68, 233, 19);
+		panelUsers.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JButton btnAfegir = new JButton("Afegir");
+		btnAfegir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("CLICKClicK");
+			}
+		});
+
+		btnAfegir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnAfegir.setBounds(12, 97, 287, 25);
+		panelUsers.add(btnAfegir);
+		
+		JLabel lblNovaReproduccio = new JLabel("Nova Reproduccio");
+		lblNovaReproduccio.setBounds(90, 12, 126, 15);
+		panelUsers.add(lblNovaReproduccio);
 		
 		refreshAll();
 	}
