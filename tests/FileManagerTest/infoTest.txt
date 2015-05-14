@@ -55,10 +55,10 @@ Efectes estudiats:
   Guarda un array de usuaris, tots de cop, a "data/userSaveProva2.txt", i comprova que s'han guardat correctament.
 
   testSaveSong:
-  Guarda diverses cançons, una per una, a "data/songSaveProva1.txt", i comprova que s'han guardat correctament.   A més, va modificant dades de les cançons, i comprova que els canvis també s'han fet correctament.
+  Guarda diverses cancons, una per una, a "data/songSaveProva1.txt", i comprova que s'han guardat correctament.   A més, va modificant dades de les cancons, i comprova que els canvis també s'han fet correctament.
 
   testSaveSongs:
-  Guarda un array de cançons, totes de cop, a "data/songSaveProva2.txt", i comprova que s'han guardat correctament.
+  Guarda un array de cancons, totes de cop, a "data/songSaveProva2.txt", i comprova que s'han guardat correctament.
 
   testSaveReproduction:
   Guarda diverses reproduccions, una per una, a "data/reproductionSaveProva1.txt", i comprova que s'han guardat correctament.
@@ -70,7 +70,7 @@ Efectes estudiats:
   Esborra diversos usuaris de "data/usersRemoveTest.txt", i comprova que totes les operacions s'han fet correctament.
 
   testRemoveSong:
-  Esborra diverses cançons de "data/songsRemoveTest.txt", i comprova que totes les operacions s'han fet correctament.
+  Esborra diverses cancons de "data/songsRemoveTest.txt", i comprova que totes les operacions s'han fet correctament.
   
 
 Operativa:

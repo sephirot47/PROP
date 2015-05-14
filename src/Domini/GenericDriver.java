@@ -106,7 +106,7 @@ public class GenericDriver
 		
 		try
 		{
-			SongManager.saveSong(filepath, s);
+			SongManager.saveSongToDisk(filepath, s);
 		}
 		catch(IOException e)
 		{
@@ -163,7 +163,7 @@ public class GenericDriver
 		
 		try 
 		{
-			SongManager.removeSong(filepath, author, title);
+			SongManager.removeSongFromDisk(filepath, author, title);
 		} 
 		catch (IOException e) 
 		{

@@ -31,12 +31,12 @@ Valors estudiats:
 
 Efectes estudiats:
   testGenerateEdges:
-    Es crea un SongGraph amb dues cançons, s'estableixen uns criteris i es generen les arestes,
+    Es crea un SongGraph amb dues cancons, s'estableixen uns criteris i es generen les arestes,
     despres es comprova que les dues cacçons s'han connectat per un aaresta ja que tenen els mateixos estils,
     durada semblant i el mateix autor.
 
   testGetNearbyReproductionsAportation:
-    Es creen dues cançons i comprova si amb aquestes hi ha una relació de proximitat o no. Si i és, 
+    Es creen dues cancons i comprova si amb aquestes hi ha una relació de proximitat o no. Si i és, 
     el pes de l'aresta serà la proximitat que tenen entre elles, si no, no farà res.
 
 Operativa:

@@ -72,7 +72,7 @@ public class MainPanel extends JPanel {
 		panelBotonesIzquierda.add(panel_2);
 		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
 		
-		JButton btnNewButton = new JButton("Gestionar cançons");
+		JButton btnNewButton = new JButton("Gestionar cancons");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

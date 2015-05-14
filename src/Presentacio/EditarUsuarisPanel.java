@@ -203,7 +203,6 @@ public class EditarUsuarisPanel extends JPanel
 				for(int i = 0; i < dlm.getSize(); ++i)
 				{
 					repros.add((String)dlm.getElementAt(i));
-					System.out.println((String)dlm.getElementAt(i));
 				}
 
 				int age = -1;

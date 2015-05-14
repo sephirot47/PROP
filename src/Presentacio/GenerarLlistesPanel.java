@@ -77,7 +77,7 @@ public class GenerarLlistesPanel extends JPanel {
 		lblDuracio.setBounds(5, 5, 70, 15);
 		panelDuracio.add(lblDuracio);
 		
-		JLabel lblCanonsAmbRelacio = new JLabel("Cançons amb duracio semblant");
+		JLabel lblCanonsAmbRelacio = new JLabel("Cancons amb duracio semblant");
 		lblCanonsAmbRelacio.setBounds(5, 22, 374, 15);
 		panelDuracio.add(lblCanonsAmbRelacio);
 		lblCanonsAmbRelacio.setFont(new Font("Dialog", Font.PLAIN, 12));
@@ -104,7 +104,7 @@ public class GenerarLlistesPanel extends JPanel {
 		lblAny.setBounds(5, 5, 70, 15);
 		panelAny.add(lblAny);
 		
-		JLabel lblCanonsAmbAnys = new JLabel("Cançons amb anys de creacio semblant");
+		JLabel lblCanonsAmbAnys = new JLabel("Cancons amb anys de creacio semblant");
 		lblCanonsAmbAnys.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblCanonsAmbAnys.setBounds(5, 22, 374, 15);
 		panelAny.add(lblCanonsAmbAnys);
@@ -141,7 +141,7 @@ public class GenerarLlistesPanel extends JPanel {
 		JRadioButton louvain = new JRadioButton("Louvain");
 		algorismeGroup.add(louvain);
 		
-		JLabel lblCanonsAmbEstil = new JLabel("Cançons amb estil semblant");
+		JLabel lblCanonsAmbEstil = new JLabel("Cancons amb estil semblant");
 		lblCanonsAmbEstil.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblCanonsAmbEstil.setBounds(5, 22, 374, 15);
 		panelEstil.add(lblCanonsAmbEstil);
@@ -168,7 +168,7 @@ public class GenerarLlistesPanel extends JPanel {
 		Public.setBounds(5, 5, 70, 15);
 		panelPublic.add(Public);
 		
-		JLabel lblCanonsAmbPublic = new JLabel("Cançons amb public d'edats semblants");
+		JLabel lblCanonsAmbPublic = new JLabel("Cancons amb public d'edats semblants");
 		lblCanonsAmbPublic.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblCanonsAmbPublic.setBounds(5, 22, 374, 15);
 		panelPublic.add(lblCanonsAmbPublic);
@@ -195,7 +195,7 @@ public class GenerarLlistesPanel extends JPanel {
 		lblProximitat.setBounds(5, 5, 113, 15);
 		panelProximitat.add(lblProximitat);
 		
-		JLabel lblCanonsEscoltadesNormalment = new JLabel("Cançons escoltades juntes en periodes curts de temps");
+		JLabel lblCanonsEscoltadesNormalment = new JLabel("Cancons escoltades juntes en periodes curts de temps");
 		lblCanonsEscoltadesNormalment.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblCanonsEscoltadesNormalment.setBounds(5, 22, 374, 15);
 		panelProximitat.add(lblCanonsEscoltadesNormalment);
@@ -222,7 +222,7 @@ public class GenerarLlistesPanel extends JPanel {
 		lblAutor.setBounds(5, 5, 70, 15);
 		panelAutor.add(lblAutor);
 		
-		JLabel lblCanonsAmbMateix = new JLabel("Cançons amb mateix autor");
+		JLabel lblCanonsAmbMateix = new JLabel("Cancons amb mateix autor");
 		lblCanonsAmbMateix.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblCanonsAmbMateix.setBounds(5, 22, 374, 15);
 		panelAutor.add(lblCanonsAmbMateix);

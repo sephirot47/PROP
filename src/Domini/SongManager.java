@@ -10,7 +10,12 @@ import Persistencia.FileManager;
 public class SongManager 
 {
 	private static Set<Song> songs = new HashSet<Song>();
-	
+    
+    public static void loadSongsFromDisk()
+    {
+    	
+    }
+    
 	public static Set<Song> getSongs(String filepath) throws Exception
 	{
 		songs.clear();
@@ -18,8 +23,7 @@ public class SongManager
 		if(songs.size() == 0)
 		{
 			ArrayList<Song> songsArray = new ArrayList<Song>();
-			
-			songsArray = SongManager.getSongsArray(filepath);
+			songsArray = SongManager.getSongsFromString(filepath);
 			
 			for(Song s : songsArray)
 			{
@@ -29,7 +33,7 @@ public class SongManager
 		return songs;
 	}
 	
-	public static void saveSong(String filepath, Song s) throws IOException
+	public static void saveSongToDisk(String filepath, Song s) throws IOException
     {
     	ArrayList<String> fileLines = new ArrayList<String>();
     	
@@ -67,7 +71,7 @@ public class SongManager
     	}
     }
     
-    public static void saveSongs(String filepath, ArrayList<Song> songs) throws IOException
+    public static void saveSongsToDisk(String filepath, ArrayList<Song> songs) throws IOException
     {
     	ArrayList<String> fileLines = new ArrayList<String>();
     	for(Song s : songs)
@@ -82,7 +86,7 @@ public class SongManager
 		FileManager.saveData(filepath, fileLines);
     }
 
-    public static void removeSong(String filepath, String Author, String Title) throws IOException
+    public static void removeSongFromDisk(String filepath, String Author, String Title) throws IOException
     {
     	String search = Author+";"+Title;
 	
@@ -96,8 +100,7 @@ public class SongManager
     	FileManager.saveData(filepath, lines);
     }
 
-
-    private static Song getSong(String line) throws Exception
+    private static Song getSongFromString(String line) throws Exception
     {
     	String fields[] = line.split(";");
     	if(fields.length < 7) return null; 
@@ -114,14 +117,14 @@ public class SongManager
     	return new Song(author, title, year, styles, duration);
     }
 
-    private static ArrayList<Song> getSongsArray(String filepath) throws Exception
+    private static ArrayList<Song> getSongsFromString(String filepath) throws Exception
 	{
 		ArrayList<Song> songs = new ArrayList<Song>();
 		
 		ArrayList<String> fileLines = FileManager.loadData(filepath);
 		for(String line : fileLines)
 		{
-			songs.add(SongManager.getSong(line));
+			songs.add(SongManager.getSongFromString(line));
 		}
 		
 		return songs;

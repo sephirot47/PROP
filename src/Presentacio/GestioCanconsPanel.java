@@ -1,11 +1,262 @@
 package Presentacio;
 
 import javax.swing.JPanel;
+import java.awt.Dimension;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JTextField;
+import javax.swing.JList;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.border.LineBorder;
+
+import Domini.Pair;
+import Domini.SongManager;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Cursor;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.io.IOException;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import java.awt.Component;
+
 
 public class GestioCanconsPanel extends JPanel
 {
+	final private JTextField txtBuscar;
+	final private JLabel labelNomValue, labelEdatValue;
+	final private JList listSongs, listReproductions;
+	
 	public GestioCanconsPanel()
 	{
 		super();
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) 
+			{
+					refreshSongList();
+			}
+		});
+		setPreferredSize(new Dimension(800, 555));
+		setLayout(null);
+		
+		JPanel panelSongs = new JPanel();
+		panelSongs.setBounds(30, 29, 311, 497);
+		add(panelSongs);
+		panelSongs.setLayout(null);
+		
+		txtBuscar = new JTextField();
+		txtBuscar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) 
+			{
+				
+				new Thread(new Runnable()
+				{
+					public void run() 
+					{
+						try{ Thread.sleep(100); } catch(Exception e){}
+						refreshSongList();
+					}
+				}
+                ).start();
+			}
+		});
+		txtBuscar.setBounds(12, 36, 216, 19);
+		panelSongs.add(txtBuscar);
+		txtBuscar.setColumns(10);
+		
+		listSongs = new JList();
+		listSongs.setAutoscrolls(false);
+		listSongs.setAlignmentY(0.0f);
+		listSongs.setAlignmentX(0.0f);
+		listSongs.addListSelectionListener(new ListSelectionListener() 
+		{
+			public void valueChanged(ListSelectionEvent arg0) 
+			{
+				String username = (String) listSongs.getSelectedValue();
+				populateSongDetails(username == null ? "" : username);
+			}
+		});
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(12, 76, 284, 363);
+		panelSongs.add(scrollPane_1);
+		listSongs.setBounds(12, 67, 278, 369);
+		scrollPane_1.setViewportView(listSongs);
+		
+		JButton btnNouCanco = new JButton("Nova canco");
+		btnNouCanco.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNouCanco.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				//PresentationManager.goToCard(NouCancoPanel.class.getSimpleName());
+			}
+		});
+		btnNouCanco.setBounds(12, 448, 111, 25);
+		panelSongs.add(btnNouCanco);
+		
+		JButton btnImportarFitxer = new JButton("Importar fitxer");
+		btnImportarFitxer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnImportarFitxer.setBounds(135, 448, 161, 25);
+		panelSongs.add(btnImportarFitxer);
+		
+		JLabel lblBuscar = new JLabel("Buscar canco:");
+		lblBuscar.setBounds(12, 12, 145, 20);
+		panelSongs.add(lblBuscar);
+		
+		JPanel panelSongDetail = new JPanel();
+		panelSongDetail.setBounds(407, 95, 364, 431);
+		add(panelSongDetail);
+		panelSongDetail.setLayout(null);
+		
+		JLabel lblNom = new JLabel("Titol:");
+		lblNom.setBounds(12, 33, 36, 20);
+		panelSongDetail.add(lblNom);
+		
+		JLabel lblEdat = new JLabel("Autor:");
+		lblEdat.setBounds(12, 76, 48, 20);
+		panelSongDetail.add(lblEdat);
+		
+		JLabel lblReproduccions = new JLabel("Estils:");
+		lblReproduccions.setBounds(12, 207, 119, 20);
+		panelSongDetail.add(lblReproduccions);
+		
+		labelEdatValue = new JLabel("-");
+		labelEdatValue.setFont(new Font("Dialog", Font.PLAIN, 12));
+		labelEdatValue.setBounds(72, 76, 48, 20);
+		panelSongDetail.add(labelEdatValue);
+		
+		labelNomValue = new JLabel("-");
+		labelNomValue.setFont(new Font("Dialog", Font.PLAIN, 12));
+		labelNomValue.setBounds(72, 33, 198, 20);
+		panelSongDetail.add(labelNomValue);
+		
+		JButton buttonEditarCanco = new JButton("Editar canco");
+		buttonEditarCanco.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				String author = "";
+				String title = "";
+				if(listSongs.getSelectedIndex() != -1 && author != null && title != null)
+				{
+					PresentationManager.goToEditCanconsPanel("a", "b");
+				}
+			}
+		});
+		buttonEditarCanco.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		buttonEditarCanco.setBounds(12, 381, 161, 25);
+		panelSongDetail.add(buttonEditarCanco);
+		
+		JButton btnEliminarCanco = new JButton("Eliminar canco");
+		btnEliminarCanco.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				String title =  ((String) listSongs.getSelectedValue()).split(",")[0].trim();
+				String author = ((String) listSongs.getSelectedValue()).split(",")[1].trim();
+				try 
+				{
+					PresentationManager.removeSongFromDisk(title, author);
+				} 
+				catch (IOException e1) 
+				{
+					e1.printStackTrace();
+				}			
+				refreshSongList();
+			}
+		});
+		btnEliminarCanco.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnEliminarCanco.setBounds(191, 381, 161, 25);
+		panelSongDetail.add(btnEliminarCanco);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 238, 340, 120);
+		panelSongDetail.add(scrollPane);
+		
+		listReproductions = new JList();
+		listReproductions.setAutoscrolls(false);
+		listReproductions.setAlignmentY(0.0f);
+		listReproductions.setAlignmentX(0.0f);
+		listReproductions.setBounds(12, 127, 340, 304);
+		scrollPane.setColumnHeaderView(listReproductions);
+		
+		JLabel label = new JLabel("Autor:");
+		label.setBounds(12, 119, 48, 20);
+		panelSongDetail.add(label);
+		
+		JLabel label_1 = new JLabel("-");
+		label_1.setFont(new Font("Dialog", Font.PLAIN, 12));
+		label_1.setBounds(72, 119, 48, 20);
+		panelSongDetail.add(label_1);
+		
+		JLabel label_2 = new JLabel("Autor:");
+		label_2.setBounds(12, 161, 48, 20);
+		panelSongDetail.add(label_2);
+		
+		JLabel label_3 = new JLabel("-");
+		label_3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		label_3.setBounds(72, 161, 48, 20);
+		panelSongDetail.add(label_3);
+		
+		JLabel lblDetallsCanco = new JLabel("Detalls canco:");
+		lblDetallsCanco.setBounds(419, 72, 114, 20);
+		add(lblDetallsCanco);
+		
+		try 
+		{
+			PresentationManager.loadSongsFromDisk();
+		} 
+		catch (Exception e) 
+		{
+			WarningDialog.show("Error", "No es troba l'arxiu de carregar cancos");
+			e.printStackTrace();
+		}
+		
+		refreshSongList();
+	}
+	
+	public void refreshSongList()
+	{	
+		DefaultListModel dlm = new DefaultListModel();
+		dlm.clear();
+
+		ArrayList<String> names = PresentationManager.getSongsTitlesAndAuthors();
+		Collections.sort(names);
+		
+		for(String name : names)
+		{
+			String search = txtBuscar.getText();
+			boolean addIt = search.equals("") || name.contains(search);
+			if(addIt) dlm.addElement(name);
+		}
+		
+		listSongs.setModel(dlm);
+
+		if(listSongs.getModel().getSize() > 0)
+			listSongs.setSelectedIndex(0);
+	}
+	
+	public void populateSongDetails(String username)
+	{
+		DefaultListModel dlm = new DefaultListModel();
+		dlm.clear();
+		dlm.addElement("songg");
+		listReproductions.setModel(dlm);
 	}
 }

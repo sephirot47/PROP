@@ -1,2 +1,4 @@
-abraham;30
 jfons;25
+abraham;30
+aina;20
+victor;12

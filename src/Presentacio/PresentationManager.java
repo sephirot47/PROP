@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import Domini.Pair;
 import Domini.SolutionManager;
+import Domini.SongManager;
 import Domini.SongSolution;
 import Domini.User;
 import Domini.UserManager;
@@ -44,6 +45,21 @@ public class PresentationManager
 		PresentationManager.goToCard(MainPanel.class.getSimpleName());
 	}
 	
+	// SOLUTIONS /////////////////////////
+	public static ArrayList<Double[]> getInfos() throws Exception
+	{
+		return SolutionManager.getInfos("data/solucions");
+	}
+	//////////////////////////////////////
+	
+	// UTILS /////////////////////////////
+
+	public static void goToCard(String cardName)
+	{
+		changeCard(cardName);
+		windowHistory.push(cardName);
+	}
+	
 	public static void createUser(String username, int edat) throws Exception
 	{
 		UserManager.createUserAndSaveToDisk(username, edat);
@@ -62,23 +78,6 @@ public class PresentationManager
 	public static ArrayList<Pair<String, Long>> getUserReproductions(String username) throws Exception
 	{
 		return UserManager.getUserReproductions(username);
-	}
-	
-	public static ArrayList<Double[]> getInfos() throws Exception
-	{
-		return SolutionManager.getInfos("data/solucions");
-	}
-	
-	public static void goToCard(String cardName)
-	{
-		changeCard(cardName);
-		windowHistory.push(cardName);
-	}
-	
-	public static void goToEditUsuarisPanel(String username)
-	{
-		EditarUsuarisPanel.currentUsername = username;
-		goToCard(EditarUsuarisPanel.class.getSimpleName());
 	}
 	
 	private static void changeCard(String cardName)
@@ -100,6 +99,15 @@ public class PresentationManager
 			cl.show(p, cardName);
 		}
 		
+	}
+	//////////////////////////////////////////////////
+	
+	//USERS ///////////////////////////////////////////
+
+	public static void goToEditUsuarisPanel(String username)
+	{
+		EditarUsuarisPanel.currentUsername = username;
+		goToCard(EditarUsuarisPanel.class.getSimpleName());
 	}
 	
 	public static void saveCurrentUsers()
@@ -149,8 +157,38 @@ public class PresentationManager
 		}
 	}
 
+	public static void loadUsersFromDisk()
+	{
+		SongManager.loadSongsFromDisk();
+	}
+
+	public static void goToEditCanconsPanel(String authorName, String title)
+	{
+	}
+	
+	
 	public static void removeUser(String user) throws IOException 
 	{
 		UserManager.removeUserFromDisk(user);
 	}
-}
+	/////////////////////////////////////
+	
+	
+	//SONGS /////////////////////////////
+	
+	public static ArrayList<Pair<String, String>> getSongsTitlesAndAuthors()
+	{
+		return new ArrayList<Pair<String, String>>();
+	}
+
+
+	public static void loadSongsFromDisk()
+	{
+		SongManager.loadSongsFromDisk();
+	}
+	
+	public static void removeSongFromDisk(String authorName, String title)
+	{
+	}
+	/////////////////////////////////////
+	}

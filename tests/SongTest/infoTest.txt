@@ -21,20 +21,20 @@ Fitxers de dades necessaris:
 
 Efectes estudiats:
   testSongConstructor0: 
-    Es crea una canço amb el primer constructor i despres es comprova que els
+    Es crea una canco amb el primer constructor i despres es comprova que els
     valors que retornen els seus getters siguin els esperats.
 
   testSongConstructor1:
-    Es crea una canço amb el segon constructor i despres es comprova que els
+    Es crea una canco amb el segon constructor i despres es comprova que els
     valors que retornen els seus getters siguin els esperats.
 
   testSetSong:
-    Es crea una canço buida, despres s'omplen els valors amb els setters i 
+    Es crea una canco buida, despres s'omplen els valors amb els setters i 
     despres es comprova que els getters retornin el svalors esperats.
 
   testMeanUserAge:
     A partir dels fitxers de "data/" es comprova que la mitjana d'edat dels
-    usuaris que ha escoltat la canço "title" de l'utor "author" sigui 30, ja que
+    usuaris que ha escoltat la canco "title" de l'utor "author" sigui 30, ja que
     l'an escoltat 4 usuaris de 10,20,40 i 50 anys (120/4 = 30).
 
 Operativa:

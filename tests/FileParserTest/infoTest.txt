@@ -33,7 +33,7 @@ Efectes estudiats:
   Obte els usuaris de "data/users1.txt" i de "data/users2.txt" i comprova que els ha carregat correctament. A més, fa diverses operacions de afegir, modificar i borrar, i comprova que tot s'actualitza correctament.
 
   testGetSongs:
-  Obte les cançons de "data/songs1.txt" i de "data/songs2.txt" i comprova que els ha carregat correctament. A més, fa diverses operacions de afegir, modificar i borrar, i comprova que tot s'actualitza correctament.
+  Obte les cancons de "data/songs1.txt" i de "data/songs2.txt" i comprova que els ha carregat correctament. A més, fa diverses operacions de afegir, modificar i borrar, i comprova que tot s'actualitza correctament.
 
   testGetReproductions:
   Obte les reproduccions de "data/repros1.txt" i de "data/repros2.txt" i comprova que els ha carregat correctament. A més, fa diverses operacions de afegir, modificar i borrar, i comprova que tot s'actualitza correctament.
@@ -51,7 +51,7 @@ Efectes estudiats:
   Obte una reproduccio a partir d'un string amb el format correcte,  i comprova que s'ha creat correctament.
 
   testGetSong:
-  Obte una canço a partir d'un string amb el format correcte,  i comprova que s'ha creat correctament.
+  Obte una canco a partir d'un string amb el format correcte,  i comprova que s'ha creat correctament.
 
 Operativa:
   Entra el numero del metode (indicat al mateix programa) que es vol provar

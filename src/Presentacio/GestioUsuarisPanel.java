@@ -195,7 +195,7 @@ public class GestioUsuarisPanel extends JPanel
 		
 		try 
 		{
-			UserManager.loadUsersFromDisk();
+			PresentationManager.loadUsersFromDisk();
 		} 
 		catch (Exception e) 
 		{
