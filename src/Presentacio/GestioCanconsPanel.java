@@ -1,6 +1,7 @@
 package Presentacio;
 
 import javax.swing.JPanel;
+
 import java.awt.Dimension;
 
 import javax.swing.DefaultListModel;
@@ -8,7 +9,9 @@ import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.border.LineBorder;
 
 import Domini.Pair;
@@ -21,6 +24,7 @@ import java.util.Collections;
 
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -29,8 +33,10 @@ import java.awt.Cursor;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.IOException;
+
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+
 import java.awt.Component;
 
 
@@ -174,7 +180,7 @@ public class GestioCanconsPanel extends JPanel
 				{
 					PresentationManager.removeSongFromDisk(title, author);
 				} 
-				catch (IOException e1) 
+				catch (Exception e1) 
 				{
 					e1.printStackTrace();
 				}			
@@ -236,14 +242,16 @@ public class GestioCanconsPanel extends JPanel
 		DefaultListModel dlm = new DefaultListModel();
 		dlm.clear();
 
-		ArrayList<String> names = PresentationManager.getSongsTitlesAndAuthors();
-		Collections.sort(names);
+		ArrayList<Pair<String, String>> authorsAndTitles = PresentationManager.getSongsAuthorsAndTitles();
+		ArrayList<String> authorsAndTitlesTogether = new ArrayList<String>();
+		for(Pair<String, String> p : authorsAndTitles) authorsAndTitlesTogether.add(p.getFirst() + ", " + p.getSecond());
+		Collections.sort(authorsAndTitlesTogether);
 		
-		for(String name : names)
+		for(String entries : authorsAndTitlesTogether)
 		{
 			String search = txtBuscar.getText();
-			boolean addIt = search.equals("") || name.contains(search);
-			if(addIt) dlm.addElement(name);
+			boolean addIt = search.equals("") || entries.contains(search);
+			if(addIt) dlm.addElement(entries);
 		}
 		
 		listSongs.setModel(dlm);

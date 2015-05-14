@@ -45,6 +45,8 @@ public class PresentationManager
 		PresentationManager.goToCard(MainPanel.class.getSimpleName());
 	}
 	
+	
+	
 	// SOLUTIONS /////////////////////////
 	public static ArrayList<Double[]> getInfos() throws Exception
 	{
@@ -52,14 +54,12 @@ public class PresentationManager
 	}
 	//////////////////////////////////////
 	
-	// UTILS /////////////////////////////
-
-	public static void goToCard(String cardName)
-	{
-		changeCard(cardName);
-		windowHistory.push(cardName);
-	}
 	
+	
+	
+	
+	
+	//USERS ///////////////////////////////////////////
 	public static void createUser(String username, int edat) throws Exception
 	{
 		UserManager.createUserAndSaveToDisk(username, edat);
@@ -80,30 +80,6 @@ public class PresentationManager
 		return UserManager.getUserReproductions(username);
 	}
 	
-	private static void changeCard(String cardName)
-	{
-		if(cardName.equals("MainPanel"))
-		{
-			JPanel p = (JPanel) MainWindow.frmYoutube.getContentPane();
-			CardLayout cl = (CardLayout) (p.getLayout());
-			cl.show(p, cardName);
-		}
-		else
-		{
-			JPanel p = (JPanel) MainWindow.frmYoutube.getContentPane();
-			CardLayout cl = (CardLayout) (p.getLayout());
-			cl.show(p, ViewPanel.class.getSimpleName());
-			
-			p = (JPanel) ViewPanel.viewPanel.cardContainer;
-			cl = (CardLayout) (p.getLayout());
-			cl.show(p, cardName);
-		}
-		
-	}
-	//////////////////////////////////////////////////
-	
-	//USERS ///////////////////////////////////////////
-
 	public static void goToEditUsuarisPanel(String username)
 	{
 		EditarUsuarisPanel.currentUsername = username;
@@ -161,11 +137,6 @@ public class PresentationManager
 	{
 		SongManager.loadSongsFromDisk();
 	}
-
-	public static void goToEditCanconsPanel(String authorName, String title)
-	{
-	}
-	
 	
 	public static void removeUser(String user) throws IOException 
 	{
@@ -174,13 +145,20 @@ public class PresentationManager
 	/////////////////////////////////////
 	
 	
-	//SONGS /////////////////////////////
 	
-	public static ArrayList<Pair<String, String>> getSongsTitlesAndAuthors()
+	
+	
+	
+	
+	//SONGS /////////////////////////////
+	public static void goToEditCanconsPanel(String authorName, String title)
+	{
+	}
+	
+	public static ArrayList<Pair<String, String>> getSongsAuthorsAndTitles()
 	{
 		return new ArrayList<Pair<String, String>>();
 	}
-
 
 	public static void loadSongsFromDisk()
 	{
@@ -191,4 +169,37 @@ public class PresentationManager
 	{
 	}
 	/////////////////////////////////////
+
+	
+	
+	
+	
+	// UTILS /////////////////////////////
+	public static void goToCard(String cardName)
+	{
+		changeCard(cardName);
+		windowHistory.push(cardName);
 	}
+	
+	private static void changeCard(String cardName)
+	{
+		if(cardName.equals("MainPanel"))
+		{
+			JPanel p = (JPanel) MainWindow.frmYoutube.getContentPane();
+			CardLayout cl = (CardLayout) (p.getLayout());
+			cl.show(p, cardName);
+		}
+		else
+		{
+			JPanel p = (JPanel) MainWindow.frmYoutube.getContentPane();
+			CardLayout cl = (CardLayout) (p.getLayout());
+			cl.show(p, ViewPanel.class.getSimpleName());
+			
+			p = (JPanel) ViewPanel.viewPanel.cardContainer;
+			cl = (CardLayout) (p.getLayout());
+			cl.show(p, cardName);
+		}
+		
+	}
+	//////////////////////////////////////////////////
+}
