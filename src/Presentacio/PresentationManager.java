@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Domini.Pair;
@@ -96,7 +97,7 @@ public class PresentationManager
 		} 
 		catch (IOException e) 
 		{
-			WarningDialog.show("Error", "No es troba l'arxiu de usuaris");
+			PresentationManager.errorWindow("No es troba l'arxiu de usuaris");
 		}
 	}
 	
@@ -119,7 +120,7 @@ public class PresentationManager
 		} 
 		catch (Exception e) 
 		{
-			WarningDialog.show("Error", e.getMessage());
+			PresentationManager.errorWindow(e.getMessage());
 		}
 	}
 	
@@ -144,7 +145,7 @@ public class PresentationManager
 		} 
 		catch (Exception e) 
 		{
-			WarningDialog.show("Error", "No s'ha pogut trobar el arxiu de usuaris o hi ha usuaris corruptes al arxiu (caracters no valids)");
+			PresentationManager.errorWindow("No s'ha pogut trobar el arxiu de usuaris o hi ha usuaris corruptes al arxiu (caracters no valids)");
 			return;
 		}
 	}
@@ -184,7 +185,7 @@ public class PresentationManager
 		} 
 		catch (Exception e) 
 		{
-			WarningDialog.show("Error", "No s'ha pogut trobar el arxiu de cancons");
+			PresentationManager.errorWindow("No s'ha pogut trobar el arxiu de cancons");
 			return;
 		}
 	}
@@ -209,6 +210,16 @@ public class PresentationManager
 	
 	
 	// UTILS /////////////////////////////
+	public static void infoWindow(String msg)
+	{
+		JOptionPane.showMessageDialog(MainWindow.frmYoutube, msg, "Info", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public static void errorWindow(String msg)
+	{
+		JOptionPane.showMessageDialog(MainWindow.frmYoutube, msg, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+	
 	public static void goToCard(String cardName)
 	{
 		changeCard(cardName);

@@ -161,14 +161,14 @@ public class EditarUsuarisPanel extends JPanel
 				}
 				catch(NumberFormatException eee)
 				{
-					WarningDialog.show("Error", "El timestamp ha de ser un numero valid.");
+					PresentationManager.errorWindow("El timestamp ha de ser un numero valid.");
 					return;
 				}
 				
-				if(titol.length() == 0){ WarningDialog.show("Error", "El titol d'una reproduccio no pot ser buit."); return;}
-				if(autor.length() == 0){ WarningDialog.show("Error", "El autor d'una reproduccio no pot ser buit."); return;}
+				if(titol.length() == 0){PresentationManager.errorWindow( "El titol d'una reproduccio no pot ser buit."); return;}
+				if(autor.length() == 0){PresentationManager.errorWindow( "El autor d'una reproduccio no pot ser buit."); return;}
 				
-				if(timestamp < 0){WarningDialog.show("Error", "El timestamp no pot ser < 0."); return;}
+				if(timestamp < 0){PresentationManager.errorWindow("El timestamp no pot ser < 0."); return;}
 				
 				((DefaultListModel)listReproductions.getModel()).addElement(autor + ", " + titol + ", " + timestamp);
 
@@ -209,16 +209,16 @@ public class EditarUsuarisPanel extends JPanel
 				try { age = Integer.parseInt(textEdat.getText()); }
 				catch(NumberFormatException eee)
 				{
-					WarningDialog.show("Error", "La edat ha de ser un numero valid.");
+					PresentationManager.errorWindow("La edat ha de ser un numero valid.");
 					return;
 				}
 				
-				if(age <= 0){WarningDialog.show("Error", "La edat d'un usuari ha de ser > 0."); return;}
+				if(age <= 0){PresentationManager.errorWindow("La edat d'un usuari ha de ser > 0."); return;}
 
 				PresentationManager.setUserAge(currentUsername, age);
 				PresentationManager.setUserReproductions(currentUsername, repros);
 				PresentationManager.saveCurrentUsers();
-				WarningDialog.show("Info", "Usuari editat correctament!");
+				PresentationManager.infoWindow("Usuari editat correctament!");
 				PresentationManager.goBack();
 			}
 		});
@@ -256,7 +256,7 @@ public class EditarUsuarisPanel extends JPanel
 		} 
 		catch (Exception e) 
 		{
-			WarningDialog.show("Error", "No es troba l'arxiu de reproduccions d'aquest usuari");
+			PresentationManager.errorWindow("No es troba l'arxiu de reproduccions d'aquest usuari");
 			e.printStackTrace();
 		}
 		

@@ -237,7 +237,7 @@ public class GestioUsuarisPanel extends JPanel
 		} 
 		catch (Exception e) 
 		{
-			WarningDialog.show("Error", "No es troba l'arxiu de reproduccions d'aquest usuari");
+			PresentationManager.errorWindow("No es troba l'arxiu de reproduccions d'aquest usuari");
 			e.printStackTrace();
 		}
 		

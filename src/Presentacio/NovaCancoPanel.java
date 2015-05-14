@@ -144,19 +144,19 @@ public class NovaCancoPanel extends JPanel
 	void onCreateSongClicked()
 	{ 
 		String title = textTitle.getText().trim();
-		if(title.equals("")) { WarningDialog.show("Error", "El titol d'una canco no pot ser buit."); return; }
+		if(title.equals("")) { PresentationManager.errorWindow("El titol d'una canco no pot ser buit."); return; }
 		
 		String author = textAuthor.getText().trim();
-		if(author.equals("")) { WarningDialog.show("Error", "El autor d'una canco no pot ser buit."); return; }
+		if(author.equals("")) {PresentationManager.errorWindow( "El autor d'una canco no pot ser buit."); return; }
 		int year = -1, duration = -1;
 		
 		try { year  = Integer.parseInt(textYear.getText().trim()); }
-		catch(NumberFormatException e) { WarningDialog.show("Error", "L'any de la canco ha de ser un numero valid."); return; }
-		if(year <= 0) { WarningDialog.show("Error", "L'any de la canco ha de ser un numero > 0."); return; }
+		catch(NumberFormatException e) {PresentationManager.errorWindow( "L'any de la canco ha de ser un numero valid."); return; }
+		if(year <= 0) {PresentationManager.errorWindow( "L'any de la canco ha de ser un numero > 0."); return; }
 		
 		try { duration  = Integer.parseInt(textDuration.getText().trim()); }
-		catch(NumberFormatException e) { WarningDialog.show("Error", "La duracio de la canco ha de ser un numero valid."); return; }
-		if(duration <= 0) { WarningDialog.show("Error", "La duracio de la canco ha de ser un numero > 0."); return; }
+		catch(NumberFormatException e) {PresentationManager.errorWindow( "La duracio de la canco ha de ser un numero valid."); return; }
+		if(duration <= 0) {PresentationManager.errorWindow( "La duracio de la canco ha de ser un numero > 0."); return; }
 
 		String style0 = textStyle0.getText().trim();
 		String style1 = textStyle1.getText().trim();
@@ -166,7 +166,7 @@ public class NovaCancoPanel extends JPanel
 		if(!style1.equals("")) styles.add(style1);
 		if(!style2.equals("")) styles.add(style2);
 		
-		if(styles.size() <= 0) { WarningDialog.show("Error", "La canco ha de tenir un estil com a minim."); return; }
+		if(styles.size() <= 0) {PresentationManager.errorWindow( "La canco ha de tenir un estil com a minim."); return; }
 		
 		try
 		{
@@ -174,7 +174,7 @@ public class NovaCancoPanel extends JPanel
 		}
 		catch(Exception e)
 		{
-			WarningDialog.show("Error", e.getMessage());
+			PresentationManager.errorWindow(e.getMessage());
 			return;
 		}
 		
