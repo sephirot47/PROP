@@ -184,7 +184,17 @@ public class PresentationManager
 		}
 	}
 	
-	public static void removeSongFromDisk(String authorName, String title)
+	public static int getSongYear(String author, String title)
+	{
+		return SongManager.getSongYear(author, title);
+	}
+
+	public static int getSongDuration(String author, String title)
+	{
+		return SongManager.getSongDuration(author, title);
+	}
+	
+	public static void removeSongFromDisk(String author, String title)
 	{
 	}
 	/////////////////////////////////////

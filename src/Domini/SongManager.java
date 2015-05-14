@@ -122,6 +122,20 @@ public class SongManager
     	return res;
 	}
 
+	public static int getSongYear(String author, String title)
+	{
+		Song s = getSongFromAuthorTitle(author, title);
+		if(s == null) return 0;
+		else return s.getYear();
+	}
+
+	public static int getSongDuration(String author, String title)
+	{
+		Song s = getSongFromAuthorTitle(author, title);
+		if(s == null) return 0;
+		else return s.getDuration();
+	}
+
     private static Song getSongFromString(String line) throws Exception
     {
     	String fields[] = line.split(";");

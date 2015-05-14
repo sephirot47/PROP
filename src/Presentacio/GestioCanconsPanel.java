@@ -43,7 +43,7 @@ import java.awt.Component;
 public class GestioCanconsPanel extends JPanel
 {
 	final private JTextField txtBuscar;
-	final private JLabel labelTitleValue, labelAuthorValue;
+	final private JLabel labelTitleValue, labelAuthorValue, labelYearValue, labelDurationValue;
 	private JList listEstils, listSongs;
 	
 	public GestioCanconsPanel()
@@ -110,7 +110,7 @@ public class GestioCanconsPanel extends JPanel
 			@Override
 			public void mouseClicked(MouseEvent e) 
 			{
-				//PresentationManager.goToCard(NouCancoPanel.class.getSimpleName());
+				PresentationManager.goToCard(NovaCancoPanel.class.getSimpleName());
 			}
 		});
 		btnNouCanco.setBounds(12, 448, 111, 25);
@@ -205,23 +205,23 @@ public class GestioCanconsPanel extends JPanel
 		listEstils.setBounds(12, 127, 340, 304);
 		scrollPane.setColumnHeaderView(listEstils);
 		
-		JLabel label = new JLabel("Autor:");
-		label.setBounds(12, 119, 48, 20);
-		panelSongDetail.add(label);
+		JLabel lblAny = new JLabel("Any:");
+		lblAny.setBounds(12, 119, 48, 20);
+		panelSongDetail.add(lblAny);
 		
-		JLabel label_1 = new JLabel("-");
-		label_1.setFont(new Font("Dialog", Font.PLAIN, 12));
-		label_1.setBounds(72, 119, 48, 20);
-		panelSongDetail.add(label_1);
+		labelYearValue = new JLabel("-");
+		labelYearValue.setFont(new Font("Dialog", Font.PLAIN, 12));
+		labelYearValue.setBounds(72, 119, 48, 20);
+		panelSongDetail.add(labelYearValue);
 		
-		JLabel label_2 = new JLabel("Autor:");
-		label_2.setBounds(12, 161, 48, 20);
-		panelSongDetail.add(label_2);
+		JLabel lblDuracio = new JLabel("Duracio:");
+		lblDuracio.setBounds(12, 161, 48, 20);
+		panelSongDetail.add(lblDuracio);
 		
-		JLabel label_3 = new JLabel("-");
-		label_3.setFont(new Font("Dialog", Font.PLAIN, 12));
-		label_3.setBounds(72, 161, 48, 20);
-		panelSongDetail.add(label_3);
+		labelDurationValue = new JLabel("-");
+		labelDurationValue.setFont(new Font("Dialog", Font.PLAIN, 12));
+		labelDurationValue.setBounds(72, 161, 48, 20);
+		panelSongDetail.add(labelDurationValue);
 		
 		JLabel lblDetallsCanco = new JLabel("Detalls canco:");
 		lblDetallsCanco.setBounds(419, 72, 114, 20);
@@ -264,6 +264,12 @@ public class GestioCanconsPanel extends JPanel
 			
 			String title = authorAndTitle.split(",")[1].trim();
 			labelTitleValue.setText(title);
+
+			int year = PresentationManager.getSongYear(author, title);
+			labelYearValue.setText( String.valueOf(year) );
+			
+			int duration = PresentationManager.getSongDuration(author, title);
+			labelDurationValue.setText( String.valueOf(duration) + " segons" );
 			
 			ArrayList<String> styles = SongManager.getStylesFromSong(author, title);
 			for(String style : styles) dlm.addElement(style);
