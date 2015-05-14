@@ -82,7 +82,7 @@ public class Main
     	System.out.println("********************* ");
     	*/
 
-    	Solution rawSolution = new Louvain().getSolution(songGraph); //Get el conjunt de llistes de Songs
+    	Solution rawSolution = new GirvanNewman().getSolution(songGraph, 2); //Get el conjunt de llistes de Songs
 		int foo = 0;
 		for(Community songList : rawSolution.getCommunities())
 		{

@@ -6,6 +6,8 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.FlowLayout;
 
+import javax.swing.ButtonGroup;
+import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
 import javax.swing.BoxLayout;
@@ -33,16 +35,19 @@ public class GenerarLlistesPanel extends JPanel {
 			labelSliderPublic = null,
 			labelSliderProximitat = null,
 			labelSliderAutor = null;
+
+	private final ButtonGroup algorismeGroup= new ButtonGroup();
 	
 	public GenerarLlistesPanel()
 	{
 		super();
-		setPreferredSize(new Dimension(1100, 410));
-		setLayout(new BorderLayout(0, 0));
+		setPreferredSize(new Dimension(800, 600));
+		setLayout(null);
 		
 		JPanel panelLeft = new JPanel();
+		panelLeft.setBounds(0, 0, 480, 510);
 		panelLeft.setBorder(new EmptyBorder(30, 30, 30, 30));
-		add(panelLeft, BorderLayout.WEST);
+		add(panelLeft);
 		
 		JPanel panelCriteris = new JPanel();
 		panelCriteris.setPreferredSize(new Dimension(410, 470));
@@ -125,6 +130,16 @@ public class GenerarLlistesPanel extends JPanel {
 		JLabel lblEstil = new JLabel("Estil");
 		lblEstil.setBounds(5, 5, 70, 15);
 		panelEstil.add(lblEstil);
+		
+
+		JRadioButton Girvan = new JRadioButton("Newman-Girvan");
+		algorismeGroup.add(Girvan);
+		
+		JRadioButton clique = new JRadioButton("Clique Percolation");
+		algorismeGroup.add(clique);
+		
+		JRadioButton louvain = new JRadioButton("Louvain");
+		algorismeGroup.add(louvain);
 		
 		JLabel lblCanonsAmbEstil = new JLabel("Cançons amb estil semblant");
 		lblCanonsAmbEstil.setFont(new Font("Dialog", Font.PLAIN, 12));
@@ -224,22 +239,24 @@ public class GenerarLlistesPanel extends JPanel {
 		labelSliderAutor.setBounds(350, 40, 31, 15);
 		panelAutor.add(labelSliderAutor);
 		
-		JPanel panelRight = new JPanel();
-		panelRight.setBorder(new EmptyBorder(40, 40, 40, 40));
-		add(panelRight, BorderLayout.EAST);
-		panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
-		
-		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(250, 410));
-		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelRight.add(panel);
-		
-		JButton btnNewButton = new JButton("Generar");
-		panel.add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnGenerar = new JButton("Generar llista");
+		btnGenerar.setBounds(543, 473, 171, 25);
+		add(btnGenerar);
+		btnGenerar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
+		
+		JPanel panelRight = new JPanel();
+		panelRight.setBounds(500, 38, 250, 165);
+		add(panelRight);
+		panelRight.setPreferredSize(new Dimension(250, 410));
+		panelRight.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelRight.setLayout(null);
+		
+		JLabel lblAlgorisme = new JLabel("Algorisme");
+		lblAlgorisme.setBounds(93, 12, 70, 15);
+		panelRight.add(lblAlgorisme);
 		
 
 		sliderDuracio.addChangeListener(new ChangeListener() {

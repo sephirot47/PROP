@@ -37,10 +37,15 @@ public class GirvanNewman extends Algorithm
 		for(Edge e : edges) originalWeights.put( e, e.getWeight() );
 		//
 		
-		ArrayList< Set<Node> > connectedComponents = GirvanNewman.getConnectedComponents(g);
+		ArrayList< Set<Node> > connectedComponents = getConnectedComponents(g);
 		while(connectedComponents.size() < n)
 		{	 
 			HashMap<Edge, Float> edgeBetweenness = new HashMap<Edge, Float>();
+			for(Edge e : edges) 
+			{
+				edgeBetweenness.put(e, 0.0f);
+			}
+			
 			// DIJKSTRA, actualitzem betweenness de edges ///////
 			Set<Node> nodes = g.getAllNodes();
 			for(Node node : nodes)
@@ -52,10 +57,14 @@ public class GirvanNewman extends Algorithm
 					if(node == n2) continue;
 					
 					LinkedList<Node> path = dijkstra.getPath(n2);
-					for(int i = 0; i < path.size() - 1; ++i)
+					if(path != null)
 					{
-						Edge e = g.getEdge(path.get(i), path.get(i+1));
-						e.setWeight(e.getWeight() + 1);
+						for(int i = 0; i < path.size() - 1; ++i)
+						{
+							Edge e = g.getEdge(path.get(i), path.get(i+1));
+							Float betweenness = edgeBetweenness.get(e);
+							edgeBetweenness.put(e, betweenness + 1); //edgeBetweenness++
+						}
 					}
 				}	
 			}
@@ -63,33 +72,40 @@ public class GirvanNewman extends Algorithm
 			
 			//Search for the edge with maximum betweenness
 			Edge edgeToRemove = null;
-			float maxEdgeBetweenness = 0;
+			float maxEdgeBetweenness = Float.NEGATIVE_INFINITY;
 			for(Node node1 : nodes)
 			{
 				Set<Node> adjNodes = g.getAdjacentNodesTo(node1);
 				for(Node node2 : adjNodes)
 				{
 					Edge currentEdge = g.getEdge(node1, node2);
-					if(currentEdge.getWeight() > maxEdgeBetweenness)
-					{
-						edgeToRemove = currentEdge; //update the edge that'll be removed
-						maxEdgeBetweenness = currentEdge.getWeight();
+					if(currentEdge.getWeight() != -1.0f) //Si el edge existeix...
+					{	
+						Float betweenness = edgeBetweenness.get(currentEdge);
+						if(betweenness != null && betweenness > maxEdgeBetweenness)
+						{
+							edgeToRemove = currentEdge; //update the edge that'll be removed
+							maxEdgeBetweenness = betweenness;
+						}
 					}
 				}
 			}
 			
 			//Remove it (pseudo remove it(put its weight to -1))
-			if(edgeToRemove != null) edgeToRemove.setWeight(-1);
+			if(edgeToRemove != null) 
+			{
+				Node n1 = (Node) g.getNodesConnectedBy(edgeToRemove).getFirst();
+				Node n2 = (Node) g.getNodesConnectedBy(edgeToRemove).getSecond();
+				edgeToRemove.setWeight(-1);
+			}
 			
 			//Count the connected components again, in order to know if we must continue
 			//removing edges or not
 			connectedComponents = getConnectedComponents(g);
-
 		}
 
 		//Restore the original weights !!!!!
-		Set<Edge> allEdges = g.getAllEdges();
-		for(Edge e : allEdges)
+		for(Edge e : edges)
 		{
 			e.setWeight( originalWeights.get(e) ); //Deberia restaurarlos ya que los edges se guardan por referencia
 		}

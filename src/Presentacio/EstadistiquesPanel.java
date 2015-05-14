@@ -23,7 +23,8 @@ import java.util.ArrayList;
 import javax.swing.JSeparator;
 import javax.swing.border.EmptyBorder;
 
-public class EstadistiquesPanel extends JPanel {
+public class EstadistiquesPanel extends JPanel 
+{
 	private final ButtonGroup algorisme = new ButtonGroup();
 	private final ButtonGroup metodes = new ButtonGroup();
 	private final ButtonGroup ym = new ButtonGroup();
