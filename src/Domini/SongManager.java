@@ -135,6 +135,16 @@ public class SongManager
 		if(s == null) return 0;
 		else return s.getDuration();
 	}
+	
+	public static void createSong(String author, String title, int year, int duration, ArrayList<String> styles) throws Exception
+	{
+		for(Song song : songs)
+			if(author.equals(song.getAuthor()) && title.equals(song.getTitle())) throw new Exception("Ja existeix una canco amb el mateix autor i titol");
+		
+		Song s = new Song(author, title, year, styles, duration);
+		songs.add(s);
+		saveSongToDisk("data/songs/songs.txt", s);
+	}
 
     private static Song getSongFromString(String line) throws Exception
     {

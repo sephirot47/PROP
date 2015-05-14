@@ -220,7 +220,7 @@ public class GestioCanconsPanel extends JPanel
 		
 		labelDurationValue = new JLabel("-");
 		labelDurationValue.setFont(new Font("Dialog", Font.PLAIN, 12));
-		labelDurationValue.setBounds(72, 161, 48, 20);
+		labelDurationValue.setBounds(72, 161, 80, 20);
 		panelSongDetail.add(labelDurationValue);
 		
 		JLabel lblDetallsCanco = new JLabel("Detalls canco:");

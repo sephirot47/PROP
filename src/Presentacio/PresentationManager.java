@@ -166,6 +166,11 @@ public class PresentationManager
 	{
 	}
 	
+	public static void createSong(String author, String title, int year, int duration, ArrayList<String> styles) throws Exception
+	{
+		SongManager.createSong(author, title, year, duration, styles);
+	}
+	
 	public static ArrayList<Pair<String, String>> getSongsAuthorsAndTitles()
 	{
 		return SongManager.getSongsAuthorsAndTitles();
