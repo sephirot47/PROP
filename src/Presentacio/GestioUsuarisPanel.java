@@ -45,7 +45,7 @@ public class GestioUsuarisPanel extends JPanel
 			@Override
 			public void componentShown(ComponentEvent e) 
 			{
-					refreshUserList();
+				refreshUserList();
 			}
 		});
 		setPreferredSize(new Dimension(800, 555));
@@ -164,14 +164,18 @@ public class GestioUsuarisPanel extends JPanel
 		btnEliminarUsuari.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String user = (String) listUsers.getSelectedValue();
-				try {
-					PresentationManager.removeUser(user);
-				} catch (IOException e1) 
+
+				if(listUsers.getSelectedIndex() != -1)
 				{
-					e1.printStackTrace();
-				}			
-				refreshUserList();
+					String user = (String) listUsers.getSelectedValue();
+					try {
+						PresentationManager.removeUser(user);
+					} catch (IOException e1) 
+					{
+						e1.printStackTrace();
+					}			
+					refreshUserList();
+				}
 			}
 		});
 		btnEliminarUsuari.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -192,16 +196,6 @@ public class GestioUsuarisPanel extends JPanel
 		listReproductions.setAlignmentX(0.0f);
 		listReproductions.setBounds(12, 127, 340, 304);
 		scrollPane.setViewportView(listReproductions);
-		
-		try 
-		{
-			PresentationManager.loadUsersFromDisk();
-		} 
-		catch (Exception e) 
-		{
-			WarningDialog.show("Error", "No es troba l'arxiu de carregar usuaris");
-			e.printStackTrace();
-		}
 		
 		refreshUserList();
 	}

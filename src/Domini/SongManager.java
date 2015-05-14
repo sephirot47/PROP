@@ -11,9 +11,9 @@ public class SongManager
 {
 	private static Set<Song> songs = new HashSet<Song>();
     
-    public static void loadSongsFromDisk()
+    public static void loadSongsFromDisk() throws Exception
     {
-    	
+    	SongManager.getSongs("data/songs/songs.txt");
     }
     
 	public static Set<Song> getSongs(String filepath) throws Exception
@@ -24,11 +24,7 @@ public class SongManager
 		{
 			ArrayList<Song> songsArray = new ArrayList<Song>();
 			songsArray = SongManager.getSongsFromString(filepath);
-			
-			for(Song s : songsArray)
-			{
-				songs.add(s);
-			}
+			for(Song s : songsArray) songs.add(s);
 		}
 		return songs;
 	}
@@ -99,6 +95,32 @@ public class SongManager
     	
     	FileManager.saveData(filepath, lines);
     }
+    
+    public static ArrayList<String> getStylesFromSong(String songAuthor, String songTitle)
+    {
+    	ArrayList<String> res = new ArrayList<String>();
+    	Song s = getSongFromAuthorTitle(songAuthor, songTitle);
+    	if(s != null) res.addAll(s.getStyles());
+    	return res;
+    }
+    
+    private static Song getSongFromAuthorTitle(String songAuthor, String songTitle)
+    {
+    	for(Song s : songs)
+    		if(s.getAuthor().equals(songAuthor) && s.getTitle().equals(songTitle)) return s;
+    	return null;
+    }
+    
+    public static ArrayList<Pair<String, String>> getSongsAuthorsAndTitles()
+	{
+    	ArrayList<Pair<String, String>> res = new ArrayList<Pair<String, String>>();
+    	for(Song s : songs)
+    	{
+    		res.add( new Pair(s.getAuthor(), s.getTitle()) );
+    	}
+    	
+    	return res;
+	}
 
     private static Song getSongFromString(String line) throws Exception
     {

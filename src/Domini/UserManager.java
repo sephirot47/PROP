@@ -15,31 +15,28 @@ public class UserManager
 	{
 		users.clear();
 		
-		if(users.size() == 0)
+		ArrayList<User> usersArray = new ArrayList<User>();
+		usersArray = UserManager.getUsersArrayFromDisk("data/users/users.txt", "");
+		
+		for(User u : usersArray)
 		{
-			ArrayList<User> usersArray = new ArrayList<User>();
-			usersArray = UserManager.getUsersArray("data/users/users.txt", "");
+			ArrayList<Reproduction> repros = new ArrayList<Reproduction>();
+			ArrayList<String> reprosLines = FileManager.loadData("data/reproductions/" + u.getName() + "Reproductions.txt");
 			
-			for(User u : usersArray)
+			for(String line : reprosLines)
 			{
-				ArrayList<Reproduction> repros = new ArrayList<Reproduction>();
-				ArrayList<String> reprosLines = FileManager.loadData("data/reproductions/" + u.getName() + "Reproductions.txt");
-				
-				for(String line : reprosLines)
-				{
-					Reproduction r = getReproduction(line);
-					if(r != null) u.addReproduction(r);
-				}
-				
-				users.add(u);
+				Reproduction r = getReproduction(line);
+				if(r != null) u.addReproduction(r);
 			}
+			
+			users.add(u);
 		}
 	}
 
 	public static void addUsersFrom(String filepath) throws Exception
 	{
 		ArrayList<User> usersArray = new ArrayList<User>();
-		usersArray = UserManager.getUsersArray(filepath, "");
+		usersArray = UserManager.getUsersArrayFromDisk(filepath, "");
 		
 		for(User u : usersArray)
 		{
@@ -71,7 +68,7 @@ public class UserManager
 		if(users.size() == 0)
 		{
 			ArrayList<User> usersArray = new ArrayList<User>();
-			usersArray = UserManager.getUsersArray(filepath, reprosDir);
+			usersArray = UserManager.getUsersArrayFromDisk(filepath, reprosDir);
 			
 			for(User u : usersArray)
 			{
@@ -296,7 +293,7 @@ public class UserManager
 	    }
 
 		
-	    private static User getUser(String line) throws Exception
+	    private static User getUserFromString(String line) throws Exception
 	    {
 	    	String fields[] = line.split(";");
 	    	if(fields.length < 2) return null; 
@@ -319,14 +316,14 @@ public class UserManager
 	    	return new Reproduction(author, title, time);
 		}
 
-		private static ArrayList<User> getUsersArray(String userFilepath, String reprosDir) throws Exception
+		private static ArrayList<User> getUsersArrayFromDisk(String userFilepath, String reprosDir) throws Exception
 		{
-			ArrayList<User> users = new ArrayList<User>();
+			ArrayList<User> theUsers = new ArrayList<User>();
 			
 			ArrayList<String> fileLines = FileManager.loadData(userFilepath);
 			for(String line : fileLines)
 			{
-				User u = UserManager.getUser(line);
+				User u = UserManager.getUserFromString(line);
 				
 				if(!reprosDir.equals(""))
 				{
@@ -340,10 +337,10 @@ public class UserManager
 					catch(Exception e){}
 				}
 				
-				users.add(u);
+				theUsers.add(u);
 			}
 			
-			return users;
+			return theUsers;
 		}
 
 		public static ArrayList<Reproduction> getReproductions(String filepath) throws IOException

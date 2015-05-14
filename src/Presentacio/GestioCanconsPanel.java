@@ -43,8 +43,8 @@ import java.awt.Component;
 public class GestioCanconsPanel extends JPanel
 {
 	final private JTextField txtBuscar;
-	final private JLabel labelNomValue, labelEdatValue;
-	final private JList listSongs, listReproductions;
+	final private JLabel labelTitleValue, labelAuthorValue;
+	private JList listEstils, listSongs;
 	
 	public GestioCanconsPanel()
 	{
@@ -53,7 +53,7 @@ public class GestioCanconsPanel extends JPanel
 			@Override
 			public void componentShown(ComponentEvent e) 
 			{
-					refreshSongList();
+				refreshSongList();
 			}
 		});
 		setPreferredSize(new Dimension(800, 555));
@@ -93,8 +93,8 @@ public class GestioCanconsPanel extends JPanel
 		{
 			public void valueChanged(ListSelectionEvent arg0) 
 			{
-				String username = (String) listSongs.getSelectedValue();
-				populateSongDetails(username == null ? "" : username);
+				String authorAndTitle = (String) listSongs.getSelectedValue();
+				populateSongDetails(authorAndTitle == null ? "" : authorAndTitle);
 			}
 		});
 		
@@ -142,15 +142,15 @@ public class GestioCanconsPanel extends JPanel
 		lblReproduccions.setBounds(12, 207, 119, 20);
 		panelSongDetail.add(lblReproduccions);
 		
-		labelEdatValue = new JLabel("-");
-		labelEdatValue.setFont(new Font("Dialog", Font.PLAIN, 12));
-		labelEdatValue.setBounds(72, 76, 48, 20);
-		panelSongDetail.add(labelEdatValue);
+		labelAuthorValue = new JLabel("-");
+		labelAuthorValue.setFont(new Font("Dialog", Font.PLAIN, 12));
+		labelAuthorValue.setBounds(72, 76, 48, 20);
+		panelSongDetail.add(labelAuthorValue);
 		
-		labelNomValue = new JLabel("-");
-		labelNomValue.setFont(new Font("Dialog", Font.PLAIN, 12));
-		labelNomValue.setBounds(72, 33, 198, 20);
-		panelSongDetail.add(labelNomValue);
+		labelTitleValue = new JLabel("-");
+		labelTitleValue.setFont(new Font("Dialog", Font.PLAIN, 12));
+		labelTitleValue.setBounds(72, 33, 198, 20);
+		panelSongDetail.add(labelTitleValue);
 		
 		JButton buttonEditarCanco = new JButton("Editar canco");
 		buttonEditarCanco.addMouseListener(new MouseAdapter() {
@@ -174,17 +174,20 @@ public class GestioCanconsPanel extends JPanel
 			@Override
 			public void mouseClicked(MouseEvent e) 
 			{
-				String title =  ((String) listSongs.getSelectedValue()).split(",")[0].trim();
-				String author = ((String) listSongs.getSelectedValue()).split(",")[1].trim();
-				try 
+				if(listSongs.getSelectedIndex() != -1)
 				{
-					PresentationManager.removeSongFromDisk(title, author);
-				} 
-				catch (Exception e1) 
-				{
-					e1.printStackTrace();
-				}			
-				refreshSongList();
+					String title =  ((String) listSongs.getSelectedValue()).split(",")[0].trim();
+					String author = ((String) listSongs.getSelectedValue()).split(",")[1].trim();
+					try 
+					{
+						PresentationManager.removeSongFromDisk(title, author);
+					} 
+					catch (Exception e1) 
+					{
+						e1.printStackTrace();
+					}			
+					refreshSongList();
+				}
 			}
 		});
 		btnEliminarCanco.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -195,12 +198,12 @@ public class GestioCanconsPanel extends JPanel
 		scrollPane.setBounds(12, 238, 340, 120);
 		panelSongDetail.add(scrollPane);
 		
-		listReproductions = new JList();
-		listReproductions.setAutoscrolls(false);
-		listReproductions.setAlignmentY(0.0f);
-		listReproductions.setAlignmentX(0.0f);
-		listReproductions.setBounds(12, 127, 340, 304);
-		scrollPane.setColumnHeaderView(listReproductions);
+		listEstils = new JList();
+		listEstils.setAutoscrolls(false);
+		listEstils.setAlignmentY(0.0f);
+		listEstils.setAlignmentX(0.0f);
+		listEstils.setBounds(12, 127, 340, 304);
+		scrollPane.setColumnHeaderView(listEstils);
 		
 		JLabel label = new JLabel("Autor:");
 		label.setBounds(12, 119, 48, 20);
@@ -224,16 +227,6 @@ public class GestioCanconsPanel extends JPanel
 		lblDetallsCanco.setBounds(419, 72, 114, 20);
 		add(lblDetallsCanco);
 		
-		try 
-		{
-			PresentationManager.loadSongsFromDisk();
-		} 
-		catch (Exception e) 
-		{
-			WarningDialog.show("Error", "No es troba l'arxiu de carregar cancos");
-			e.printStackTrace();
-		}
-		
 		refreshSongList();
 	}
 	
@@ -247,24 +240,35 @@ public class GestioCanconsPanel extends JPanel
 		for(Pair<String, String> p : authorsAndTitles) authorsAndTitlesTogether.add(p.getFirst() + ", " + p.getSecond());
 		Collections.sort(authorsAndTitlesTogether);
 		
-		for(String entries : authorsAndTitlesTogether)
+		for(String entry : authorsAndTitlesTogether)
 		{
-			String search = txtBuscar.getText();
-			boolean addIt = search.equals("") || entries.contains(search);
-			if(addIt) dlm.addElement(entries);
+			String search = txtBuscar.getText().trim();
+			boolean addIt = search.equals("") || entry.contains(search);
+			if(addIt) dlm.addElement(entry);
 		}
-		
+				
 		listSongs.setModel(dlm);
 
 		if(listSongs.getModel().getSize() > 0)
 			listSongs.setSelectedIndex(0);
 	}
 	
-	public void populateSongDetails(String username)
+	public void populateSongDetails(String authorAndTitle)
 	{
 		DefaultListModel dlm = new DefaultListModel();
 		dlm.clear();
-		dlm.addElement("songg");
-		listReproductions.setModel(dlm);
+		if(!authorAndTitle.equals(""))
+		{
+			String author = authorAndTitle.split(",")[0].trim();
+			labelAuthorValue.setText(author);
+			
+			String title = authorAndTitle.split(",")[1].trim();
+			labelTitleValue.setText(title);
+			
+			ArrayList<String> styles = SongManager.getStylesFromSong(author, title);
+			for(String style : styles) dlm.addElement(style);
+		}
+
+		listEstils.setModel(dlm);
 	}
 }

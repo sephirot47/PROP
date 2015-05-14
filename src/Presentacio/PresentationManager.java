@@ -43,6 +43,8 @@ public class PresentationManager
 	public static void initialize()
 	{
 		PresentationManager.goToCard(MainPanel.class.getSimpleName());
+		PresentationManager.loadUsersFromDisk();
+		PresentationManager.loadSongsFromDisk();
 	}
 	
 	
@@ -91,7 +93,8 @@ public class PresentationManager
 		try 
 		{
 			UserManager.saveCurrentUsersToDisk();
-		} catch (IOException e) 
+		} 
+		catch (IOException e) 
 		{
 			WarningDialog.show("Error", "No es troba l'arxiu de usuaris");
 		}
@@ -135,7 +138,15 @@ public class PresentationManager
 
 	public static void loadUsersFromDisk()
 	{
-		SongManager.loadSongsFromDisk();
+		try 
+		{
+			UserManager.loadUsersFromDisk();
+		} 
+		catch (Exception e) 
+		{
+			WarningDialog.show("Error", "No s'ha pogut trobar el arxiu de usuaris o hi ha usuaris corruptes al arxiu (caracters no valids)");
+			return;
+		}
 	}
 	
 	public static void removeUser(String user) throws IOException 
@@ -157,12 +168,20 @@ public class PresentationManager
 	
 	public static ArrayList<Pair<String, String>> getSongsAuthorsAndTitles()
 	{
-		return new ArrayList<Pair<String, String>>();
+		return SongManager.getSongsAuthorsAndTitles();
 	}
 
 	public static void loadSongsFromDisk()
 	{
-		SongManager.loadSongsFromDisk();
+		try 
+		{
+			SongManager.loadSongsFromDisk();
+		} 
+		catch (Exception e) 
+		{
+			WarningDialog.show("Error", "No s'ha pogut trobar el arxiu de cancons");
+			return;
+		}
 	}
 	
 	public static void removeSongFromDisk(String authorName, String title)
@@ -178,6 +197,7 @@ public class PresentationManager
 	public static void goToCard(String cardName)
 	{
 		changeCard(cardName);
+		JPanel p = (JPanel) MainWindow.frmYoutube.getContentPane();
 		windowHistory.push(cardName);
 	}
 	
@@ -194,7 +214,8 @@ public class PresentationManager
 			JPanel p = (JPanel) MainWindow.frmYoutube.getContentPane();
 			CardLayout cl = (CardLayout) (p.getLayout());
 			cl.show(p, ViewPanel.class.getSimpleName());
-			
+
+			ViewPanel.viewPanel.refreshInsidePanels();
 			p = (JPanel) ViewPanel.viewPanel.cardContainer;
 			cl = (CardLayout) (p.getLayout());
 			cl.show(p, cardName);

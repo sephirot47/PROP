@@ -17,6 +17,14 @@ public class ViewPanel extends JPanel {
 
 	public static ViewPanel viewPanel;
 	public JPanel cardContainer;
+	private GestioCanconsPanel gcp;
+	private GestioUsuarisPanel gup;
+	private GenerarLlistesPanel recp;
+	private EstadistiquesPanel estp;
+	private CreditsPanel credp;
+	private NouUsuariPanel nup;
+	private EditarUsuarisPanel edup;
+	private EditarCanconsPanel ecp;
 	
 	public ViewPanel() 
 	{
@@ -48,14 +56,14 @@ public class ViewPanel extends JPanel {
 		btnEnrerepanel.setHorizontalAlignment(SwingConstants.LEFT);
 		frame.add(btnEnrerepanel, BorderLayout.WEST);
 
-		GestioCanconsPanel gcp = new GestioCanconsPanel();
-		GestioUsuarisPanel gup = new GestioUsuarisPanel();
-		GenerarLlistesPanel recp = new GenerarLlistesPanel();
-		EstadistiquesPanel estp = new EstadistiquesPanel();
-		CreditsPanel credp = new CreditsPanel();
-		NouUsuariPanel nup = new NouUsuariPanel();
-		EditarUsuarisPanel edup= new EditarUsuarisPanel();
-		EditarCanconsPanel ecp = new EditarCanconsPanel();
+		gcp = new GestioCanconsPanel();
+		gup = new GestioUsuarisPanel();
+		recp = new GenerarLlistesPanel();
+		estp = new EstadistiquesPanel();
+		credp = new CreditsPanel();
+		nup = new NouUsuariPanel();
+		edup= new EditarUsuarisPanel();
+		ecp = new EditarCanconsPanel();
 		
 		cardContainer.add(gcp, GestioCanconsPanel.class.getSimpleName());
 		cardContainer.add(gup, GestioUsuarisPanel.class.getSimpleName());
@@ -66,5 +74,10 @@ public class ViewPanel extends JPanel {
 		cardContainer.add(edup, EditarUsuarisPanel.class.getSimpleName());
 		cardContainer.add(ecp, EditarCanconsPanel.class.getSimpleName());
 	}
-
+	
+	public void refreshInsidePanels()
+	{
+		gcp.refreshSongList();
+		gup.refreshUserList();
+	}
 }
