@@ -28,6 +28,7 @@ import java.awt.event.MouseEvent;
 import java.awt.Cursor;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.IOException;
 
 public class GestioUsuarisPanel extends JPanel
 {
@@ -157,6 +158,19 @@ public class GestioUsuarisPanel extends JPanel
 		panelUserDetail.add(buttonEditarUsuari);
 		
 		JButton btnEliminarUsuari = new JButton("Eliminar usuari");
+		btnEliminarUsuari.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String user = (String) listUsers.getSelectedValue();
+				try {
+					PresentationManager.removeUser(user);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}			
+				refreshUserList();
+			}
+		});
 		btnEliminarUsuari.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEliminarUsuari.setBounds(191, 443, 161, 25);
 		panelUserDetail.add(btnEliminarUsuari);

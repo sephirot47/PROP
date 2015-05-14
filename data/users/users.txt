@@ -1,9 +1,3 @@
-Jordi Turmo;18
-abraham;30
-pepe;12
 victor;20
 jfons;40
-Fabio;22232323
-asd;23
-aina;10
-pepe;12
+abraham;30

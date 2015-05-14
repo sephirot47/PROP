@@ -3,11 +3,13 @@ package Domini;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.TimeZone;
 
@@ -31,19 +33,37 @@ public class GirvanNewman extends Algorithm
 		
 		//Save the original weights to restore them later
 		Set<Edge> edges = g.getAllEdges();
-		Set<Pair<Edge, Float>> originalEdges = new HashSet<Pair<Edge, Float>>();
-		for(Edge e : edges) originalEdges.add( new Pair<Edge, Float>(e, e.getWeight()) );
+		HashMap<Edge, Float> originalWeights = new HashMap<Edge, Float>();
+		for(Edge e : edges) originalWeights.put( e, e.getWeight() );
 		//
-				
-		clearEdgeBetweenness(g); //ALL edges to zero betweenness
-		updateEdgeBetweenness(g); //Weight the edges
+		
 		ArrayList< Set<Node> > connectedComponents = GirvanNewman.getConnectedComponents(g);
 		while(connectedComponents.size() < n)
-		{	
+		{	 
+			HashMap<Edge, Float> edgeBetweenness = new HashMap<Edge, Float>();
+			// DIJKSTRA, actualitzem betweenness de edges ///////
+			Set<Node> nodes = g.getAllNodes();
+			for(Node node : nodes)
+			{
+				Dijkstra dijkstra = new Dijkstra(g);
+				dijkstra.execute(node);
+				for(Node n2 : nodes)
+				{
+					if(node == n2) continue;
+					
+					LinkedList<Node> path = dijkstra.getPath(n2);
+					for(int i = 0; i < path.size() - 1; ++i)
+					{
+						Edge e = g.getEdge(path.get(i), path.get(i+1));
+						e.setWeight(e.getWeight() + 1);
+					}
+				}	
+			}
+			///////////////////
+			
 			//Search for the edge with maximum betweenness
 			Edge edgeToRemove = null;
 			float maxEdgeBetweenness = 0;
-			Set<Node> nodes = g.getAllNodes();
 			for(Node node1 : nodes)
 			{
 				Set<Node> adjNodes = g.getAdjacentNodesTo(node1);
@@ -60,10 +80,6 @@ public class GirvanNewman extends Algorithm
 			
 			//Remove it (pseudo remove it(put its weight to -1))
 			if(edgeToRemove != null) edgeToRemove.setWeight(-1);
-
-			//Weight the edges. It doesn't take into account the negative weighted edges!!!
-			//(as if they didn't exist)
-			updateEdgeBetweenness(g);
 			
 			//Count the connected components again, in order to know if we must continue
 			//removing edges or not
@@ -72,9 +88,10 @@ public class GirvanNewman extends Algorithm
 		}
 
 		//Restore the original weights !!!!!
-		for(Pair<Edge, Float> e : originalEdges)
+		Set<Edge> allEdges = g.getAllEdges();
+		for(Edge e : allEdges)
 		{
-			e.getFirst().setWeight(e.getSecond()); //Deberia restaurarlos ya que los edges se guardan por referencia
+			e.setWeight( originalWeights.get(e) ); //Deberia restaurarlos ya que los edges se guardan por referencia
 		}
 		//
 		
@@ -135,110 +152,141 @@ public class GirvanNewman extends Algorithm
 		return connectedComponents;
 	}
 
-
-	/**
-	 * Sets the weight of all edges to 0
-	 */
-	private static void clearEdgeBetweenness(Graph g)
-	{
-		Set<Edge> edges = g.getAllEdges();
-		for(Edge e : edges)  e.setWeight(0);
-	}
-
 	/**
 	 * We had to put this function here in order to be able to extend the Algorithm class........
 	 */
 	public Solution getSolution(Graph g)
 	{
-		return getSolution(g, 4);
+		int nCommunities = (int) Math.floor( Math.sqrt(g.getAllNodes().size()) );
+		return getSolution(g, nCommunities);
 	}
 	
-	/**
-	 * Sets the weight of all edges to 0, except the negative ones
-	 */
-	private static void clearEdgeBetweennessExceptNegative(Graph g)
+	private class Dijkstra
 	{
-		Set<Edge> edges = g.getAllEdges();
-		for(Edge e : edges) 
-			if(e.getWeight() > 0) e.setWeight(0);
-	}
+	  private final List<Node> nodes;
+	  private final List<Edge> edges;
+	  private Set<Node> settledNodes;
+	  private Set<Node> unSettledNodes;
+	  private HashMap<Node, Node> predecessors;
+	  private HashMap<Node, Float> distance;
+	  private Graph g;
+	  
+	  public Dijkstra(Graph graph) 
+	  {
+		g = graph;
+		
+	    // create a copy of the array so that we can operate on this array
+	    this.nodes = new ArrayList<Node>(graph.getAllNodes());
+	    this.edges = new ArrayList<Edge>(graph.getAllEdges());
+	  }
 	
-	/**
-	 * Updates the betweenness of every edge, this is, it assigns a weight equal
-	 * to [2 * (the number of shortest paths from every node to every node that pass through that edge)]
-	 * (approximately hehehe)
-	 */
-	private static <N extends Node> void updateEdgeBetweenness(Graph g)
-	{
-		clearEdgeBetweennessExceptNegative(g); //All edges to zero, except the negative ones
-		
-		//For every node, get the shortest path to every other node
-		//For every edge every path passes by, add 1 to its betweenness
-		Set<N> nodes = g.getAllNodes();
-		for(N n1 : nodes)
-		{
-			for(N n2 : nodes)
-			{
-				if(n1 == n2) continue;
-				
-				LinkedList<N> path = getShortestPath(g, n1, n2);
-				Iterator<N> it = path.iterator();
-				
-				N prevNode = null; 
-				if(it.hasNext()) prevNode = it.next();
-				while(it.hasNext())
-				{
-					if(it.hasNext())
-					{
-						N n = it.next();
-						Edge e = g.getEdge(prevNode, n);
-						if(e != null) e.setWeight(e.getWeight() + 1);
-						prevNode = n;
-					}
-				}
-			}
-		}
-	}
+	  public void execute(Node source) 
+	  {
+	    settledNodes = new HashSet<Node>();
+	    unSettledNodes = new HashSet<Node>();
+	    distance = new HashMap<Node, Float>();
+	    predecessors = new HashMap<Node, Node>();
+	    distance.put(source, 0.0f);
+	    unSettledNodes.add(source);
+	    while (unSettledNodes.size() > 0) 
+	    {
+	      Node node = getMinimum(unSettledNodes);
+	      settledNodes.add(node);
+	      unSettledNodes.remove(node);
+	      findMinimalDistances(node);
+	    }
+	  }
 	
-	private static <N extends Node> LinkedList<N> getShortestPath(Graph g, N origin, N destiny) //BFS
-	{
-		HashMap<N, N> parentNodes = new HashMap<N, N>();
-		HashSet<N> visitedNodes = new HashSet<N>();
-		LinkedList<N> nextNodes = new LinkedList<N>();
-		
-		N currentNode = origin;
-		nextNodes.push(origin);
-		visitedNodes.add(origin);
-		
-		boolean found = false;
-		while(nextNodes.size() > 0 && !found)
-		{
-			currentNode = nextNodes.get(0); nextNodes.remove(0);
-		    for(N n : (Set<N>) g.getAllNodes())
-		    {
-		    	Edge e = g.getEdge(currentNode, n);
-		    	if(e != null && !visitedNodes.contains(n) && e.getWeight() >= 0)
-		    	{
-					visitedNodes.add(n);
-		    		parentNodes.put(n, currentNode);
-			    	nextNodes.add(nextNodes.size(), n);
-			    	if(n == destiny) { found = true; break; }
-		    	}
-		    }
-		}
-		
-		LinkedList<N> path = new LinkedList<N>(); //Get the path
-		if(found)
-		{
-			N n = destiny;
-			while(n != origin)
-			{
-				path.add(0, n);
-				n = parentNodes.get(n); //jump to the previous node
-			}
-			path.add(0, origin);
-		}
-		return path;
-	}
+	  private void findMinimalDistances(Node node) 
+	  {
+	    List<Node> adjacentNodes = getNeighbors(node);
+	    for (Node target : adjacentNodes) 
+	    {
+	      if (getShortestDistance(target) > getShortestDistance(node) + getDistance(node, target)) 
+	      {
+	        distance.put(target, getShortestDistance(node) + getDistance(node, target));
+	        predecessors.put(target, node);
+	        unSettledNodes.add(target);
+	      }
+	    }
 	
+	  }
+	
+	  private float getDistance(Node node, Node target) 
+	  {
+		return g.getEdge(node, target).getWeight();
+		/*
+	    for (Edge edge : edges)
+	    {
+	      if (edge.getSource().equals(node) && edge.getDestination().equals(target)) {
+	        return edge.getWeight();
+	      }
+	    }
+	    throw new RuntimeException("Should not happen");
+	    */
+	  }
+	
+	  private List<Node> getNeighbors(Node node) 
+	  {
+	    List<Node> neighbors = new ArrayList<Node>();
+	     
+	    Set<Node> adjNodes = g.getAdjacentNodesTo(node);
+	    for(Node n : adjNodes)
+	    {
+	    	Edge e = g.getEdge(node, n);
+	    	if(e != null && e.getWeight() != -1) 
+	    		neighbors.add(n);
+	    }
+	    
+	    return neighbors;
+	  }
+	
+	  private Node getMinimum(Set<Node> Nodees) {
+	    Node minimum = null;
+	    for (Node Node : Nodees) {
+	      if (minimum == null) {
+	        minimum = Node;
+	      } else {
+	        if (getShortestDistance(Node) < getShortestDistance(minimum)) {
+	          minimum = Node;
+	        }
+	      }
+	    }
+	    return minimum;
+	  }
+	
+	  private boolean isSettled(Node Node) {
+	    return settledNodes.contains(Node);
+	  }
+	
+	  private Float getShortestDistance(Node destination) {
+	    Float d = distance.get(destination);
+	    if (d == null) {
+	      return Float.POSITIVE_INFINITY;
+	    } else {
+	      return d;
+	    }
+	  }
+	
+	  /*
+	   * This method returns the path from the source to the selected target and
+	   * NULL if no path exists
+	   */
+	  public LinkedList<Node> getPath(Node target) {
+	    LinkedList<Node> path = new LinkedList<Node>();
+	    Node step = target;
+	    // check if a path exists
+	    if (predecessors.get(step) == null) {
+	      return null;
+	    }
+	    path.add(step);
+	    while (predecessors.get(step) != null) {
+	      step = predecessors.get(step);
+	      path.add(step);
+	    }
+	    // Put it into the correct order
+	    Collections.reverse(path);
+	    return path;
+	  }
+	};
 }

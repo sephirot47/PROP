@@ -36,7 +36,7 @@ public class EditarUsuarisPanel extends JPanel
 {
 	public static String currentUsername = "";
 	final private JList listReproductions;
-	private JTextField textNom;
+	private JLabel textNom;
 	private JTextField textEdat;
 	private JButton btnEliminarReproduccio;
 	private JTextField textField;
@@ -100,7 +100,7 @@ public class EditarUsuarisPanel extends JPanel
 		lblDetallsUsuari.setBounds(122, 0, 114, 20);
 		panelUserDetail.add(lblDetallsUsuari);
 		
-		textNom = new JTextField();
+		textNom = new JLabel();
 		textNom.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentShown(ComponentEvent e) 
@@ -110,7 +110,7 @@ public class EditarUsuarisPanel extends JPanel
 		});
 		textNom.setBounds(59, 34, 114, 19);
 		panelUserDetail.add(textNom);
-		textNom.setColumns(10);
+		//textNom.setColumns(10);
 		
 		textEdat = new JTextField();
 		textEdat.setColumns(10);
@@ -156,6 +156,17 @@ public class EditarUsuarisPanel extends JPanel
 		JLabel lblNovaReproduccio = new JLabel("Nova Reproduccio");
 		lblNovaReproduccio.setBounds(90, 12, 126, 15);
 		panelUsers.add(lblNovaReproduccio);
+		
+		JButton btnNewButton = new JButton("Desar canvis");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//PresentationManager.removeUser(currentUsername);
+			}
+		});
+		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton.setBounds(406, 309, 311, 42);
+		add(btnNewButton);
 		
 		refreshAll();
 	}

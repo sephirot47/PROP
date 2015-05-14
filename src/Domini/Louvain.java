@@ -223,6 +223,7 @@ public class Louvain extends Algorithm
                                         totalTot+=tot[i];
                                         totalIn+=in[i];
                                 }
+                                newMod=modularity();
                                
                         }
                         return improvement;

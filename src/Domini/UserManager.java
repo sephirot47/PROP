@@ -44,7 +44,7 @@ public class UserManager
 		{
 			if(u.getName().equals(username))
 			{
-				Exception e = new Exception("El nom d'usuari ja existeix");
+				throw new Exception("El nom d'usuari ja existeix");
 			}
 		}
 		
@@ -179,6 +179,28 @@ public class UserManager
 	    	}
 	    	
 	    	FileManager.saveData(filepath, lines);
+	    }
+	    
+	    public static void removeUser(String username) throws IOException
+	    {
+	    	String search = username;
+		
+	    	ArrayList<String> lines = FileManager.loadData("data/users/users.txt");
+	    	for(int i = 0; i < lines.size(); ++i)
+	    	{
+	    		String line = lines.get(i);
+	    		if(line.startsWith(search)) lines.remove(i);
+	    	}
+	    	
+	    	FileManager.saveData("data/users/users.txt", lines);
+	    	
+	    	users.clear();
+	    	try {
+				loadUsers();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    }
 
 	    public static void saveReproduction(String filepath, Reproduction r) throws IOException

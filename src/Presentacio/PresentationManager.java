@@ -2,6 +2,7 @@ package Presentacio;
 
 import java.awt.CardLayout;
 import java.awt.EventQueue;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -112,5 +113,9 @@ public class PresentationManager
 		{
 			changeCard(windowHistory.peek());
 		}
+	}
+
+	public static void removeUser(String user) throws IOException {
+		UserManager.removeUser(user);
 	}
 }
