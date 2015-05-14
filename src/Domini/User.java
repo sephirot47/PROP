@@ -52,6 +52,7 @@ public class User
     	checkUsername(name);
     	name = n; 
     } 
+    
 	public void setReproductions(ArrayList<Reproduction> reproductions) 
 	{
 		this.reproductions = reproductions;

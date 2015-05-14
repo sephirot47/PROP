@@ -13,6 +13,8 @@ import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Cursor;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class WarningDialog extends JDialog {
 
@@ -28,8 +30,10 @@ public class WarningDialog extends JDialog {
 			dialog.setMessage(msg);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-			
-		} catch (Exception e) {
+			MainWindow.frmYoutube.setEnabled(false);
+		} 
+		catch (Exception e) 
+		{
 			e.printStackTrace();
 		}
 	}
@@ -39,13 +43,20 @@ public class WarningDialog extends JDialog {
 	 */
 	public WarningDialog() 
 	{
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) 
+			{
+				MainWindow.frmYoutube.setEnabled(true);
+			}
+		});
 		setBounds(100, 100, 450, 200);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
-			lblMsg = new JLabel("Lorem ipsum mi puta madre");
+			lblMsg = new JLabel("Lorem ipsum");
 			lblMsg.setHorizontalAlignment(SwingConstants.CENTER);
 			contentPanel.add(lblMsg);
 		}

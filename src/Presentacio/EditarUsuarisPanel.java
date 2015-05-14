@@ -1,6 +1,7 @@
 package Presentacio;
 
 import javax.swing.JPanel;
+
 import java.awt.Dimension;
 
 import javax.swing.DefaultListModel;
@@ -8,7 +9,9 @@ import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.border.LineBorder;
 
 import Domini.Pair;
@@ -21,6 +24,7 @@ import java.util.Collections;
 
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -28,9 +32,13 @@ import java.awt.event.MouseEvent;
 import java.awt.Cursor;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+
 import javax.swing.ListSelectionModel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import javax.swing.JScrollPane;
 
 public class EditarUsuarisPanel extends JPanel
 {
@@ -39,8 +47,9 @@ public class EditarUsuarisPanel extends JPanel
 	private JLabel textNom;
 	private JTextField textEdat;
 	private JButton btnEliminarReproduccio;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textTitol;
+	private JTextField textAutor;
+	private JTextField textTimestamp;
 	
 	public EditarUsuarisPanel()
 	{
@@ -74,15 +83,12 @@ public class EditarUsuarisPanel extends JPanel
 		
 		listReproductions = new JList();
 		listReproductions.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		listReproductions.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) 
-			{
-				System.out.println(arg0.getFirstIndex());
-			}
-		});
-		listReproductions.setBorder(new LineBorder(new Color(0, 0, 0)));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 125, 336, 301);
+		panelUserDetail.add(scrollPane);
 		listReproductions.setBounds(12, 127, 340, 304);
-		panelUserDetail.add(listReproductions);
+		scrollPane.setViewportView(listReproductions);
 		
 		btnEliminarReproduccio = new JButton("Eliminar reproduccio");
 		btnEliminarReproduccio.addMouseListener(new MouseAdapter() {
@@ -93,7 +99,7 @@ public class EditarUsuarisPanel extends JPanel
 			}
 		});
 		btnEliminarReproduccio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEliminarReproduccio.setBounds(154, 443, 198, 25);
+		btnEliminarReproduccio.setBounds(154, 438, 198, 25);
 		panelUserDetail.add(btnEliminarReproduccio);
 		
 		JLabel lblDetallsUsuari = new JLabel("Detalls usuari:");
@@ -119,7 +125,7 @@ public class EditarUsuarisPanel extends JPanel
 		
 		JPanel panelUsers = new JPanel();
 		panelUsers.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelUsers.setBounds(406, 155, 311, 142);
+		panelUsers.setBounds(406, 155, 311, 187);
 		add(panelUsers);
 		panelUsers.setLayout(null);
 		
@@ -131,42 +137,95 @@ public class EditarUsuarisPanel extends JPanel
 		lblAutor.setBounds(12, 70, 70, 15);
 		panelUsers.add(lblAutor);
 		
-		textField = new JTextField();
-		textField.setBounds(66, 39, 233, 19);
-		panelUsers.add(textField);
-		textField.setColumns(10);
+		textTitol = new JTextField();
+		textTitol.setBounds(108, 39, 191, 19);
+		panelUsers.add(textTitol);
+		textTitol.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(66, 68, 233, 19);
-		panelUsers.add(textField_1);
-		textField_1.setColumns(10);
+		textAutor = new JTextField();
+		textAutor.setBounds(108, 68, 191, 19);
+		panelUsers.add(textAutor);
+		textAutor.setColumns(10);
 		
 		JButton btnAfegir = new JButton("Afegir");
 		btnAfegir.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("CLICKClicK");
+			public void mouseClicked(MouseEvent e) 
+			{
+				String titol = textTitol.getText().trim();
+				String autor = textAutor.getText().trim();
+				int timestamp = -1;
+				try
+				{
+					timestamp = Integer.parseInt(textTimestamp.getText().trim());
+				}
+				catch(NumberFormatException eee)
+				{
+					WarningDialog.show("Error", "El timestamp ha de ser un numero valid.");
+					return;
+				}
+				
+				if(titol.length() == 0){ WarningDialog.show("Error", "El titol d'una reproduccio no pot ser buit."); return;}
+				if(autor.length() == 0){ WarningDialog.show("Error", "El autor d'una reproduccio no pot ser buit."); return;}
+				
+				if(timestamp < 0){WarningDialog.show("Error", "El timestamp no pot ser < 0."); return;}
+				
+				((DefaultListModel)listReproductions.getModel()).addElement(autor + ", " + titol + ", " + timestamp);
+
+				refreshDeleteReproductionsButton();
 			}
 		});
 
 		btnAfegir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnAfegir.setBounds(12, 97, 287, 25);
+		btnAfegir.setBounds(12, 138, 287, 25);
 		panelUsers.add(btnAfegir);
 		
 		JLabel lblNovaReproduccio = new JLabel("Nova Reproduccio");
 		lblNovaReproduccio.setBounds(90, 12, 126, 15);
 		panelUsers.add(lblNovaReproduccio);
 		
-		JButton btnNewButton = new JButton("Desar canvis");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		textTimestamp = new JTextField();
+		textTimestamp.setColumns(10);
+		textTimestamp.setBounds(108, 99, 191, 19);
+		panelUsers.add(textTimestamp);
+		
+		JLabel lblTimestamp = new JLabel("Timestamp:");
+		lblTimestamp.setBounds(12, 101, 112, 15);
+		panelUsers.add(lblTimestamp);
+		
+		JButton btnDesar = new JButton("Desar canvis");
+		btnDesar.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				//PresentationManager.removeUser(currentUsername);
+			public void mouseClicked(MouseEvent e) 
+			{
+				ArrayList<String> repros = new ArrayList<String>();
+				DefaultListModel dlm = (DefaultListModel) listReproductions.getModel();
+				for(int i = 0; i < dlm.getSize(); ++i)
+				{
+					repros.add((String)dlm.getElementAt(i));
+					System.out.println((String)dlm.getElementAt(i));
+				}
+
+				int age = -1;
+				try { age = Integer.parseInt(textEdat.getText()); }
+				catch(NumberFormatException eee)
+				{
+					WarningDialog.show("Error", "La edat ha de ser un numero valid.");
+					return;
+				}
+				
+				if(age <= 0){WarningDialog.show("Error", "La edat d'un usuari ha de ser > 0."); return;}
+
+				PresentationManager.setUserAge(currentUsername, age);
+				PresentationManager.setUserReproductions(currentUsername, repros);
+				PresentationManager.saveCurrentUsers();
+				WarningDialog.show("Info", "Usuari editat correctament!");
+				PresentationManager.goBack();
 			}
 		});
-		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setBounds(406, 309, 311, 42);
-		add(btnNewButton);
+		btnDesar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnDesar.setBounds(406, 368, 311, 42);
+		add(btnDesar);
 		
 		refreshAll();
 	}
@@ -236,33 +295,5 @@ public class EditarUsuarisPanel extends JPanel
 			dlm.removeRange(firstIndex, lastIndex);
 		}
 		refreshDeleteReproductionsButton();
-	}
-	
-	private void onSaveChangesClicked()
-	{
-		String name = textNom.getText();
-		int age = 0;
-		
-		try
-		{
-			age  = Integer.parseInt(textEdat.getText());
-		}
-		catch(NumberFormatException e)
-		{
-			WarningDialog.show("Error", "La edat ha de ser un numero valid.");
-			return;
-		}
-		
-		try
-		{
-			PresentationManager.createUser(name, age);	
-		}
-		catch(Exception e)
-		{
-			WarningDialog.show("Error", e.getMessage());
-			return;
-		}
-		
-		PresentationManager.goBack();
 	}
 }

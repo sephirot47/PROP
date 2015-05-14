@@ -87,27 +87,27 @@ public class UserManagerTest extends TestCase
 	
 		FileManager.eraseData("data/userSaveProva1.txt"); //Comencem amb larxiu buit
 		
-		UserManager.saveUser("data/userSaveProva1.txt", u1);
+		UserManager.saveUserToDisk("data/userSaveProva1.txt", u1);
 		usersLines.add("usuari1;23");
 		assertEquals(FileManager.loadData("data/userSaveProva1.txt"), usersLines);
 		
-		UserManager.saveUser("data/userSaveProva1.txt", u2);
+		UserManager.saveUserToDisk("data/userSaveProva1.txt", u2);
 		usersLines.add("usuari2;21");
 		assertEquals(FileManager.loadData("data/userSaveProva1.txt"), usersLines);
 		
-		UserManager.saveUser("data/userSaveProva1.txt", u3);
+		UserManager.saveUserToDisk("data/userSaveProva1.txt", u3);
 		usersLines.add("usuari3;45");
 		assertEquals(FileManager.loadData("data/userSaveProva1.txt"), usersLines);
 		
 		u2.setAge(5478);
 		u2.setName("usuari567");
-		UserManager.saveUser("data/userSaveProva1.txt", u2);
+		UserManager.saveUserToDisk("data/userSaveProva1.txt", u2);
 		usersLines.add("usuari567;5478");
 		assertEquals(FileManager.loadData("data/userSaveProva1.txt"), usersLines);
 		
 		u2.setName("usuari2");  //Modificarem una linia en especific
 		u2.setAge(656);
-		UserManager.saveUser("data/userSaveProva1.txt", u2);
+		UserManager.saveUserToDisk("data/userSaveProva1.txt", u2);
 		usersLines.set(1, "usuari2;656");
 		assertEquals(FileManager.loadData("data/userSaveProva1.txt"), usersLines);
 		} catch(Exception e) {}
@@ -128,7 +128,7 @@ public class UserManagerTest extends TestCase
 		 usersLines.add("usuari2;21");
 		 usersLines.add("usuari3;45");
 		 
-		 UserManager.saveUsers("data/userSaveProva2.txt", writtenUsers);
+		 UserManager.saveUsersToDisk("data/userSaveProva2.txt", writtenUsers);
 		 assertEquals(FileManager.loadData("data/userSaveProva2.txt"), usersLines);
 		 
 		
@@ -138,7 +138,7 @@ public class UserManagerTest extends TestCase
 		 FileManager.eraseData("data/userSaveProva3.txt"); //Comencem amb larxiu buit
 		 
 		 writtenUsers.add(new User("AAAAAAAAAAAAA", 213));
-		 UserManager.saveUsers("data/userSaveProva3.txt", writtenUsers);
+		 UserManager.saveUsersToDisk("data/userSaveProva3.txt", writtenUsers);
 		 assertFalse(FileManager.loadData("data/userSaveProva3.txt").equals(usersLines));
 		 
 		 usersLines.add("AAAAAAAAAAAAA;213");
@@ -154,20 +154,20 @@ public class UserManagerTest extends TestCase
 	
 		FileManager.eraseData("data/reproductionSaveProva1.txt"); //Comencem amb larxiu buit
 		
-		UserManager.saveReproduction("data/reproductionSaveProva1.txt", r1);
+		UserManager.saveReproductionToDisk("data/reproductionSaveProva1.txt", r1);
 		reproductionsLines.add("autor1;titol1;1");
 		assertEquals(FileManager.loadData("data/reproductionSaveProva1.txt"), reproductionsLines);
 		
-		UserManager.saveReproduction("data/reproductionSaveProva1.txt", r2);
+		UserManager.saveReproductionToDisk("data/reproductionSaveProva1.txt", r2);
 		reproductionsLines.add("autor2;titol2;2");
 		assertEquals(FileManager.loadData("data/reproductionSaveProva1.txt"), reproductionsLines);
 		
-		UserManager.saveReproduction("data/reproductionSaveProva1.txt", r3);
+		UserManager.saveReproductionToDisk("data/reproductionSaveProva1.txt", r3);
 		reproductionsLines.add("autor3;titol3;3");
 		assertEquals(FileManager.loadData("data/reproductionSaveProva1.txt"), reproductionsLines);
 		
 		r2.setSongAuthor("autor2bis"); //Si canviem la primary key, es considera un nou user
-		UserManager.saveReproduction("data/reproductionSaveProva1.txt", r2);
+		UserManager.saveReproductionToDisk("data/reproductionSaveProva1.txt", r2);
 		assertFalse(FileManager.loadData("data/reproductionSaveProva1.txt").equals(reproductionsLines));
 		reproductionsLines.add("autor2bis;titol2;2");
 		assertEquals(FileManager.loadData("data/reproductionSaveProva1.txt"), reproductionsLines);
@@ -188,7 +188,7 @@ public class UserManagerTest extends TestCase
 		 reproductionsLines.add("autor2;titol1;2");
 		 reproductionsLines.add("autor3;titol123;3");
 		 
-		 UserManager.saveReproductions("data/reproductionSaveProva2.txt", writtenReproductions);
+		 UserManager.saveReproductionsToDisk("data/reproductionSaveProva2.txt", writtenReproductions);
 		 assertEquals(FileManager.loadData("data/reproductionSaveProva2.txt"), reproductionsLines);
 	 }
 	 
@@ -205,11 +205,11 @@ public class UserManagerTest extends TestCase
 		 FileManager.saveData("data/usersRemoveTest.txt", usersLines);
 	
 		 usersLines.remove(2);
-		 UserManager.removeUser("data/usersRemoveTest.txt", "bbb");
+		 UserManager.removeUserFromDisk("data/usersRemoveTest.txt", "bbb");
 		 assertEquals(FileManager.loadData("data/usersRemoveTest.txt"), usersLines);
 	
 		 usersLines.remove(1);
-		 UserManager.removeUser("data/usersRemoveTest.txt", "aaa");
+		 UserManager.removeUserFromDisk("data/usersRemoveTest.txt", "aaa");
 		 assertEquals(FileManager.loadData("data/usersRemoveTest.txt"), usersLines);
 	 }
  

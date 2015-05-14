@@ -29,6 +29,8 @@ import java.awt.Cursor;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.IOException;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 public class GestioUsuarisPanel extends JPanel
 {
@@ -46,7 +48,7 @@ public class GestioUsuarisPanel extends JPanel
 					refreshUserList();
 			}
 		});
-		setPreferredSize(new Dimension(800, 561));
+		setPreferredSize(new Dimension(800, 555));
 		setLayout(null);
 		
 		JPanel panelUsers = new JPanel();
@@ -76,6 +78,9 @@ public class GestioUsuarisPanel extends JPanel
 		txtBuscar.setColumns(10);
 		
 		listUsers = new JList();
+		listUsers.setAutoscrolls(false);
+		listUsers.setAlignmentY(0.0f);
+		listUsers.setAlignmentX(0.0f);
 		listUsers.addListSelectionListener(new ListSelectionListener() 
 		{
 			public void valueChanged(ListSelectionEvent arg0) 
@@ -84,9 +89,12 @@ public class GestioUsuarisPanel extends JPanel
 				populateUserDetails(username == null ? "" : username);
 			}
 		});
-		listUsers.setBorder(new LineBorder(new Color(0, 0, 0)));
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(12, 76, 284, 363);
+		panelUsers.add(scrollPane_1);
 		listUsers.setBounds(12, 67, 278, 369);
-		panelUsers.add(listUsers);
+		scrollPane_1.setViewportView(listUsers);
 		
 		JButton btnNouUsuari = new JButton("Nou usuari");
 		btnNouUsuari.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -126,11 +134,6 @@ public class GestioUsuarisPanel extends JPanel
 		lblReproduccions.setBounds(12, 93, 119, 20);
 		panelUserDetail.add(lblReproduccions);
 		
-		listReproductions = new JList();
-		listReproductions.setBorder(new LineBorder(new Color(0, 0, 0)));
-		listReproductions.setBounds(12, 127, 340, 304);
-		panelUserDetail.add(listReproductions);
-		
 		labelEdatValue = new JLabel("-");
 		labelEdatValue.setFont(new Font("Dialog", Font.PLAIN, 12));
 		labelEdatValue.setBounds(72, 61, 48, 20);
@@ -164,8 +167,8 @@ public class GestioUsuarisPanel extends JPanel
 				String user = (String) listUsers.getSelectedValue();
 				try {
 					PresentationManager.removeUser(user);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
+				} catch (IOException e1) 
+				{
 					e1.printStackTrace();
 				}			
 				refreshUserList();
@@ -179,9 +182,20 @@ public class GestioUsuarisPanel extends JPanel
 		lblDetallsUsuari.setBounds(122, 0, 114, 20);
 		panelUserDetail.add(lblDetallsUsuari);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 127, 340, 304);
+		panelUserDetail.add(scrollPane);
+		
+		listReproductions = new JList();
+		listReproductions.setAutoscrolls(false);
+		listReproductions.setAlignmentY(0.0f);
+		listReproductions.setAlignmentX(0.0f);
+		listReproductions.setBounds(12, 127, 340, 304);
+		scrollPane.setViewportView(listReproductions);
+		
 		try 
 		{
-			UserManager.loadUsers();
+			UserManager.loadUsersFromDisk();
 		} 
 		catch (Exception e) 
 		{

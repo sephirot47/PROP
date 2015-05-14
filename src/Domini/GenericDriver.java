@@ -205,7 +205,7 @@ public class GenericDriver
 		
 		try
 		{
-			UserManager.saveUser(filepath, u);
+			UserManager.saveUserToDisk(filepath, u);
 		}
 		catch(IOException e)
 		{
@@ -263,7 +263,7 @@ public class GenericDriver
 		
 		try 
 		{
-			UserManager.removeUser(filepath, username);
+			UserManager.removeUserFromDisk(filepath, username);
 		} 
 		catch (IOException e) 
 		{
@@ -306,7 +306,7 @@ public class GenericDriver
 		
 		try
 		{
-			UserManager.saveReproduction(filepath + "/" + username + "Reproductions.txt", r);
+			UserManager.saveReproductionToDisk(filepath + "/" + username + "Reproductions.txt", r);
 		}
 		catch(IOException e)
 		{

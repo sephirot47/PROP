@@ -11,7 +11,7 @@ public class UserManager
 {
 	private static Set<User> users = new HashSet<User>();
 	
-	public static void loadUsers() throws Exception
+	public static void loadUsersFromDisk() throws Exception
 	{
 		users.clear();
 		
@@ -22,6 +22,15 @@ public class UserManager
 			
 			for(User u : usersArray)
 			{
+				ArrayList<Reproduction> repros = new ArrayList<Reproduction>();
+				ArrayList<String> reprosLines = FileManager.loadData("data/reproductions/" + u.getName() + "Reproductions.txt");
+				
+				for(String line : reprosLines)
+				{
+					Reproduction r = getReproduction(line);
+					if(r != null) u.addReproduction(r);
+				}
+				
 				users.add(u);
 			}
 		}
@@ -38,7 +47,7 @@ public class UserManager
 		}
 	}
 	
-	public static void createUser(String username, int edat) throws Exception 
+	public static void createUserAndSaveToDisk(String username, int edat) throws Exception 
 	{
 		for(User u: users)
 		{
@@ -51,9 +60,8 @@ public class UserManager
 		User u = new User(username, edat);
 		users.add(u);
 		
-		saveReproductions("data/reproductions/" + username + "Reproductions.txt", new ArrayList<Reproduction>());
-		
-		saveCurrentUsers();
+		saveReproductionsToDisk("data/reproductions/" + username + "Reproductions.txt", new ArrayList<Reproduction>());
+		saveUserToDisk("data/users/users.txt", u);
 	}
 	
 	public static Set<User> getUsers(String filepath, String reprosDir) throws Exception
@@ -93,6 +101,42 @@ public class UserManager
 		return 0;
 	}
 	
+	public static void setUserAge(String username, int age)
+	{
+		for(User u : users)
+		{
+			if(u.getName().equals(username))
+			{
+				u.setAge(age);
+				return;
+			}
+		}
+	}
+	
+	public static void setUserReproductions(String username, ArrayList<String> reprosStrings) throws Exception
+	{
+		ArrayList<Reproduction> repros = new ArrayList<Reproduction>();
+		for(String line : reprosStrings)
+		{
+			//Passem al format adient, el dels arxiu
+			line = line.replaceAll(",", ";");
+			Reproduction r = getReproduction(line);
+			repros.add(r);
+		}
+		
+		User user = getUserByName(username);
+		if(username != null)
+		{
+			user.setReproductions(repros);
+		}
+	}
+
+	private static User getUserByName(String username)
+	{
+		for(User u : users) if(u.getName().equals(username)) return u;
+		return null;
+	}
+	
 	public static ArrayList<Pair<String, Long>> getUserReproductions(String username) throws Exception
 	{
 		ArrayList<Pair<String, Long>> result = new ArrayList<Pair<String, Long>>();
@@ -109,7 +153,7 @@ public class UserManager
 		return null;
 	}
 	
-	 public static void saveUser(String filepath, User u) throws IOException
+	 public static void saveUserToDisk(String filepath, User u) throws IOException
 	    {
 	    	ArrayList<String> fileLines = new ArrayList<String>();
 	    	String songLine = u.getName() + ";" + u.getAge();
@@ -144,8 +188,9 @@ public class UserManager
 	    }
 	    
 
-	    public static void saveCurrentUsers() throws IOException
+	    public static void saveCurrentUsersToDisk() throws IOException
 	    {
+	    	//Actualitzar fitxers usuaris
 	    	ArrayList<String> fileLines = new ArrayList<String>();
 	    	for(User u : users)
 	    	{
@@ -153,9 +198,23 @@ public class UserManager
 	    		fileLines.add(songLine);
 	    	}
 	    	FileManager.saveData("data/users/users.txt", fileLines);
+	    	
+
+	    	//Actualitzar fitxers reproduccions
+	    	for(User u : users)
+	    	{
+		    	fileLines = new ArrayList<String>();
+	    		ArrayList<Reproduction> repros = u.getReproductions();
+	    		for(Reproduction r : repros)
+    			{
+	    			String line = r.getSongAuthor() + ";" + r.getSongTitle() + ";" + r.getTime();
+		    		fileLines.add(line);
+    			}
+		    	FileManager.saveData("data/reproductions/" + u.getName() + "Reproductions.txt", fileLines);
+	    	}
 	    }
 	 
-	    public static void saveUsers(String filepath, ArrayList<User> users) throws IOException
+	    public static void saveUsersToDisk(String filepath, ArrayList<User> users) throws IOException
 	    {
 	    	ArrayList<String> fileLines = new ArrayList<String>();
 	    	for(User u : users)
@@ -167,7 +226,7 @@ public class UserManager
 	    }
 
 	    
-	    public static void removeUser(String filepath, String username) throws IOException
+	    public static void removeUserFromDisk(String filepath, String username) throws IOException
 	    {
 	    	String search = username;
 		
@@ -179,9 +238,11 @@ public class UserManager
 	    	}
 	    	
 	    	FileManager.saveData(filepath, lines);
+	    	System.out.println("data/reproductions/" + username + "Reproductions.txt");
+	    	FileManager.eraseData("data/reproductions/" + username + "Reproductions.txt");
 	    }
 	    
-	    public static void removeUser(String username) throws IOException
+	    public static void removeUserFromDisk(String username) throws IOException
 	    {
 	    	String search = username;
 		
@@ -196,14 +257,17 @@ public class UserManager
 	    	
 	    	users.clear();
 	    	try {
-				loadUsers();
+				loadUsersFromDisk();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
+	    	
+	    	//Eliminem les seves reproduccions
+	    	FileManager.eraseData("data/reproductions/" + username + "Reproductions.txt");
 	    }
 
-	    public static void saveReproduction(String filepath, Reproduction r) throws IOException
+	    public static void saveReproductionToDisk(String filepath, Reproduction r) throws IOException
 	    {
 	    	ArrayList<String> fileLines = new ArrayList<String>();
 	    	
@@ -220,7 +284,7 @@ public class UserManager
 	    	}
 	    }
 	    
-	    public static void saveReproductions(String filepath, ArrayList<Reproduction> reproductions) throws IOException
+	    public static void saveReproductionsToDisk(String filepath, ArrayList<Reproduction> reproductions) throws IOException
 	    {
 	    	ArrayList<String> fileLines = new ArrayList<String>();
 	    	for(Reproduction r : reproductions)
@@ -247,10 +311,10 @@ public class UserManager
 	    private static Reproduction getReproduction(String line) throws Exception
 		{
 	    	String fields[] = line.split(";");
-	    	if(fields.length < 3) return null; 
-	    	String author = fields[0];
-	    	String title = fields[1];
-	    	int time = Integer.parseInt(fields[2]);
+	    	if(fields.length != 3) { throw new Exception("Bad reproduction string format"); }
+	    	String author = fields[0].trim();
+	    	String title = fields[1].trim();
+	    	int time = Integer.parseInt(fields[2].trim());
 	    	
 	    	return new Reproduction(author, title, time);
 		}
