@@ -83,9 +83,13 @@ public class Main
     	*/
 
     	Graph<Song> g2 = new Graph<Song>();
-    	g2.addNode(new Song("XX", "XX"));
+    	g2.addNode(a);
+    	g2.addNode(b);
+    	g2.addNode(c);
+    	g2.addNode(f);
+    	g2.addEdge(a,b,new Edge());
     	
-    	Solution rawSolution = new GirvanNewman().getSolution(g2, 2); //Get el conjunt de llistes de Songs
+    	Solution rawSolution = new GirvanNewman().getSolution(g2, 1); //Get el conjunt de llistes de Songs
 		int foo = 0;
 		for(Community songList : rawSolution.getCommunities())
 		{

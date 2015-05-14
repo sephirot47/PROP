@@ -1,17 +1,12 @@
 package Domini;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.TimeZone;
 
 
 public class GirvanNewman extends Algorithm
@@ -23,7 +18,7 @@ public class GirvanNewman extends Algorithm
 	 */
 	public Solution getSolution(Graph g, int n)
 	{
-		long startTime = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis();
+		long startTime = System.nanoTime();
 		
 		if(n > g.getAllNodes().size())
 		{
@@ -94,8 +89,6 @@ public class GirvanNewman extends Algorithm
 			//Remove it (pseudo remove it(put its weight to -1))
 			if(edgeToRemove != null) 
 			{
-				Node n1 = (Node) g.getNodesConnectedBy(edgeToRemove).getFirst();
-				Node n2 = (Node) g.getNodesConnectedBy(edgeToRemove).getSecond();
 				edgeToRemove.setWeight(-1);
 			}
 			
@@ -119,7 +112,7 @@ public class GirvanNewman extends Algorithm
 			communities.add(com);
 		}
 		
-		long genTime = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis() - startTime;
+		long genTime = System.nanoTime() - startTime;
 		Solution s = new Solution();
 		for(Community c : communities) s.addCommunity(c);
 		s.setTime(genTime);
