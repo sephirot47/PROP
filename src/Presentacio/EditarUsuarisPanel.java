@@ -42,7 +42,7 @@ import javax.swing.JScrollPane;
 
 public class EditarUsuarisPanel extends JPanel
 {
-	public static String currentUsername = "";
+	private static String currentUsername = "";
 	final private JList listReproductions;
 	private JLabel textNom;
 	private JTextField textEdat;
@@ -294,5 +294,10 @@ public class EditarUsuarisPanel extends JPanel
 			dlm.removeRange(firstIndex, lastIndex);
 		}
 		refreshDeleteReproductionsButton();
+	}
+	
+	public static void setCurrentUsername(String username)
+	{
+		currentUsername = username;
 	}
 }

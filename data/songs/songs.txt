@@ -1,5 +1,5 @@
-Camela;cuando sarpa el hamor;2015;-;-;flamenquillo del weno;180
 SoyTanSutil;tramboliko;1867;dubstep;-;ioroYOLO;45
-AC/DC;Thunderstruck;1990;Rock;-;-;292
 AC/DC;Hells Bells;1980;Rock;-;-;312
-AAAAA;TTTTT;123;ESTIL1;ESTIL1;ESTIL1;324
+AAA;BBB;123;asda;-;-;123
+XXX;YYY;123;aaa;-;-;321
+XXX;YYY22;1234;eee;-;-;478

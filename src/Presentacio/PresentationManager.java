@@ -85,7 +85,7 @@ public class PresentationManager
 	
 	public static void goToEditUsuarisPanel(String username)
 	{
-		EditarUsuarisPanel.currentUsername = username;
+		EditarUsuarisPanel.setCurrentUsername(username);
 		goToCard(EditarUsuarisPanel.class.getSimpleName());
 	}
 	
@@ -165,6 +165,8 @@ public class PresentationManager
 	//SONGS /////////////////////////////
 	public static void goToEditCanconsPanel(String authorName, String title)
 	{
+		EditarSolucioPanel.setCurrentAuthorTitle(authorName, title);
+		goToCard(EditarSolucioPanel.class.getSimpleName());
 	}
 	
 	public static void createSong(String author, String title, int year, int duration, ArrayList<String> styles) throws Exception

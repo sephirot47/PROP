@@ -24,7 +24,7 @@ public class ViewPanel extends JPanel {
 	private CreditsPanel credp;
 	private NouUsuariPanel nup;
 	private EditarUsuarisPanel edup;
-	private EditarCanconsPanel ecp;
+	private EditarSolucioPanel ecp;
 	private NovaCancoPanel ncp;
 	
 	public ViewPanel() 
@@ -64,7 +64,7 @@ public class ViewPanel extends JPanel {
 		credp = new CreditsPanel();
 		nup = new NouUsuariPanel();
 		edup= new EditarUsuarisPanel();
-		ecp = new EditarCanconsPanel();
+		ecp = new EditarSolucioPanel();
 		ncp = new NovaCancoPanel();
 		
 		cardContainer.add(gcp, GestioCanconsPanel.class.getSimpleName());
@@ -74,7 +74,7 @@ public class ViewPanel extends JPanel {
 		cardContainer.add(credp, CreditsPanel.class.getSimpleName());
 		cardContainer.add(nup, NouUsuariPanel.class.getSimpleName());
 		cardContainer.add(edup, EditarUsuarisPanel.class.getSimpleName());
-		cardContainer.add(ecp, EditarCanconsPanel.class.getSimpleName());
+		cardContainer.add(ecp, EditarSolucioPanel.class.getSimpleName());
 		cardContainer.add(ncp, NovaCancoPanel.class.getSimpleName());
 	}
 	

@@ -32,9 +32,6 @@ public class NovaCancoPanel extends JPanel
 	private JTextField textStyle1;
 	private JTextField textStyle2;
 
-	/**
-	 * Create the panel.
-	 */
 	public NovaCancoPanel() 
 	{
 		setPreferredSize(new Dimension(800, 560));
