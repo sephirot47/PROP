@@ -202,6 +202,12 @@ public class PresentationManager
 	
 	public static void removeSongFromDisk(String author, String title)
 	{
+		try { 
+			SongManager.removeSongFromDisk(author, title);
+		}
+		catch(Exception e)
+		{
+		}
 	}
 	/////////////////////////////////////
 

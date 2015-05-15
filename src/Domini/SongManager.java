@@ -82,6 +82,12 @@ public class SongManager
 		FileManager.saveData(filepath, fileLines);
     }
 
+    public static void removeSongFromDisk(String Author, String Title) throws IOException
+    {
+    	removeSongFromDisk("data/songs/songs.txt", Author, Title);
+    }
+    
+
     public static void removeSongFromDisk(String filepath, String Author, String Title) throws IOException
     {
     	String search = Author+";"+Title;
@@ -92,6 +98,8 @@ public class SongManager
     		String line = lines.get(i);
     		if(line.startsWith(search)) lines.remove(i);
     	}
+    	
+    	songs.remove(getSongFromAuthorTitle(Author, Title));
     	
     	FileManager.saveData(filepath, lines);
     }

@@ -42,16 +42,16 @@ public class NovaCancoPanel extends JPanel
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(95, 172, 308, 191);
+		panel.setBounds(68, 172, 308, 190);
 		add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblTitol = new JLabel("Titol:");
-		lblTitol.setBounds(10, 59, 36, 15);
+		lblTitol.setBounds(10, 58, 36, 15);
 		panel.add(lblTitol);
 		
 		JLabel lblAutor = new JLabel("Autor:");
-		lblAutor.setBounds(10, 14, 37, 15);
+		lblAutor.setBounds(10, 14, 52, 15);
 		panel.add(lblAutor);
 		
 		textTitle = new JTextField();
@@ -70,7 +70,7 @@ public class NovaCancoPanel extends JPanel
 		panel.add(textYear);
 		
 		JLabel lblAny = new JLabel("Any:");
-		lblAny.setBounds(10, 101, 37, 15);
+		lblAny.setBounds(10, 103, 37, 15);
 		panel.add(lblAny);
 		
 		textDuration = new JTextField();
@@ -79,15 +79,15 @@ public class NovaCancoPanel extends JPanel
 		panel.add(textDuration);
 		
 		JLabel lblDuracio = new JLabel("Duracio:");
-		lblDuracio.setBounds(10, 149, 52, 15);
+		lblDuracio.setBounds(10, 149, 70, 15);
 		panel.add(lblDuracio);
 		
 		JLabel lblDadesBasiques = new JLabel("Dades basiques");
-		lblDadesBasiques.setBounds(95, 151, 315, 15);
+		lblDadesBasiques.setBounds(68, 151, 315, 15);
 		add(lblDadesBasiques);
 		
 		JButton btnCrearUsuari = new JButton("Crear canco");
-		btnCrearUsuari.setBounds(320, 390, 142, 25);
+		btnCrearUsuari.setBounds(293, 390, 142, 25);
 		add(btnCrearUsuari);
 		btnCrearUsuari.addMouseListener(new MouseAdapter() 
 		{
@@ -100,44 +100,44 @@ public class NovaCancoPanel extends JPanel
 		btnCrearUsuari.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		JLabel lblEstilsDeLa_1 = new JLabel("Estils de la canco");
-		lblEstilsDeLa_1.setBounds(435, 151, 315, 15);
+		lblEstilsDeLa_1.setBounds(408, 151, 315, 15);
 		add(lblEstilsDeLa_1);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBounds(435, 174, 249, 142);
+		panel_1.setBounds(408, 174, 368, 142);
 		add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel lblEstil = new JLabel("Estil 1:");
-		lblEstil.setBounds(10, 15, 37, 15);
+		lblEstil.setBounds(10, 15, 67, 15);
 		panel_1.add(lblEstil);
 		
 		textStyle0 = new JTextField();
-		textStyle0.setBounds(70, 11, 169, 19);
+		textStyle0.setBounds(95, 10, 169, 19);
 		panel_1.add(textStyle0);
 		textStyle0.setColumns(10);
 		
 		JLabel lblEstil_1 = new JLabel("Estil 2:");
-		lblEstil_1.setBounds(10, 44, 37, 15);
+		lblEstil_1.setBounds(10, 44, 67, 15);
 		panel_1.add(lblEstil_1);
 		
 		textStyle1 = new JTextField();
-		textStyle1.setBounds(70, 41, 169, 19);
+		textStyle1.setBounds(95, 40, 169, 19);
 		panel_1.add(textStyle1);
 		textStyle1.setColumns(10);
 		
 		JLabel lblEstil_2 = new JLabel("Estil 3:");
-		lblEstil_2.setBounds(10, 72, 37, 15);
+		lblEstil_2.setBounds(10, 72, 67, 15);
 		panel_1.add(lblEstil_2);
 		
 		textStyle2 = new JTextField();
-		textStyle2.setBounds(70, 69, 169, 19);
+		textStyle2.setBounds(95, 68, 169, 19);
 		panel_1.add(textStyle2);
 		textStyle2.setColumns(10);
 		
 		JLabel lblEstilsDeLa = new JLabel("(deixar en blanc si no es volen afegir mes estils)");
-		lblEstilsDeLa.setBounds(10, 116, 315, 15);
+		lblEstilsDeLa.setBounds(10, 115, 355, 15);
 		panel_1.add(lblEstilsDeLa);
 	}
 	

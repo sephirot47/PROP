@@ -60,7 +60,7 @@ public class GestioCanconsPanel extends JPanel
 		setLayout(null);
 		
 		JPanel panelSongs = new JPanel();
-		panelSongs.setBounds(30, 29, 311, 497);
+		panelSongs.setBounds(30, 29, 365, 497);
 		add(panelSongs);
 		panelSongs.setLayout(null);
 		
@@ -99,7 +99,7 @@ public class GestioCanconsPanel extends JPanel
 		});
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(12, 76, 284, 363);
+		scrollPane_1.setBounds(12, 76, 341, 363);
 		panelSongs.add(scrollPane_1);
 		listSongs.setBounds(12, 67, 278, 369);
 		scrollPane_1.setViewportView(listSongs);
@@ -113,12 +113,12 @@ public class GestioCanconsPanel extends JPanel
 				PresentationManager.goToCard(NovaCancoPanel.class.getSimpleName());
 			}
 		});
-		btnNouCanco.setBounds(12, 448, 111, 25);
+		btnNouCanco.setBounds(12, 448, 145, 25);
 		panelSongs.add(btnNouCanco);
 		
 		JButton btnImportarFitxer = new JButton("Importar fitxer");
 		btnImportarFitxer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnImportarFitxer.setBounds(135, 448, 161, 25);
+		btnImportarFitxer.setBounds(192, 448, 161, 25);
 		panelSongs.add(btnImportarFitxer);
 		
 		JLabel lblBuscar = new JLabel("Buscar canco:");
@@ -144,12 +144,12 @@ public class GestioCanconsPanel extends JPanel
 		
 		labelAuthorValue = new JLabel("-");
 		labelAuthorValue.setFont(new Font("Dialog", Font.PLAIN, 12));
-		labelAuthorValue.setBounds(72, 76, 48, 20);
+		labelAuthorValue.setBounds(84, 76, 198, 20);
 		panelSongDetail.add(labelAuthorValue);
 		
 		labelTitleValue = new JLabel("-");
 		labelTitleValue.setFont(new Font("Dialog", Font.PLAIN, 12));
-		labelTitleValue.setBounds(72, 33, 198, 20);
+		labelTitleValue.setBounds(84, 33, 198, 20);
 		panelSongDetail.add(labelTitleValue);
 		
 		JButton buttonEditarCanco = new JButton("Editar canco");
@@ -176,16 +176,10 @@ public class GestioCanconsPanel extends JPanel
 			{
 				if(listSongs.getSelectedIndex() != -1)
 				{
-					String title =  ((String) listSongs.getSelectedValue()).split(",")[0].trim();
-					String author = ((String) listSongs.getSelectedValue()).split(",")[1].trim();
-					try 
-					{
-						PresentationManager.removeSongFromDisk(title, author);
-					} 
-					catch (Exception e1) 
-					{
-						e1.printStackTrace();
-					}			
+					String author = ((String) listSongs.getSelectedValue()).split(",")[0].trim();
+					String title =  ((String) listSongs.getSelectedValue()).split(",")[1].trim();
+					System.out.println(author + "," + title);
+					PresentationManager.removeSongFromDisk(author, title);
 					refreshSongList();
 				}
 			}
@@ -211,16 +205,16 @@ public class GestioCanconsPanel extends JPanel
 		
 		labelYearValue = new JLabel("-");
 		labelYearValue.setFont(new Font("Dialog", Font.PLAIN, 12));
-		labelYearValue.setBounds(72, 119, 48, 20);
+		labelYearValue.setBounds(84, 119, 198, 20);
 		panelSongDetail.add(labelYearValue);
 		
 		JLabel lblDuracio = new JLabel("Duracio:");
-		lblDuracio.setBounds(12, 161, 48, 20);
+		lblDuracio.setBounds(12, 161, 80, 20);
 		panelSongDetail.add(lblDuracio);
 		
 		labelDurationValue = new JLabel("-");
 		labelDurationValue.setFont(new Font("Dialog", Font.PLAIN, 12));
-		labelDurationValue.setBounds(72, 161, 80, 20);
+		labelDurationValue.setBounds(84, 161, 198, 20);
 		panelSongDetail.add(labelDurationValue);
 		
 		JLabel lblDetallsCanco = new JLabel("Detalls canco:");
