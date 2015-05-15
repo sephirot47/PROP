@@ -165,8 +165,8 @@ public class PresentationManager
 	//SONGS /////////////////////////////
 	public static void goToEditCanconsPanel(String authorName, String title)
 	{
-		EditarSolucioPanel.setCurrentAuthorTitle(authorName, title);
-		goToCard(EditarSolucioPanel.class.getSimpleName());
+		EditarCanconsPanel.setCurrentAuthorTitle(authorName, title);
+		goToCard(EditarCanconsPanel.class.getSimpleName());
 	}
 	
 	public static void createSong(String author, String title, int year, int duration, ArrayList<String> styles) throws Exception
@@ -201,14 +201,45 @@ public class PresentationManager
 	{
 		return SongManager.getSongDuration(author, title);
 	}
+
+	public static ArrayList<String> getSongStyles(String author, String title)
+	{
+		return SongManager.getSongStyles(author, title);
+	}
+	
+	public static void setSongYear(String author, String title, int year)
+	{
+		SongManager.setSongYear(author, title, year);
+	}
+	
+	public static void setSongDuration(String author, String title, int duration)
+	{
+		SongManager.setSongDuration(author, title, duration);
+	}
+
+	public static void setSongStyles(String author, String title, ArrayList<String> styles) throws Exception
+	{
+		SongManager.setSongStyles(author, title, styles);
+	}
 	
 	public static void removeSongFromDisk(String author, String title)
 	{
-		try { 
+		try 
+		{ 
 			SongManager.removeSongFromDisk(author, title);
+		}
+		catch(Exception e){}
+	}
+	
+	public static void saveCurrentSongsToDisk()
+	{
+		try
+		{
+			SongManager.saveCurrentSongsToDisk();
 		}
 		catch(Exception e)
 		{
+			errorWindow(e.getMessage());
 		}
 	}
 	/////////////////////////////////////

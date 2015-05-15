@@ -13,10 +13,10 @@ public class SongManager
     
     public static void loadSongsFromDisk() throws Exception
     {
-    	SongManager.getSongs("data/songs/songs.txt");
+    	SongManager.getSongsFromDisk("data/songs/songs.txt");
     }
     
-	public static Set<Song> getSongs(String filepath) throws Exception
+	public static Set<Song> getSongsFromDisk(String filepath) throws Exception
 	{
 		songs.clear();
 		
@@ -24,7 +24,8 @@ public class SongManager
 		{
 			ArrayList<Song> songsArray = new ArrayList<Song>();
 			songsArray = SongManager.getSongsFromString(filepath);
-			for(Song s : songsArray) songs.add(s);
+			for(Song s : songsArray) 
+				if(s != null) songs.add(s);
 		}
 		return songs;
 	}
@@ -103,8 +104,26 @@ public class SongManager
     	
     	FileManager.saveData(filepath, lines);
     }
+	
+	public static void setSongYear(String author, String title, int year)
+	{
+		Song s = getSongFromAuthorTitle(author, title);
+		if(s != null) s.setYear(year);
+	}
+	
+	public static void setSongDuration(String author, String title, int duration)
+	{
+		Song s = getSongFromAuthorTitle(author, title);
+		if(s != null) s.setDuration(duration);
+	}
+
+	public static void setSongStyles(String author, String title, ArrayList<String> styles) throws Exception
+	{
+		Song s = getSongFromAuthorTitle(author, title);
+		if(s != null) s.setStyles(styles);
+	}
     
-    public static ArrayList<String> getStylesFromSong(String songAuthor, String songTitle)
+    public static ArrayList<String> getSongStyles(String songAuthor, String songTitle)
     {
     	ArrayList<String> res = new ArrayList<String>();
     	Song s = getSongFromAuthorTitle(songAuthor, songTitle);
@@ -152,6 +171,13 @@ public class SongManager
 		Song s = new Song(author, title, year, styles, duration);
 		songs.add(s);
 		saveSongToDisk("data/songs/songs.txt", s);
+	}
+	
+	public static void saveCurrentSongsToDisk() throws Exception
+	{
+		ArrayList<Song> songsArray = new ArrayList<Song>();
+		for(Song s : songs) songsArray.add(s);
+		saveSongsToDisk("data/songs/songs.txt", songsArray);
 	}
 
     private static Song getSongFromString(String line) throws Exception

@@ -38,7 +38,6 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import java.awt.Component;
-import javax.swing.ListSelectionModel;
 
 
 public class GestioCanconsPanel extends JPanel
@@ -87,7 +86,6 @@ public class GestioCanconsPanel extends JPanel
 		txtBuscar.setColumns(10);
 		
 		listSongs = new JList();
-		listSongs.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		listSongs.setAutoscrolls(false);
 		listSongs.setAlignmentY(0.0f);
 		listSongs.setAlignmentX(0.0f);
@@ -178,12 +176,9 @@ public class GestioCanconsPanel extends JPanel
 			{
 				if(listSongs.getSelectedIndex() != -1)
 				{
-					for(int i = listSongs.getMinSelectionIndex(); i <= listSongs.getMaxSelectionIndex(); ++i)
-					{
-						String author = ((String) listSongs.getModel().getElementAt(i)).split(",")[0].trim();
-						String title =  ((String) listSongs.getModel().getElementAt(i)).split(",")[1].trim();
-						PresentationManager.removeSongFromDisk(author, title);
-					}
+					String author = ((String) listSongs.getSelectedValue()).split(",")[0].trim();
+					String title =  ((String) listSongs.getSelectedValue()).split(",")[1].trim();
+					PresentationManager.removeSongFromDisk(author, title);
 					refreshSongList();
 				}
 			}
@@ -197,7 +192,6 @@ public class GestioCanconsPanel extends JPanel
 		panelSongDetail.add(scrollPane);
 		
 		listEstils = new JList();
-		listEstils.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		listEstils.setAutoscrolls(false);
 		listEstils.setAlignmentY(0.0f);
 		listEstils.setAlignmentX(0.0f);
@@ -256,34 +250,24 @@ public class GestioCanconsPanel extends JPanel
 	{
 		DefaultListModel dlm = new DefaultListModel();
 		dlm.clear();
-		if(authorAndTitle != null)
+		if(!authorAndTitle.equals(""))
 		{
-			if(authorAndTitle.split(",").length >= 2)
-			{
-				String author = authorAndTitle.split(",")[0].trim();
-				labelAuthorValue.setText(author);
-				
-				String title = authorAndTitle.split(",")[1].trim();
-				labelTitleValue.setText(title);
-	
-				int year = PresentationManager.getSongYear(author, title);
-				labelYearValue.setText( String.valueOf(year) );
-				
-				int duration = PresentationManager.getSongDuration(author, title);
-				labelDurationValue.setText( String.valueOf(duration) + " segons" );
-				
-				ArrayList<String> styles = SongManager.getStylesFromSong(author, title);
-				for(String style : styles) dlm.addElement(style);
-			}
+			String author = authorAndTitle.split(",")[0].trim();
+			labelAuthorValue.setText(author);
+			
+			String title = authorAndTitle.split(",")[1].trim();
+			labelTitleValue.setText(title);
+
+			int year = PresentationManager.getSongYear(author, title);
+			labelYearValue.setText( String.valueOf(year) );
+			
+			int duration = PresentationManager.getSongDuration(author, title);
+			labelDurationValue.setText( String.valueOf(duration) + " segons" );
+			
+			ArrayList<String> styles = PresentationManager.getSongStyles(author, title);
+			for(String style : styles) dlm.addElement(style);
 		}
-		else
-		{
-			labelAuthorValue.setText("-");
-			labelTitleValue.setText("-");
-			labelYearValue.setText("-");
-			labelDurationValue.setText("-");
-		}
-		
+
 		listEstils.setModel(dlm);
 	}
 }

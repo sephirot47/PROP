@@ -129,7 +129,7 @@ public class GenericDriver
 		Set<Song> songs = null;
 		try
 		{
-			songs = SongManager.getSongs(filepath);
+			songs = SongManager.getSongsFromDisk(filepath);
 		}
 		catch(Exception e)
 		{

@@ -6,10 +6,8 @@ import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class EditarSolucioPanel extends JPanel {
- 
-	private static String currentAuthor, currentTitle;
-	
+public class EditarSolucioPanel extends JPanel 
+{
 	public EditarSolucioPanel() 
 	{
 		setLayout(null);
@@ -40,11 +38,5 @@ public class EditarSolucioPanel extends JPanel {
 		JButton btnRemoveSong = new JButton("Eliminar canco de la llista");
 		btnRemoveSong.setBounds(397, 450, 265, 25);
 		add(btnRemoveSong);
-	}
-	
-	public static void setCurrentAuthorTitle(String author, String title)
-	{
-		currentAuthor = author;
-		currentTitle = title;
 	}
 }
