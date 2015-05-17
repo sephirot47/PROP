@@ -5,6 +5,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import java.awt.Font;
 
 public class EditarSolucioPanel extends JPanel 
 {
@@ -21,7 +22,7 @@ public class EditarSolucioPanel extends JPanel
 		scrollPane_1.setViewportView(songsList);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(33, 31, 265, 407);
+		scrollPane.setBounds(33, 54, 265, 384);
 		add(scrollPane);
 		
 		JList listsList = new JList();
@@ -32,11 +33,17 @@ public class EditarSolucioPanel extends JPanel
 		add(btnRemoveList);
 		
 		JLabel lblNewLabel = new JLabel("Llista x:");
-		lblNewLabel.setBounds(397, 27, 70, 15);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel.setBounds(397, 27, 265, 15);
 		add(lblNewLabel);
 		
 		JButton btnRemoveSong = new JButton("Eliminar canco de la llista");
 		btnRemoveSong.setBounds(397, 450, 265, 25);
 		add(btnRemoveSong);
+		
+		JLabel lblLlistes = new JLabel("Llistes:");
+		lblLlistes.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblLlistes.setBounds(33, 28, 265, 15);
+		add(lblLlistes);
 	}
 }

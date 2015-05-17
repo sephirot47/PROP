@@ -59,7 +59,7 @@ public class GenerarLlistesPanel extends JPanel {
 		JPanel panelCriteris = new JPanel();
 		panelCriteris.setBounds(35, 35, 435, 434);
 		panelCriteris.setPreferredSize(new Dimension(410, 470));
-		panelCriteris.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelCriteris.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		panelLeft.add(panelCriteris);
 		panelCriteris.setLayout(null);
 		
@@ -267,7 +267,7 @@ public class GenerarLlistesPanel extends JPanel {
 		panelAlgorisme.setBounds(500, 38, 250, 125);
 		add(panelAlgorisme);
 		panelAlgorisme.setPreferredSize(new Dimension(250, 410));
-		panelAlgorisme.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelAlgorisme.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		panelAlgorisme.setLayout(null);
 		
 		JLabel lblAlgorisme = new JLabel("Algorisme:");

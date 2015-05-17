@@ -65,27 +65,30 @@ public class EditarUsuarisPanel extends JPanel
 		setLayout(null);
 		
 		JPanel panelUserDetail = new JPanel();
-		panelUserDetail.setBounds(0, 30, 364, 498);
+		panelUserDetail.setBounds(0, 30, 364, 475);
 		add(panelUserDetail);
 		panelUserDetail.setLayout(null);
 		
 		JLabel lblNom = new JLabel("Nom:");
-		lblNom.setBounds(12, 33, 36, 20);
+		lblNom.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNom.setBounds(10, 11, 36, 20);
 		panelUserDetail.add(lblNom);
 		
 		JLabel lblEdat = new JLabel("Edat:");
-		lblEdat.setBounds(12, 61, 48, 20);
+		lblEdat.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblEdat.setBounds(10, 39, 48, 20);
 		panelUserDetail.add(lblEdat);
 		
 		JLabel lblReproduccions = new JLabel("Reproduccions:");
-		lblReproduccions.setBounds(12, 93, 119, 20);
+		lblReproduccions.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblReproduccions.setBounds(10, 71, 119, 20);
 		panelUserDetail.add(lblReproduccions);
 		
 		listReproductions = new JList();
 		listReproductions.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 125, 336, 301);
+		scrollPane.setBounds(10, 103, 336, 301);
 		panelUserDetail.add(scrollPane);
 		listReproductions.setBounds(12, 127, 340, 304);
 		scrollPane.setViewportView(listReproductions);
@@ -102,10 +105,6 @@ public class EditarUsuarisPanel extends JPanel
 		btnEliminarReproduccio.setBounds(154, 438, 198, 25);
 		panelUserDetail.add(btnEliminarReproduccio);
 		
-		JLabel lblDetallsUsuari = new JLabel("Detalls usuari:");
-		lblDetallsUsuari.setBounds(122, 0, 114, 20);
-		panelUserDetail.add(lblDetallsUsuari);
-		
 		textNom = new JLabel();
 		textNom.addComponentListener(new ComponentAdapter() {
 			@Override
@@ -114,36 +113,38 @@ public class EditarUsuarisPanel extends JPanel
 				refreshAll();
 			}
 		});
-		textNom.setBounds(59, 34, 114, 19);
+		textNom.setBounds(57, 12, 114, 19);
 		panelUserDetail.add(textNom);
 		//textNom.setColumns(10);
 		
 		textEdat = new JTextField();
 		textEdat.setColumns(10);
-		textEdat.setBounds(59, 62, 114, 19);
+		textEdat.setBounds(57, 40, 114, 19);
 		panelUserDetail.add(textEdat);
 		
 		JPanel panelUsers = new JPanel();
 		panelUsers.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelUsers.setBounds(406, 155, 311, 187);
+		panelUsers.setBounds(406, 155, 311, 152);
 		add(panelUsers);
 		panelUsers.setLayout(null);
 		
 		JLabel lblTitol = new JLabel("Titol:");
-		lblTitol.setBounds(12, 41, 70, 15);
+		lblTitol.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTitol.setBounds(10, 13, 70, 15);
 		panelUsers.add(lblTitol);
 		
 		JLabel lblAutor = new JLabel("Autor:");
-		lblAutor.setBounds(12, 70, 70, 15);
+		lblAutor.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblAutor.setBounds(10, 42, 70, 15);
 		panelUsers.add(lblAutor);
 		
 		textTitol = new JTextField();
-		textTitol.setBounds(108, 39, 191, 19);
+		textTitol.setBounds(106, 11, 191, 19);
 		panelUsers.add(textTitol);
 		textTitol.setColumns(10);
 		
 		textAutor = new JTextField();
-		textAutor.setBounds(108, 68, 191, 19);
+		textAutor.setBounds(106, 40, 191, 19);
 		panelUsers.add(textAutor);
 		textAutor.setColumns(10);
 		
@@ -177,20 +178,17 @@ public class EditarUsuarisPanel extends JPanel
 		});
 
 		btnAfegir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnAfegir.setBounds(12, 138, 287, 25);
+		btnAfegir.setBounds(10, 110, 287, 25);
 		panelUsers.add(btnAfegir);
-		
-		JLabel lblNovaReproduccio = new JLabel("Nova Reproduccio");
-		lblNovaReproduccio.setBounds(90, 12, 126, 15);
-		panelUsers.add(lblNovaReproduccio);
 		
 		textTimestamp = new JTextField();
 		textTimestamp.setColumns(10);
-		textTimestamp.setBounds(108, 99, 191, 19);
+		textTimestamp.setBounds(106, 71, 191, 19);
 		panelUsers.add(textTimestamp);
 		
 		JLabel lblTimestamp = new JLabel("Timestamp:");
-		lblTimestamp.setBounds(12, 101, 112, 15);
+		lblTimestamp.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTimestamp.setBounds(10, 73, 112, 15);
 		panelUsers.add(lblTimestamp);
 		
 		JButton btnDesar = new JButton("Desar canvis");
@@ -223,8 +221,18 @@ public class EditarUsuarisPanel extends JPanel
 			}
 		});
 		btnDesar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnDesar.setBounds(406, 368, 311, 42);
+		btnDesar.setBounds(406, 327, 311, 42);
 		add(btnDesar);
+		
+		JLabel lblNovaReproduccio = new JLabel("Nova Reproduccio");
+		lblNovaReproduccio.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNovaReproduccio.setBounds(406, 129, 126, 15);
+		add(lblNovaReproduccio);
+		
+		JLabel lblDetallsUsuari = new JLabel("Detalls usuari:");
+		lblDetallsUsuari.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblDetallsUsuari.setBounds(0, 11, 114, 20);
+		add(lblDetallsUsuari);
 		
 		refreshAll();
 	}

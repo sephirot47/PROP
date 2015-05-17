@@ -139,6 +139,7 @@ public class EditarCanconsPanel extends JPanel
 		panel.add(separator_2);
 		
 		JLabel lblEditarCanco = new JLabel("Editar canco:");
+		lblEditarCanco.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblEditarCanco.setBounds(134, 65, 127, 15);
 		add(lblEditarCanco);
 	}
