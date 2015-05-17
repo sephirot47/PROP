@@ -213,8 +213,13 @@ public class SolutionManager
     	}
 		FileManager.saveData(filedir + "comunitats.txt",  lines);
     }
-    
-	public static void removeSolution(String nomSolucio) throws IOException 
+
+	public static void removeSolutionFromDisk(String date) throws IOException 
+	{
+		removeSolution("solution_" + date);
+	}
+	
+	private static void removeSolution(String nomSolucio) throws IOException 
 	{
 		File communities = new File("data/solutions/" + nomSolucio + "/comunitats.txt");
 		File entrada = new File("data/solutions/" + nomSolucio + "/entrada.txt");
@@ -225,6 +230,5 @@ public class SolutionManager
 		info.delete();
 		File folder = new File("data/solutions/" + nomSolucio);
 		folder.delete();
-
 	}
 }

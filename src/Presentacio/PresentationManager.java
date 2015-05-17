@@ -71,6 +71,17 @@ public class PresentationManager
 		}
 	}
 	
+	public static void removeSolutionFromDisk(String date)
+	{
+		try 
+		{
+			SolutionManager.removeSolutionFromDisk(date);
+		} catch (Exception e)
+		{
+			errorWindow(e.getMessage());
+		}
+	}
+	
 	public static double getSolutionGenTime(String date)
 	{
 		date = date.replaceAll(":", ",");

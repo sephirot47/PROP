@@ -18,6 +18,9 @@ import javax.swing.JSeparator;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class HistorialPanel extends JPanel 
 {	
@@ -45,6 +48,7 @@ public class HistorialPanel extends JPanel
 		scrollPane.setViewportView(solutionsList);
 		
 		JButton btnImport = new JButton("Importar d'un fitxer");
+		btnImport.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnImport.setBounds(72, 480, 232, 23);
 		add(btnImport);
 		
@@ -99,10 +103,25 @@ public class HistorialPanel extends JPanel
 		panel.add(separator_2);
 		
 		JButton btnEliminarSolucio = new JButton("Eliminar Solucio");
+		btnEliminarSolucio.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) 
+			{
+				if(solutionsList.getSelectedIndex() != -1)
+				{
+					String date = (String) solutionsList.getSelectedValue();
+					date = date.replaceAll(":", ",");
+					PresentationManager.removeSolutionFromDisk(date);
+					refresh();
+				}
+			}
+		});
+		btnEliminarSolucio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEliminarSolucio.setBounds(414, 294, 283, 23);
 		add(btnEliminarSolucio);
 		
 		JButton btnConsultarSolucio = new JButton("Consultar Solucio");
+		btnConsultarSolucio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnConsultarSolucio.setBounds(414, 260, 283, 23);
 		add(btnConsultarSolucio);
 	}
@@ -125,7 +144,7 @@ public class HistorialPanel extends JPanel
 	
 	public void populateSolutionDetails(String date)
 	{
-		if(!date.equals(""))
+		if(date != null && !date.equals(""))
 		{
 			double genTime = PresentationManager.getSolutionGenTime(date) / 1E6;
 			int nCommunities = PresentationManager.getSolutionNumberOfCommunities(date);
