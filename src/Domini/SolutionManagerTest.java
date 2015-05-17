@@ -70,9 +70,9 @@ public class SolutionManagerTest  extends TestCase {
 		expectedInfo.add("3");
 		expectedInfo.add("0.01");
 		
-		SongSolution s = new SongSolution(g, comunities, 0.01, 'G');
+		SongSolution s = new SongSolution(g, comunities);
 
-		SolutionManager.saveSolution(s, "test");
+		SolutionManager.saveSolution(s);
 		
 		ArrayList<String> realGraph = FileManager.loadData("data/solutions/solution_test/entrada.txt");
 		assertTrue(realGraph.containsAll(expectedGraph) && expectedGraph.containsAll(realGraph));

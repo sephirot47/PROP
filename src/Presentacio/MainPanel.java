@@ -2,6 +2,7 @@ package Presentacio;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -9,31 +10,49 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Rectangle;
 import java.awt.Cursor;
 import java.awt.Insets;
 import java.awt.Dimension;
+
 import javax.swing.AbstractAction;
+
 import java.awt.event.ActionEvent;
+
 import javax.swing.Action;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.CardLayout;
 import java.util.Stack;
 
+import javax.swing.ImageIcon;
 import javax.swing.JEditorPane;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
 
 
+
+
+
+
+
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 
 
 public class MainPanel extends JPanel {
@@ -49,112 +68,39 @@ public class MainPanel extends JPanel {
 		Main.setMinimumSize(new Dimension(1000, 10));
 		Main.setName("Main");
 		add(Main);
-		Main.setLayout(new BorderLayout(0, 0));
+		Main.setLayout(null);
 		
 		JPanel panelCosaArriba = new JPanel();
-		panelCosaArriba.setBorder(new EmptyBorder(20, 20, 20, 20));
-		panelCosaArriba.setBackground(Color.LIGHT_GRAY);
+		panelCosaArriba.setBounds(10, 11, 780, 166);
 		panelCosaArriba.setForeground(Color.BLUE);
 		panelCosaArriba.setPreferredSize(new Dimension(1000, 250));
-		Main.add(panelCosaArriba, BorderLayout.NORTH);
-		panelCosaArriba.setLayout(new BoxLayout(panelCosaArriba, BoxLayout.X_AXIS));
 		
-		JPanel panelBotonesIzquierda = new JPanel();
-		panelBotonesIzquierda.setMinimumSize(new Dimension(10, 0));
-		panelBotonesIzquierda.setPreferredSize(new Dimension(200, 200));
-		Main.add(panelBotonesIzquierda, BorderLayout.WEST);
-		panelBotonesIzquierda.setBorder(new EmptyBorder(50, 10, 0, 0));
-		panelBotonesIzquierda.setLayout(new BoxLayout(panelBotonesIzquierda, BoxLayout.Y_AXIS));
+		BufferedImage picture;
+		try 
+		{
+			picture = ImageIO.read(new File("header.jpg"));
+			panelCosaArriba.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+			JLabel picLabel = new JLabel( new ImageIcon("header.jpg") );
+			picLabel.setIconTextGap(0);
+			picLabel.setVerticalAlignment(SwingConstants.TOP);
+			panelCosaArriba.add(picLabel);
+		} 
+		catch (IOException e1) { e1.printStackTrace(); }
+		 
+		Main.add(panelCosaArriba);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setMaximumSize(new Dimension(32000, 30));
-		panel_2.setAlignmentY(0.0f);
-		panelBotonesIzquierda.add(panel_2);
-		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
-		
-		JButton btnNewButton = new JButton("Gestionar cancons");
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				PresentationManager.goToCard(GestioCanconsPanel.class.getSimpleName());
-			}
-		});
-		panel_2.add(btnNewButton);
-		btnNewButton.setMaximumSize(new Dimension(999, 25));
-		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setAlignmentY(0.0f);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setMaximumSize(new Dimension(32000, 30));
-		panel_3.setAlignmentY(0.0f);
-		panelBotonesIzquierda.add(panel_3);
-		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.X_AXIS));
-		
-		JButton btnGestionarUsuaris = new JButton("Gestionar usuaris");
-		btnGestionarUsuaris.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) 
-			{
-				PresentationManager.goToCard(GestioUsuarisPanel.class.getSimpleName());
-			}
-		});
-		panel_3.add(btnGestionarUsuaris);
-		btnGestionarUsuaris.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnGestionarUsuaris.setMaximumSize(new Dimension(999, 25));
-		btnGestionarUsuaris.setAlignmentY(0.0f);
-		
-		JPanel panel_5 = new JPanel();
-		panel_5.setMaximumSize(new Dimension(32000, 30));
-		panel_5.setAlignmentY(0.0f);
-		panelBotonesIzquierda.add(panel_5);
-		panel_5.setLayout(new BoxLayout(panel_5, BoxLayout.X_AXIS));
-		
-		JButton btnGenerarLlistes = new JButton("Generar llistes");
-		btnGenerarLlistes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				//PresentationManager.goToCard(GenerarLlistesPanel.class.getSimpleName());
-				PresentationManager.goToCard(GenerarLlistesPanel.class.getSimpleName());
-			}
-		});
-		panel_5.add(btnGenerarLlistes);
-		btnGenerarLlistes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnGenerarLlistes.setMaximumSize(new Dimension(999, 25));
-		btnGenerarLlistes.setAlignmentY(0.0f);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setMaximumSize(new Dimension(32000, 30));
-		panel_4.setAlignmentY(0.0f);
-		panelBotonesIzquierda.add(panel_4);
-		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
-		
-		JButton btnEstadstiques = new JButton("Estadistiques");
-		btnEstadstiques.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				PresentationManager.goToCard(EstadistiquesPanel.class.getSimpleName());
-			}
-		});
-		panel_4.add(btnEstadstiques);
-		btnEstadstiques.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEstadstiques.setMaximumSize(new Dimension(999, 25));
-		btnEstadstiques.setAlignmentY(0.0f);
 		
 		JPanel panelBotonesAbajo = new JPanel();
+		panelBotonesAbajo.setBounds(10, 507, 800, 50);
 		panelBotonesAbajo.setPreferredSize(new Dimension(800, 50));
 		panelBotonesAbajo.setMaximumSize(new Dimension(800, 50));
-		Main.add(panelBotonesAbajo, BorderLayout.SOUTH);
+		Main.add(panelBotonesAbajo);
 		panelBotonesAbajo.setBorder(new EmptyBorder(10, 10, 10, 10));
-		panelBotonesAbajo.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setMaximumSize(new Dimension(100, 50));
-		panel_1.setPreferredSize(new Dimension(100, 30));
-		panel_1.setAlignmentX(0.0f);
-		panelBotonesAbajo.add(panel_1, BorderLayout.WEST);
-		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
+		panelBotonesAbajo.setLayout(null);
 		
 		JButton credits = new JButton("Credits");
+		credits.setBounds(10, 16, 96, 23);
+		panelBotonesAbajo.add(credits);
 		credits.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -163,17 +109,12 @@ public class MainPanel extends JPanel {
 			}
 		});
 		credits.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		panel_1.add(credits);
-		
-		JPanel panel = new JPanel();
-		panel.setMaximumSize(new Dimension(200, 30));
-		panel.setAlignmentX(0.0f);
-		panelBotonesAbajo.add(panel, BorderLayout.EAST);
 		
 		
-		JButton sortir = new JButton("Desar sessió i sortir");
+		JButton sortir = new JButton("Desar sessio i sortir");
+		sortir.setBounds(589, 16, 180, 23);
+		panelBotonesAbajo.add(sortir);
 		sortir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		sortir.setHorizontalAlignment(SwingConstants.RIGHT);
 		sortir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void  mouseClicked(MouseEvent e) 
@@ -181,8 +122,73 @@ public class MainPanel extends JPanel {
 				System.exit(0);
 			}
 		});
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		panel.add(sortir);
+		
+		JButton btnNewButton = new JButton("Gestionar cancons");
+		btnNewButton.setBounds(314, 334, 190, 25);
+		Main.add(btnNewButton);
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PresentationManager.goToCard(GestioCanconsPanel.class.getSimpleName());
+			}
+		});
+		btnNewButton.setMaximumSize(new Dimension(999, 25));
+		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton.setAlignmentY(0.0f);
+		
+		JButton btnHistorial = new JButton("Historial");
+		btnHistorial.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) 
+			{
+				PresentationManager.goToCard(HistorialPanel.class.getSimpleName());
+			}
+		});
+		btnHistorial.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnHistorial.setBounds(314, 406, 190, 25);
+		Main.add(btnHistorial);
+		btnHistorial.setMaximumSize(new Dimension(999, 25));
+		btnHistorial.setAlignmentY(0.0f);
+		
+		JButton btnGestionarUsuaris = new JButton("Gestionar usuaris");
+		btnGestionarUsuaris.setBounds(314, 370, 190, 25);
+		Main.add(btnGestionarUsuaris);
+		btnGestionarUsuaris.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				PresentationManager.goToCard(GestioUsuarisPanel.class.getSimpleName());
+			}
+		});
+		btnGestionarUsuaris.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnGestionarUsuaris.setMaximumSize(new Dimension(999, 25));
+		btnGestionarUsuaris.setAlignmentY(0.0f);
+		
+		JButton btnGenerarLlistes = new JButton("Generar llistes");
+		btnGenerarLlistes.setBounds(314, 298, 190, 25);
+		Main.add(btnGenerarLlistes);
+		btnGenerarLlistes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//PresentationManager.goToCard(GenerarLlistesPanel.class.getSimpleName());
+				PresentationManager.goToCard(GenerarLlistesPanel.class.getSimpleName());
+			}
+		});
+		btnGenerarLlistes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnGenerarLlistes.setMaximumSize(new Dimension(999, 25));
+		btnGenerarLlistes.setAlignmentY(0.0f);
+		
+		JButton btnEstadstiques = new JButton("Estadistiques");
+		btnEstadstiques.setBounds(314, 442, 190, 25);
+		Main.add(btnEstadstiques);
+		btnEstadstiques.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PresentationManager.goToCard(EstadistiquesPanel.class.getSimpleName());
+			}
+		});
+		btnEstadstiques.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnEstadstiques.setMaximumSize(new Dimension(999, 25));
+		btnEstadstiques.setAlignmentY(0.0f);
 	}
-
 }

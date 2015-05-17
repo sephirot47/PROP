@@ -14,6 +14,7 @@ import Domini.Edge;
 import Domini.Louvain;
 import Domini.Node;
 import Domini.Solution;
+import Domini.SolutionManager;
 import Domini.SongSolution;
 import Domini.Song;
 import Domini.GraphManager;
@@ -97,6 +98,12 @@ public class Main
 			for(Node n : songList.getCommunity()) System.out.println("-" + ((Song)n).getId());
 			System.out.println(" ");
 		}
+		
+		System.out.println(rawSolution.getTime());
+		SongSolution ss = new SongSolution(g2, rawSolution);
+		System.out.println(ss.getTime());
+		
+		SolutionManager.saveSolution(ss);
 		
 		/*
 		Graph<Song> entrada = null;

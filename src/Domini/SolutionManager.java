@@ -5,12 +5,28 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Set;
 
 import Persistencia.FileManager;
 
 public class SolutionManager 
 {
+	private static ArrayList<SongSolution> solutions = new ArrayList<SongSolution>();
+	
+	public static void loadSolutionsFromDisk() throws Exception
+	{
+		try 
+		{
+			solutions = getSolutions("data/solutions");
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			throw new Exception("No es troba el directori de solucions('data/solutions')");
+		}
+	}
+	
 	public static ArrayList<Double[]> getInfos(String SolutionsDir) throws Exception
 	{
 		ArrayList<Double[]> result = new ArrayList<Double[]>();
@@ -46,6 +62,38 @@ public class SolutionManager
 		
 		return result;
 	}
+	
+	private static SongSolution getSolutionFromDate(String date)
+	{
+		for(SongSolution s : solutions) if(s.getId().equals(date)) return s;
+		return null;
+	}
+	
+	public static ArrayList<String> getCurrentSolutionsDates()
+	{
+		ArrayList<String> result = new ArrayList<String>();
+		for(SongSolution s : solutions) result.add( s.getId() );
+		return result;
+	}
+
+	public static double getSolutionGenTime(String date)
+	{
+		SongSolution sol = getSolutionFromDate(date); 
+		return sol == null ? 0.1 : sol.getTime();
+	}
+
+	public static char getSolutionAlgorithm(String date)
+	{
+		SongSolution sol = getSolutionFromDate(date); 
+		return sol == null ? '-' : sol.getAlg();
+	}
+	
+	public static int getSolutionNumberOfCommunities(String date)
+	{
+		SongSolution sol = getSolutionFromDate(date); 
+		return sol == null ? 0 : sol.getNumCommunities();
+	}
+	
 	public static ArrayList<SongSolution> getSolutions(String solutionsDir) throws Exception 
 	{
 		ArrayList<SongSolution> result = new ArrayList<SongSolution>();
@@ -53,43 +101,47 @@ public class SolutionManager
 		File baseDir = new File(solutionsDir);
 		File[] solutions = baseDir.listFiles();
 
-		for (File dir : solutions) {
-
+		for (File dir : solutions) 
+		{
 			// Legir el graph
 			Graph<Song> graph = GraphManager.getGraph(dir.getPath() + "/entrada.txt");
 
 			// Llegir les comunitats
 			ArrayList<String> resultLines = FileManager.loadData(dir.getPath() + "/comunitats.txt");
-			Solution comunities = new Solution();
+			Solution solution = new Solution();
 			Community com = new Community();
 
-			for (String line : resultLines) {
-				if (line.equals("0"))
-					continue;
+			for (String line : resultLines) 
+			{
+				if (line.equals("0")) continue;
 				if (line.charAt(0) == '(') {
 					String author = line.substring(1, line.indexOf(','));
 					String title = line.substring(line.indexOf(',') + 1, line.indexOf(')'));
 					com.addNode(new Song(author, title));
 				} else {
-					comunities.addCommunity(com);
+					solution.addCommunity(com);
 					com = new Community();
 				}
 			}
-			comunities.addCommunity(com);
-
+			if(com.getNumberOfNodes() > 0) solution.addCommunity(com);
+			
 			// Llegir info
 			ArrayList<String> infoLines = FileManager.loadData(dir.getPath() + "/info.txt");
-
-			String id = new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date());
-			result.add(new SongSolution(graph, comunities, Double.parseDouble(infoLines.get(2)), infoLines.get(0).charAt(0)));
+			String id = dir.getName().substring(dir.getName().indexOf("_") + 1);
+			
+			solution.setTime(Double.parseDouble(infoLines.get(2)));
+			solution.setAlg(infoLines.get(0).charAt(0));
+			solution.setId(id);
+			
+			result.add(new SongSolution(graph, solution));
 		}
 
 		return result;
 	}
 
-	public static void saveSolution(SongSolution s, String id) throws IOException 
+	public static void saveSolution(SongSolution s) throws IOException 
 	{
-		//String date = new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date());
+		String id = s.getId();
 		String filedir = "data/solutions/solution_" + id + "/";
 
 		// arxiu de Graph(entrada)
@@ -99,13 +151,11 @@ public class SolutionManager
 		SolutionManager.saveCommunitiesSolution(filedir, s);
 
 		// arxiu de info extra
-		{
-			ArrayList<String> lines = new ArrayList<String>();
-			lines.add(String.valueOf(s.getAlg())); // Alg usat
-			lines.add(String.valueOf(s.getEntrada().getAllNodes().size())); // Nombre de cancons processades
-			lines.add(String.valueOf(s.getTime())); // Temps que ha tardat a generar la solucio
-			FileManager.saveData(filedir + "info.txt", lines);
-		}
+		ArrayList<String> lines = new ArrayList<String>();
+		lines.add(String.valueOf(s.getAlg())); // Alg usat
+		lines.add(String.valueOf(s.getEntrada().getAllNodes().size())); // Nombre de cancons processades
+		lines.add(String.valueOf(s.getTime())); // Temps que ha tardat a generar la solucio
+		FileManager.saveData(filedir + "info.txt", lines);
 	}
 
 
@@ -122,7 +172,6 @@ public class SolutionManager
     		
     		songsArray.add(s);
     	}
-    	
     	
     	Set<Edge> edges = entrada.getAllEdges();
     	for(Edge e : edges)

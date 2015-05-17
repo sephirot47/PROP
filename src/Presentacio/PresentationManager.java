@@ -49,12 +49,49 @@ public class PresentationManager
 	}
 	
 	
-	
 	// SOLUTIONS /////////////////////////
 	public static ArrayList<Double[]> getInfos() throws Exception
 	{
-		return SolutionManager.getInfos("data/solucions");
+		return SolutionManager.getInfos("data/solutions");
 	}
+	
+	public static ArrayList<String> getSolutionDates()
+	{
+		return SolutionManager.getCurrentSolutionsDates();
+	}
+	
+	public static void loadSolutionsFromDisk()
+	{
+		try 
+		{
+			SolutionManager.loadSolutionsFromDisk();
+		} catch (Exception e)
+		{
+			errorWindow(e.getMessage());
+		}
+	}
+	
+	public static double getSolutionGenTime(String date)
+	{
+		date = date.replaceAll(":", ",");
+		return SolutionManager.getSolutionGenTime(date);
+	}
+
+	public static String getSolutionAlgorithm(String date)
+	{
+		date = date.replaceAll(":", ",");
+		char alg =  SolutionManager.getSolutionAlgorithm(date);
+		if(alg == 'C') return "Clique";
+		if(alg == 'L') return "Louvain";
+		return "Girvan Newman";
+	}
+	
+	public static int getSolutionNumberOfCommunities(String date)
+	{
+		date = date.replaceAll(":", ",");
+		return SolutionManager.getSolutionNumberOfCommunities(date);
+	}
+	
 	//////////////////////////////////////
 	
 	
