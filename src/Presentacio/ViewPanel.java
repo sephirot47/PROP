@@ -28,6 +28,7 @@ public class ViewPanel extends JPanel {
 	private NovaCancoPanel ncp;
 	private EditarCanconsPanel ecanconsp;
 	private HistorialPanel hp;
+	private ConsultarSolucioPanel csp;
 	
 	public ViewPanel() 
 	{
@@ -70,6 +71,7 @@ public class ViewPanel extends JPanel {
 		ncp = new NovaCancoPanel();
 		ecanconsp = new EditarCanconsPanel();
 		hp = new HistorialPanel();
+		csp = new ConsultarSolucioPanel();
 		
 		cardContainer.add(gcp, GestioCanconsPanel.class.getSimpleName());
 		cardContainer.add(gup, GestioUsuarisPanel.class.getSimpleName());
@@ -80,7 +82,9 @@ public class ViewPanel extends JPanel {
 		cardContainer.add(edup, EditarUsuarisPanel.class.getSimpleName());
 		cardContainer.add(ecp, EditarSolucioPanel.class.getSimpleName());
 		cardContainer.add(ncp, NovaCancoPanel.class.getSimpleName());
+		cardContainer.add(ecanconsp, EditarCanconsPanel.class.getSimpleName());
 		cardContainer.add(hp, HistorialPanel.class.getSimpleName());
+		cardContainer.add(csp, ConsultarSolucioPanel.class.getSimpleName());
 	}
 	
 	public void refreshInsidePanels()
@@ -89,5 +93,6 @@ public class ViewPanel extends JPanel {
 		gup.refreshUserList();
 		ecanconsp.refresh();
 		hp.refresh();
+		csp.refresh();
 	}
 }

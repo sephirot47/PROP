@@ -103,6 +103,12 @@ public class PresentationManager
 		return SolutionManager.getSolutionNumberOfCommunities(date);
 	}
 	
+	public static void goToConsultarSolucioPanel(String selectedSolutionDate)
+	{
+		ConsultarSolucioPanel.setCurrentSolutionDate(selectedSolutionDate);
+		goToCard(ConsultarSolucioPanel.class.getSimpleName());
+	}
+	
 	//////////////////////////////////////
 	
 	
@@ -336,4 +342,9 @@ public class PresentationManager
 		
 	}
 	//////////////////////////////////////////////////
+
+	public static ArrayList<ArrayList<String>> getSolutionCommunities(String solutionDate) 
+	{
+		return SolutionManager.getSolutionCommunities(solutionDate);
+	}
 }

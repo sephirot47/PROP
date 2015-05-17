@@ -32,7 +32,7 @@ public class HistorialPanel extends JPanel
 		setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(72, 38, 232, 431);
+		scrollPane.setBounds(72, 58, 232, 411);
 		add(scrollPane);
 		
 		solutionsList = new JList();
@@ -59,7 +59,7 @@ public class HistorialPanel extends JPanel
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(414, 58, 283, 191);
+		panel.setBounds(414, 58, 283, 179);
 		add(panel);
 		panel.setLayout(null);
 		
@@ -98,10 +98,6 @@ public class HistorialPanel extends JPanel
 		separator_1.setBounds(10, 115, 263, 2);
 		panel.add(separator_1);
 		
-		JSeparator separator_2 = new JSeparator();
-		separator_2.setBounds(10, 0, 263, 2);
-		panel.add(separator_2);
-		
 		JButton btnEliminarSolucio = new JButton("Eliminar Solucio");
 		btnEliminarSolucio.addMouseListener(new MouseAdapter() {
 			@Override
@@ -117,13 +113,30 @@ public class HistorialPanel extends JPanel
 			}
 		});
 		btnEliminarSolucio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEliminarSolucio.setBounds(414, 294, 283, 23);
+		btnEliminarSolucio.setBounds(414, 285, 283, 23);
 		add(btnEliminarSolucio);
 		
 		JButton btnConsultarSolucio = new JButton("Consultar Solucio");
+		btnConsultarSolucio.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) 
+			{
+				if(solutionsList.getSelectedIndex() != -1)
+				{
+					String selectedDate = (String) solutionsList.getSelectedValue();
+					selectedDate = selectedDate.replaceAll(":", ",");
+					PresentationManager.goToConsultarSolucioPanel(selectedDate);
+				}
+			}
+		});
 		btnConsultarSolucio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnConsultarSolucio.setBounds(414, 260, 283, 23);
+		btnConsultarSolucio.setBounds(414, 251, 283, 23);
 		add(btnConsultarSolucio);
+		
+		JLabel lblLlistaSolucions = new JLabel("Llista solucions:");
+		lblLlistaSolucions.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblLlistaSolucions.setBounds(72, 35, 175, 23);
+		add(lblLlistaSolucions);
 	}
 	
 	public void refresh()

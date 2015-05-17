@@ -86,8 +86,8 @@ public class SolutionManagerTest  extends TestCase {
 	public static void testRemoveSolution() throws IOException 
 	{
 		String nomSolucio = "solution_test";
-		SolutionManager.removeSolution(nomSolucio);
-		File solucio = new File("data/solutions/" + nomSolucio);
+		SolutionManager.removeSolutionFromDisk(nomSolucio);
+		File solucio = new File("data/solutions/" + "solution_" + nomSolucio);
 		assertFalse(solucio.exists());
 	}
 }

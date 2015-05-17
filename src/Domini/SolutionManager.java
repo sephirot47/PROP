@@ -231,4 +231,21 @@ public class SolutionManager
 		File folder = new File("data/solutions/" + nomSolucio);
 		folder.delete();
 	}
+
+	public static ArrayList<ArrayList<String>> getSolutionCommunities(String solutionDate) 
+	{
+		ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+		SongSolution s = getSolutionFromDate(solutionDate);
+		if(s != null)
+		{
+			ArrayList<Community> communities = s.getCommunities();
+			for(Community c : communities)
+			{
+				ArrayList<String> cStrings = new ArrayList<String>();
+				for(Node n : c.getCommunity()) 	cStrings.add(n.getId());
+				result.add(cStrings);
+			}
+		}
+		return result;
+	}
 }
