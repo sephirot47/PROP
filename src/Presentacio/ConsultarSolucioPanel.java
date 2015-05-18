@@ -11,10 +11,16 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+
 import java.awt.Cursor;
+
 import javax.swing.ListSelectionModel;
+
+import Domini.Graph;
+import Domini.Song;
 
 public class ConsultarSolucioPanel extends JPanel 
 {
@@ -44,6 +50,13 @@ public class ConsultarSolucioPanel extends JPanel
 		scrollPane.setViewportView(listsList);
 		
 		JButton btnViewGraph = new JButton("Veure el graf d'entrada");
+		btnViewGraph.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				PresentationManager.goToViewGraph("");
+			}
+		});
 		btnViewGraph.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnViewGraph.setBounds(264, 503, 255, 23);
 		add(btnViewGraph);

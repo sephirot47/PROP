@@ -217,6 +217,8 @@ public class SolutionManager
 
 	public static void removeSolutionFromDisk(String date) throws IOException 
 	{
+		SongSolution s = getSolutionFromDate(date);
+		if(s != null) solutions.remove(s);
 		removeSolution("solution_" + date);
 	}
 	

@@ -18,7 +18,6 @@ public class Graph <N extends Node>
 		graph = new HashMap<N, HashMap<N, Edge>>();
 	}
 
-
 	///// NODES STUFF /////////////////////////////////////////////////////
 	/**
 	 * Add a new disconnected node (without edges to any node). The node mustn't exist in the graph before adding it.

@@ -112,8 +112,15 @@ public class EditarSolucioPanel extends JPanel
 		add(lblLlistes);
 		
 		JButton btnViewGraph = new JButton("Visualitzar graf");
+		btnViewGraph.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				PresentationManager.goToViewGraph("");
+			}
+		});
 		btnViewGraph.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnViewGraph.setBounds(33, 487, 265, 25);
+		btnViewGraph.setBounds(237, 487, 265, 25);
 		add(btnViewGraph);
 		
 		JButton buttonSaveSolution = new JButton("Desar solucio");
@@ -126,7 +133,7 @@ public class EditarSolucioPanel extends JPanel
 			}
 		});
 		buttonSaveSolution.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		buttonSaveSolution.setBounds(397, 450, 265, 66);
+		buttonSaveSolution.setBounds(397, 368, 265, 66);
 		add(buttonSaveSolution);
 	}
 

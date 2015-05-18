@@ -9,9 +9,11 @@ import java.util.Stack;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Domini.Graph;
 import Domini.GraphManager;
 import Domini.Pair;
 import Domini.SolutionManager;
+import Domini.Song;
 import Domini.SongManager;
 import Domini.SongSolution;
 import Domini.User;
@@ -393,5 +395,10 @@ public class PresentationManager
 		{
 			errorWindow( e.getMessage() );
 		}
+	}
+
+	public static void goToViewGraph(String graphId) 
+	{
+		goToCard(ViewGraphPanel.class.getSimpleName());
 	}
 }
