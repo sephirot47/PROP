@@ -24,37 +24,37 @@ Fitxers de dades necessaris:
 Efectes estudiats:
 
   testAddSongToFile:
-  Afegeix o modifica una canço al arxiu indicat. 
-  Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
+  Afegeix o modifica una canco al arxiu indicat. 
+  Mitjancant l'output als arxius es pot comprovar que tot ha funcionat correctament.
 
   testReadSongFile:
-  Llegeix les cançons d'un arxiu indicat. A l'output s'imprimiran totes les cançons llegides. 
-  Mitjançant l'output es pot comprovar que tot ha funcionat correctament.
+  Llegeix les cancons d'un arxiu indicat. A l'output s'imprimiran totes les cancons llegides. 
+  Mitjancant l'output es pot comprovar que tot ha funcionat correctament.
 
   testRemoveSongOfFile:
-  Esborra una canço d'un arxiu indicat. 
-  Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
+  Esborra una canco d'un arxiu indicat. 
+  Mitjancant l'output als arxius es pot comprovar que tot ha funcionat correctament.
 
   testAddUserToFile:
   Afegeix o modifica un user al arxiu indicat. 
-  Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
+  Mitjancant l'output als arxius es pot comprovar que tot ha funcionat correctament.
 
   testReadUserFile:
   Llegeix els usuaris d'un arxiu indicat. A l'output s'imprimiran tots els usuaris llegits. 
-  Mitjançant l'output es pot comprovar que tot ha funcionat correctament.
+  Mitjancant l'output es pot comprovar que tot ha funcionat correctament.
 
   testRemoveUserOfFile:
   Esborra un usuari d'un arxiu indicat. 
-  Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
+  Mitjancant l'output als arxius es pot comprovar que tot ha funcionat correctament.
 
   testAddReproductionToFile:
   Afegeix o modifica una reproduccio al arxiu indicat. 
-  Mitjançant l'output als arxius es pot comprovar que tot ha funcionat correctament.
+  Mitjancant l'output als arxius es pot comprovar que tot ha funcionat correctament.
 
   testReadReproductions:
   Llegeix les reproduccions d'un usuari indicat, a un directori determinat.
   Si per exemple, vull que llegeixi les reproduccions del arxiu "directori/aaa/pepeReproductions", quan el programa demana el directori haure d'escriure "directori/aaa" i quan demani el nom d'usuari hauré d'escriure "pepe".  
-  A l'output s'imprimiran tots les reproduccions llegides. Mitjançant l'output es pot comprovar que tot ha funcionat correctament.
+  A l'output s'imprimiran tots les reproduccions llegides. Mitjancant l'output es pot comprovar que tot ha funcionat correctament.
 
   testGenerateSolution:
   Donat un graf d'entrada, troba comunitats usant GirvanNewman i les mostra per la pantalla, a més de guardar la solució.
@@ -64,4 +64,4 @@ Efectes estudiats:
   IMPORTANT: la solució es generarà a la carpeta "data/solution_id", on id és la id introduida. Es generarà una solució seguint el format descrit al document de formats.
 
 Operativa:
-  Entra el numero del metode (indicat al mateix programa) que es vol provar. A partir d'aqui cal seguir les instruccions per introduir el input que es demana, i es rebra feedback mitjançant el output.
+  Entra el numero del metode (indicat al mateix programa) que es vol provar. A partir d'aqui cal seguir les instruccions per introduir el input que es demana, i es rebra feedback mitjancant el output.

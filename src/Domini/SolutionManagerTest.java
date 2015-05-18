@@ -70,9 +70,9 @@ public class SolutionManagerTest  extends TestCase {
 		expectedInfo.add("3");
 		expectedInfo.add("0.01");
 		
-		SongSolution s = new SongSolution(g, comunities, 0.01, 'G');
+		SongSolution s = new SongSolution(g, comunities);
 
-		SolutionManager.saveSolution(s, "test");
+		SolutionManager.saveSolution(s);
 		
 		ArrayList<String> realGraph = FileManager.loadData("data/solutions/solution_test/entrada.txt");
 		assertTrue(realGraph.containsAll(expectedGraph) && expectedGraph.containsAll(realGraph));
@@ -86,8 +86,8 @@ public class SolutionManagerTest  extends TestCase {
 	public static void testRemoveSolution() throws IOException 
 	{
 		String nomSolucio = "solution_test";
-		SolutionManager.removeSolution(nomSolucio);
-		File solucio = new File("data/solutions/" + nomSolucio);
+		SolutionManager.removeSolutionFromDisk(nomSolucio);
+		File solucio = new File("data/solutions/" + "solution_" + nomSolucio);
 		assertFalse(solucio.exists());
 	}
 }

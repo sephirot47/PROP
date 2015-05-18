@@ -31,6 +31,7 @@ import java.awt.event.ComponentEvent;
 import java.io.IOException;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.ListSelectionModel;
 
 public class GestioUsuarisPanel extends JPanel
 {
@@ -45,7 +46,7 @@ public class GestioUsuarisPanel extends JPanel
 			@Override
 			public void componentShown(ComponentEvent e) 
 			{
-					refreshUserList();
+				refreshUserList();
 			}
 		});
 		setPreferredSize(new Dimension(800, 555));
@@ -78,6 +79,7 @@ public class GestioUsuarisPanel extends JPanel
 		txtBuscar.setColumns(10);
 		
 		listUsers = new JList();
+		listUsers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listUsers.setAutoscrolls(false);
 		listUsers.setAlignmentY(0.0f);
 		listUsers.setAlignmentX(0.0f);
@@ -109,6 +111,13 @@ public class GestioUsuarisPanel extends JPanel
 		panelUsers.add(btnNouUsuari);
 		
 		JButton btnImportarFitxer = new JButton("Importar fitxer");
+		btnImportarFitxer.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PresentationManager.importUsers();
+				refreshUserList();
+			}
+		});
 		btnImportarFitxer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnImportarFitxer.setBounds(135, 448, 161, 25);
 		panelUsers.add(btnImportarFitxer);
@@ -164,14 +173,18 @@ public class GestioUsuarisPanel extends JPanel
 		btnEliminarUsuari.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String user = (String) listUsers.getSelectedValue();
-				try {
-					PresentationManager.removeUser(user);
-				} catch (IOException e1) 
+
+				if(listUsers.getSelectedIndex() != -1)
 				{
-					e1.printStackTrace();
-				}			
-				refreshUserList();
+					String user = (String) listUsers.getSelectedValue();
+					try {
+						PresentationManager.removeUser(user);
+					} catch (IOException e1) 
+					{
+						e1.printStackTrace();
+					}			
+					refreshUserList();
+				}
 			}
 		});
 		btnEliminarUsuari.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -187,21 +200,12 @@ public class GestioUsuarisPanel extends JPanel
 		panelUserDetail.add(scrollPane);
 		
 		listReproductions = new JList();
+		listReproductions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listReproductions.setAutoscrolls(false);
 		listReproductions.setAlignmentY(0.0f);
 		listReproductions.setAlignmentX(0.0f);
 		listReproductions.setBounds(12, 127, 340, 304);
 		scrollPane.setViewportView(listReproductions);
-		
-		try 
-		{
-			UserManager.loadUsersFromDisk();
-		} 
-		catch (Exception e) 
-		{
-			WarningDialog.show("Error", "No es troba l'arxiu de carregar usuaris");
-			e.printStackTrace();
-		}
 		
 		refreshUserList();
 	}
@@ -243,7 +247,7 @@ public class GestioUsuarisPanel extends JPanel
 		} 
 		catch (Exception e) 
 		{
-			WarningDialog.show("Error", "No es troba l'arxiu de reproduccions d'aquest usuari");
+			PresentationManager.errorWindow("No es troba l'arxiu de reproduccions d'aquest usuari");
 			e.printStackTrace();
 		}
 		

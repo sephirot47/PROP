@@ -106,7 +106,7 @@ public class GenericDriver
 		
 		try
 		{
-			SongManager.saveSong(filepath, s);
+			SongManager.saveSongToDisk(filepath, s);
 		}
 		catch(IOException e)
 		{
@@ -129,7 +129,7 @@ public class GenericDriver
 		Set<Song> songs = null;
 		try
 		{
-			songs = SongManager.getSongs(filepath);
+			songs = SongManager.getSongsFromDisk(filepath);
 		}
 		catch(Exception e)
 		{
@@ -163,7 +163,7 @@ public class GenericDriver
 		
 		try 
 		{
-			SongManager.removeSong(filepath, author, title);
+			SongManager.removeSongFromDisk(filepath, author, title);
 		} 
 		catch (IOException e) 
 		{
@@ -434,10 +434,10 @@ public class GenericDriver
 		}
 		long genTime = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis() - startTime;
 		
-		SongSolution s = new SongSolution(songGraph, rawSolution, genTime, 'G');
+		SongSolution s = new SongSolution(songGraph, rawSolution);
 		try 
 		{
-			SolutionManager.saveSolution(s, id);
+			SolutionManager.saveSolution(s);
 		} 
 		catch (IOException e) 
 		{

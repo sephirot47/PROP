@@ -1,0 +1,24 @@
+0
+(AAA,  BBB)
+1
+(x,  y)
+2
+(SoyTanSutil,  tramboliko)
+3
+(AC/DC,  Hells Bells)
+4
+(XXX,  YYY22)
+5
+(x2,  y)
+6
+(x234,  y)
+7
+(XXX,  YYY)
+8
+(AC/DC,  Highway to mec)
+9
+(x23,  y)
+10
+(asd,  sdf)
+11
+(cfghfghf,  ghghj)

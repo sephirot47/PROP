@@ -28,7 +28,26 @@ public class SolutionManager
 		}
 	}
 	
-	
+	public static ArrayList<Pair<Double,Integer>> getInfos(String SolutionsDir,char algorisme) throws Exception
+	{
+		File baseDir = new File(SolutionsDir);
+		File[] solutions = baseDir.listFiles();
+		ArrayList<Pair<Double,Integer>> Dades = new ArrayList<Pair<Double,Integer>>(); 
+		
+		for (File dir : solutions) {
+			ArrayList<String> infoLines = FileManager.loadData(dir.getPath() + "/info.txt");
+			Pair<Double, Integer> dades = new Pair<Double,Integer>();
+			dades.setFirst(Double.parseDouble(infoLines.get(2)));
+			dades.setSecond(Integer.parseInt(infoLines.get(1)));
+			
+			if(infoLines.get(0).charAt(0) == algorisme){
+				Dades.add(dades);
+			}
+		}
+		
+		
+		return Dades;
+	}
 	
 	private static SongSolution getSolutionFromDate(String date)
 	{
@@ -290,40 +309,5 @@ public class SolutionManager
 			addSolution(s);
 			saveSolution(s);
 		}
-	}
-	public static ArrayList<Double[]> getInfos(String SolutionsDir) throws Exception
-	{
-		ArrayList<Double[]> result = new ArrayList<Double[]>();
-		
-		ArrayList<SongSolution> solutions = new ArrayList<SongSolution>();
-		solutions = getSolutions(SolutionsDir);
-		File baseDir = new File(SolutionsDir);
-		
-		Double[] Girvan = new Double[(baseDir.listFiles()).length];
-		Double[] Clique = new Double[(baseDir.listFiles()).length];
-		Double[] Louvain = new Double[(baseDir.listFiles()).length];
-		
-		for(int i = 0; i < (baseDir.listFiles()).length; i++)
-		{
-			if(solutions.get(i).getAlg() == 'G'){
-				Girvan[i] = solutions.get(i).getTime();
-				Clique[i] = -1.0;
-				Louvain[i] = -1.0;
-			}
-			else if(solutions.get(i).getAlg() == 'L'){
-				Girvan[i] = -1.0;
-				Clique[i] = solutions.get(i).getTime();
-				Louvain[i] = -1.0;
-			}
-			else
-			{
-				Girvan[i] = -1.0;
-				Clique[i] = -1.0;
-				Louvain[i] = solutions.get(i).getTime();
-			}
-			
-		}
-		
-		return result;
 	}
 }

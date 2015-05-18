@@ -75,7 +75,7 @@ public class NouUsuariPanel extends JPanel {
 		}
 		catch(NumberFormatException e)
 		{
-			WarningDialog.show("Error", "La edat ha de ser un numero valid.");
+			PresentationManager.errorWindow("La edat ha de ser un numero valid.");
 			return;
 		}
 		
@@ -85,7 +85,7 @@ public class NouUsuariPanel extends JPanel {
 		}
 		catch(Exception e)
 		{
-			WarningDialog.show("Error", e.getMessage());
+			PresentationManager.errorWindow(e.getMessage());
 			return;
 		}
 		

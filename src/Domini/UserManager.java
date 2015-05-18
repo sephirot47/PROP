@@ -15,36 +15,40 @@ public class UserManager
 	{
 		users.clear();
 		
-		if(users.size() == 0)
+		ArrayList<User> usersArray = new ArrayList<User>();
+		usersArray = UserManager.getUsersArrayFromDisk("data/users/users.txt", "");
+		
+		for(User u : usersArray)
 		{
-			ArrayList<User> usersArray = new ArrayList<User>();
-			usersArray = UserManager.getUsersArray("data/users/users.txt", "");
+			ArrayList<Reproduction> repros = new ArrayList<Reproduction>();
+			ArrayList<String> reprosLines = FileManager.loadData("data/reproductions/" + u.getName() + "Reproductions.txt");
 			
-			for(User u : usersArray)
+			for(String line : reprosLines)
 			{
-				ArrayList<Reproduction> repros = new ArrayList<Reproduction>();
-				ArrayList<String> reprosLines = FileManager.loadData("data/reproductions/" + u.getName() + "Reproductions.txt");
-				
-				for(String line : reprosLines)
-				{
-					Reproduction r = getReproduction(line);
-					if(r != null) u.addReproduction(r);
-				}
-				
-				users.add(u);
+				Reproduction r = getReproduction(line);
+				if(r != null) u.addReproduction(r);
 			}
+			
+			addUser(u);
 		}
 	}
 
 	public static void addUsersFrom(String filepath) throws Exception
 	{
 		ArrayList<User> usersArray = new ArrayList<User>();
-		usersArray = UserManager.getUsersArray(filepath, "");
+		usersArray = UserManager.getUsersArrayFromDisk(filepath, "");
 		
 		for(User u : usersArray)
 		{
-			users.add(u);
+			addUser(u);
 		}
+	}
+	
+	public static void addUser(User user)
+	{
+		for(User u : users)
+			if(u.getName().equals(user.getName())) return;
+		users.add(user);
 	}
 	
 	public static void createUserAndSaveToDisk(String username, int edat) throws Exception 
@@ -58,7 +62,7 @@ public class UserManager
 		}
 		
 		User u = new User(username, edat);
-		users.add(u);
+		addUser(u);
 		
 		saveReproductionsToDisk("data/reproductions/" + username + "Reproductions.txt", new ArrayList<Reproduction>());
 		saveUserToDisk("data/users/users.txt", u);
@@ -66,17 +70,12 @@ public class UserManager
 	
 	public static Set<User> getUsers(String filepath, String reprosDir) throws Exception
 	{
-		users.clear();
+		ArrayList<User> usersArray = new ArrayList<User>();
+		usersArray = UserManager.getUsersArrayFromDisk(filepath, reprosDir);
 		
-		if(users.size() == 0)
+		for(User u : usersArray)
 		{
-			ArrayList<User> usersArray = new ArrayList<User>();
-			usersArray = UserManager.getUsersArray(filepath, reprosDir);
-			
-			for(User u : usersArray)
-			{
-				users.add(u);
-			}
+			addUser(u);
 		}
 		return users;
 	}
@@ -238,7 +237,6 @@ public class UserManager
 	    	}
 	    	
 	    	FileManager.saveData(filepath, lines);
-	    	System.out.println("data/reproductions/" + username + "Reproductions.txt");
 	    	FileManager.eraseData("data/reproductions/" + username + "Reproductions.txt");
 	    }
 	    
@@ -254,6 +252,7 @@ public class UserManager
 	    	}
 	    	
 	    	FileManager.saveData("data/users/users.txt", lines);
+	    	FileManager.eraseData("data/reproductions/" + username + "Reproductions.txt");
 	    	
 	    	users.clear();
 	    	try {
@@ -296,7 +295,7 @@ public class UserManager
 	    }
 
 		
-	    private static User getUser(String line) throws Exception
+	    private static User getUserFromString(String line) throws Exception
 	    {
 	    	String fields[] = line.split(";");
 	    	if(fields.length < 2) return null; 
@@ -319,14 +318,14 @@ public class UserManager
 	    	return new Reproduction(author, title, time);
 		}
 
-		private static ArrayList<User> getUsersArray(String userFilepath, String reprosDir) throws Exception
+		private static ArrayList<User> getUsersArrayFromDisk(String userFilepath, String reprosDir) throws Exception
 		{
-			ArrayList<User> users = new ArrayList<User>();
+			ArrayList<User> theUsers = new ArrayList<User>();
 			
 			ArrayList<String> fileLines = FileManager.loadData(userFilepath);
 			for(String line : fileLines)
 			{
-				User u = UserManager.getUser(line);
+				User u = UserManager.getUserFromString(line);
 				
 				if(!reprosDir.equals(""))
 				{
@@ -340,10 +339,10 @@ public class UserManager
 					catch(Exception e){}
 				}
 				
-				users.add(u);
+				theUsers.add(u);
 			}
 			
-			return users;
+			return theUsers;
 		}
 
 		public static ArrayList<Reproduction> getReproductions(String filepath) throws IOException
@@ -361,5 +360,19 @@ public class UserManager
 			}
 			
 			return reproductions;
+		}
+
+		public static void importUsers(String path) throws Exception 
+		{
+			getUsers(path, "");
+			saveCurrentUsersToDisk();	
+		}
+
+		public static void importReproductions(String path, String username) throws Exception
+		{
+			User u = getUserByName(username);
+			ArrayList<Reproduction> repros = getReproductions(path);
+			for(Reproduction r : repros) u.addReproduction(r);
+			saveReproductionsToDisk("data/reproductions/" + u.getName() + "Reproductions.txt", u.getReproductions());
 		}
 }

@@ -1,10 +1,9 @@
 package Domini;
  
 import java.util.*;
+
  
-/**
- * @author pau
- */
+
 public class Clique extends Algorithm
 {
     public Solution getSolution(Graph g) throws Exception 
@@ -13,12 +12,12 @@ public class Clique extends Algorithm
  
         Solution s;
         DJSets ds = new DJSets(0);
-        HashMap<Edge, Integer> edgeIndexes = new HashMap<>();
+        HashMap<Edge, Integer> edgeIndexes = new HashMap<Edge, Integer>();
  
         // We get all the edges
         List<Edge> edges = new ArrayList<Edge>(g.getAllEdges());
  
-        ArrayList<Pair<Edge, Pair<Node, Node>>> edgesInfo = new ArrayList<>();
+        ArrayList<Pair<Edge, Pair<Node, Node>>> edgesInfo = new ArrayList<Pair<Edge, Pair<Node, Node>>>();
         for (Edge e : edges) {
             Pair<Node, Node> p = (g.getNodesConnectedBy(e));
             edgesInfo.add(new Pair<Edge, Pair<Node, Node>>(e, g.getNodesConnectedBy(e)));
@@ -102,7 +101,7 @@ public class Clique extends Algorithm
  
     private static Solution buildSolution(HashMap<Edge, Integer> edgeIndexes, DJSets ds, Graph g) {
         Solution s = new Solution();
-        HashMap<Integer, Community> comms = new HashMap<>();
+        HashMap<Integer, Community> comms = new HashMap<Integer, Community>();
         for (Edge e : edgeIndexes.keySet()) {
             Community c;
             int commNum = ds.find(edgeIndexes.get(e));

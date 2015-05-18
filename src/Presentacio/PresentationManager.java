@@ -59,6 +59,7 @@ public class PresentationManager
 	
 	
 	// SOLUTIONS /////////////////////////
+
 	public static ArrayList<Pair<Double,Integer>> getInfos(char algorisme) throws Exception
 	{
 		return SolutionManager.getInfos("data/solutions",algorisme);
@@ -473,4 +474,7 @@ public class PresentationManager
 			}
 		}
 	}
+
 }
+
+

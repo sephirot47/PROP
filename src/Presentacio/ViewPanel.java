@@ -17,6 +17,19 @@ public class ViewPanel extends JPanel {
 
 	public static ViewPanel viewPanel;
 	public JPanel cardContainer;
+	private GestioCanconsPanel gcp;
+	private GestioUsuarisPanel gup;
+	private GenerarLlistesPanel recp;
+	private EstadistiquesPanel estp;
+	private CreditsPanel credp;
+	private NouUsuariPanel nup;
+	private EditarUsuarisPanel edup;
+	private EditarSolucioPanel esp;
+	private NovaCancoPanel ncp;
+	private EditarCanconsPanel ecp;
+	private HistorialPanel hp;
+	private ConsultarSolucioPanel csp;
+	private ViewGraphPanel vgp;
 	
 	public ViewPanel() 
 	{
@@ -48,14 +61,19 @@ public class ViewPanel extends JPanel {
 		btnEnrerepanel.setHorizontalAlignment(SwingConstants.LEFT);
 		frame.add(btnEnrerepanel, BorderLayout.WEST);
 
-		GestioCanconsPanel gcp = new GestioCanconsPanel();
-		GestioUsuarisPanel gup = new GestioUsuarisPanel();
-		GenerarLlistesPanel recp = new GenerarLlistesPanel();
-		EstadistiquesPanel estp = new EstadistiquesPanel();
-		CreditsPanel credp = new CreditsPanel();
-		NouUsuariPanel nup = new NouUsuariPanel();
-		EditarUsuarisPanel edup= new EditarUsuarisPanel();
-		EditarCanconsPanel ecp = new EditarCanconsPanel();
+		gcp = new GestioCanconsPanel();
+		gup = new GestioUsuarisPanel();
+		recp = new GenerarLlistesPanel();
+		estp = new EstadistiquesPanel();
+		credp = new CreditsPanel();
+		nup = new NouUsuariPanel();
+		edup= new EditarUsuarisPanel();
+		esp = new EditarSolucioPanel();
+		ncp = new NovaCancoPanel();
+		ecp = new EditarCanconsPanel();
+		hp = new HistorialPanel();
+		csp = new ConsultarSolucioPanel();
+		vgp = new ViewGraphPanel();
 		
 		cardContainer.add(gcp, GestioCanconsPanel.class.getSimpleName());
 		cardContainer.add(gup, GestioUsuarisPanel.class.getSimpleName());
@@ -64,7 +82,22 @@ public class ViewPanel extends JPanel {
 		cardContainer.add(credp, CreditsPanel.class.getSimpleName());
 		cardContainer.add(nup, NouUsuariPanel.class.getSimpleName());
 		cardContainer.add(edup, EditarUsuarisPanel.class.getSimpleName());
+		cardContainer.add(esp, EditarSolucioPanel.class.getSimpleName());
+		cardContainer.add(ncp, NovaCancoPanel.class.getSimpleName());
 		cardContainer.add(ecp, EditarCanconsPanel.class.getSimpleName());
+		cardContainer.add(hp, HistorialPanel.class.getSimpleName());
+		cardContainer.add(csp, ConsultarSolucioPanel.class.getSimpleName());
+		cardContainer.add(vgp, ViewGraphPanel.class.getSimpleName());
 	}
-
+	
+	public void refreshInsidePanels(String cardName)
+	{
+		if(cardName.equals(GestioCanconsPanel.class.getSimpleName())) gcp.refreshSongList();
+		else if(cardName.equals(GestioUsuarisPanel.class.getSimpleName())) gup.refreshUserList();
+		else if(cardName.equals(EditarCanconsPanel.class.getSimpleName())) ecp.refresh();
+		else if(cardName.equals(HistorialPanel.class.getSimpleName())) hp.refresh();
+		else if(cardName.equals(ConsultarSolucioPanel.class.getSimpleName())) csp.refresh();
+		else if(cardName.equals(EditarSolucioPanel.class.getSimpleName())) esp.refresh();
+		else if(cardName.equals(ViewGraphPanel.class.getSimpleName())) vgp.refresh();
+	}
 }

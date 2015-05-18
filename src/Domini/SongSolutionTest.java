@@ -50,7 +50,7 @@ public class SongSolutionTest extends TestCase
 		Song s4 = new Song("AC/DC","T.N.T",1975,style,214);
 		
 		Solution songs = new Solution();
-		SongSolution so = new SongSolution(sg, songs, 0.01, 'G' );
+		SongSolution so = new SongSolution(sg, songs);
 		
 		sg.addNode(s);
 		sg.addNode(s1);
@@ -69,7 +69,7 @@ public class SongSolutionTest extends TestCase
 		
 		Solution songs = new Solution();
 		
-		SongSolution so = new SongSolution(sg, songs, 0.01, 'G' );
+		SongSolution so = new SongSolution(sg, songs);
 
 		so.setAlg('J');
 		assertEquals('J',so.getAlg());
@@ -106,7 +106,7 @@ public class SongSolutionTest extends TestCase
 		
 		Solution songs = new Solution();
 		
-		SongSolution so = new SongSolution(sg, songs, 0.01, 'G' );
+		SongSolution so = new SongSolution(sg, songs);
 
 		songs.addCommunity(ss);
 		songs.addCommunity(ss2);
@@ -140,7 +140,7 @@ public class SongSolutionTest extends TestCase
 		
 		Solution songs = new Solution();
 		
-		SongSolution so = new SongSolution(sg, songs, 0.01, 'G' );
+		SongSolution so = new SongSolution(sg, songs);
 
 		so.setTime(0.15);
 		
@@ -153,7 +153,7 @@ public class SongSolutionTest extends TestCase
 		
 		Solution songs = new Solution();
 		
-		SongSolution so = new SongSolution(sg, songs, 0.01, 'G' );
+		SongSolution so = new SongSolution(sg, songs);
 		assertEquals("GirvanNewman", so.getAlg());
 	}
 	
@@ -163,7 +163,7 @@ public class SongSolutionTest extends TestCase
 		
 		Solution songs = new Solution();
 		
-		SongSolution so = new SongSolution(sg, songs, 0.01, 'G' );
+		SongSolution so = new SongSolution(sg, songs);
 		so.setAlg('G');
 		assertEquals('G', so.getAlg());
 	}
@@ -184,7 +184,7 @@ public class SongSolutionTest extends TestCase
 		
 		Solution songs = new Solution();
 		
-		SongSolution so = new SongSolution(sg, songs, 0.01, 'G' );
+		SongSolution so = new SongSolution(sg, songs);
 
 		
 		sg.addNode(s);
@@ -227,7 +227,7 @@ public class SongSolutionTest extends TestCase
 		
 		Solution songs = new Solution();
 		
-		SongSolution so = new SongSolution(sg, songs, 0.01, 'G' );
+		SongSolution so = new SongSolution(sg, songs);
 		
 		songs.addCommunity(ss);
 		songs.addCommunity(ss2);

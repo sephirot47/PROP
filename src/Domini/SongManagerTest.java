@@ -26,7 +26,7 @@ public class SongManagerTest extends TestCase
 	{
 		try {
 		//TEST 1
-		Set<Song> songsRead = SongManager.getSongs("data/songs1.txt"); //read from file
+		Set<Song> songsRead = SongManager.getSongsFromDisk("data/songs1.txt"); //read from file
 		Set<Song> songs = new HashSet<Song>(); //created by us
 
 		assertFalse(setsEquals(songs, songsRead)); 
@@ -41,7 +41,7 @@ public class SongManagerTest extends TestCase
 		
 		//TEST 2
 		songsRead.clear();
-		songsRead = SongManager.getSongs("data/songs2.txt"); //read from file
+		songsRead = SongManager.getSongsFromDisk("data/songs2.txt"); //read from file
 		songs.clear();
 		
 		ArrayList<String> styles20 = new ArrayList<String>(); 
@@ -76,21 +76,21 @@ public class SongManagerTest extends TestCase
 
 		FileManager.eraseData("data/songSaveProva1.txt"); //Comencem amb larxiu buit
 		
-		SongManager.saveSong("data/songSaveProva1.txt", s1);
+		SongManager.saveSongToDisk("data/songSaveProva1.txt", s1);
 		songsLines.add("autor1;titol1;2014;-;-;-;100");
 		assertEquals(FileManager.loadData("data/songSaveProva1.txt"), songsLines);
 		
-		SongManager.saveSong("data/songSaveProva1.txt", s2);
+		SongManager.saveSongToDisk("data/songSaveProva1.txt", s2);
 		songsLines.add("autor2;titol2;222;-;-;-;200");
 		assertEquals(FileManager.loadData("data/songSaveProva1.txt"), songsLines);
 		
-		SongManager.saveSong("data/songSaveProva1.txt", s3);
+		SongManager.saveSongToDisk("data/songSaveProva1.txt", s3);
 		songsLines.add("autor3;titol3;333;-;-;-;300");
 		assertEquals(FileManager.loadData("data/songSaveProva1.txt"), songsLines);
 		
 		s2.setDuration(5478); //Si canviem la primary key, es considera un nou user
 		s2.setAuthorTitle("aaa", "bbb");
-		SongManager.saveSong("data/songSaveProva1.txt", s2);
+		SongManager.saveSongToDisk("data/songSaveProva1.txt", s2);
 		assertFalse(FileManager.loadData("data/songSaveProva1.txt").equals(songsLines));
 		songsLines.add("aaa;bbb;222;-;-;-;5478");
 		assertEquals(FileManager.loadData("data/songSaveProva1.txt"), songsLines);
@@ -99,18 +99,18 @@ public class SongManagerTest extends TestCase
 		ArrayList<String> styles = new ArrayList<String>();
 		styles.add("Nightcore");
 		s3.addStyles(styles);
-		SongManager.saveSong("data/songSaveProva1.txt", s3);
+		SongManager.saveSongToDisk("data/songSaveProva1.txt", s3);
 		assertFalse(FileManager.loadData("data/songSaveProva1.txt").equals(songsLines));
 		songsLines.set(2, "autor3;titol3;333;Nightcore;-;-;300");
 		assertEquals(FileManager.loadData("data/songSaveProva1.txt"), songsLines);
 
 		//Guardar sense modificar no afecta
-		SongManager.saveSong("data/songSaveProva1.txt", s1);
-		SongManager.saveSong("data/songSaveProva1.txt", s2);
-		SongManager.saveSong("data/songSaveProva1.txt", s3);
-		SongManager.saveSong("data/songSaveProva1.txt", s1);
-		SongManager.saveSong("data/songSaveProva1.txt", s2);
-		SongManager.saveSong("data/songSaveProva1.txt", s3);
+		SongManager.saveSongToDisk("data/songSaveProva1.txt", s1);
+		SongManager.saveSongToDisk("data/songSaveProva1.txt", s2);
+		SongManager.saveSongToDisk("data/songSaveProva1.txt", s3);
+		SongManager.saveSongToDisk("data/songSaveProva1.txt", s1);
+		SongManager.saveSongToDisk("data/songSaveProva1.txt", s2);
+		SongManager.saveSongToDisk("data/songSaveProva1.txt", s3);
 		assertEquals(FileManager.loadData("data/songSaveProva1.txt"), songsLines);
 	 }
 	 
@@ -129,7 +129,7 @@ public class SongManagerTest extends TestCase
 		 songsLines.add("autor2;titol1;1997;-;-;-;180");
 		 songsLines.add("autor3;titol123;1870;-;-;-;60");
 		 
-		 SongManager.saveSongs("data/songSaveProva2.txt", writtenSongs);
+		 SongManager.saveSongsToDisk("data/songSaveProva2.txt", writtenSongs);
 		 assertEquals(FileManager.loadData("data/songSaveProva2.txt"), songsLines);
 	 }
 
@@ -149,7 +149,7 @@ public class SongManagerTest extends TestCase
 		 FileManager.saveData("data/songsRemoveTest.txt", songsLines);
 
 		 songsLines.remove(5);
-		 SongManager.removeSong("data/songsRemoveTest.txt", "AC/DC", "T.N.T");
+		 SongManager.removeSongFromDisk("data/songsRemoveTest.txt", "AC/DC", "T.N.T");
 		 assertEquals(FileManager.loadData("data/songsRemoveTest.txt"), songsLines);
 	 }
 	

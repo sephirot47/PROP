@@ -1,6 +1,13 @@
-Camela;cuando sarpa el hamor;2015;-;-;flamenquillo del weno;180
-SoyTanSutil;tramboliko;1867;dubstep;-;ioroYOLO;45
-AC/DC;Thunderstruck;1990;Rock;-;-;292
-AC/DC;Highway to Hell;1979;Rock;-;-;284
-AC/DC;You Shook Me All Night Long;1980;Rock;-;-;212
+XXX;YYY22;1234;eee;-;-;478
+AAA;BBB;123;asda;-;-;123
+cfghfghf;ghghj;54;fgf;-;-;234
+x23;y;1;e123;123;xzc;1
+x2;y;1;e;-;-;1
+asd;sdf;234;q;w;e;234
+XXX;YYY;123;aaa;-;-;321
+SoyTanSutil;tramboliko;1111;e1;e3;-;222
+autor Guai;itol Guai;1;estil;-;-;1
+x;y;1;e;-;-;1
+x234;y;1;e;-;-;1
+AC/DC;Highway to mec;12;e1;-;-;218
 AC/DC;Hells Bells;1980;Rock;-;-;312

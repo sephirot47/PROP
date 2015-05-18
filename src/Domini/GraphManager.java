@@ -1,6 +1,8 @@
 package Domini;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Set;
 
 import Persistencia.FileManager;
@@ -135,5 +137,36 @@ public class GraphManager
 		}
 		catch (Exception e){}
 		return aportation;
+	}
+
+	public static String generateSolution(char algorisme, int durationP, int yearP, int styleP, int publicP, int proximityP, int authorP) throws Exception
+	{
+		try { SongManager.loadSongsFromDisk(); } 
+		catch(Exception e) { throw new Exception("No es troba el arxiu de cancons 'data/songs/songs.txt'"); }
+		
+		Set<Song> songs = SongManager.getSongs();
+		Graph<Song> g = new Graph<Song>();
+		for(Song s : songs) g.addNode(s);
+		
+		Ponderations p = new Ponderations();
+		p.setDuration(durationP);
+		p.setAuthor(authorP);
+		p.setYear(yearP);
+		p.setStyle(styleP);
+		p.setUserAge(publicP);
+		p.setNearbyReproductions(proximityP);
+		
+		generateEdges(g, p);
+		
+		Solution rawSol = null;
+		if(algorisme == 'G') rawSol = new GirvanNewman().getSolution(g);
+		else if(algorisme == 'C') rawSol = new Clique().getSolution(g);
+		else rawSol = new Louvain().getSolution(g);
+		
+		SongSolution sol = new SongSolution(g, rawSol);
+		sol.setId(new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()));
+		SolutionManager.setLastGeneratedSolution(sol);
+		
+		return sol.getId();
 	}
 }

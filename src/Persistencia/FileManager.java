@@ -86,6 +86,17 @@ public class FileManager
           File file = new File(path);
           return file.delete();
     }
+
+    public static ArrayList<String> listFilesOf(String path)
+    {
+    	Path fpath = Paths.get(path); //generem un path amb l'string
+    	fpath = fpath.toAbsolutePath();
+        File file = new File( fpath.toString() );
+        ArrayList<String> content = new ArrayList<String>();
+        String[] sss = file.list();
+        for(String fileInDir : sss) content.add(fileInDir);
+        return content;
+    }
     
     //path es un path no nul
     //retorna cert si path existeix
@@ -97,7 +108,6 @@ public class FileManager
         File file = new File(path);
         file.getParentFile().mkdirs();
         if(file.exists()) return true; return false;
-    	
     }
     
     //path es un cami a un fitxer existent, newLine conte una linia de text

@@ -60,6 +60,21 @@ public class Song extends Node
 		this.author = author;
 		this.title = title;
 	}
+
+	public void setStyles(ArrayList<String> est) throws Exception
+	{
+		for(String style : est) checkString(style);
+		
+		styles.clear();
+		if((styles.size() + est.size()) <= 3)
+		{
+			styles.addAll(est);
+		}
+		else
+		{
+			throw new Exception("No es poden afegir mes de 3 estils a una canco");
+		}
+	}
 	
 	public void addStyles(ArrayList<String> est) throws Exception
 	{
@@ -71,8 +86,13 @@ public class Song extends Node
 		}
 		else
 		{
-			throw new Exception("Can't add more than 3 styles to a song...");
+			throw new Exception("No es poden afegir mes de 3 estils a una canco");
 		}
+	}
+
+	public void setYear(int y)
+	{
+		year = y;
 	}
 	
 	public void setDuration(int dur)
@@ -123,8 +143,8 @@ public class Song extends Node
 	
 	private void checkString(String str) throws Exception
 	{
-		if(str.contains(";")) throw new Exception("Song strings can't contain the \" ; \" character (\'" + 
-												  str + "\')");
+		if(str.contains(";") || str.contains(",")) 
+			throw new Exception("Les dades d'una canco no poden contenir els caracters \" ; \" ni \" , \" ");
 	}
 
 	@Override
