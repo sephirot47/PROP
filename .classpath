@@ -4,6 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jgraph"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jfreechart"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Jung"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Jfreechart"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
