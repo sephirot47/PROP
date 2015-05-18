@@ -253,10 +253,11 @@ public class EstadistiquesPanel extends JPanel
 					XYSeries serie1 = new XYSeries("Clique");
 					XYSeries serie2 = new XYSeries("Louvain");
 					for(int x1 = 0; x1 < dadesinfo.size(); x1++){
-						for(int i = 0; i < dadesinfo.get(x1).size(); i++){					 
-							if(x1 == 0)serie.add(dadesinfo.get(x1).get(i).getSecond(),dadesinfo.get(x1).get(i).getFirst());
-							if(x1 == 1)serie1.add(dadesinfo.get(x1).get(i).getSecond(),dadesinfo.get(x1).get(i).getFirst());
-							else serie2.add(dadesinfo.get(x1).get(i).getSecond(),dadesinfo.get(x1).get(i).getFirst());
+						for(int i = 0; i < dadesinfo.get(x1).size(); i++){
+							double n = dadesinfo.get(x1).get(i).getFirst()/1000;
+							if(x1 == 0)	serie.add(n,dadesinfo.get(x1).get(i).getSecond());							
+							if(x1 == 1)serie1.add(n,dadesinfo.get(x1).get(i).getSecond());
+							else serie2.add(n,dadesinfo.get(x1).get(i).getSecond());
 						}
 					}
 					if(!serie.isEmpty()) dades.addSeries(serie);
@@ -270,7 +271,7 @@ public class EstadistiquesPanel extends JPanel
 						renderer.setSeriesPaint(2, Color.BLUE);
 					}				
 				}
-				chart = ChartFactory.createXYLineChart(alg,"Nodes","Temps",dades,PlotOrientation.VERTICAL,true,false,false);
+				chart = ChartFactory.createXYLineChart(alg,"Temps","Nodes",dades,PlotOrientation.HORIZONTAL,true,false,false);
 				chart.setBackgroundPaint(Color.white);
 				plot =  chart.getXYPlot(); 
 				renderer.setSeriesPaint(0, Color.RED);				

@@ -1,0 +1,26 @@
+0
+(x, y)
+1
+(autor Guai, itol Guai)
+2
+(x2, y)
+3
+(AC/DC, Hells Bells)
+4
+(x23, y)
+5
+(x234, y)
+6
+(XXX, YYY22)
+7
+(asd, sdf)
+8
+(SoyTanSutil, tramboliko)
+9
+(AC/DC, Highway to mec)
+10
+(cfghfghf, ghghj)
+11
+(XXX, YYY)
+12
+(AAA, BBB)
