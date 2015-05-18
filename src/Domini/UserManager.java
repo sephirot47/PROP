@@ -29,7 +29,7 @@ public class UserManager
 				if(r != null) u.addReproduction(r);
 			}
 			
-			users.add(u);
+			addUser(u);
 		}
 	}
 
@@ -40,8 +40,15 @@ public class UserManager
 		
 		for(User u : usersArray)
 		{
-			users.add(u);
+			addUser(u);
 		}
+	}
+	
+	public static void addUser(User user)
+	{
+		for(User u : users)
+			if(u.getName().equals(user.getName())) return;
+		users.add(user);
 	}
 	
 	public static void createUserAndSaveToDisk(String username, int edat) throws Exception 
@@ -55,7 +62,7 @@ public class UserManager
 		}
 		
 		User u = new User(username, edat);
-		users.add(u);
+		addUser(u);
 		
 		saveReproductionsToDisk("data/reproductions/" + username + "Reproductions.txt", new ArrayList<Reproduction>());
 		saveUserToDisk("data/users/users.txt", u);
@@ -63,17 +70,12 @@ public class UserManager
 	
 	public static Set<User> getUsers(String filepath, String reprosDir) throws Exception
 	{
-		users.clear();
+		ArrayList<User> usersArray = new ArrayList<User>();
+		usersArray = UserManager.getUsersArrayFromDisk(filepath, reprosDir);
 		
-		if(users.size() == 0)
+		for(User u : usersArray)
 		{
-			ArrayList<User> usersArray = new ArrayList<User>();
-			usersArray = UserManager.getUsersArrayFromDisk(filepath, reprosDir);
-			
-			for(User u : usersArray)
-			{
-				users.add(u);
-			}
+			addUser(u);
 		}
 		return users;
 	}
@@ -358,5 +360,11 @@ public class UserManager
 			}
 			
 			return reproductions;
+		}
+
+		public static void importUsers(String path) throws Exception 
+		{
+			getUsers(path, "");
+			saveCurrentUsersToDisk();	
 		}
 }

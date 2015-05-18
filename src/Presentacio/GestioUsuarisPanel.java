@@ -109,6 +109,13 @@ public class GestioUsuarisPanel extends JPanel
 		panelUsers.add(btnNouUsuari);
 		
 		JButton btnImportarFitxer = new JButton("Importar fitxer");
+		btnImportarFitxer.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PresentationManager.importUsers();
+				refreshUserList();
+			}
+		});
 		btnImportarFitxer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnImportarFitxer.setBounds(135, 448, 161, 25);
 		panelUsers.add(btnImportarFitxer);

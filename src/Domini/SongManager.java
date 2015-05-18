@@ -18,20 +18,16 @@ public class SongManager
 	
     public static void loadSongsFromDisk() throws Exception
     {
+    	songs.clear();
     	SongManager.getSongsFromDisk("data/songs/songs.txt");
     }
     
 	public static Set<Song> getSongsFromDisk(String filepath) throws Exception
 	{
-		songs.clear();
-		
-		if(songs.size() == 0)
-		{
-			ArrayList<Song> songsArray = new ArrayList<Song>();
-			songsArray = SongManager.getSongsFromString(filepath);
-			for(Song s : songsArray) 
-				if(s != null) songs.add(s);
-		}
+		ArrayList<Song> songsArray = new ArrayList<Song>();
+		songsArray = SongManager.getSongsFromString(filepath);
+		for(Song s : songsArray) 
+			if(s != null) addSong(s);
 		return songs;
 	}
 	
@@ -174,8 +170,15 @@ public class SongManager
 			if(author.equals(song.getAuthor()) && title.equals(song.getTitle())) throw new Exception("Ja existeix una canco amb el mateix autor i titol");
 		
 		Song s = new Song(author, title, year, styles, duration);
-		songs.add(s);
+		addSong(s);
 		saveSongToDisk("data/songs/songs.txt", s);
+	}
+	
+	public static void addSong(Song song)
+	{
+		for(Song s : songs)
+			if(s.getAuthor().equals(song.getAuthor()) && s.getTitle().equals(song.getTitle())) return;
+		songs.add(song);
 	}
 	
 	public static void saveCurrentSongsToDisk() throws Exception
@@ -209,9 +212,14 @@ public class SongManager
 		ArrayList<String> fileLines = FileManager.loadData(filepath);
 		for(String line : fileLines)
 		{
-			songs.add(SongManager.getSongFromString(line));
+			addSong(SongManager.getSongFromString(line));
 		}
 		
 		return songs;
+	}
+
+	public static void importSongs(String path) throws Exception {
+		getSongsFromDisk(path);
+		saveCurrentSongsToDisk();
 	}
 }

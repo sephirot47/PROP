@@ -117,6 +117,13 @@ public class GestioCanconsPanel extends JPanel
 		panelSongs.add(btnNouCanco);
 		
 		JButton btnImportarFitxer = new JButton("Importar fitxer");
+		btnImportarFitxer.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PresentationManager.importSongs();
+				refreshSongList();
+			}
+		});
 		btnImportarFitxer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnImportarFitxer.setBounds(192, 448, 161, 25);
 		panelSongs.add(btnImportarFitxer);

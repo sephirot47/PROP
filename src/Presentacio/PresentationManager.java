@@ -2,12 +2,17 @@ package Presentacio;
 
 import java.awt.CardLayout;
 import java.awt.EventQueue;
+import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JWindow;
+import javax.swing.plaf.FileChooserUI;
 
 import Domini.Graph;
 import Domini.GraphManager;
@@ -74,6 +79,7 @@ public class PresentationManager
 			errorWindow(e.getMessage());
 		}
 	}
+
 	
 	public static void removeSolutionFromDisk(String date)
 	{
@@ -345,6 +351,25 @@ public class PresentationManager
 	
 	
 	// UTILS /////////////////////////////
+	public static String openFileWindow(boolean directoryOnly)
+	{
+		final JFileChooser fc = new JFileChooser();
+		fc.setCurrentDirectory(new File("data/"));
+		
+		if (directoryOnly) fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		
+		int returnVal = fc.showOpenDialog(MainWindow.frmYoutube);
+		
+		 if (returnVal == JFileChooser.APPROVE_OPTION) {
+	            File file = fc.getSelectedFile();
+	            return file.getPath();
+	        } else {
+	            //errorWindow("Ha);
+	        }
+		 
+		return null;
+	}
+	
 	public static void infoWindow(String msg)
 	{
 		JOptionPane.showMessageDialog(MainWindow.frmYoutube, msg, "Info", JOptionPane.INFORMATION_MESSAGE);
@@ -400,5 +425,28 @@ public class PresentationManager
 	public static void goToViewGraph(String graphId) 
 	{
 		goToCard(ViewGraphPanel.class.getSimpleName());
+	}
+
+	public static void importSongs() {
+		String path = openFileWindow(false);
+		if (path != null){
+			try {
+				SongManager.importSongs(path);
+			} catch (Exception e) {
+				errorWindow(e.getMessage());
+			}
+		}
+	}
+
+	public static void importUsers() {
+		String path = openFileWindow(false);
+		if (path != null){
+			try {
+				UserManager.importUsers(path);
+			} catch (Exception e) {
+				errorWindow(e.getMessage());
+			}
+		}
+		
 	}
 }
