@@ -1,10 +1,5 @@
-ccc;14
-aaa;12
-ddd;15
-eee;16
-Rare_Pepe;12
-Manolos;2
-Pepes;89
-bbb;13
-Txuanet;56
+aa2a3545656;1
+aa2a;1
 fff;17
+aa2a3;1
+aaa;1

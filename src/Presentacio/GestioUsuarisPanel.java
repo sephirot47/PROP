@@ -31,6 +31,7 @@ import java.awt.event.ComponentEvent;
 import java.io.IOException;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.ListSelectionModel;
 
 public class GestioUsuarisPanel extends JPanel
 {
@@ -78,6 +79,7 @@ public class GestioUsuarisPanel extends JPanel
 		txtBuscar.setColumns(10);
 		
 		listUsers = new JList();
+		listUsers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listUsers.setAutoscrolls(false);
 		listUsers.setAlignmentY(0.0f);
 		listUsers.setAlignmentX(0.0f);
@@ -198,6 +200,7 @@ public class GestioUsuarisPanel extends JPanel
 		panelUserDetail.add(scrollPane);
 		
 		listReproductions = new JList();
+		listReproductions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listReproductions.setAutoscrolls(false);
 		listReproductions.setAlignmentY(0.0f);
 		listReproductions.setAlignmentX(0.0f);

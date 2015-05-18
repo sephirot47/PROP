@@ -65,7 +65,7 @@ public class EditarUsuarisPanel extends JPanel
 		setLayout(null);
 		
 		JPanel panelUserDetail = new JPanel();
-		panelUserDetail.setBounds(0, 30, 364, 475);
+		panelUserDetail.setBounds(0, 30, 364, 486);
 		add(panelUserDetail);
 		panelUserDetail.setLayout(null);
 		
@@ -102,7 +102,7 @@ public class EditarUsuarisPanel extends JPanel
 			}
 		});
 		btnEliminarReproduccio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEliminarReproduccio.setBounds(154, 438, 198, 25);
+		btnEliminarReproduccio.setBounds(10, 416, 336, 25);
 		panelUserDetail.add(btnEliminarReproduccio);
 		
 		textNom = new JLabel();
@@ -121,6 +121,19 @@ public class EditarUsuarisPanel extends JPanel
 		textEdat.setColumns(10);
 		textEdat.setBounds(57, 40, 114, 19);
 		panelUserDetail.add(textEdat);
+		
+		JButton btnImportarFitxer = new JButton("Importar fitxer");
+		btnImportarFitxer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnImportarFitxer.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				PresentationManager.importReproductions(currentUsername);
+				refreshReproductionsList();
+			}
+		});
+		btnImportarFitxer.setBounds(10, 450, 336, 25);
+		panelUserDetail.add(btnImportarFitxer);
 		
 		JPanel panelUsers = new JPanel();
 		panelUsers.setBorder(new LineBorder(new Color(0, 0, 0)));

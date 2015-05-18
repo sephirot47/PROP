@@ -237,7 +237,6 @@ public class UserManager
 	    	}
 	    	
 	    	FileManager.saveData(filepath, lines);
-	    	System.out.println("data/reproductions/" + username + "Reproductions.txt");
 	    	FileManager.eraseData("data/reproductions/" + username + "Reproductions.txt");
 	    }
 	    
@@ -253,6 +252,7 @@ public class UserManager
 	    	}
 	    	
 	    	FileManager.saveData("data/users/users.txt", lines);
+	    	FileManager.eraseData("data/reproductions/" + username + "Reproductions.txt");
 	    	
 	    	users.clear();
 	    	try {
@@ -366,5 +366,13 @@ public class UserManager
 		{
 			getUsers(path, "");
 			saveCurrentUsersToDisk();	
+		}
+
+		public static void importReproductions(String path, String username) throws Exception
+		{
+			User u = getUserByName(username);
+			ArrayList<Reproduction> repros = getReproductions(path);
+			for(Reproduction r : repros) u.addReproduction(r);
+			saveReproductionsToDisk("data/reproductions/" + u.getName() + "Reproductions.txt", u.getReproductions());
 		}
 }

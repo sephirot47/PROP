@@ -362,7 +362,7 @@ public class PresentationManager
 		
 		 if (returnVal == JFileChooser.APPROVE_OPTION) {
 	            File file = fc.getSelectedFile();
-	            return file.getPath();
+	            return file.getAbsolutePath();
 	        } else {
 	            //errorWindow("Ha);
 	        }
@@ -455,6 +455,19 @@ public class PresentationManager
 		if (path != null){
 			try {
 				SolutionManager.importSolutions(path);
+			} catch (Exception e) {
+				errorWindow(e.getMessage());
+			}
+		}
+	}
+
+	public static void importReproductions(String username) 
+	{
+		String path = openFileWindow(false);
+		if (path != null){
+			try {
+				System.out.println(path);
+				UserManager.importReproductions(path, username);
 			} catch (Exception e) {
 				errorWindow(e.getMessage());
 			}
