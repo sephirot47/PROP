@@ -94,5 +94,6 @@ public class ViewPanel extends JPanel {
 		ecanconsp.refresh();
 		hp.refresh();
 		csp.refresh();
+		ecp.refresh();
 	}
 }

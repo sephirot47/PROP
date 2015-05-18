@@ -11,6 +11,11 @@ public class SongManager
 {
 	private static Set<Song> songs = new HashSet<Song>();
     
+	public static final Set<Song> getSongs()
+	{
+		return songs;
+	}
+	
     public static void loadSongsFromDisk() throws Exception
     {
     	SongManager.getSongsFromDisk("data/songs/songs.txt");

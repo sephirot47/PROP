@@ -22,11 +22,14 @@ import java.awt.Font;
 import java.awt.Cursor;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.plaf.SliderUI;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.JSeparator;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GenerarLlistesPanel extends JPanel {
 
@@ -38,10 +41,13 @@ public class GenerarLlistesPanel extends JPanel {
 			labelSliderAutor = null;
 
 	private final ButtonGroup algorismeGroup = new ButtonGroup();
+	private JRadioButton Girvan, louvain, clique;
+	private JSlider sliderDuracio, sliderAny,sliderEstil, sliderPublic, sliderProximitat, sliderAutor;
 	
 	public GenerarLlistesPanel()
 	{
 		super();
+		setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		setPreferredSize(new Dimension(800, 600));
 		setLayout(null);
 		
@@ -103,7 +109,7 @@ public class GenerarLlistesPanel extends JPanel {
 		panelDuracio.add(lblCanonsAmbRelacio);
 		lblCanonsAmbRelacio.setFont(new Font("Dialog", Font.PLAIN, 12));
 		
-		final JSlider sliderDuracio = new JSlider();
+		 sliderDuracio = new JSlider();
 		sliderDuracio.setBounds(0, 40, 332, 16);
 		panelDuracio.add(sliderDuracio);
 		sliderDuracio.setMajorTickSpacing(1);
@@ -131,7 +137,7 @@ public class GenerarLlistesPanel extends JPanel {
 		lblCanonsAmbAnys.setBounds(5, 22, 374, 15);
 		panelAny.add(lblCanonsAmbAnys);
 		
-		final JSlider sliderAny = new JSlider();
+		 sliderAny = new JSlider();
 		sliderAny.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		sliderAny.setMinorTickSpacing(1);
 		sliderAny.setMaximum(10);
@@ -159,7 +165,7 @@ public class GenerarLlistesPanel extends JPanel {
 		lblCanonsAmbEstil.setBounds(5, 22, 374, 15);
 		panelEstil.add(lblCanonsAmbEstil);
 		
-		final JSlider sliderEstil = new JSlider();
+		 sliderEstil = new JSlider();
 		sliderEstil.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		sliderEstil.setMinorTickSpacing(1);
 		sliderEstil.setMaximum(10);
@@ -187,7 +193,7 @@ public class GenerarLlistesPanel extends JPanel {
 		lblCanonsAmbPublic.setBounds(5, 22, 374, 15);
 		panelPublic.add(lblCanonsAmbPublic);
 		
-		final JSlider sliderPublic = new JSlider();
+		 sliderPublic = new JSlider();
 		sliderPublic.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		sliderPublic.setMinorTickSpacing(1);
 		sliderPublic.setMaximum(10);
@@ -215,7 +221,7 @@ public class GenerarLlistesPanel extends JPanel {
 		lblCanonsEscoltadesNormalment.setBounds(5, 22, 374, 15);
 		panelProximitat.add(lblCanonsEscoltadesNormalment);
 		
-		final JSlider sliderProximitat = new JSlider();
+		 sliderProximitat = new JSlider();
 		sliderProximitat.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		sliderProximitat.setMinorTickSpacing(1);
 		sliderProximitat.setMaximum(10);
@@ -243,7 +249,7 @@ public class GenerarLlistesPanel extends JPanel {
 		lblCanonsAmbMateix.setBounds(5, 22, 374, 15);
 		panelAutor.add(lblCanonsAmbMateix);
 		
-		final JSlider sliderAutor = new JSlider();
+		 sliderAutor = new JSlider();
 		sliderAutor.setMinorTickSpacing(1);
 		sliderAutor.setMaximum(10);
 		sliderAutor.setMajorTickSpacing(1);
@@ -256,12 +262,16 @@ public class GenerarLlistesPanel extends JPanel {
 		panelAutor.add(labelSliderAutor);
 		
 		JButton btnGenerar = new JButton("Generar llista");
-		btnGenerar.setBounds(545, 443, 171, 25);
-		add(btnGenerar);
-		btnGenerar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnGenerar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				generateSolution();
 			}
 		});
+		btnGenerar.setBounds(545, 443, 171, 25);
+		add(btnGenerar);
+
 		
 		JPanel panelAlgorisme = new JPanel();
 		panelAlgorisme.setBounds(500, 38, 250, 125);
@@ -276,21 +286,21 @@ public class GenerarLlistesPanel extends JPanel {
 		add(lblAlgorisme);
 		
 
-		JRadioButton Girvan = new JRadioButton("Girvan Newman");
+		Girvan = new JRadioButton("Girvan Newman");
 		Girvan.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		Girvan.setSize(234, 20);
 		Girvan.setLocation(6, 7);
 		algorismeGroup.add(Girvan);
 		panelAlgorisme.add(Girvan);
 		
-		JRadioButton clique = new JRadioButton("Clique Percolation");
+		clique = new JRadioButton("Clique Percolation");
 		clique.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		clique.setLocation(6, 48);
 		clique.setSize(234, 20);
 		algorismeGroup.add(clique);
 		panelAlgorisme.add(clique);
 		
-		JRadioButton louvain = new JRadioButton("Louvain");
+		louvain = new JRadioButton("Louvain");
 		louvain.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		louvain.setLocation(6, 90);
 		louvain.setSize(234, 20);
@@ -352,5 +362,27 @@ public class GenerarLlistesPanel extends JPanel {
 					labelSliderAutor.setText( String.valueOf(sliderAutor.getValue()) );
 			}
 		});
+	}
+	
+	private void generateSolution()
+	{
+		char algorisme = '-';
+		if(louvain.isSelected()) algorisme = 'L';
+		else if(clique.isSelected()) algorisme = 'C';
+		else if(Girvan.isSelected()) algorisme = 'G';
+		else 
+		{
+			PresentationManager.errorWindow("Selecciona un algorisme primer!");
+			return;
+		}
+		
+		int durationP = sliderDuracio.getValue();
+		int yearP = sliderAny.getValue();
+		int styleP = sliderEstil.getValue();
+		int publicP = sliderPublic.getValue();
+		int proximityP = sliderProximitat.getValue();
+		int authorP = sliderAutor.getValue();
+		
+		PresentationManager.generateSolution(algorisme, durationP, yearP, styleP, publicP, proximityP, authorP);
 	}
 }

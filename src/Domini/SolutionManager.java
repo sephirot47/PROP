@@ -13,6 +13,7 @@ import Persistencia.FileManager;
 public class SolutionManager 
 {
 	private static ArrayList<SongSolution> solutions = new ArrayList<SongSolution>();
+	private static String lastGeneratedSolutionId = "";
 	
 	public static void loadSolutionsFromDisk() throws Exception
 	{
@@ -65,7 +66,7 @@ public class SolutionManager
 	
 	private static SongSolution getSolutionFromDate(String date)
 	{
-		for(SongSolution s : solutions) if(s.getId().equals(date)) return s;
+		for(SongSolution s : solutions) { System.out.println(s.getId()); if(s.getId().equals(date)) return s; }
 		return null;
 	}
 	
@@ -247,5 +248,52 @@ public class SolutionManager
 			}
 		}
 		return result;
+	}
+	
+	public static void discardLastGeneratedSoution()
+	{
+		for(SongSolution s : solutions)
+		{
+			if( s.getId().equals(lastGeneratedSolutionId) )
+			{
+				lastGeneratedSolutionId = "";
+				solutions.remove(s);
+				return;
+			}
+		}
+	}
+
+	public static void setLastGeneratedSolution(SongSolution sol)
+	{
+		lastGeneratedSolutionId = sol.getId();
+		solutions.add(sol);
+	}
+
+	public static void removeSolutionList(String solutionId, int listIndex) 
+	{
+		SongSolution sol = getSolutionFromDate(solutionId);
+		System.out.println("Remove solution list: " + solutionId + ", " + listIndex);
+		if(sol != null)
+			sol.removeCommunity( sol.getCommunities().get(listIndex) );
+	}
+
+	public static void removeSolutionSong(String solutionId, String songAuthor, String songTitle) 
+	{
+		SongSolution sol = getSolutionFromDate(solutionId);
+		if(sol == null) return;
+		
+		ArrayList<Community> communities = sol.getCommunities();
+		for(Community c : communities)
+		{
+			for(Node n : c.getCommunity())
+			{
+				Song s = (Song)n;
+				if(s.getAuthor().equals(songAuthor) && s.getTitle().equals(songTitle))
+				{
+					c.deleteNode(n.getId());
+					return;
+				}
+			}
+		}
 	}
 }

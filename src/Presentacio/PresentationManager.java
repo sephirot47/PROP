@@ -9,6 +9,7 @@ import java.util.Stack;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Domini.GraphManager;
 import Domini.Pair;
 import Domini.SolutionManager;
 import Domini.SongManager;
@@ -109,6 +110,21 @@ public class PresentationManager
 		goToCard(ConsultarSolucioPanel.class.getSimpleName());
 	}
 	
+	public static void goToEditarSolucioPanel(String lastGeneratedSolutionId)
+	{
+		EditarSolucioPanel.setCurrentSolutionDate(lastGeneratedSolutionId);
+		goToCard(EditarSolucioPanel.class.getSimpleName());
+	}
+	
+	public static void removeSolutionList(String solutionId, int listIndex)
+	{
+		SolutionManager.removeSolutionList(solutionId, listIndex);
+	}
+	
+	public static void removeSolutionSong(String solutionId, String songAuthor, String songTitle)
+	{
+		SolutionManager.removeSolutionSong(solutionId, songAuthor, songTitle);
+	}
 	//////////////////////////////////////
 	
 	
@@ -346,5 +362,17 @@ public class PresentationManager
 	public static ArrayList<ArrayList<String>> getSolutionCommunities(String solutionDate) 
 	{
 		return SolutionManager.getSolutionCommunities(solutionDate);
+	}
+
+	public static void generateSolution(char algorisme, int durationP, int yearP, int styleP, int publicP, int proximityP, int authorP) 
+	{
+		String id = "";
+		try 
+		{ 
+			 id = GraphManager.generateSolution(algorisme, durationP, yearP, styleP, publicP, proximityP, authorP); 
+		}
+		catch(Exception e) { errorWindow(e.getMessage()); return; }
+		
+		goToEditarSolucioPanel(id);
 	}
 }
