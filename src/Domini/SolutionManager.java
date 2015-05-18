@@ -305,4 +305,11 @@ public class SolutionManager
 		saveSolution(s);
 		lastGeneratedSolutionId = "";
 	}
+
+	public static void importSolutions(String path) throws Exception
+	{
+		ArrayList<SongSolution> importedSolutions = getSolutions(path);
+		solutions.addAll(importedSolutions);
+		for(SongSolution s : importedSolutions) saveSolution(s);
+	}
 }

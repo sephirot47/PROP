@@ -50,6 +50,14 @@ public class HistorialPanel extends JPanel
 		scrollPane.setViewportView(solutionsList);
 		
 		JButton btnImport = new JButton("Importar d'un fitxer");
+		btnImport.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				PresentationManager.importSolutions();
+				refresh();
+			}
+		});
 		btnImport.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnImport.setBounds(72, 480, 232, 23);
 		add(btnImport);

@@ -447,6 +447,17 @@ public class PresentationManager
 				errorWindow(e.getMessage());
 			}
 		}
-		
+	}
+
+	public static void importSolutions() 
+	{
+		String path = openFileWindow(true);
+		if (path != null){
+			try {
+				SolutionManager.importSolutions(path);
+			} catch (Exception e) {
+				errorWindow(e.getMessage());
+			}
+		}
 	}
 }

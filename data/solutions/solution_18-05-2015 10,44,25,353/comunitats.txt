@@ -1,24 +1,24 @@
 0
-(AAA, BBB)
+(AAA,  BBB)
 1
-(x, y)
+(x,  y)
 2
-(SoyTanSutil, tramboliko)
+(SoyTanSutil,  tramboliko)
 3
-(AC/DC, Hells Bells)
+(AC/DC,  Hells Bells)
 4
-(XXX, YYY22)
+(XXX,  YYY22)
 5
-(x2, y)
+(x2,  y)
 6
-(x234, y)
+(x234,  y)
 7
-(XXX, YYY)
+(XXX,  YYY)
 8
-(AC/DC, Highway to mec)
+(AC/DC,  Highway to mec)
 9
-(x23, y)
+(x23,  y)
 10
-(asd, sdf)
+(asd,  sdf)
 11
-(cfghfghf, ghghj)
+(cfghfghf,  ghghj)
