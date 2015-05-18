@@ -243,7 +243,7 @@ public class EstadistiquesPanel extends JPanel
 				if(alg != "Tots"){
 					XYSeries serie = new XYSeries(alg);			
 					for(int i = 0; i < dadesinfo.get(0).size(); i++){						
-							 serie.add(dadesinfo.get(0).get(i).getSecond(),dadesinfo.get(0).get(i).getFirst());
+							 serie.add(dadesinfo.get(0).get(i).getFirst()/1000,dadesinfo.get(0).get(i).getSecond());
 							 
 					}
 					dades.addSeries(serie);
