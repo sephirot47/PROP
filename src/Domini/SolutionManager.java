@@ -268,7 +268,7 @@ public class SolutionManager
 	public static void setLastGeneratedSolution(SongSolution sol)
 	{
 		lastGeneratedSolutionId = sol.getId();
-		solutions.add(sol);
+		addSolution(sol);
 	}
 
 	public static void removeSolutionList(String solutionId, int listIndex) 
@@ -306,10 +306,23 @@ public class SolutionManager
 		lastGeneratedSolutionId = "";
 	}
 
+	public static void addSolution(SongSolution solution)
+	{
+		for(SongSolution s : solutions)
+		{
+			if(solution.getId().equals(s.getId())) return;
+		}
+		
+		solutions.add(solution);
+	}
+	
 	public static void importSolutions(String path) throws Exception
 	{
 		ArrayList<SongSolution> importedSolutions = getSolutions(path);
-		solutions.addAll(importedSolutions);
-		for(SongSolution s : importedSolutions) saveSolution(s);
+		for(SongSolution s : importedSolutions)
+		{
+			addSolution(s);
+			saveSolution(s);
+		}
 	}
 }
