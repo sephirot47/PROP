@@ -7,6 +7,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.axis.*;
 import org.jfree.data.xy.*;
+
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,7 +15,9 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import Domini.Pair;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -22,8 +25,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Panel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -205,8 +213,6 @@ public class EstadistiquesPanel extends JPanel
 	public void grafiques(boolean algoritme, boolean forma, boolean tipus, String alg) {
 		
 		ChartPanel panel = null;
-		
-		//grafica.add(vuit);
 		
 		if(algoritme && forma && tipus){	
 			grafica.removeAll();

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
@@ -45,8 +47,42 @@ public class SolutionManager
 			}
 		}
 		
+		Dades.sort(new Comparator<Pair<Double,Integer>>(){
+
+			@Override
+			public int compare(Pair<Double, Integer> arg0,
+					Pair<Double, Integer> arg1) {
+				// TODO Auto-generated method stub
+				return arg0.getSecond().toString().compareTo(arg1.getSecond().toString());
+			}
+			
+		});
+		ArrayList<Pair<Double,Integer>> sorted = new ArrayList<Pair<Double,Integer>>();
+		if(Dades.size() > 1){
+			
+			Pair<Double,Integer> n = Dades.get(0);
+			int count = 1;
+			for(int i = 1; i < Dades.size(); i++){
+				if(n.getSecond() == Dades.get(i).getSecond()){
+					n.setFirst(n.getFirst() + Dades.get(i).getFirst());
+					count++;
+				}
+				else{
+					n.setFirst(n.getFirst()/count);
+					sorted.add(n);
+					count = 1;
+					n = Dades.get(i);
+				}
+			}
+			if(count != 1){
+				n.setFirst(n.getFirst()/count);
+				sorted.add(n);
+			}
+			if(Dades.get(Dades.size()-1).getSecond() != Dades.get(Dades.size()-2).getSecond()) sorted.add(Dades.get(Dades.size()-1));
+		}
+		else sorted = Dades;
 		
-		return Dades;
+		return sorted;
 	}
 	
 	private static SongSolution getSolutionFromDate(String date)
