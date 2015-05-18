@@ -66,7 +66,7 @@ public class SolutionManager
 	
 	private static SongSolution getSolutionFromDate(String date)
 	{
-		for(SongSolution s : solutions) { System.out.println(s.getId()); if(s.getId().equals(date)) return s; }
+		for(SongSolution s : solutions) { if(s.getId().equals(date)) return s; }
 		return null;
 	}
 	
@@ -249,7 +249,7 @@ public class SolutionManager
 		}
 		return result;
 	}
-	
+
 	public static void discardLastGeneratedSoution()
 	{
 		for(SongSolution s : solutions)
@@ -272,9 +272,9 @@ public class SolutionManager
 	public static void removeSolutionList(String solutionId, int listIndex) 
 	{
 		SongSolution sol = getSolutionFromDate(solutionId);
-		System.out.println("Remove solution list: " + solutionId + ", " + listIndex);
-		if(sol != null)
+		if(sol != null) {
 			sol.removeCommunity( sol.getCommunities().get(listIndex) );
+		}
 	}
 
 	public static void removeSolutionSong(String solutionId, String songAuthor, String songTitle) 
@@ -295,5 +295,12 @@ public class SolutionManager
 				}
 			}
 		}
+	}
+
+	public static void saveLastGeneratedSolution() throws Exception
+	{
+		SongSolution s = getSolutionFromDate(lastGeneratedSolutionId);
+		saveSolution(s);
+		lastGeneratedSolutionId = "";
 	}
 }

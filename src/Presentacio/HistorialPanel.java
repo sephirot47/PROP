@@ -13,11 +13,13 @@ import javax.swing.border.LineBorder;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JSeparator;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -141,9 +143,11 @@ public class HistorialPanel extends JPanel
 	
 	public void refresh()
 	{
-		PresentationManager.loadSolutionsFromDisk();
+		PresentationManager.discardLastGeneratedSolution();
 		
 		ArrayList<String> solutionDates = PresentationManager.getSolutionDates();
+		Collections.sort(solutionDates);
+		
 		DefaultListModel dlm = new DefaultListModel();
 		dlm.clear();
 		for(String date : solutionDates) 

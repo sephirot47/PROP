@@ -15,6 +15,10 @@ import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ListSelectionModel;
+
+import Domini.SolutionManager;
+
 public class EditarSolucioPanel extends JPanel 
 {
 	private static ArrayList<ArrayList<String>> currentSolutionLists = new ArrayList<ArrayList<String>>();
@@ -40,6 +44,7 @@ public class EditarSolucioPanel extends JPanel
 		add(scrollPane);
 		
 		listsList = new JList();
+		listsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listsList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) 
 			{
@@ -83,6 +88,16 @@ public class EditarSolucioPanel extends JPanel
 					String songAuthor = line.split(",")[0].trim();
 					String songTitle = line.split(",")[1].trim();
 					PresentationManager.removeSolutionSong(currentSolutionDate, songAuthor, songTitle);
+					
+					refresh();
+					for(int i = 0; i < currentSolutionLists.size(); ++i)
+					{
+						if(currentSolutionLists.get(i).size() <= 0)
+						{
+							PresentationManager.removeSolutionList(currentSolutionDate, i);
+							break;
+						}
+					}
 					refresh();
 				}
 			}
@@ -102,6 +117,14 @@ public class EditarSolucioPanel extends JPanel
 		add(btnViewGraph);
 		
 		JButton buttonSaveSolution = new JButton("Desar solucio");
+		buttonSaveSolution.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				PresentationManager.saveLastGeneratedSolution();
+				PresentationManager.goBack();
+			}
+		});
 		buttonSaveSolution.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonSaveSolution.setBounds(397, 450, 265, 66);
 		add(buttonSaveSolution);
@@ -115,13 +138,16 @@ public class EditarSolucioPanel extends JPanel
 	
 	public void refresh()
 	{
+		System.out.println("REFRESH esp");
+		currentSolutionLists = PresentationManager.getSolutionCommunities(currentSolutionDate);
+		
 		DefaultListModel dlm = new DefaultListModel();
 		dlm.clear();
 		int i = 0;
 		for(ArrayList<String> list : currentSolutionLists) 
 			dlm.addElement("Llista " + String.valueOf(++i));
 		listsList.setModel(dlm);
-		//if(dlm.getSize() > 0) listsList.setSelectedIndex(0);
+
 		if(listsList.getSelectedIndex() == -1) songsList.setModel(new DefaultListModel());
 		else populateSongList(listsList.getSelectedIndex());
 	}
@@ -132,6 +158,5 @@ public class EditarSolucioPanel extends JPanel
 		ArrayList<String> list = currentSolutionLists.get(listIndex);
 		for(String song : list) dlm.addElement(song);
 		songsList.setModel(dlm);
-		//if(dlm.getSize() > 0) songsList.setSelectedIndex(0);
 	}
 }

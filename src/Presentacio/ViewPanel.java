@@ -24,9 +24,9 @@ public class ViewPanel extends JPanel {
 	private CreditsPanel credp;
 	private NouUsuariPanel nup;
 	private EditarUsuarisPanel edup;
-	private EditarSolucioPanel ecp;
+	private EditarSolucioPanel esp;
 	private NovaCancoPanel ncp;
-	private EditarCanconsPanel ecanconsp;
+	private EditarCanconsPanel ecp;
 	private HistorialPanel hp;
 	private ConsultarSolucioPanel csp;
 	
@@ -67,9 +67,9 @@ public class ViewPanel extends JPanel {
 		credp = new CreditsPanel();
 		nup = new NouUsuariPanel();
 		edup= new EditarUsuarisPanel();
-		ecp = new EditarSolucioPanel();
+		esp = new EditarSolucioPanel();
 		ncp = new NovaCancoPanel();
-		ecanconsp = new EditarCanconsPanel();
+		ecp = new EditarCanconsPanel();
 		hp = new HistorialPanel();
 		csp = new ConsultarSolucioPanel();
 		
@@ -80,20 +80,20 @@ public class ViewPanel extends JPanel {
 		cardContainer.add(credp, CreditsPanel.class.getSimpleName());
 		cardContainer.add(nup, NouUsuariPanel.class.getSimpleName());
 		cardContainer.add(edup, EditarUsuarisPanel.class.getSimpleName());
-		cardContainer.add(ecp, EditarSolucioPanel.class.getSimpleName());
+		cardContainer.add(esp, EditarSolucioPanel.class.getSimpleName());
 		cardContainer.add(ncp, NovaCancoPanel.class.getSimpleName());
-		cardContainer.add(ecanconsp, EditarCanconsPanel.class.getSimpleName());
+		cardContainer.add(ecp, EditarCanconsPanel.class.getSimpleName());
 		cardContainer.add(hp, HistorialPanel.class.getSimpleName());
 		cardContainer.add(csp, ConsultarSolucioPanel.class.getSimpleName());
 	}
 	
-	public void refreshInsidePanels()
+	public void refreshInsidePanels(String cardName)
 	{
-		gcp.refreshSongList();
-		gup.refreshUserList();
-		ecanconsp.refresh();
-		hp.refresh();
-		csp.refresh();
-		ecp.refresh();
+		if(cardName.equals(GestioCanconsPanel.class.getSimpleName())) gcp.refreshSongList();
+		else if(cardName.equals(GestioUsuarisPanel.class.getSimpleName())) gup.refreshUserList();
+		else if(cardName.equals(EditarCanconsPanel.class.getSimpleName())) ecp.refresh();
+		else if(cardName.equals(HistorialPanel.class.getSimpleName())) hp.refresh();
+		else if(cardName.equals(ConsultarSolucioPanel.class.getSimpleName())) csp.refresh();
+		else if(cardName.equals(EditarSolucioPanel.class.getSimpleName())) esp.refresh();
 	}
 }

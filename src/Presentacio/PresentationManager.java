@@ -47,6 +47,7 @@ public class PresentationManager
 		PresentationManager.goToCard(MainPanel.class.getSimpleName());
 		PresentationManager.loadUsersFromDisk();
 		PresentationManager.loadSongsFromDisk();
+		PresentationManager.loadSolutionsFromDisk();
 	}
 	
 	
@@ -125,6 +126,29 @@ public class PresentationManager
 	{
 		SolutionManager.removeSolutionSong(solutionId, songAuthor, songTitle);
 	}
+
+	public static ArrayList<ArrayList<String>> getSolutionCommunities(String solutionDate) 
+	{
+		return SolutionManager.getSolutionCommunities(solutionDate);
+	}
+
+	public static void generateSolution(char algorisme, int durationP, int yearP, int styleP, int publicP, int proximityP, int authorP) 
+	{
+		String id = "";
+		try 
+		{ 
+			 id = GraphManager.generateSolution(algorisme, durationP, yearP, styleP, publicP, proximityP, authorP); 
+		}
+		catch(Exception e) { errorWindow(e.getMessage()); return; }
+		
+		goToEditarSolucioPanel(id);
+	}
+	
+	public static void discardLastGeneratedSolution()
+	{
+		SolutionManager.discardLastGeneratedSoution();
+	}
+	
 	//////////////////////////////////////
 	
 	
@@ -350,29 +374,24 @@ public class PresentationManager
 			CardLayout cl = (CardLayout) (p.getLayout());
 			cl.show(p, ViewPanel.class.getSimpleName());
 
-			ViewPanel.viewPanel.refreshInsidePanels();
+			ViewPanel.viewPanel.refreshInsidePanels(cardName);
 			p = (JPanel) ViewPanel.viewPanel.cardContainer;
 			cl = (CardLayout) (p.getLayout());
 			cl.show(p, cardName);
 		}
-		
 	}
 	//////////////////////////////////////////////////
 
-	public static ArrayList<ArrayList<String>> getSolutionCommunities(String solutionDate) 
+	public static void saveLastGeneratedSolution() 
 	{
-		return SolutionManager.getSolutionCommunities(solutionDate);
-	}
-
-	public static void generateSolution(char algorisme, int durationP, int yearP, int styleP, int publicP, int proximityP, int authorP) 
-	{
-		String id = "";
 		try 
-		{ 
-			 id = GraphManager.generateSolution(algorisme, durationP, yearP, styleP, publicP, proximityP, authorP); 
+		{
+			SolutionManager.saveLastGeneratedSolution();
+			PresentationManager.infoWindow("Solucio desada correctament");
+		} 
+		catch (Exception e)
+		{
+			errorWindow( e.getMessage() );
 		}
-		catch(Exception e) { errorWindow(e.getMessage()); return; }
-		
-		goToEditarSolucioPanel(id);
 	}
 }

@@ -262,6 +262,7 @@ public class GenerarLlistesPanel extends JPanel {
 		panelAutor.add(labelSliderAutor);
 		
 		JButton btnGenerar = new JButton("Generar llista");
+		btnGenerar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnGenerar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 
