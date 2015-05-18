@@ -5,47 +5,62 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Set;
 
 import Persistencia.FileManager;
 
 public class SolutionManager 
 {
-	public static ArrayList<Double[]> getInfos(String SolutionsDir) throws Exception
+	private static ArrayList<SongSolution> solutions = new ArrayList<SongSolution>();
+	private static String lastGeneratedSolutionId = "";
+	
+	public static void loadSolutionsFromDisk() throws Exception
 	{
-		ArrayList<Double[]> result = new ArrayList<Double[]>();
-		
-		ArrayList<SongSolution> solutions = new ArrayList<SongSolution>();
-		solutions = getSolutions(SolutionsDir);
-		File baseDir = new File(SolutionsDir);
-		
-		Double[] Girvan = new Double[(baseDir.listFiles()).length];
-		Double[] Clique = new Double[(baseDir.listFiles()).length];
-		Double[] Louvain = new Double[(baseDir.listFiles()).length];
-		
-		for(int i = 0; i < (baseDir.listFiles()).length; i++)
+		try 
 		{
-			if(solutions.get(i).getAlg() == 'G'){
-				Girvan[i] = solutions.get(i).getTime();
-				Clique[i] = -1.0;
-				Louvain[i] = -1.0;
-			}
-			else if(solutions.get(i).getAlg() == 'L'){
-				Girvan[i] = -1.0;
-				Clique[i] = solutions.get(i).getTime();
-				Louvain[i] = -1.0;
-			}
-			else
-			{
-				Girvan[i] = -1.0;
-				Clique[i] = -1.0;
-				Louvain[i] = solutions.get(i).getTime();
-			}
-			
+			solutions = getSolutions("data/solutions");
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			throw new Exception("No es troba el directori de solucions('data/solutions')");
 		}
-		
+	}
+	
+	
+	
+	private static SongSolution getSolutionFromDate(String date)
+	{
+		for(SongSolution s : solutions) { if(s.getId().equals(date)) return s; }
+		return null;
+	}
+	
+	public static ArrayList<String> getCurrentSolutionsDates()
+	{
+		ArrayList<String> result = new ArrayList<String>();
+		for(SongSolution s : solutions) result.add( s.getId() );
 		return result;
 	}
+
+	public static double getSolutionGenTime(String date)
+	{
+		SongSolution sol = getSolutionFromDate(date); 
+		return sol == null ? 0.1 : sol.getTime();
+	}
+
+	public static char getSolutionAlgorithm(String date)
+	{
+		SongSolution sol = getSolutionFromDate(date); 
+		return sol == null ? '-' : sol.getAlg();
+	}
+	
+	public static int getSolutionNumberOfCommunities(String date)
+	{
+		SongSolution sol = getSolutionFromDate(date); 
+		return sol == null ? 0 : sol.getNumCommunities();
+	}
+	
 	public static ArrayList<SongSolution> getSolutions(String solutionsDir) throws Exception 
 	{
 		ArrayList<SongSolution> result = new ArrayList<SongSolution>();
@@ -53,43 +68,47 @@ public class SolutionManager
 		File baseDir = new File(solutionsDir);
 		File[] solutions = baseDir.listFiles();
 
-		for (File dir : solutions) {
-
+		for (File dir : solutions) 
+		{
 			// Legir el graph
 			Graph<Song> graph = GraphManager.getGraph(dir.getPath() + "/entrada.txt");
 
 			// Llegir les comunitats
 			ArrayList<String> resultLines = FileManager.loadData(dir.getPath() + "/comunitats.txt");
-			Solution comunities = new Solution();
+			Solution solution = new Solution();
 			Community com = new Community();
 
-			for (String line : resultLines) {
-				if (line.equals("0"))
-					continue;
+			for (String line : resultLines) 
+			{
+				if (line.equals("0")) continue;
 				if (line.charAt(0) == '(') {
 					String author = line.substring(1, line.indexOf(','));
 					String title = line.substring(line.indexOf(',') + 1, line.indexOf(')'));
 					com.addNode(new Song(author, title));
 				} else {
-					comunities.addCommunity(com);
+					solution.addCommunity(com);
 					com = new Community();
 				}
 			}
-			comunities.addCommunity(com);
-
+			if(com.getNumberOfNodes() > 0) solution.addCommunity(com);
+			
 			// Llegir info
 			ArrayList<String> infoLines = FileManager.loadData(dir.getPath() + "/info.txt");
-
-			String id = new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date());
-			result.add(new SongSolution(graph, comunities, Double.parseDouble(infoLines.get(2)), infoLines.get(0).charAt(0)));
+			String id = dir.getName().substring(dir.getName().indexOf("_") + 1);
+			
+			solution.setTime(Double.parseDouble(infoLines.get(2)));
+			solution.setAlg(infoLines.get(0).charAt(0));
+			solution.setId(id);
+			
+			result.add(new SongSolution(graph, solution));
 		}
 
 		return result;
 	}
 
-	public static void saveSolution(SongSolution s, String id) throws IOException 
+	public static void saveSolution(SongSolution s) throws IOException 
 	{
-		//String date = new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date());
+		String id = s.getId();
 		String filedir = "data/solutions/solution_" + id + "/";
 
 		// arxiu de Graph(entrada)
@@ -99,13 +118,11 @@ public class SolutionManager
 		SolutionManager.saveCommunitiesSolution(filedir, s);
 
 		// arxiu de info extra
-		{
-			ArrayList<String> lines = new ArrayList<String>();
-			lines.add(String.valueOf(s.getAlg())); // Alg usat
-			lines.add(String.valueOf(s.getEntrada().getAllNodes().size())); // Nombre de cancons processades
-			lines.add(String.valueOf(s.getTime())); // Temps que ha tardat a generar la solucio
-			FileManager.saveData(filedir + "info.txt", lines);
-		}
+		ArrayList<String> lines = new ArrayList<String>();
+		lines.add(String.valueOf(s.getAlg())); // Alg usat
+		lines.add(String.valueOf(s.getEntrada().getAllNodes().size())); // Nombre de cancons processades
+		lines.add(String.valueOf(s.getTime())); // Temps que ha tardat a generar la solucio
+		FileManager.saveData(filedir + "info.txt", lines);
 	}
 
 
@@ -122,7 +139,6 @@ public class SolutionManager
     		
     		songsArray.add(s);
     	}
-    	
     	
     	Set<Edge> edges = entrada.getAllEdges();
     	for(Edge e : edges)
@@ -164,8 +180,15 @@ public class SolutionManager
     	}
 		FileManager.saveData(filedir + "comunitats.txt",  lines);
     }
-    
-	public static void removeSolution(String nomSolucio) throws IOException 
+
+	public static void removeSolutionFromDisk(String date) throws IOException 
+	{
+		SongSolution s = getSolutionFromDate(date);
+		if(s != null) solutions.remove(s);
+		removeSolution("solution_" + date);
+	}
+	
+	private static void removeSolution(String nomSolucio) throws IOException 
 	{
 		File communities = new File("data/solutions/" + nomSolucio + "/comunitats.txt");
 		File entrada = new File("data/solutions/" + nomSolucio + "/entrada.txt");
@@ -176,6 +199,131 @@ public class SolutionManager
 		info.delete();
 		File folder = new File("data/solutions/" + nomSolucio);
 		folder.delete();
+	}
 
+	public static ArrayList<ArrayList<String>> getSolutionCommunities(String solutionDate) 
+	{
+		ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+		SongSolution s = getSolutionFromDate(solutionDate);
+		if(s != null)
+		{
+			ArrayList<Community> communities = s.getCommunities();
+			for(Community c : communities)
+			{
+				ArrayList<String> cStrings = new ArrayList<String>();
+				for(Node n : c.getCommunity()) 	cStrings.add(n.getId());
+				result.add(cStrings);
+			}
+		}
+		return result;
+	}
+
+	public static void discardLastGeneratedSoution()
+	{
+		for(SongSolution s : solutions)
+		{
+			if( s.getId().equals(lastGeneratedSolutionId) )
+			{
+				lastGeneratedSolutionId = "";
+				solutions.remove(s);
+				return;
+			}
+		}
+	}
+
+	public static void setLastGeneratedSolution(SongSolution sol)
+	{
+		lastGeneratedSolutionId = sol.getId();
+		addSolution(sol);
+	}
+
+	public static void removeSolutionList(String solutionId, int listIndex) 
+	{
+		SongSolution sol = getSolutionFromDate(solutionId);
+		if(sol != null) {
+			sol.removeCommunity( sol.getCommunities().get(listIndex) );
+		}
+	}
+
+	public static void removeSolutionSong(String solutionId, String songAuthor, String songTitle) 
+	{
+		SongSolution sol = getSolutionFromDate(solutionId);
+		if(sol == null) return;
+		
+		ArrayList<Community> communities = sol.getCommunities();
+		for(Community c : communities)
+		{
+			for(Node n : c.getCommunity())
+			{
+				Song s = (Song)n;
+				if(s.getAuthor().equals(songAuthor) && s.getTitle().equals(songTitle))
+				{
+					c.deleteNode(n.getId());
+					return;
+				}
+			}
+		}
+	}
+
+	public static void saveLastGeneratedSolution() throws Exception
+	{
+		SongSolution s = getSolutionFromDate(lastGeneratedSolutionId);
+		saveSolution(s);
+		lastGeneratedSolutionId = "";
+	}
+
+	public static void addSolution(SongSolution solution)
+	{
+		for(SongSolution s : solutions)
+		{
+			if(solution.getId().equals(s.getId())) return;
+		}
+		
+		solutions.add(solution);
+	}
+	
+	public static void importSolutions(String path) throws Exception
+	{
+		ArrayList<SongSolution> importedSolutions = getSolutions(path);
+		for(SongSolution s : importedSolutions)
+		{
+			addSolution(s);
+			saveSolution(s);
+		}
+	}
+	public static ArrayList<Double[]> getInfos(String SolutionsDir) throws Exception
+	{
+		ArrayList<Double[]> result = new ArrayList<Double[]>();
+		
+		ArrayList<SongSolution> solutions = new ArrayList<SongSolution>();
+		solutions = getSolutions(SolutionsDir);
+		File baseDir = new File(SolutionsDir);
+		
+		Double[] Girvan = new Double[(baseDir.listFiles()).length];
+		Double[] Clique = new Double[(baseDir.listFiles()).length];
+		Double[] Louvain = new Double[(baseDir.listFiles()).length];
+		
+		for(int i = 0; i < (baseDir.listFiles()).length; i++)
+		{
+			if(solutions.get(i).getAlg() == 'G'){
+				Girvan[i] = solutions.get(i).getTime();
+				Clique[i] = -1.0;
+				Louvain[i] = -1.0;
+			}
+			else if(solutions.get(i).getAlg() == 'L'){
+				Girvan[i] = -1.0;
+				Clique[i] = solutions.get(i).getTime();
+				Louvain[i] = -1.0;
+			}
+			else
+			{
+				Girvan[i] = -1.0;
+				Clique[i] = -1.0;
+				Louvain[i] = solutions.get(i).getTime();
+			}
+			
+		}
+		
+		return result;
 	}
 }
