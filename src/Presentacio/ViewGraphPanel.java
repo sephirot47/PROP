@@ -1,6 +1,7 @@
 package Presentacio;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Paint;
 import java.awt.Shape;
@@ -32,29 +33,87 @@ import org.apache.commons.collections15.Transformer;
 
 import Domini.Pair;
 
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+import java.awt.Font;
+
 public class ViewGraphPanel extends JPanel 
 {
 	private static VisualizationViewer vv;
 	private static Graph g; //GRAF de JUNG, no el nostre de DOMINI
 	private static SpringLayout graphLayout;
+	private JLabel labelNodeName;
 	
 	public ViewGraphPanel() 
 	{
 		setLayout(null);
 
 		JPanel scrollPane = new JPanel();
-		scrollPane.setBounds(20, 20, 750, 550);
+		scrollPane.setBounds(20, 20, 750, 463);
 		add(scrollPane);
 
 		g = new UndirectedSparseGraph();
 		graphLayout = new SpringLayout(g);
 		graphLayout.setSize( new Dimension(550, 450) );
 		vv = new VisualizationViewer(graphLayout);
+		vv.setPreferredSize(new Dimension(600, 400));
 		
 		MutableTransformer modelTransformer = vv.getRenderContext().getMultiLayerTransformer().getTransformer(Layer.LAYOUT);
 		modelTransformer.setTranslate(20, 20);
 		
 		scrollPane.add(vv);
+		
+		labelNodeName = new JLabel("");
+		labelNodeName.setFont(new Font("Dialog", Font.PLAIN, 12));
+		labelNodeName.setBounds(256, 488, 452, 20);
+		add(labelNodeName);
+		
+		JLabel lblNodeSeleccionat = new JLabel("Canco seleccionada:");
+		lblNodeSeleccionat.setAlignmentX(1.0f);
+		lblNodeSeleccionat.setAlignmentY(1.0f);
+		lblNodeSeleccionat.setHorizontalTextPosition(SwingConstants.RIGHT);
+		lblNodeSeleccionat.setBounds(87, 488, 157, 20);
+		add(lblNodeSeleccionat);
+		vv.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) 
+			{
+				Pair<Float, Float> point = new Pair<Float, Float>( (float)e.getX(), (float)e.getY() );
+				Pair<String, Integer> vertex = getVertexFromPoint(point);
+				System.out.println(point.getFirst() + ", " + point.getSecond());
+				if(vertex != null)
+				{
+					labelNodeName.setText(vertex.getFirst());
+					vv.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				}
+				else
+				{
+					labelNodeName.setText("-----");
+					vv.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				}
+			}
+		});
+	}
+	
+	private static Pair<String, Integer> getVertexFromPoint(Pair<Float, Float> point)
+	{
+		float vertexDiameter = 20.0f;
+		if(g.getVertexCount() <= 0) return null;
+		
+		for(Object v : g.getVertices())
+		{
+			Pair<String, Integer> vertex = (Pair<String, Integer>) v;
+			float x = (float) graphLayout.getX(vertex) + vertexDiameter, 
+			      y = (float) graphLayout.getY(vertex) + vertexDiameter;
+			if(vertex.getFirst().contains("X")) System.out.println(x + "~~~" + y);
+			float distance = (float) Math.sqrt((x - point.getFirst()) * (x - point.getFirst()) + (y - point.getSecond()) * (y - point.getSecond()));
+			if(distance < vertexDiameter * 0.5f) return vertex;
+		}
+		return null;
 	}
 	
 	public static void setCurrentGraph(Pair<ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > , ArrayList< Pair<String, Integer> > > graphCommunities)
@@ -71,6 +130,7 @@ public class ViewGraphPanel extends JPanel
 		g = new UndirectedSparseGraph();
 		graphLayout.setGraph(g);
 		
+	
 		ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > graph = graphCommunities.getFirst();
 		ArrayList< Pair<String, Integer> > communities = graphCommunities.getSecond();
 		final int numCommunities = communities.size();
