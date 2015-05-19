@@ -47,6 +47,7 @@ public class SolutionManager
 			}
 		}
 		
+		/*
 		Dades.sort(new Comparator<Pair<Double,Integer>>(){
 
 			@Override
@@ -57,6 +58,8 @@ public class SolutionManager
 			}
 			
 		});
+		*/
+		
 		ArrayList<Pair<Double,Integer>> sorted = new ArrayList<Pair<Double,Integer>>();
 		if(Dades.size() > 1){
 			

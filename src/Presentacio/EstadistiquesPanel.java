@@ -1,6 +1,5 @@
 package Presentacio;
 
-
 import org.jfree.chart.*;
 import org.jfree.chart.renderer.xy.XYSplineRenderer;
 import org.jfree.chart.plot.PlotOrientation;
@@ -75,7 +74,7 @@ public class EstadistiquesPanel extends JPanel
 		add(panelRight, BorderLayout.EAST);
 		panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
 		
-		JButton btnEstadstiques = new JButton("Go to crèdits");
+		JButton btnEstadstiques = new JButton("Go to crï¿½dits");
 		btnEstadstiques.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

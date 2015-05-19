@@ -104,7 +104,7 @@ public class MainPanel extends JPanel {
 		credits.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PresentationManager.goToCard(CreditsPanel.class.getSimpleName());
+				PresentationManager.goToCard(ViewGraphPanel.class.getSimpleName());
 				//WarningDialog.show("Ostia!", "Estás mirando los créditos...");
 			}
 		});
