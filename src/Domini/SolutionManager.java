@@ -81,7 +81,7 @@ public class SolutionManager
 				n.setFirst(n.getFirst()/count);
 				sorted.add(n);
 			}
-			if(Dades.get(Dades.size()-1).getSecond() != Dades.get(Dades.size()-2).getSecond()) sorted.add(Dades.get(Dades.size()-1));
+			else if(Dades.get(Dades.size()-1).getSecond() != Dades.get(Dades.size()-2).getSecond()) sorted.add(Dades.get(Dades.size()-1));
 		}
 		else sorted = Dades;
 		

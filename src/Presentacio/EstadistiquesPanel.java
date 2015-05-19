@@ -24,16 +24,24 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JScrollPane;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
 import java.awt.Panel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import javax.swing.JTable;
 
 public class EstadistiquesPanel extends JPanel 
 {
@@ -41,33 +49,25 @@ public class EstadistiquesPanel extends JPanel
 	private final ButtonGroup metodes = new ButtonGroup();
 	private final ButtonGroup ym = new ButtonGroup();
 	private JPanel panelLeft = new JPanel();
-	private JLabel vuit = new JLabel("No hi ha dades");
+	
 	
 	private ArrayList<ArrayList<Pair<Double,Integer>>> dadesinfo = new ArrayList<ArrayList<Pair<Double,Integer>>>();
-	private Panel grafica = new Panel();
+	private JPanel grafica = new JPanel();
 	public EstadistiquesPanel()
 	{
 		super();
 		initComponents();
 	}
 	public void initComponents(){
-		
-		
-		vuit.setSize(30, 90);
-		vuit.setVisible(false);
+
 		panelLeft.setBorder(new EmptyBorder(30, 30, 30, 30));
-		add(panelLeft, BorderLayout.WEST);
-		
+		add(panelLeft, BorderLayout.WEST);		
 		
 		grafica.setPreferredSize(new Dimension(500, 500));
 		grafica.setMinimumSize(new Dimension(50, 50));
 		add(grafica);
 		grafica.setLayout(null);
-		
 		grafica.removeAll();
-		
-		
-		
 		
 		JPanel panelRight = new JPanel();
 		panelRight.setBorder(new EmptyBorder(40, 40, 40, 40));
@@ -89,6 +89,8 @@ public class EstadistiquesPanel extends JPanel
 		
 		Box left = Box.createVerticalBox();
 		
+		
+		
 		final JRadioButton Girvan = new JRadioButton("Newman-Girvan");
 		algorisme.add(Girvan);
 		left.add(Girvan);
@@ -109,7 +111,7 @@ public class EstadistiquesPanel extends JPanel
 		left.add(label);
 		
 		final JRadioButton Grafica = new JRadioButton("Grafica");
-		metodes.add(Grafica);
+		metodes.add(Grafica); 
 		left.add(Grafica);
 		
 		final JRadioButton taula = new JRadioButton("Taula");
@@ -135,31 +137,43 @@ public class EstadistiquesPanel extends JPanel
 
 		Girvan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				grafiques(Girvan.isSelected(), Grafica.isSelected(), nodes.isSelected(), "Girvan-Newman");
+				String met = "";
+				if(taula.isSelected()) met = "Taula";
+				else if(Grafica.isSelected()) met = "Grafica";
+				grafiques(Girvan.isSelected(), met, nodes.isSelected(), "Girvan-Newman");
 			}
 		});
 		
 		clique.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				grafiques(clique.isSelected(), Grafica.isSelected(), nodes.isSelected(), "Clique");
+				String met = "";
+				if(taula.isSelected()) met = "Taula";
+				else if(Grafica.isSelected()) met = "Grafica";
+				grafiques(clique.isSelected(), met, nodes.isSelected(), "Clique");
 			}
 		});
 		
 		louvain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				grafiques(louvain.isSelected(), Grafica.isSelected(), nodes.isSelected(), "Louvain");
+				String met = "";
+				if(taula.isSelected()) met = "Taula";
+				else if(Grafica.isSelected()) met = "Grafica";
+				grafiques(louvain.isSelected(), met, nodes.isSelected(), "Louvain");
 			}
 		});
 		
 		tots.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				grafiques(tots.isSelected(), Grafica.isSelected(), nodes.isSelected(), "Tots");
+				String met = "";
+				if(taula.isSelected()) met = "Taula";
+				else if(Grafica.isSelected()) met = "Grafica";
+				grafiques(tots.isSelected(), met, nodes.isSelected(), "Tots");
 			}
 		});
 		Grafica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String alg = "";
-				String met = "";
+				
 				boolean but = false;
 				if(Girvan.isSelected()){
 					alg = "Girvan-Newman";
@@ -173,19 +187,47 @@ public class EstadistiquesPanel extends JPanel
 					alg = "Clique";
 					but = true;
 				}
-				else{
+				else if(tots.isSelected()){
 					alg = "Tots";
 					but = true;
 				}
 
-				grafiques(but, true, nodes.isSelected(), alg);
+				grafiques(but, "Grafica", nodes.isSelected(), alg);
+			}
+		});
+		taula.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String alg = "";
+				
+				boolean but = false;
+				if(Girvan.isSelected()){
+					alg = "Girvan-Newman";
+					but = true;
+				}
+				else if(louvain.isSelected()){
+					alg = "Louvain";
+					but = true;
+				}
+				else if(clique.isSelected()){
+					alg = "Clique";
+					but = true;
+				}
+				else if(tots.isSelected()){
+					alg = "Tots";
+					but = true;
+				}
+
+				grafiques(but, "Taula", nodes.isSelected(), alg);
 			}
 		});
 		
 		nodes.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
-				String alg = "";		
+				String alg = "";
+				String met = "";
+				if(taula.isSelected()) met = "Taula";
+				else if(Grafica.isSelected()) met = "Grafica";
 				boolean but = false;
 				if(Girvan.isSelected()){
 					alg = "Girvan-Newman";
@@ -199,24 +241,24 @@ public class EstadistiquesPanel extends JPanel
 					alg = "Clique";
 					but = true;
 				}
-				else{
+				else if(tots.isSelected()){
 					alg = "Tots";
 					but = true;
 				}
-
-				grafiques(but, Grafica.isSelected(), true, alg);			
+				
+				grafiques(but, met, true, alg);			
 			}
 		});
 				
 	}
-	public void grafiques(boolean algoritme, boolean forma, boolean tipus, String alg) {
+	public void grafiques(boolean algoritme, String forma, boolean tipus, String alg) {
 		
 		ChartPanel panel = null;
-		
-		if(algoritme && forma && tipus){	
+		if(algoritme && forma.equals("Grafica") && tipus){	
 			grafica.removeAll();
 			
 			try {
+				grafica.removeAll();
 				dadesinfo.removeAll(dadesinfo);
 				if(alg != "Tots"){
 					dadesinfo.add(PresentationManager.getInfos(alg.charAt(0)));
@@ -244,58 +286,168 @@ public class EstadistiquesPanel extends JPanel
 				ValueAxis y = new NumberAxis();
 				
 				
+				
 				XYPlot plot;
 				if(alg != "Tots"){
-					XYSeries serie = new XYSeries(alg);			
-					for(int i = 0; i < dadesinfo.get(0).size(); i++){						
-							 serie.add(dadesinfo.get(0).get(i).getFirst()/1000,dadesinfo.get(0).get(i).getSecond());
+					XYSeries serie = new XYSeries(alg);
+					if(alg == "Louvain"){
+						for(int i = 0; i < dadesinfo.get(0).size(); i++){
+							serie.add(dadesinfo.get(0).get(i).getFirst()/100,dadesinfo.get(0).get(i).getSecond());
 							 
+						}
+					}else{	
+						for(int i = 0; i < dadesinfo.get(0).size(); i++){						
+							 serie.add(dadesinfo.get(0).get(i).getFirst()/1000000 ,dadesinfo.get(0).get(i).getSecond());
+							 
+						}
 					}
 					dades.addSeries(serie);
+					 
 				}
 				else{
+					
 					XYSeries serie = new XYSeries("Girvan-Newman");
 					XYSeries serie1 = new XYSeries("Clique");
 					XYSeries serie2 = new XYSeries("Louvain");
 					for(int x1 = 0; x1 < dadesinfo.size(); x1++){
 						for(int i = 0; i < dadesinfo.get(x1).size(); i++){
-							double n = dadesinfo.get(x1).get(i).getFirst()/1000;
+							double n = dadesinfo.get(x1).get(i).getFirst()/1000000;
 							if(x1 == 0)	serie.add(n,dadesinfo.get(x1).get(i).getSecond());							
 							if(x1 == 1)serie1.add(n,dadesinfo.get(x1).get(i).getSecond());
-							else serie2.add(n,dadesinfo.get(x1).get(i).getSecond());
+							else if(x1 == 2) serie2.add(dadesinfo.get(x1).get(i).getFirst()/100,dadesinfo.get(x1).get(i).getSecond());
 						}
 					}
-					if(!serie.isEmpty()) dades.addSeries(serie);
+					int count = 0;
+					if(!serie.isEmpty()){
+						dades.addSeries(serie);
+						count++;
+					}
 					
 					if(!serie1.isEmpty()) {
 						dades.addSeries(serie1);
-						renderer.setSeriesPaint(1, Color.GREEN);
+						renderer.setSeriesPaint(count, Color.GREEN);
+						count++;
 					}
 					if(!serie2.isEmpty()){
 						dades.addSeries(serie2);
-						renderer.setSeriesPaint(2, Color.BLUE);
+						renderer.setSeriesPaint(count, Color.BLUE);
 					}				
 				}
 				chart = ChartFactory.createXYLineChart(alg,"Temps","Nodes",dades,PlotOrientation.HORIZONTAL,true,false,false);
 				chart.setBackgroundPaint(Color.white);
 				plot =  chart.getXYPlot(); 
+				
+				
+				//PER TAL DE CANVIAR EL FORMAT DE LES Y
+				DecimalFormat newFormat = new DecimalFormat("0.00");
+				
+				XYPlot xyPlot = chart.getXYPlot();
+				ValueAxis domainAxis = xyPlot.getDomainAxis();
+
+	
+				((NumberAxis) domainAxis).setNumberFormatOverride(newFormat);
+				((NumberAxis) domainAxis).setTickUnit(new NumberTickUnit(0.1f));
+				
+				
+				plot.setDomainAxis(domainAxis);
+				
+				//color de la primera serie i tamany de la linia
 				renderer.setSeriesPaint(0, Color.RED);				
 				renderer.setSeriesStroke(0, new BasicStroke(1.0f));
 				plot.setRenderer(renderer);
 				
 				panel = new ChartPanel(chart);
-				panel.setBounds(5, 10, 410, 400);
+				panel.setBounds(5, 10, 500, 450);
 				 
 				grafica.add(panel);
 				grafica.repaint();
 				
 				
 			 }
-			 else
+			else
 			 {
 				grafica.repaint();
 			 }
 		} 
+		else if(algoritme && forma.equals("Taula") && tipus){
+			 
+			 try {
+					dadesinfo.removeAll(dadesinfo);
+					if(alg != "Tots"){
+						dadesinfo.add(PresentationManager.getInfos(alg.charAt(0)));
+					}
+					else{
+						dadesinfo.add(PresentationManager.getInfos('G'));
+						dadesinfo.add(PresentationManager.getInfos('C'));
+						dadesinfo.add(PresentationManager.getInfos('L'));
+					}
+				} catch (Exception e1) {
+
+					e1.printStackTrace();
+				}
+			 
+			 if(!alg.equals("Tots") && !dadesinfo.get(0).isEmpty()){
+				 String[] ColumNames = {
+						 "Temps","Nodes"
+				 };
+				 Object[][] fields = new String[dadesinfo.get(0).size()][2];	 
+				 for(int i = 0; i< dadesinfo.get(0).size(); i++){
+					 if(alg != "Louvain"){
+						 Double n = dadesinfo.get(0).get(i).getFirst()/1000000;
+						 fields[i][0] = n.toString();
+						 fields[i][1] = dadesinfo.get(0).get(i).getSecond().toString();
+					 }
+					 else{
+						 Double n = dadesinfo.get(0).get(i).getFirst()/100;
+						 fields[i][0] = n.toString();
+						 fields[i][1] = dadesinfo.get(0).get(i).getSecond().toString();
+					 }			
+				 }
+				 JTable table = new JTable(fields,ColumNames);
+				 grafica.removeAll();
+				 table.setBounds(10,10,500,400);
+				 
+				 grafica.add(table,BorderLayout.CENTER);
+				 //JScrollPane tableContainer = new JScrollPane(table);			     
+				 //grafica.add(tableContainer,BorderLayout.CENTER);
+			     grafica.repaint();
+			 }
+			 else if(!dadesinfo.get(0).isEmpty()){
+				 String[] ColumNames = {
+						 "Algorisme","Temps","Nodes"
+				 };
+				 String[] Algorisme={
+						 "Girvan-Newman","Clique","Louvain"
+				 };
+				 Object[][] fields = new String[dadesinfo.get(0).size() + dadesinfo.get(1).size() + dadesinfo.get(2).size()][3];
+				 int count = 0;
+
+				 for(int x1 = 0; x1 < dadesinfo.size(); x1++){
+					 for(int i = 0; i< dadesinfo.get(x1).size(); i++){
+						 
+						 if(x1 != 2){
+							 Double n = dadesinfo.get(x1).get(i).getFirst()/1000000;
+							 fields[count][0] = Algorisme[x1];
+							 fields[count][1] = n.toString();
+							 fields[count][2] = dadesinfo.get(x1).get(i).getSecond().toString();
+						 }
+						 else{
+							 Double n = dadesinfo.get(x1).get(i).getFirst()/100;
+							 fields[count][0] = Algorisme[x1];
+							 fields[count][1] = n.toString();
+							 fields[count][2] = dadesinfo.get(x1).get(i).getSecond().toString();
+						 }
+						 ++count;
+					 }
+				 }
+				 
+				 JTable table = new JTable(fields,ColumNames);
+				 grafica.removeAll();
+				 table.setBounds(10,10,500,400);
+				 grafica.add(table,BorderLayout.CENTER);
+				 grafica.repaint();
+			 }
+		 }
 	}		
 }
 	
