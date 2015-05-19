@@ -110,17 +110,25 @@ public class ViewGraphPanel extends JPanel
 			{
 				String author = nomVertex.split(",")[0].trim();
 				String title = nomVertex.split(",")[1].trim();
-				String authorN = adjacencies.getSecond().getFirst().split(",")[0].trim();
-				String titleN = adjacencies.getSecond().getFirst().split(",")[1].trim();
+				String authorN = adjacencies.getFirst().split(",")[0].trim();
+				String titleN = adjacencies.getFirst().split(",")[1].trim();
 				
-				//Hemos encontrado el vertice en la lista de adyacencias
 				if(author.equals(authorN) && title.equals(titleN))
 				{
+					//Hemos encontrado el vertice en la lista de adyacencias
+					//La recorremos y anadimos sus edges
 					for(Pair<String, Float> edge : adjacencies.getSecond())
 					{
 						String nomVertexAdjacent = edge.getFirst();
 						Float pesEdge = edge.getSecond();
-						g.addEdge();
+						Pair<String, Integer> adjVertex = new Pair<String, Integer>();
+						
+						//Busquem el adjacent vertex a la llista de vertices
+						for(Pair<String, Integer> v : verticesAdded) 
+							if(v.getFirst().equals(nomVertexAdjacent)) { adjVertex = v; break;}
+
+						String nomEdge = nomVertex + nomVertexAdjacent;
+						g.addEdge(nomEdge, vertex, adjVertex);
 					}
 				}
 			}
