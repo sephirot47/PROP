@@ -157,6 +157,12 @@ public class PresentationManager
 	{
 		SolutionManager.discardLastGeneratedSoution();
 	}
+
+	public static Pair< ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > , ArrayList< Pair<String, Integer> > >
+					getLastGeneratedSolutionStringGraph()
+	{
+		return SolutionManager.getLastGeneratedSolutionStringGraph();
+	}
 	
 	//////////////////////////////////////
 	

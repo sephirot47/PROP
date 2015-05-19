@@ -30,6 +30,8 @@ import javax.swing.JScrollPane;
 
 import org.apache.commons.collections15.Transformer;
 
+import Domini.Pair;
+
 public class ViewGraphPanel extends JPanel 
 {
 	private VisualizationViewer vv;
@@ -53,9 +55,28 @@ public class ViewGraphPanel extends JPanel
 		scrollPane.add(vv);
 	}
 	
-	public void setCurrentGraph(ArrayList<ArrayList<String>> stringGraph,
-			  					ArrayList<ArrayList<String>> comunitats)
+	public void setCurrentGraph(Pair<ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > , ArrayList< Pair<String, Integer> > > graphCommunities)
 	{
+		/*
+		 * El graf es una llista d'adjacencies:
+		 * Array(
+		 * 			Pair( "A", Array("B", "C", "D"),
+		 * 			Pair( "X", Array("X", "Y", "A", ...)),
+		 * 			...
+		 * 		)
+		 */
+		
+		ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > graph = graphCommunities.getFirst();
+		ArrayList< Pair<String, Integer> >  communities = graphCommunities.getSecond();
+		for(Pair< String, ArrayList< Pair<String, Float> > > adjacencies : graph)
+		{
+			Pair<String, Integer> vertex = new Pair<String, Integer>();
+			vertex.setFirst(adjacencies.getFirst()); //Posem el nom del vertex
+			g.addVertex(vertex);
+			for(Pair)
+		}
+		
+		
 		Graph g = new UndirectedSparseGraph();
 		String v1 =  "A", v2 = "B";
 		g.addVertex(v1);

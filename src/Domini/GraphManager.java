@@ -138,6 +138,38 @@ public class GraphManager
 		catch (Exception e){}
 		return aportation;
 	}
+	
+	/*
+	 * Por cada nodo del grafo, tenemos su nombre, y su lista de adyacencias
+	 * Por cada lista de adyacencias de un nodo, tenemos el nodo adyacente, y el peso de la arista
+	 */
+	public static ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > getStringGraph(Graph g)
+	{
+		ArrayList< Pair< String, ArrayList<Pair<String, Float>> > > result = new ArrayList< Pair< String, ArrayList<Pair<String, Float> > > >();
+		Set<Node> nodes = g.getAllNodes();
+		
+		for(Node n : nodes)
+		{
+			Pair< String, ArrayList<Pair<String, Float>> > pairNodeAdjacencies = 
+						new Pair< String, ArrayList<Pair<String, Float>> >();
+			pairNodeAdjacencies.setFirst(n.getId());
+			pairNodeAdjacencies.setSecond(new ArrayList<Pair<String, Float>>());
+			
+			Set<Node> nAdjs = g.getAdjacentNodesTo(n);
+			for(Node nAdj : nAdjs)
+			{
+				Edge e = g.getEdge(n, nAdj);
+				
+				Pair<String, Float> adjacencia = new Pair<String, Float>();
+				adjacencia.setFirst(nAdj.getId());
+				adjacencia.setSecond(e.getWeight());
+				
+				pairNodeAdjacencies.getSecond().add(adjacencia);
+			}
+		}
+		
+		return result;
+	}
 
 	public static String generateSolution(char algorisme, int durationP, int yearP, int styleP, int publicP, int proximityP, int authorP) throws Exception
 	{
