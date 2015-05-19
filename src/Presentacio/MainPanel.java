@@ -103,9 +103,9 @@ public class MainPanel extends JPanel {
 		panelBotonesAbajo.add(credits);
 		credits.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				PresentationManager.goToCard(ViewGraphPanel.class.getSimpleName());
-				//WarningDialog.show("Ostia!", "Estás mirando los créditos...");
+			public void mouseClicked(MouseEvent e) 
+			{
+				PresentationManager.goToViewGraphLastGeneratedSolution();
 			}
 		});
 		credits.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

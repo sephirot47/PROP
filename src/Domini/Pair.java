@@ -13,4 +13,6 @@ public class Pair<F, S>
 	
 	public F getFirst()  { return f; }
 	public S getSecond() { return s; }
+	
+	public boolean equals() { return f.equals(f) && s.equals(s); }
 }

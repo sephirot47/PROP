@@ -116,7 +116,7 @@ public class EditarSolucioPanel extends JPanel
 			@Override
 			public void mouseClicked(MouseEvent e) 
 			{
-				PresentationManager.goToViewGraph("");
+				PresentationManager.goToViewGraphLastGeneratedSolution();
 			}
 		});
 		btnViewGraph.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

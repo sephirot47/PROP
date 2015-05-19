@@ -166,6 +166,8 @@ public class GraphManager
 				
 				pairNodeAdjacencies.getSecond().add(adjacencia);
 			}
+			
+			result.add(pairNodeAdjacencies);
 		}
 		
 		return result;

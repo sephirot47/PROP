@@ -118,34 +118,6 @@ public class SolutionManager
 		SongSolution sol = getSolutionFromDate(date); 
 		return sol == null ? 0 : sol.getNumCommunities();
 	}
-
-	//                                 GRAF                                        COMUNITATS
-	public static Pair<ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > , ArrayList< Pair<String, Integer> > >
-		getLastGeneratedSolutionStringGraph()
-	{
-		Pair<ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > , ArrayList< Pair<String, Integer> >> result =
-				new Pair<ArrayList< Pair< String, ArrayList< Pair<String, Float> > > >, ArrayList< Pair<String, Integer> >>();
-		
-		SongSolution s = getSolutionFromDate(lastGeneratedSolutionId);
-		ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > stringGraph = GraphManager.getStringGraph(s.entrada);
-		
-		result.setFirst(stringGraph);
-		
-		ArrayList< Pair<String, Integer> > communities = new ArrayList< Pair<String, Integer> >(); 
-		int cIndex = 0;
-		for(Community c : s.getCommunities())
-		{
-			for(Node n : c.getCommunity())
-			{
-				communities.add( new Pair<String, Integer>(n.getId(), cIndex) );
-			}
-			++cIndex;
-		}
-		
-		result.setSecond(communities);
-		
-		return result;
-	}
 	
 	public static ArrayList<SongSolution> getSolutions(String solutionsDir) throws Exception 
 	{
@@ -376,5 +348,35 @@ public class SolutionManager
 			addSolution(s);
 			saveSolution(s);
 		}
+	}
+
+	public static Pair<ArrayList<Pair<String, ArrayList<Pair<String, Float>>>>, ArrayList<Pair<String, Integer>>> getSolutionStringGraphCommunities(String solutionId) 
+	{
+		Pair<ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > , ArrayList< Pair<String, Integer> >> result =
+				new Pair<ArrayList< Pair< String, ArrayList< Pair<String, Float> > > >, ArrayList< Pair<String, Integer> >>();
+		
+		SongSolution s = getSolutionFromDate(solutionId);
+		ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > stringGraph = GraphManager.getStringGraph(s.entrada);
+		result.setFirst(stringGraph);
+		
+		ArrayList< Pair<String, Integer> > communities = new ArrayList< Pair<String, Integer> >(); 
+		int cIndex = 0;
+		for(Community c : s.getCommunities())
+		{
+			for(Node n : c.getCommunity())
+			{
+				communities.add( new Pair<String, Integer>(n.getId(), cIndex) );
+			}
+			++cIndex;
+		}
+		
+		result.setSecond(communities);
+		
+		return result;
+	}
+
+	public static Pair<ArrayList<Pair<String, ArrayList<Pair<String, Float>>>>, ArrayList<Pair<String, Integer>>> getLastGeneratedSolutionStringGraphCommunities() 
+	{
+		return getSolutionStringGraphCommunities(lastGeneratedSolutionId);
 	}
 }

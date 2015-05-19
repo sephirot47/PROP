@@ -161,7 +161,13 @@ public class PresentationManager
 	public static Pair< ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > , ArrayList< Pair<String, Integer> > >
 					getLastGeneratedSolutionStringGraph()
 	{
-		return SolutionManager.getLastGeneratedSolutionStringGraph();
+		return SolutionManager.getLastGeneratedSolutionStringGraphCommunities();
+	}
+
+	public static void goToViewGraphLastGeneratedSolution() 
+	{
+		ViewGraphPanel.setCurrentGraph( SolutionManager.getLastGeneratedSolutionStringGraphCommunities() );
+		goToCard(ViewGraphPanel.class.getSimpleName());
 	}
 	
 	//////////////////////////////////////
@@ -431,6 +437,7 @@ public class PresentationManager
 
 	public static void goToViewGraph(String graphId) 
 	{
+		ViewGraphPanel.setCurrentGraph( SolutionManager.getSolutionStringGraphCommunities(graphId) );
 		goToCard(ViewGraphPanel.class.getSimpleName());
 	}
 
@@ -480,7 +487,6 @@ public class PresentationManager
 			}
 		}
 	}
-
 }
 
 

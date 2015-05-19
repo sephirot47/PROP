@@ -54,7 +54,7 @@ public class ConsultarSolucioPanel extends JPanel
 			@Override
 			public void mouseClicked(MouseEvent e) 
 			{
-				PresentationManager.goToViewGraph("");
+				PresentationManager.goToViewGraph(currentSolutionDate);
 			}
 		});
 		btnViewGraph.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
