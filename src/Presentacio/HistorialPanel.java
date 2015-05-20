@@ -38,6 +38,7 @@ public class HistorialPanel extends JPanel
 		add(scrollPane);
 		
 		solutionsList = new JList();
+		solutionsList.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		solutionsList.addListSelectionListener(new ListSelectionListener() 
 		{
 			public void valueChanged(ListSelectionEvent arg0) 

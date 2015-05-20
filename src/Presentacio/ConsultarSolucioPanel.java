@@ -37,6 +37,7 @@ public class ConsultarSolucioPanel extends JPanel
 		add(scrollPane);
 		
 		listsList = new JList();
+		listsList.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		listsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listsList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) 
@@ -66,6 +67,7 @@ public class ConsultarSolucioPanel extends JPanel
 		add(scrollPane_1);
 		
 		songsList = new JList();
+		songsList.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		songsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_1.setViewportView(songsList);
 		

@@ -98,6 +98,6 @@ public class ViewPanel extends JPanel {
 		else if(cardName.equals(HistorialPanel.class.getSimpleName())) hp.refresh();
 		else if(cardName.equals(ConsultarSolucioPanel.class.getSimpleName())) csp.refresh();
 		else if(cardName.equals(EditarSolucioPanel.class.getSimpleName())) esp.refresh();
-		else if(cardName.equals(ViewGraphPanel.class.getSimpleName())) vgp.refresh();
+		else if(cardName.equals(ViewGraphPanel.class.getSimpleName())) vgp.onEnterPanel();
 	}
 }

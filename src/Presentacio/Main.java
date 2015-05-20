@@ -88,9 +88,10 @@ public class Main
     	g2.addNode(b);
     	g2.addNode(c);
     	g2.addNode(f);
+    	for(int ii = 0; ii < 500; ++ii) g2.addNode(new Song());
     	g2.addEdge(a,b,new Edge());
     	
-    	Solution rawSolution = new GirvanNewman().getSolution(songGraph, 6); //Get el conjunt de llistes de Songs
+    	Solution rawSolution = new GirvanNewman().getSolution(g2, 6); //Get el conjunt de llistes de Songs
 		int foo = 0;
 		for(Community songList : rawSolution.getCommunities())
 		{
@@ -99,7 +100,7 @@ public class Main
 			System.out.println(" ");
 		}
 		
-		SongSolution ss = new SongSolution(songGraph, rawSolution);
+		SongSolution ss = new SongSolution(g2, rawSolution);
 		System.out.println(ss.getTime());
 		
 		SolutionManager.saveSolution(ss);

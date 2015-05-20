@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Paint;
+import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
@@ -23,6 +24,7 @@ import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 import edu.uci.ics.jung.graph.util.Context;
 import edu.uci.ics.jung.visualization.Layer;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
+import edu.uci.ics.jung.visualization.control.GraphMouseListener;
 import edu.uci.ics.jung.visualization.decorators.EdgeShape;
 import edu.uci.ics.jung.visualization.transform.MutableTransformer;
 import edu.uci.ics.jung.visualization.util.VertexShapeFactory;
@@ -33,6 +35,7 @@ import org.apache.commons.collections15.Transformer;
 
 import Domini.Pair;
 
+import java.awt.dnd.DragGestureEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseEvent;
 
@@ -41,31 +44,113 @@ import javax.swing.SwingConstants;
 
 import java.awt.Font;
 
+import javax.swing.JButton;
+
+import java.awt.event.MouseAdapter;
+
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+
+import java.awt.event.MouseWheelListener;
+import java.awt.event.MouseWheelEvent;
+
 public class ViewGraphPanel extends JPanel 
 {
 	private static VisualizationViewer vv;
-	private static Graph g; //GRAF de JUNG, no el nostre de DOMINI
-	private static SpringLayout graphLayout;
+	private static Graph<Pair<String, Integer>, String> g; //GRAF de JUNG, no el nostre de DOMINI
+	private static SpringLayout<Pair<String, Integer>, String> graphLayout;
+	private static boolean graphLocked = false;
+	private static int layoutOffsetX = 15, layoutOffsetY = 15;
+	private static int layoutWidth = 550, layoutHeight = 365;
+	private static float currentZoom = 1.0f, zoomStep = 1.05f;
+	private static float maxZoom = 2.0f, minZoom = 0.7f;
 	private JLabel labelNodeName;
+	private JButton btnPausar;
 	
 	public ViewGraphPanel() 
 	{
 		setLayout(null);
 
-		JPanel scrollPane = new JPanel();
-		scrollPane.setBounds(20, 20, 750, 463);
-		add(scrollPane);
+		JPanel panel = new JPanel();
+		panel.setBounds(20, 20, 750, 463);
+		add(panel);
 
-		g = new UndirectedSparseGraph();
-		graphLayout = new SpringLayout(g);
-		graphLayout.setSize( new Dimension(550, 450) );
+		g = new UndirectedSparseGraph<Pair<String, Integer>, String>();
+		graphLayout = new SpringLayout<Pair<String, Integer>, String>(g);
+		graphLayout.setSize( new Dimension(layoutWidth, layoutHeight) );
 		vv = new VisualizationViewer(graphLayout);
-		vv.setPreferredSize(new Dimension(600, 400));
 		
-		MutableTransformer modelTransformer = vv.getRenderContext().getMultiLayerTransformer().getTransformer(Layer.LAYOUT);
-		modelTransformer.setTranslate(20, 20);
+		vv.addGraphMouseListener(new GraphMouseListener()
+		{
+			public void graphClicked(Object t, MouseEvent arg1) 
+			{
+				Pair<String, Integer> vertex = (Pair<String, Integer>)t;
+				labelNodeName.setText(vertex.getFirst());
+			}
+
+			public void graphPressed(Object t, MouseEvent arg1) {
+			}
+			
+			public void graphReleased(Object t, MouseEvent arg1) 
+			{
+				labelNodeName.setText("-----");
+			}
+		});
+
+		vv.addMouseWheelListener(new MouseWheelListener() 
+		{
+			public void mouseWheelMoved(MouseWheelEvent e) 
+			{
+				float delta = e.getWheelRotation();
+				if(delta < 0) currentZoom *= Math.abs(delta) * zoomStep;
+				else currentZoom /= delta * zoomStep;
+				if(currentZoom < minZoom) currentZoom = minZoom;
+				else if(currentZoom > maxZoom) currentZoom = maxZoom;
+				applyZoom(currentZoom);
+			}
+		});
+		vv.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		vv.setBounds(75, 5, 600, 400);
+
+		panel.setLayout(null);
 		
-		scrollPane.add(vv);
+		panel.add(vv);
+		
+		btnPausar = new JButton("Pausar animacio");
+		btnPausar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnPausar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				triggerGraphAnimation();
+			}
+		});
+		btnPausar.setBounds(50, 416, 161, 23);
+		panel.add(btnPausar);
+		
+		JButton btnRedibuixarGrafanimacio = new JButton("Redibuixar graf (animacio)");
+		btnRedibuixarGrafanimacio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRedibuixarGrafanimacio.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				animateGraph();
+			}
+		});
+		btnRedibuixarGrafanimacio.setBounds(221, 416, 218, 23);
+		panel.add(btnRedibuixarGrafanimacio);
+		
+		JButton btnRedibuixarGraf = new JButton("Redibuixar graf (instantaniament)");
+		btnRedibuixarGraf.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRedibuixarGraf.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) 
+			{
+				redrawGraphInstant();
+			}
+		});
+		btnRedibuixarGraf.setBounds(449, 416, 250, 23);
+		panel.add(btnRedibuixarGraf);
 		
 		labelNodeName = new JLabel("");
 		labelNodeName.setFont(new Font("Dialog", Font.PLAIN, 12));
@@ -78,42 +163,7 @@ public class ViewGraphPanel extends JPanel
 		lblNodeSeleccionat.setHorizontalTextPosition(SwingConstants.RIGHT);
 		lblNodeSeleccionat.setBounds(87, 488, 157, 20);
 		add(lblNodeSeleccionat);
-		vv.addMouseMotionListener(new MouseMotionAdapter() {
-			@Override
-			public void mouseMoved(MouseEvent e) 
-			{
-				Pair<Float, Float> point = new Pair<Float, Float>( (float)e.getX(), (float)e.getY() );
-				Pair<String, Integer> vertex = getVertexFromPoint(point);
-				System.out.println(point.getFirst() + ", " + point.getSecond());
-				if(vertex != null)
-				{
-					labelNodeName.setText(vertex.getFirst());
-					vv.setCursor(new Cursor(Cursor.HAND_CURSOR));
-				}
-				else
-				{
-					labelNodeName.setText("-----");
-					vv.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-				}
-			}
-		});
-	}
-	
-	private static Pair<String, Integer> getVertexFromPoint(Pair<Float, Float> point)
-	{
-		float vertexDiameter = 20.0f;
-		if(g.getVertexCount() <= 0) return null;
-		
-		for(Object v : g.getVertices())
-		{
-			Pair<String, Integer> vertex = (Pair<String, Integer>) v;
-			float x = (float) graphLayout.getX(vertex) + vertexDiameter, 
-			      y = (float) graphLayout.getY(vertex) + vertexDiameter;
-			if(vertex.getFirst().contains("X")) System.out.println(x + "~~~" + y);
-			float distance = (float) Math.sqrt((x - point.getFirst()) * (x - point.getFirst()) + (y - point.getSecond()) * (y - point.getSecond()));
-			if(distance < vertexDiameter * 0.5f) return vertex;
-		}
-		return null;
+		applyZoom(1.0);
 	}
 	
 	public static void setCurrentGraph(Pair<ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > , ArrayList< Pair<String, Integer> > > graphCommunities)
@@ -129,7 +179,6 @@ public class ViewGraphPanel extends JPanel
 		
 		g = new UndirectedSparseGraph();
 		graphLayout.setGraph(g);
-		
 	
 		ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > graph = graphCommunities.getFirst();
 		ArrayList< Pair<String, Integer> > communities = graphCommunities.getSecond();
@@ -194,59 +243,96 @@ public class ViewGraphPanel extends JPanel
 			}
 		}
 		
-		/*
-		for(Pair< String, ArrayList< Pair<String, Float> > > adjacencies : graph)
-		{
-			ArrayList<Pair<String, Integer>> vertex = g.getVertices();
-			for(Pair<String, Float> e : adjacencies.getSecond());
-			{
-				g.addEdge(new Pair<String, Float>(vertex.getFirst() + e.getFirst(), e.getSecond()), vertex, );
-			}
-		}
-		*/
-		
 		vv.getRenderContext().setEdgeShapeTransformer(new EdgeShape.Line<String, String>());
-		//vv.getRenderContext().setVertexStrokeTransformer(Verte);
-	
-	 		//Creamos colores para cada comunidad
-	 		final ArrayList<Color> communityColors = new ArrayList<Color>();
-	 		communityColors.add(Color.RED);
-	 		communityColors.add(Color.GREEN);
-	 		communityColors.add(Color.BLUE);
-	 		communityColors.add(Color.YELLOW);
-	 		communityColors.add(Color.ORANGE);
-	 		communityColors.add(Color.WHITE);
-	 		communityColors.add(Color.PINK);
-	 		communityColors.add(Color.CYAN);
-	 		communityColors.add(Color.MAGENTA);
-	 		communityColors.add(Color.GRAY);
-	 		int n = communityColors.size();
-	 		for(int i = n; i < numCommunities; ++i) communityColors.add( Color.getHSBColor(new Random().nextFloat(), 1.0f, 0.7f) );
-	 		
-	 	    Transformer<Pair<String, Integer>, Paint> vertexColor = new Transformer<Pair<String, Integer>, Paint>() 
-	 	    {
-	 	        public Paint transform(Pair<String, Integer> v) 
-	 	        {
-	 	        	int c = v.getSecond();
-	 	            return communityColors.get(c);
-	 	        }
-	 	    };
-	 	    
+		
+ 		//Creamos colores para cada comunidad
+ 		final ArrayList<Color> communityColors = new ArrayList<Color>();
+ 		communityColors.add(Color.RED);
+ 		communityColors.add(Color.GREEN);
+ 		communityColors.add(Color.BLUE);
+ 		communityColors.add(Color.YELLOW);
+ 		communityColors.add(Color.ORANGE);
+ 		communityColors.add(Color.WHITE);
+ 		communityColors.add(Color.PINK);
+ 		communityColors.add(Color.CYAN);
+ 		communityColors.add(Color.MAGENTA);
+ 		communityColors.add(Color.GRAY);
+ 		int n = communityColors.size();
+ 		for(int i = n; i < numCommunities; ++i) communityColors.add( Color.getHSBColor(new Random().nextFloat(), 1.0f, 0.7f) );
+ 		
+ 	    Transformer<Pair<String, Integer>, Paint> vertexColor = new Transformer<Pair<String, Integer>, Paint>() 
+ 	    {
+ 	        public Paint transform(Pair<String, Integer> v) 
+ 	        {
+ 	        	int c = v.getSecond();
+ 	            return communityColors.get(c);
+ 	        }
+ 	    };
 	    
-	    Transformer<Pair<String, Integer>, Shape> vertexSize = new Transformer<Pair<String, Integer>, Shape>(){
-	        public Shape transform(Pair<String, Integer> v)
-	        {
-	            Ellipse2D circle = new Ellipse2D.Double(-15, -15, 30, 30);
-	            // in this case, the vertex is twice as large
-	            return AffineTransform.getScaleInstance(2, 2).createTransformedShape(circle);
-	        }
-	    };
 	    vv.getRenderContext().setVertexFillPaintTransformer(vertexColor);
 	    //vv.getRenderContext().setVertexShapeTransformer(vertexSize);
 	}
-	
-	public void refresh() 
-	{
 
+	public void refreshPauseButton()
+	{
+		if(graphLocked) btnPausar.setText("Continuar animacio");
+		else btnPausar.setText("Pausar animacio");
+	}
+	
+	public void triggerGraphAnimation()
+	{
+		if(!graphLocked) {graphLayout.lock(true); graphLocked = true; }
+		else { graphLayout.lock(false); graphLocked = false; }
+		refreshPauseButton();
+	}
+	
+	public void onEnterPanel()
+	{
+		currentZoom = 1.0f;
+		animateGraph();
+	}
+	
+	public void animateGraph()
+	{
+		resetLayout();
+		refreshPauseButton();
+	}
+	
+	public void redrawGraphInstant()
+	{
+		resetLayout();
+
+	    int initialGraphSteps = 100;
+		for(int i = 0; i < initialGraphSteps; ++i) graphLayout.step();
+		graphLayout.lock(true);
+		graphLocked = true;
+		refreshPauseButton();
+	}
+	
+	public void applyZoom(double scale)
+	{
+		int newLayoutWidth = (int) (layoutWidth * 1.0f/currentZoom), 
+			newLayoutHeight = (int) (layoutHeight * 1.0f/currentZoom);
+		int newLayoutOffsetX = (int) (layoutOffsetX * 1.0f/currentZoom), 
+			newLayoutOffsetY = (int) (layoutOffsetY * 1.0f/currentZoom);
+			
+		graphLayout.setSize( new Dimension(newLayoutWidth, newLayoutHeight) );
+		
+		MutableTransformer modelTransformer = vv.getRenderContext().getMultiLayerTransformer().getTransformer(Layer.VIEW);
+		modelTransformer.setScale(scale, scale, new Point2D.Double(0, 0));
+		modelTransformer.setTranslate(newLayoutOffsetX,  newLayoutOffsetY);
+	}
+	
+	public void resetLayout() 
+	{
+		graphLayout = new SpringLayout<Pair<String, Integer>, String>(g);
+		applyZoom(currentZoom);
+		graphLayout.reset();
+		graphLayout.initialize();
+		graphLayout.lock(false);
+		graphLocked = false;
+		vv.setGraphLayout(graphLayout);
+		vv.invalidate();
+		refreshPauseButton();
 	}
 }
