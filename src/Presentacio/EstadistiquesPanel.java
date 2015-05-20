@@ -309,9 +309,9 @@ public class EstadistiquesPanel extends JPanel
 					for(int x1 = 0; x1 < dadesinfo.size(); x1++){
 						for(int i = 0; i < dadesinfo.get(x1).size(); i++){
 							double n = dadesinfo.get(x1).get(i).getFirst()/1000000;
-							if(x1 == 0)	serie.add(n,dadesinfo.get(x1).get(i).getSecond());							
-							if(x1 == 1)serie1.add(n,dadesinfo.get(x1).get(i).getSecond());
-							else if(x1 == 2) serie2.add(dadesinfo.get(x1).get(i).getFirst()/100,dadesinfo.get(x1).get(i).getSecond());
+							if(x1 == 0)	serie.add(dadesinfo.get(x1).get(i).getSecond().doubleValue(),n);							
+							if(x1 == 1)serie1.add(dadesinfo.get(x1).get(i).getSecond().doubleValue(),n);
+							else if(x1 == 2) serie2.add(dadesinfo.get(x1).get(i).getSecond().doubleValue(),dadesinfo.get(x1).get(i).getFirst()/100);
 						}
 					}
 					int count = 0;
