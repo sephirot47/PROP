@@ -1,6 +1,8 @@
 package Presentacio;
 
 import org.jfree.chart.*;
+import org.jfree.chart.renderer.category.LineAndShapeRenderer;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.renderer.xy.XYSplineRenderer;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
@@ -279,13 +281,8 @@ public class EstadistiquesPanel extends JPanel
 				
 				JFreeChart chart = null;
 				
-				XYSplineRenderer renderer = new XYSplineRenderer();
+				final XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
 				XYSeriesCollection dades = new XYSeriesCollection();
-				
-				ValueAxis x = new NumberAxis();
-				ValueAxis y = new NumberAxis();
-				
-				
 				
 				XYPlot plot;
 				if(alg != "Tots"){
@@ -333,7 +330,7 @@ public class EstadistiquesPanel extends JPanel
 						renderer.setSeriesPaint(count, Color.BLUE);
 					}				
 				}
-				chart = ChartFactory.createXYLineChart(alg,"Temps","Nodes",dades,PlotOrientation.HORIZONTAL,true,false,false);
+				chart = ChartFactory.createXYLineChart(alg,"Temps","Nodes",(XYDataset)dades,PlotOrientation.HORIZONTAL,true,false,false);
 				chart.setBackgroundPaint(Color.white);
 				plot =  chart.getXYPlot(); 
 				
@@ -344,10 +341,10 @@ public class EstadistiquesPanel extends JPanel
 				XYPlot xyPlot = chart.getXYPlot();
 				ValueAxis domainAxis = xyPlot.getDomainAxis();
 
-	
-				((NumberAxis) domainAxis).setNumberFormatOverride(newFormat);
-				((NumberAxis) domainAxis).setTickUnit(new NumberTickUnit(0.1f));
 				
+				((NumberAxis) domainAxis).setNumberFormatOverride(newFormat);
+				//((NumberAxis) domainAxis).setTickUnit(new NumberTickUnit(0.1f));
+				domainAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 				
 				plot.setDomainAxis(domainAxis);
 				
@@ -355,6 +352,7 @@ public class EstadistiquesPanel extends JPanel
 				renderer.setSeriesPaint(0, Color.RED);				
 				renderer.setSeriesStroke(0, new BasicStroke(1.0f));
 				plot.setRenderer(renderer);
+				
 				
 				panel = new ChartPanel(chart);
 				panel.setBounds(5, 10, 500, 450);
@@ -446,6 +444,7 @@ public class EstadistiquesPanel extends JPanel
 				 table.setBounds(10,10,500,400);
 				 grafica.add(table,BorderLayout.CENTER);
 				 grafica.repaint();
+	
 			 }
 		 }
 	}		

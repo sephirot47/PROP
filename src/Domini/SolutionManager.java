@@ -47,18 +47,16 @@ public class SolutionManager
 			}
 		}
 		
-		/*
+		
 		Dades.sort(new Comparator<Pair<Double,Integer>>(){
 
 			@Override
 			public int compare(Pair<Double, Integer> arg0,
-					Pair<Double, Integer> arg1) {
-				// TODO Auto-generated method stub
-				return arg0.getSecond().toString().compareTo(arg1.getSecond().toString());
-			}
-			
-		});
-		*/
+				Pair<Double, Integer> arg1) {				
+					return arg0.getSecond() - arg1.getSecond();
+				}			
+			});
+		
 		
 		ArrayList<Pair<Double,Integer>> sorted = new ArrayList<Pair<Double,Integer>>();
 		if(Dades.size() > 1){
@@ -66,12 +64,15 @@ public class SolutionManager
 			Pair<Double,Integer> n = Dades.get(0);
 			int count = 1;
 			for(int i = 1; i < Dades.size(); i++){
+				
 				if(n.getSecond() == Dades.get(i).getSecond()){
 					n.setFirst(n.getFirst() + Dades.get(i).getFirst());
 					count++;
+					
 				}
 				else{
 					n.setFirst(n.getFirst()/count);
+					System.out.println(n.getSecond() + " " + n.getFirst()/count + " " + count);
 					sorted.add(n);
 					count = 1;
 					n = Dades.get(i);

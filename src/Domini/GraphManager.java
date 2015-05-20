@@ -194,13 +194,11 @@ public class GraphManager
 		
 		Solution rawSol = null;
 		if(algorisme == 'G') rawSol = new GirvanNewman().getSolution(g);
-		else if(algorisme == 'C') rawSol = new Clique().getSolution(g);
+		else if(algorisme == 'C') rawSol = new Clique().getSolution(g);		
 		else rawSol = new Louvain().getSolution(g);
-		
 		SongSolution sol = new SongSolution(g, rawSol);
 		sol.setId(new SimpleDateFormat("dd-MM-yyyy HH,mm,ss,SSS").format(new Date()));
 		SolutionManager.setLastGeneratedSolution(sol);
-		
 		return sol.getId();
 	}
 }
