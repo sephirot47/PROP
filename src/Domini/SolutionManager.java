@@ -47,8 +47,8 @@ public class SolutionManager
 			}
 		}
 		
-		
-		Dades.sort(new Comparator<Pair<Double,Integer>>(){
+
+		Collections.sort(Dades, new Comparator<Pair<Double,Integer>>(){
 
 			@Override
 			public int compare(Pair<Double, Integer> arg0,

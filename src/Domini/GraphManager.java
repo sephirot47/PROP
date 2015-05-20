@@ -37,7 +37,7 @@ public class GraphManager
 		return g;
 	}
 
-	public static void generateEdges(Graph<Song> g, Ponderations p)
+	private static void generateEdges(Graph<Song> g, Ponderations p)
 	{
 		g.removeAllEdges();
 		float threshold = (p.getThreshold()*0.1f)/2;
@@ -104,7 +104,7 @@ public class GraphManager
 		}
 	}
 	
-	public static float getNearbyReproductionsAportation(Graph<Song> g, Song s1, Song s2) //Entre 0.0f y 1.0f
+	private static float getNearbyReproductionsAportation(Graph<Song> g, Song s1, Song s2) //Entre 0.0f y 1.0f
 	{
 		float aportation = 0.0f;
 		try{
