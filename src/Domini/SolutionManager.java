@@ -72,7 +72,6 @@ public class SolutionManager
 				}
 				else{
 					n.setFirst(n.getFirst()/count);
-					System.out.println(n.getSecond() + " " + n.getFirst()/count + " " + count);
 					sorted.add(n);
 					count = 1;
 					n = Dades.get(i);

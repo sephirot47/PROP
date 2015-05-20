@@ -289,12 +289,12 @@ public class EstadistiquesPanel extends JPanel
 					XYSeries serie = new XYSeries(alg);
 					if(alg == "Louvain"){
 						for(int i = 0; i < dadesinfo.get(0).size(); i++){
-							serie.add(dadesinfo.get(0).get(i).getFirst()/100,dadesinfo.get(0).get(i).getSecond());
+							serie.add(dadesinfo.get(0).get(i).getSecond().doubleValue(),dadesinfo.get(0).get(i).getFirst()/100);
 							 
 						}
 					}else{	
 						for(int i = 0; i < dadesinfo.get(0).size(); i++){						
-							 serie.add(dadesinfo.get(0).get(i).getFirst()/1000000 ,dadesinfo.get(0).get(i).getSecond());
+							 serie.add(dadesinfo.get(0).get(i).getSecond().doubleValue(),dadesinfo.get(0).get(i).getFirst()/1000000 );
 							 
 						}
 					}
@@ -330,19 +330,19 @@ public class EstadistiquesPanel extends JPanel
 						renderer.setSeriesPaint(count, Color.BLUE);
 					}				
 				}
-				chart = ChartFactory.createXYLineChart(alg,"Temps","Nodes",(XYDataset)dades,PlotOrientation.HORIZONTAL,true,false,false);
+				chart = ChartFactory.createXYLineChart(alg,"Nodes","Temps",(XYDataset)dades,PlotOrientation.VERTICAL,true,false,false);
 				chart.setBackgroundPaint(Color.white);
 				plot =  chart.getXYPlot(); 
 				
 				
 				//PER TAL DE CANVIAR EL FORMAT DE LES Y
-				DecimalFormat newFormat = new DecimalFormat("0.00");
+				//DecimalFormat newFormat = new DecimalFormat("0.00");
 				
 				XYPlot xyPlot = chart.getXYPlot();
 				ValueAxis domainAxis = xyPlot.getDomainAxis();
 
 				
-				((NumberAxis) domainAxis).setNumberFormatOverride(newFormat);
+				//((NumberAxis) domainAxis).setNumberFormatOverride(newFormat);
 				//((NumberAxis) domainAxis).setTickUnit(new NumberTickUnit(0.1f));
 				domainAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 				
