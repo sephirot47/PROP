@@ -64,6 +64,8 @@ public class ViewGraphPanel extends JPanel
 	private static int layoutWidth = 550, layoutHeight = 365;
 	private static float currentZoom = 1.0f, zoomStep = 1.05f;
 	private static float maxZoom = 2.0f, minZoom = 0.7f;
+	private static ArrayList< Pair<String, Integer> > verticesAdded;
+	private static Pair<ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > , ArrayList< Pair<String, Integer> > > graphCommunities;
 	private JLabel labelNodeName;
 	private JButton btnPausar;
 	
@@ -125,22 +127,10 @@ public class ViewGraphPanel extends JPanel
 				triggerGraphAnimation();
 			}
 		});
-		btnPausar.setBounds(50, 416, 161, 23);
+		btnPausar.setBounds(75, 416, 161, 23);
 		panel.add(btnPausar);
 		
-		JButton btnRedibuixarGrafanimacio = new JButton("Redibuixar graf (animacio)");
-		btnRedibuixarGrafanimacio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRedibuixarGrafanimacio.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) 
-			{
-				animateGraph();
-			}
-		});
-		btnRedibuixarGrafanimacio.setBounds(221, 416, 218, 23);
-		panel.add(btnRedibuixarGrafanimacio);
-		
-		JButton btnRedibuixarGraf = new JButton("Redibuixar graf (instantaniament)");
+		JButton btnRedibuixarGraf = new JButton("Redibuixar graf");
 		btnRedibuixarGraf.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRedibuixarGraf.addMouseListener(new MouseAdapter() {
 			@Override
@@ -149,7 +139,7 @@ public class ViewGraphPanel extends JPanel
 				redrawGraphInstant();
 			}
 		});
-		btnRedibuixarGraf.setBounds(449, 416, 250, 23);
+		btnRedibuixarGraf.setBounds(425, 416, 250, 23);
 		panel.add(btnRedibuixarGraf);
 		
 		labelNodeName = new JLabel("");
@@ -164,6 +154,7 @@ public class ViewGraphPanel extends JPanel
 		lblNodeSeleccionat.setBounds(87, 488, 157, 20);
 		add(lblNodeSeleccionat);
 		applyZoom(1.0);
+		verticesAdded = new ArrayList< Pair<String, Integer> >();
 	}
 	
 	public static void setCurrentGraph(Pair<ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > , ArrayList< Pair<String, Integer> > > graphCommunities)
@@ -177,6 +168,8 @@ public class ViewGraphPanel extends JPanel
 		 * 		)
 		 */
 		
+		ViewGraphPanel.graphCommunities = graphCommunities;
+		
 		g = new UndirectedSparseGraph();
 		graphLayout.setGraph(g);
 	
@@ -184,7 +177,7 @@ public class ViewGraphPanel extends JPanel
 		ArrayList< Pair<String, Integer> > communities = graphCommunities.getSecond();
 		final int numCommunities = communities.size();
 
-		ArrayList< Pair<String, Integer> > verticesAdded = new ArrayList< Pair<String, Integer> >();
+		verticesAdded.clear();
 		for(Pair< String, ArrayList< Pair<String, Float> > > adjacencies : graph)
 		{
 			Pair<String, Integer> vertex = new Pair<String, Integer>();
@@ -270,7 +263,6 @@ public class ViewGraphPanel extends JPanel
  	    };
 	    
 	    vv.getRenderContext().setVertexFillPaintTransformer(vertexColor);
-	    //vv.getRenderContext().setVertexShapeTransformer(vertexSize);
 	}
 
 	public void refreshPauseButton()
@@ -289,13 +281,7 @@ public class ViewGraphPanel extends JPanel
 	public void onEnterPanel()
 	{
 		currentZoom = 1.0f;
-		animateGraph();
-	}
-	
-	public void animateGraph()
-	{
-		resetLayout();
-		refreshPauseButton();
+		redrawGraphInstant();
 	}
 	
 	public void redrawGraphInstant()
@@ -304,18 +290,18 @@ public class ViewGraphPanel extends JPanel
 
 	    int initialGraphSteps = 100;
 		for(int i = 0; i < initialGraphSteps; ++i) graphLayout.step();
-		graphLayout.lock(true);
-		graphLocked = true;
+		graphLayout.lock(false);
+		graphLocked = false;
 		refreshPauseButton();
 	}
 	
 	public void applyZoom(double scale)
 	{
-		int newLayoutWidth = (int) (layoutWidth * 1.0f/currentZoom), 
-			newLayoutHeight = (int) (layoutHeight * 1.0f/currentZoom);
-		int newLayoutOffsetX = (int) (layoutOffsetX * 1.0f/currentZoom), 
-			newLayoutOffsetY = (int) (layoutOffsetY * 1.0f/currentZoom);
-			
+		final int newLayoutWidth = (int) (layoutWidth * 1.0f/currentZoom), 
+				  newLayoutHeight = (int) (layoutHeight * 1.0f/currentZoom);
+		final int newLayoutOffsetX = (int) (layoutOffsetX * 1.0f/currentZoom), 
+				  newLayoutOffsetY = (int) (layoutOffsetY * 1.0f/currentZoom);
+		
 		graphLayout.setSize( new Dimension(newLayoutWidth, newLayoutHeight) );
 		
 		MutableTransformer modelTransformer = vv.getRenderContext().getMultiLayerTransformer().getTransformer(Layer.VIEW);
@@ -327,12 +313,9 @@ public class ViewGraphPanel extends JPanel
 	{
 		graphLayout = new SpringLayout<Pair<String, Integer>, String>(g);
 		applyZoom(currentZoom);
-		graphLayout.reset();
-		graphLayout.initialize();
-		graphLayout.lock(false);
 		graphLocked = false;
+		
 		vv.setGraphLayout(graphLayout);
-		vv.invalidate();
 		refreshPauseButton();
 	}
 }
