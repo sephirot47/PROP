@@ -71,41 +71,27 @@ public class EstadistiquesPanel extends JPanel
 		grafica.setLayout(null);
 		grafica.removeAll();
 		
-		JPanel panelRight = new JPanel();
-		panelRight.setBorder(new EmptyBorder(40, 40, 40, 40));
-		add(panelRight, BorderLayout.EAST);
-		panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
-		
-		JButton btnEstadstiques = new JButton("Go to cr�dits");
-		btnEstadstiques.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				PresentationManager.goToCard(CreditsPanel.class.getSimpleName());
-				
-			}
-		});
-		btnEstadstiques.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEstadstiques.setMaximumSize(new Dimension(999, 25));
-		btnEstadstiques.setAlignmentY(0.0f);
-		panelRight.add(btnEstadstiques);
-		
 		Box left = Box.createVerticalBox();
 		
 		
 		
 		final JRadioButton Girvan = new JRadioButton("Newman-Girvan");
+		Girvan.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		algorisme.add(Girvan);
 		left.add(Girvan);
 		
 		final JRadioButton clique = new JRadioButton("Clique Percolation");
+		clique.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		algorisme.add(clique);
 		left.add(clique);
 		
 		final JRadioButton louvain = new JRadioButton("Louvain");
+		louvain.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		algorisme.add(louvain);
 		left.add(louvain);
 		
 		final JRadioButton tots = new JRadioButton("Tots");
+		tots.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		algorisme.add(tots);
 		left.add(tots);
 		
@@ -113,10 +99,12 @@ public class EstadistiquesPanel extends JPanel
 		left.add(label);
 		
 		final JRadioButton Grafica = new JRadioButton("Grafica");
+		Grafica.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		metodes.add(Grafica); 
 		left.add(Grafica);
 		
 		final JRadioButton taula = new JRadioButton("Taula");
+		taula.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		metodes.add(taula);
 		left.add(taula);
 		
@@ -125,13 +113,16 @@ public class EstadistiquesPanel extends JPanel
 		
 		
 		final JRadioButton nodes = new JRadioButton("Temps-Nodes");
+		nodes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		ym.add(nodes);
 		left.add(nodes);
 		
 		final JRadioButton edges = new JRadioButton("Temps-Edges");
+		edges.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		ym.add(edges);
 		left.add(edges);
 		final JRadioButton altres = new JRadioButton("Altres");
+		altres.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		ym.add(altres);
 		left.add(altres);
 
@@ -444,7 +435,6 @@ public class EstadistiquesPanel extends JPanel
 				 table.setBounds(10,10,500,400);
 				 grafica.add(table,BorderLayout.CENTER);
 				 grafica.repaint();
-	
 			 }
 		 }
 	}		

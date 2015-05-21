@@ -393,6 +393,11 @@ public class PresentationManager
 		JOptionPane.showMessageDialog(MainWindow.frmYoutube, msg, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 	
+	public static int confirmWindow(String msg)
+	{
+		return JOptionPane.showConfirmDialog(MainWindow.frmYoutube, msg, "Estas segur?", JOptionPane.YES_NO_OPTION);
+	}
+	
 	public static void goToCard(String cardName)
 	{
 		changeCard(cardName);

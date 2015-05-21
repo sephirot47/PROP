@@ -19,10 +19,12 @@ public class CreditsPanel extends JPanel {
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(324, 213, 162, 114);
+		panel.setBounds(266, 205, 266, 194);
 		add(panel);
+		panel.setLayout(null);
 		
 		JLabel lblcCredits = new JLabel("<html>Credits<br><br>Abraham Cortes<br>Aina Soler<br>Joan Fons<br>Victor Anton Dominguez");
+		lblcCredits.setBounds(20, 29, 226, 136);
 		panel.add(lblcCredits);
 		lblcCredits.setHorizontalAlignment(SwingConstants.CENTER);
 	}

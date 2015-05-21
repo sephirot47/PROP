@@ -41,6 +41,7 @@ public class GraphManager
 	{
 		g.removeAllEdges();
 		float threshold = (p.getThreshold()*0.1f)/2;
+		System.out.println("Threshold: " + threshold);
 		
 		Set<Song> songs = g.getAllNodes();
 		//Set<User> users = UserManager.GetUsers("data/users/users.txt", "data/reproductions");
@@ -86,19 +87,30 @@ public class GraphManager
 					
 					//User Ages
 					float userAgeDistance = Math.abs(s.getMeanUserAge() - s2.getMeanUserAge());
-					userAgeAportation = (5.0f / userAgeDistance)*((float) p.getUserAge()*0.1f);
-					if(userAgeAportation > 1.0f) userAgeAportation = p.getUserAge()*0.1f;
+					if (userAgeDistance == Float.NaN || userAgeAportation == 0.0f) userAgeAportation = 0.0f;
+					else {
+						userAgeAportation = (5.0f / userAgeDistance)*((float) p.getUserAge()*0.1f);
+						if(userAgeAportation > 1.0f) userAgeAportation = p.getUserAge()*0.1f;
+					}
 					//
 					
 					//Nearby Reproductions 
 					nearbyReproductionsAportation = (getNearbyReproductionsAportation(g, s,s2)) * ((float) p.getNearbyReproductions()*0.1f);
 					
-					affinity =  (authorAportation + styleAportation + durationAportation + yearAportation + userAgeAportation + nearbyReproductionsAportation)/(float) 6;
+					affinity =  (authorAportation + styleAportation + durationAportation + yearAportation + userAgeAportation + nearbyReproductionsAportation)/6.0f;
+					System.out.println("______");
+					System.out.println(authorAportation);
+					System.out.println(styleAportation);
+					System.out.println(durationAportation);
+					System.out.println(yearAportation);
+					System.out.println(userAgeAportation);
+					System.out.println(nearbyReproductionsAportation);
+					System.out.println("______");
 					
-				
 					Edge edge = new Edge();
 					edge.setWeight(affinity);
 					if(affinity >= threshold) g.addEdge(s, s2, edge);
+					System.out.println("Affinity " + affinity);
 				}
 			}
 		}

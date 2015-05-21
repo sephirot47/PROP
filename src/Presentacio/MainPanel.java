@@ -105,7 +105,7 @@ public class MainPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) 
 			{
-				PresentationManager.goToViewGraphLastGeneratedSolution();
+				PresentationManager.goToCard(CreditsPanel.class.getSimpleName());
 			}
 		});
 		credits.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

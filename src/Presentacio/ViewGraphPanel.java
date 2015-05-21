@@ -127,7 +127,7 @@ public class ViewGraphPanel extends JPanel
 				triggerGraphAnimation();
 			}
 		});
-		btnPausar.setBounds(75, 416, 161, 23);
+		btnPausar.setBounds(75, 416, 250, 23);
 		panel.add(btnPausar);
 		
 		JButton btnRedibuixarGraf = new JButton("Redibuixar graf");
