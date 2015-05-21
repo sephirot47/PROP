@@ -1,16 +1,20 @@
 package Presentacio;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Paint;
 import java.awt.Point;
 import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import javax.swing.JPanel;
 
@@ -50,6 +54,7 @@ import java.awt.event.MouseAdapter;
 
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.StrokeBorder;
 
 import java.awt.event.MouseWheelListener;
 import java.awt.event.MouseWheelEvent;
@@ -57,14 +62,16 @@ import java.awt.event.MouseWheelEvent;
 public class ViewGraphPanel extends JPanel 
 {
 	private static VisualizationViewer vv;
-	private static Graph<Pair<String, Integer>, String> g; //GRAF de JUNG, no el nostre de DOMINI
-	private static SpringLayout<Pair<String, Integer>, String> graphLayout;
+	private static Graph<Pair<String, Integer>, Pair<String, Float>> g; //GRAF de JUNG, no el nostre de DOMINI
+	private static SpringLayout<Pair<String, Integer>, Pair<String, Float>> graphLayout;
 	private static boolean graphLocked = false;
 	private static int layoutOffsetX = 15, layoutOffsetY = 15;
 	private static int layoutWidth = 550, layoutHeight = 365;
 	private static float currentZoom = 1.0f, zoomStep = 1.05f;
 	private static float maxZoom = 2.0f, minZoom = 0.7f;
-	private static ArrayList< Pair<String, Integer> > verticesAdded;
+	private static Set< Pair<String, Integer> > verticesAdded;
+	private static Pair<String, Integer> selectedVertex = null;
+	private static Set< Pair<String, Float> > edgesVisible;
 	private static Pair<ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > , ArrayList< Pair<String, Integer> > > graphCommunities;
 	private JLabel labelNodeName;
 	private JButton btnPausar;
@@ -77,8 +84,8 @@ public class ViewGraphPanel extends JPanel
 		panel.setBounds(20, 20, 750, 463);
 		add(panel);
 
-		g = new UndirectedSparseGraph<Pair<String, Integer>, String>();
-		graphLayout = new SpringLayout<Pair<String, Integer>, String>(g);
+		g = new UndirectedSparseGraph<Pair<String, Integer>, Pair<String, Float>>();
+		graphLayout = new SpringLayout<Pair<String, Integer>, Pair<String, Float>>(g);
 		graphLayout.setSize( new Dimension(layoutWidth, layoutHeight) );
 		vv = new VisualizationViewer(graphLayout);
 		
@@ -86,8 +93,24 @@ public class ViewGraphPanel extends JPanel
 		{
 			public void graphClicked(Object t, MouseEvent arg1) 
 			{
+				edgesVisible.clear();
+				
 				Pair<String, Integer> vertex = (Pair<String, Integer>)t;
+				if(selectedVertex != null && selectedVertex.equals(vertex)) 
+				{
+					selectedVertex = null;
+					labelNodeName.setText("----");
+					return;
+				}
+				
+				selectedVertex = vertex;
 				labelNodeName.setText(vertex.getFirst());
+
+				ArrayList<Pair<String, Float>> edges = new ArrayList<Pair<String, Float>>(g.getIncidentEdges(vertex));
+				for(Pair<String, Float> e : edges)
+				{
+					edgesVisible.add(e);
+				}
 			}
 
 			public void graphPressed(Object t, MouseEvent arg1) {
@@ -154,7 +177,9 @@ public class ViewGraphPanel extends JPanel
 		lblNodeSeleccionat.setBounds(87, 488, 157, 20);
 		add(lblNodeSeleccionat);
 		applyZoom(1.0);
-		verticesAdded = new ArrayList< Pair<String, Integer> >();
+		
+		verticesAdded = new HashSet< Pair<String, Integer> >();
+		edgesVisible =  new HashSet< Pair<String, Float> >();
 	}
 	
 	public static void setCurrentGraph(Pair<ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > , ArrayList< Pair<String, Integer> > > graphCommunities)
@@ -229,8 +254,10 @@ public class ViewGraphPanel extends JPanel
 						for(Pair<String, Integer> v : verticesAdded) 
 							if(v.getFirst().equals(nomVertexAdjacent)) { adjVertex = v; break;}
 
-						String nomEdge = nomVertex + nomVertexAdjacent;
-						g.addEdge(nomEdge, vertex, adjVertex);
+						Pair<String, Float> edgePair = new Pair<String, Float>();
+						edgePair.setFirst(nomVertex + nomVertexAdjacent);
+						edgePair.setSecond(pesEdge);
+						g.addEdge(edgePair, vertex, adjVertex);
 					}
 				}
 			}
@@ -263,6 +290,33 @@ public class ViewGraphPanel extends JPanel
  	    };
 	    
 	    vv.getRenderContext().setVertexFillPaintTransformer(vertexColor);
+ 	    
+	     vv.getRenderContext().setEdgeLabelTransformer(new Transformer<Pair<String, Float>, String>() 
+	     {
+	       public String transform(Pair<String, Float> e) 
+	       {
+	    	   float weight = ((float)((int)(e.getSecond() * 100)))/100.0f;
+	    	   if(edgesVisible.contains(e)) return String.valueOf(weight);
+	    	   else return "";
+	       }
+	     });
+	     vv.getRenderContext().setEdgeDrawPaintTransformer(new Transformer<Pair<String, Float>, Paint>() 
+    	     {
+		       public Paint transform(Pair<String, Float> e) 
+		       {
+		    	   if(edgesVisible.contains(e)) return Color.BLACK;
+		    	   else return Color.LIGHT_GRAY;
+		       }
+		     });
+
+	     vv.getRenderContext().setEdgeStrokeTransformer(new Transformer<Pair<String, Float>, Stroke>() 
+    	     {
+		       public Stroke transform(Pair<String, Float> e) 
+		       {
+		    	   if(edgesVisible.contains(e)) return  (Stroke) new BasicStroke(2.0f);
+		    	   else return (Stroke) new BasicStroke(1.0f);
+		       }
+		     });
 	}
 
 	public void refreshPauseButton()
@@ -282,21 +336,29 @@ public class ViewGraphPanel extends JPanel
 	{
 		currentZoom = 1.0f;
 		redrawGraphInstant();
+		labelNodeName.setText("----");
 	}
 	
 	public void redrawGraphInstant()
 	{
 		resetLayout();
 
+		applyZoom(3.0);
 	    int initialGraphSteps = 100;
 		for(int i = 0; i < initialGraphSteps; ++i) graphLayout.step();
 		graphLayout.lock(false);
 		graphLocked = false;
+		applyZoom(1.0);
+		for(int i = 0; i < initialGraphSteps; ++i) graphLayout.step();
+		selectedVertex = null;
+		edgesVisible.clear();
+		
 		refreshPauseButton();
 	}
 	
 	public void applyZoom(double scale)
 	{
+		currentZoom = (float) scale;
 		final int newLayoutWidth = (int) (layoutWidth * 1.0f/currentZoom), 
 				  newLayoutHeight = (int) (layoutHeight * 1.0f/currentZoom);
 		final int newLayoutOffsetX = (int) (layoutOffsetX * 1.0f/currentZoom), 
@@ -311,7 +373,7 @@ public class ViewGraphPanel extends JPanel
 	
 	public void resetLayout() 
 	{
-		graphLayout = new SpringLayout<Pair<String, Integer>, String>(g);
+		graphLayout = new SpringLayout<Pair<String, Integer>, Pair<String, Float>>(g);
 		applyZoom(currentZoom);
 		graphLocked = false;
 		

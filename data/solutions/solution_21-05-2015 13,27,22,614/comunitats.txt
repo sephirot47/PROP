@@ -1,0 +1,12 @@
+0
+(a, f)
+(a, nnn)
+(a, x)
+1
+(jfons, aaa)
+(jfons, fff)
+(jfons, nnn)
+2
+(b, b)
+(b, nnn)
+(b, f)

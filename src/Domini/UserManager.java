@@ -164,7 +164,8 @@ public class UserManager
 		    	boolean existedInFile = false;
 		    	for(String line : fileLines)
 		    	{
-		    		if(line.startsWith(u.getName()))
+		    		String name = line.split(";")[0];
+		    		if(name.equals(u.getName()))
 		    		{
 		    			fileLines.set(fileLines.indexOf(line), songLine);
 		    			existedInFile = true;
@@ -233,7 +234,8 @@ public class UserManager
 	    	for(int i = 0; i < lines.size(); ++i)
 	    	{
 	    		String line = lines.get(i);
-	    		if(line.startsWith(search)) lines.remove(i);
+	    		String name = line.split(";")[0];
+	    		if(name.equals(search)) lines.remove(i);
 	    	}
 	    	
 	    	FileManager.saveData(filepath, lines);
@@ -243,12 +245,13 @@ public class UserManager
 	    public static void removeUserFromDisk(String username) throws IOException
 	    {
 	    	String search = username;
-		
+
 	    	ArrayList<String> lines = FileManager.loadData("data/users/users.txt");
 	    	for(int i = 0; i < lines.size(); ++i)
 	    	{
 	    		String line = lines.get(i);
-	    		if(line.startsWith(search)) lines.remove(i);
+	    		String name = line.split(";")[0];
+	    		if(name.equals(search)) lines.remove(i);
 	    	}
 	    	
 	    	FileManager.saveData("data/users/users.txt", lines);

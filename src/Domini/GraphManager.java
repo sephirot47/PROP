@@ -40,80 +40,98 @@ public class GraphManager
 	private static void generateEdges(Graph<Song> g, Ponderations p)
 	{
 		g.removeAllEdges();
-		float threshold = (p.getThreshold()*0.1f)/2;
-		System.out.println("Threshold: " + threshold);
+		Float threshold = 0.0f;
+		int n = 0;
 		
 		Set<Song> songs = g.getAllNodes();
-		//Set<User> users = UserManager.GetUsers("data/users/users.txt", "data/reproductions");
 		for(Song s : songs)
 		{
 			for(Song s2 : songs)
 			{
-				if(s != s2)
-				{
-					float affinity = 0.0f;
-					//		duration = year = style = userAge = nearbyReproductions = author;
-					float authorAportation, styleAportation, durationAportation, yearAportation, userAgeAportation,  nearbyReproductionsAportation; //Entre 0 y 1
-					authorAportation = styleAportation = durationAportation = yearAportation = userAgeAportation = nearbyReproductionsAportation = 0;
-					
-					//Autor
-					if(s.getAuthor().equalsIgnoreCase(s2.getAuthor())) authorAportation = ((float) p.getAuthor()*0.1f);
-					else authorAportation = 0.0f;
-					//
-					
-					//Estils
-					ArrayList<String> styles1 = s.getStyles(), styles2 = s2.getStyles();
-					float sameStyles = 0;
-					for(String st1 : styles1)
-						for(String st2 : styles2)
-							if(st1.equals(st2)) 
-								sameStyles++;
-							
-
-					styleAportation = (sameStyles/styles1.size())*((float) p.getStyle()*0.1f); //0.0, 0.33, 0.66 o 1.0
-					//
-					
-					//DurationAportation
-					float durationDistance = Math.abs(s.getDuration() - s2.getDuration());
-					durationAportation = (30.0f / durationDistance) * ((float) p.getDuration()*0.1f);
-					if(durationAportation > 1.0f) durationAportation = p.getDuration()*0.1f;
-					//
-					
-					//Year
-					float yearDistance = Math.abs(s.getYear() - s2.getYear());
-					yearAportation = (3.0f / yearDistance)*((float) p.getYear()*0.1f);
-					if(yearAportation > 1.0f) yearAportation = p.getYear()*0.1f;
-					//
-					
-					//User Ages
-					float userAgeDistance = Math.abs(s.getMeanUserAge() - s2.getMeanUserAge());
-					if (userAgeDistance == Float.NaN || userAgeAportation == 0.0f) userAgeAportation = 0.0f;
-					else {
-						userAgeAportation = (5.0f / userAgeDistance)*((float) p.getUserAge()*0.1f);
-						if(userAgeAportation > 1.0f) userAgeAportation = p.getUserAge()*0.1f;
-					}
-					//
-					
-					//Nearby Reproductions 
-					nearbyReproductionsAportation = (getNearbyReproductionsAportation(g, s,s2)) * ((float) p.getNearbyReproductions()*0.1f);
-					
-					affinity =  (authorAportation + styleAportation + durationAportation + yearAportation + userAgeAportation + nearbyReproductionsAportation)/6.0f;
-					System.out.println("______");
-					System.out.println(authorAportation);
-					System.out.println(styleAportation);
-					System.out.println(durationAportation);
-					System.out.println(yearAportation);
-					System.out.println(userAgeAportation);
-					System.out.println(nearbyReproductionsAportation);
-					System.out.println("______");
-					
-					Edge edge = new Edge();
-					edge.setWeight(affinity);
-					if(affinity >= threshold) g.addEdge(s, s2, edge);
-					System.out.println("Affinity " + affinity);
-				}
+				if(s == s2) continue;
+				threshold += getAffinity(s,s2,p,g);
+				++n;
 			}
 		}
+		System.out.println("Threshold: " + threshold);
+		
+		threshold /= n;
+		if(threshold == Float.NaN) threshold = 0.0f;
+
+		for(Song s : songs)
+		{
+			for(Song s2 : songs)
+			{
+				if(s == s2) continue;
+				Edge edge = new Edge();
+				Float affinity = getAffinity(s,s2,p,g);
+				edge.setWeight(affinity);
+				if(affinity >= threshold) g.addEdge(s, s2, edge);
+				System.out.println("Affinity " + affinity);
+			}
+		}
+
+		System.out.println("Threshold " + threshold);
+	}
+	
+	private static Float getAffinity(Song s, Song s2, Ponderations p, Graph g)
+	{
+		Float affinity = 0.0f;
+		//		duration = year = style = userAge = nearbyReproductions = author;
+		Float authorAportation, styleAportation, durationAportation, yearAportation, userAgeAportation,  nearbyReproductionsAportation; //Entre 0 y 1
+		authorAportation = styleAportation = durationAportation = yearAportation = userAgeAportation = nearbyReproductionsAportation = 0.0f;
+		
+		//Autor
+		if(s.getAuthor().equalsIgnoreCase(s2.getAuthor())) authorAportation = ((float) p.getAuthor()*0.1f);
+		else authorAportation = 0.0f;
+		//
+		
+		//Estils
+		ArrayList<String> styles1 = s.getStyles(), styles2 = s2.getStyles();
+		Float sameStyles = 0.0f;
+		for(String st1 : styles1)
+			for(String st2 : styles2)
+				if(st1.equals(st2)) 
+					sameStyles++;
+
+		styleAportation = (sameStyles/styles1.size())*((float) p.getStyle()*0.1f); //0.0, 0.33, 0.66 o 1.0
+		//
+		
+		//DurationAportation
+		Float durationDistance = (float) Math.abs(s.getDuration() - s2.getDuration());
+		durationAportation = (30.0f / durationDistance) * ((float) p.getDuration()*0.1f);
+		if(durationAportation > 1.0f) durationAportation = p.getDuration()*0.1f;
+		//
+		
+		//Year
+		Float yearDistance = (float) Math.abs(s.getYear() - s2.getYear());
+		yearAportation = (3.0f / yearDistance)*((float) p.getYear()*0.1f);
+		if(yearAportation > 1.0f) yearAportation = p.getYear()*0.1f;
+		//
+		
+		//User Ages
+		Float userAgeDistance = Math.abs(s.getMeanUserAge() - s2.getMeanUserAge());
+		if (userAgeDistance.equals(Float.NaN) || userAgeAportation == 0.0f) userAgeAportation = 0.0f;
+		else {
+			userAgeAportation = (5.0f / userAgeDistance)*((float) p.getUserAge()*0.1f);
+			if(userAgeAportation > 1.0f) userAgeAportation = p.getUserAge()*0.1f;
+			
+		}
+		//
+		
+		//Nearby Reproductions 
+		nearbyReproductionsAportation = (getNearbyReproductionsAportation(g, s,s2)) * ((float) p.getNearbyReproductions()*0.1f);
+		
+		if(authorAportation.equals(Float.NaN)) authorAportation = 0.0f;
+		if(styleAportation.equals(Float.NaN)) styleAportation = 0.0f;
+		if(durationAportation.equals(Float.NaN)) durationAportation = 0.0f;
+		if(yearAportation.equals(Float.NaN)) yearAportation = 0.0f;
+		if(userAgeAportation.equals(Float.NaN)) userAgeAportation = 0.0f;
+		if(nearbyReproductionsAportation.equals(Float.NaN)) nearbyReproductionsAportation = 0.0f;
+		
+		affinity = authorAportation + styleAportation + durationAportation + yearAportation + userAgeAportation + nearbyReproductionsAportation;
+		if(affinity.equals(Float.NaN)) return 0.0f;
+		return affinity;
 	}
 	
 	private static float getNearbyReproductionsAportation(Graph<Song> g, Song s1, Song s2) //Entre 0.0f y 1.0f

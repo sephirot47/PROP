@@ -150,6 +150,12 @@ public class Graph <N extends Node>
 		Set<Edge> edges = getAllEdges();
 		for(Edge e : edges) removeEdge(e);
 	}
+	
+	public Set<Edge> getAdjacentEdgesTo(Node n)
+	{
+		Set<Edge> edges = new HashSet<Edge>(graph.get(n).values());
+		return edges;
+	}
 	//////////////////////////////////////////////////////////////////////
 	
 	

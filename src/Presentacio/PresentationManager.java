@@ -267,6 +267,7 @@ public class PresentationManager
 	
 	public static void removeUser(String user) throws IOException 
 	{
+		System.out.println("delete user " + user + "~");
 		UserManager.removeUserFromDisk(user);
 	}
 	/////////////////////////////////////
