@@ -1,0 +1,15 @@
+0
+(jfons, aaa)
+(jfons, j)
+(a, nnn)
+(jfons, nnn)
+(b, j)
+(b, nnn)
+(a, x)
+(b, f)
+1
+(cx, kxy)
+(cx, kxya)
+(cx, ckxya)
+(kxy, kxy)
+(c, kxy)

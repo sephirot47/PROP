@@ -361,6 +361,7 @@ public class SolutionManager
 		result.setFirst(stringGraph);
 		
 		ArrayList< Pair<String, Integer> > communities = new ArrayList< Pair<String, Integer> >(); 
+		System.out.println(s.getCommunities().size());
 		Set<Song> communitiedSongs = new HashSet<Song>();
 		int cIndex = 0;
 		for(Community c : s.getCommunities())
@@ -370,8 +371,7 @@ public class SolutionManager
 				Pair<String, Integer> stringNode = new Pair<String, Integer>(n.getId(), cIndex);
 				communities.add(stringNode);
 				communitiedSongs.add((Song)n);
-			}
-			
+			}	
 			++cIndex;
 		}
 
@@ -380,11 +380,25 @@ public class SolutionManager
 		Set<Song> allSongs = g.getAllNodes();
 		for(Song song : allSongs)
 		{
-			if(!communitiedSongs.contains(song))
+			boolean found = false;
+			for(Song song2 : communitiedSongs)
+			{
+				if(song2.getAuthor().equals(song.getAuthor()) && 
+				   song2.getTitle().equals(song.getTitle()))
+				{
+					found = true; break;
+				}
+			}
+			if(!found)
 			{
 				Pair<String, Integer> stringNode = new Pair<String, Integer>(song.getId(), -1);
 				communities.add(stringNode);
 			}
+		}
+		
+		for(Pair<String, Integer> entry : communities)
+		{
+			System.out.println(entry.getFirst() + ", " + entry.getSecond());
 		}
 			
 		result.setSecond(communities);

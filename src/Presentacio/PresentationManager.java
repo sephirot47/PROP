@@ -478,9 +478,9 @@ public class PresentationManager
 		SolutionManager.modifyLastGeneratedSolution(song, from, to);
 	}
 
-	public static void goToViewGraph(String graphId) 
+	public static void goToViewGraph(String solutionDate) 
 	{
-		ViewGraphPanel.setCurrentGraph( SolutionManager.getSolutionStringGraphCommunities(graphId) );
+		ViewGraphPanel.setCurrentGraph( SolutionManager.getSolutionStringGraphCommunities(solutionDate) );
 		goToCard(ViewGraphPanel.class.getSimpleName());
 	}
 
