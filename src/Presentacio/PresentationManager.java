@@ -440,6 +440,11 @@ public class PresentationManager
 			errorWindow( e.getMessage() );
 		}
 	}
+	
+	public void modifyLastGeneratedSolution(String song, int from, int to)  
+	{
+		SolutionManager.modifyLastGeneratedSolution(song, from, to);
+	}
 
 	public static void goToViewGraph(String graphId) 
 	{
