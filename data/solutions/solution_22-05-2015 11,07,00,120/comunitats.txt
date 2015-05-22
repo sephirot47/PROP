@@ -1,0 +1,8 @@
+0
+(jfons, nnn)
+(b, j)
+(b, nnn)
+1
+2
+(b, b)
+(b, f)

@@ -13,6 +13,7 @@ import javax.swing.event.ListSelectionListener;
 
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -39,6 +40,7 @@ public class EditarSolucioPanel extends JPanel
 		add(scrollPane_1);
 		
 		songsList = new JList();
+		songsList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		songsList.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		songsList.setBounds(0, 0, 1, 1);
 		scrollPane_1.setViewportView(songsList);
@@ -76,7 +78,7 @@ public class EditarSolucioPanel extends JPanel
 		btnRemoveList.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRemoveList.setBounds(33, 450, 265, 25);
 		add(btnRemoveList);
-		lblLlistaSelected = new JLabel("Llista x:");
+		lblLlistaSelected = new JLabel("Llista:");
 		lblLlistaSelected.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblLlistaSelected.setBounds(397, 27, 265, 15);
 		add(lblLlistaSelected);
@@ -88,19 +90,16 @@ public class EditarSolucioPanel extends JPanel
 			{
 				if(songsList.getSelectedIndex() != -1)
 				{
-					String line = (String) songsList.getSelectedValue();
-					String songAuthor = line.split(",")[0].trim();
-					String songTitle = line.split(",")[1].trim();
-					PresentationManager.removeSolutionSong(currentSolutionDate, songAuthor, songTitle);
-					
-					refresh();
-					for(int i = 0; i < currentSolutionLists.size(); ++i)
+					int min = songsList.getMinSelectionIndex();
+					int n = songsList.getMaxSelectionIndex() - min;
+					for(int i = 0; i <= n; ++i)
 					{
-						if(currentSolutionLists.get(i).size() <= 0)
-						{
-							PresentationManager.removeSolutionList(currentSolutionDate, i);
-							break;
-						}
+						songsList.setSelectedIndex(min + i);
+						System.out.println(min + i);
+						String line = (String) songsList.getSelectedValue();
+						String songAuthor = line.split(",")[0].trim();
+						String songTitle = line.split(",")[1].trim();
+						PresentationManager.removeSolutionSong(currentSolutionDate, songAuthor, songTitle);
 					}
 					refresh();
 				}
@@ -145,6 +144,7 @@ public class EditarSolucioPanel extends JPanel
 		add(comboLists);
 		
 		JButton btnMoureALa = new JButton("Moure a la llista");
+		btnMoureALa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMoureALa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -152,10 +152,23 @@ public class EditarSolucioPanel extends JPanel
 					PresentationManager.errorWindow("Has de seleccionar una canco");
 					return;
 				}
+				if(listsList.getSelectedIndex() == comboLists.getSelectedIndex())
+				{
+					PresentationManager.errorWindow("La canco ja esta a la llista a la que vols moure-la");
+					return;
+				}
 				
-				String song = (String) songsList.getSelectedValue();
-				
-				
+				int min = songsList.getMinSelectionIndex();
+				int n = songsList.getMaxSelectionIndex() - min;
+				for(int i = 0; i <= n; ++i)
+				{
+					songsList.setSelectedIndex(min + i);
+					String songName = ((String) songsList.getSelectedValue()).trim();
+					int listFrom = listsList.getSelectedIndex();
+					int listTo = comboLists.getSelectedIndex();
+					PresentationManager.modifyLastGeneratedSolution(songName, listFrom, listTo);
+				}
+				refresh();
 			}
 		});
 		btnMoureALa.setBounds(514, 324, 148, 25);
@@ -170,7 +183,6 @@ public class EditarSolucioPanel extends JPanel
 	
 	public void refresh()
 	{
-		System.out.println("REFRESH esp");
 		currentSolutionLists = PresentationManager.getSolutionCommunities(currentSolutionDate);
 		
 		DefaultListModel dlm = new DefaultListModel();
@@ -195,6 +207,7 @@ public class EditarSolucioPanel extends JPanel
 	{
 		DefaultListModel dlm = new DefaultListModel();
 		ArrayList<String> list = currentSolutionLists.get(listIndex);
+		Collections.sort(list);
 		for(String song : list) dlm.addElement(song);
 		songsList.setModel(dlm);
 	}

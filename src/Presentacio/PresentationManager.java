@@ -441,7 +441,7 @@ public class PresentationManager
 		}
 	}
 	
-	public void modifyLastGeneratedSolution(String song, int from, int to)  
+	public static void modifyLastGeneratedSolution(String song, int from, int to)  
 	{
 		SolutionManager.modifyLastGeneratedSolution(song, from, to);
 	}

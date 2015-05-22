@@ -1,0 +1,23 @@
+0
+(cx, kxy)
+(cx, kxya)
+(cx, cjkxya)
+(cx, ckxya)
+(kxy, kxy)
+(c, kxy)
+1
+(jfons, fff)
+(jfons, aaa)
+(jfons, j)
+(b, b)
+(a, f)
+(a, nnn)
+(a, j)
+(jfons, nnn)
+(b, j)
+(b, nnn)
+(a, x)
+(b, f)
+2
+(k, k)
+(kx, kx)

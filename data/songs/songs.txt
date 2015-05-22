@@ -10,3 +10,11 @@ jfons;nnn;123;e1;e2;e3;123
 a;j;123;e1;e2;e3;123
 b;j;123;e1;e2;e3;123
 jfons;j;123;e1;e2;e3;123
+k;k;1;e1;-;-;1
+kx;kx;13;e1;e3;-;14
+kxy;kxy;138;e1asd;e3s;zxc;149
+c;kxy;138;e1asd;e3s;zxc;149
+cx;kxy;138;e1asd;e3s;zxc;149
+cx;kxya;138;e1asd;e3s;zxc;149
+cx;ckxya;138;e1asd;e3s;zxc;149
+cx;cjkxya;138;e1asd;e3s;zxc;149

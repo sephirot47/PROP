@@ -285,6 +285,7 @@ public class ViewGraphPanel extends JPanel
  	        public Paint transform(Pair<String, Integer> v) 
  	        {
  	        	int c = v.getSecond();
+ 	        	if(c == -1) return new Color(0.0f, 0.0f, 0.0f, 0.0f);
  	            return communityColors.get(c);
  	        }
  	    };
@@ -376,6 +377,7 @@ public class ViewGraphPanel extends JPanel
 		graphLayout = new SpringLayout<Pair<String, Integer>, Pair<String, Float>>(g);
 		applyZoom(currentZoom);
 		graphLocked = false;
+		graphLayout.setForceMultiplier(0.01f*g.getVertexCount());
 		
 		vv.setGraphLayout(graphLayout);
 		refreshPauseButton();

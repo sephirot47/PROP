@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 import Persistencia.FileManager;
@@ -360,16 +361,32 @@ public class SolutionManager
 		result.setFirst(stringGraph);
 		
 		ArrayList< Pair<String, Integer> > communities = new ArrayList< Pair<String, Integer> >(); 
+		Set<Song> communitiedSongs = new HashSet<Song>();
 		int cIndex = 0;
 		for(Community c : s.getCommunities())
 		{
 			for(Node n : c.getCommunity())
 			{
-				communities.add( new Pair<String, Integer>(n.getId(), cIndex) );
+				Pair<String, Integer> stringNode = new Pair<String, Integer>(n.getId(), cIndex);
+				communities.add(stringNode);
+				communitiedSongs.add((Song)n);
 			}
+			
 			++cIndex;
 		}
+
 		
+		Graph<Song> g = s.getEntrada();
+		Set<Song> allSongs = g.getAllNodes();
+		for(Song song : allSongs)
+		{
+			if(!communitiedSongs.contains(song))
+			{
+				Pair<String, Integer> stringNode = new Pair<String, Integer>(song.getId(), -1);
+				communities.add(stringNode);
+			}
+		}
+			
 		result.setSecond(communities);
 		
 		return result;
@@ -380,9 +397,27 @@ public class SolutionManager
 		return getSolutionStringGraphCommunities(lastGeneratedSolutionId);
 	}
 
-	public static void modifyLastGeneratedSolution(String song, int from, int to) {
+	public static void modifyLastGeneratedSolution(String songName, int from, int to) 
+	{
 		SongSolution s = getSolutionFromDate(lastGeneratedSolutionId);
 		ArrayList<Community> communities = s.getCommunities();
-		//TO-DO kñbgASDÑCVKUGASDÑVKDHASFÑVHASDÑBVHSCDVKLJBHSLFIBHSÓDVHBṔOAH
+		
+		Song song = null;
+		Community cFrom = communities.get(from);
+		ArrayList<Node> nodes = cFrom.getCommunity();
+		for(Node n : nodes)
+		{
+			if(n.getId().equals(songName))
+			{
+				song = (Song) n;
+				break;
+			}
+		}
+
+		if(song == null) return;
+		
+		Community cTo = communities.get(to);
+		cTo.addNode((Node) song);
+		cFrom.deleteNode(songName);
 	}
 }
