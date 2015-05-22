@@ -185,8 +185,11 @@ public class GestioCanconsPanel extends JPanel
 				{
 					String author = ((String) listSongs.getSelectedValue()).split(",")[0].trim();
 					String title =  ((String) listSongs.getSelectedValue()).split(",")[1].trim();
-					PresentationManager.removeSongFromDisk(author, title);
-					refreshSongList();
+					if(PresentationManager.confirmWindow("Estas segur que vols eliminar la canco '" + title + "' de l'autor '" + author + "' ?"))
+					{
+						PresentationManager.removeSongFromDisk(author, title);
+						refreshSongList();
+					}
 				}
 			}
 		});

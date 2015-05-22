@@ -177,13 +177,16 @@ public class GestioUsuarisPanel extends JPanel
 				if(listUsers.getSelectedIndex() != -1)
 				{
 					String user = (String) listUsers.getSelectedValue();
-					try {
-						PresentationManager.removeUser(user);
-					} catch (IOException e1) 
+					if(PresentationManager.confirmWindow("Estas segur que vols esborrar l'usuari '" + user + "' ?"))
 					{
-						e1.printStackTrace();
-					}			
-					refreshUserList();
+						try {
+							PresentationManager.removeUser(user);
+						} catch (IOException e1) 
+						{
+							e1.printStackTrace();
+						}			
+						refreshUserList();
+					}
 				}
 			}
 		});

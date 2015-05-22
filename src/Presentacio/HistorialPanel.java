@@ -117,9 +117,12 @@ public class HistorialPanel extends JPanel
 				if(solutionsList.getSelectedIndex() != -1)
 				{
 					String date = (String) solutionsList.getSelectedValue();
-					date = date.replaceAll(":", ",");
-					PresentationManager.removeSolutionFromDisk(date);
-					refresh();
+					if(PresentationManager.confirmWindow("Estas segur que vols esborrar la solucio '" + date + "' ?"))
+					{
+						date = date.replaceAll(":", ",");
+						PresentationManager.removeSolutionFromDisk(date);
+						refresh();
+					}
 				}
 			}
 		});

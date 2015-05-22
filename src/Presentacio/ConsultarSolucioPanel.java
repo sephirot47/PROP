@@ -50,7 +50,7 @@ public class ConsultarSolucioPanel extends JPanel
 		});
 		scrollPane.setViewportView(listsList);
 		
-		JButton btnViewGraph = new JButton("Veure el graf d'entrada");
+		JButton btnViewGraph = new JButton("Visualitzar el graf");
 		btnViewGraph.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 

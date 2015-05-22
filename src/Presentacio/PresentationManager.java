@@ -394,9 +394,9 @@ public class PresentationManager
 		JOptionPane.showMessageDialog(MainWindow.frmYoutube, msg, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 	
-	public static int confirmWindow(String msg)
+	public static boolean confirmWindow(String msg)
 	{
-		return JOptionPane.showConfirmDialog(MainWindow.frmYoutube, msg, "Estas segur?", JOptionPane.YES_NO_OPTION);
+		return JOptionPane.showConfirmDialog(MainWindow.frmYoutube, msg, "Estas segur?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION ? true : false;
 	}
 	
 	public static void goToCard(String cardName)

@@ -165,16 +165,20 @@ public class NovaCancoPanel extends JPanel
 		
 		if(styles.size() <= 0) {PresentationManager.errorWindow( "La canco ha de tenir un estil com a minim."); return; }
 		
-		try
+		if(PresentationManager.confirmWindow("<html>Estas segur que vols crear la canco '" + title + "' de l'autor '" + author + "' ?" +
+				"<br/>Pensa que no podras canviar el nom de la canco ni el autor mes tard...</html>"))
 		{
-			PresentationManager.createSong(author, title, year, duration, styles);	
+			try
+			{
+				PresentationManager.createSong(author, title, year, duration, styles);	
+			}
+			catch(Exception e)
+			{
+				PresentationManager.errorWindow(e.getMessage());
+				return;
+			}
+			
+			PresentationManager.goBack();
 		}
-		catch(Exception e)
-		{
-			PresentationManager.errorWindow(e.getMessage());
-			return;
-		}
-		
-		PresentationManager.goBack();
 	}
 }
