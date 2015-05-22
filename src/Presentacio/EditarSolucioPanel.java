@@ -1,5 +1,7 @@
 package Presentacio;
 
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -19,13 +21,15 @@ import javax.swing.ListSelectionModel;
 
 import Domini.SolutionManager;
 
+import javax.swing.JComboBox;
+
 public class EditarSolucioPanel extends JPanel 
 {
 	private static ArrayList<ArrayList<String>> currentSolutionLists = new ArrayList<ArrayList<String>>();
 	private static String currentSolutionDate = "";
 	private JLabel lblLlistaSelected;
 	private JList listsList, songsList;
-	
+	private JComboBox<String> comboLists;
 	public EditarSolucioPanel() 
 	{
 		setLayout(null);
@@ -135,6 +139,27 @@ public class EditarSolucioPanel extends JPanel
 		buttonSaveSolution.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonSaveSolution.setBounds(397, 368, 265, 66);
 		add(buttonSaveSolution);
+		
+		comboLists = new JComboBox<String>();
+		comboLists.setBounds(397, 324, 105, 24);
+		add(comboLists);
+		
+		JButton btnMoureALa = new JButton("Moure a la llista");
+		btnMoureALa.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (songsList.getSelectedIndex() == -1) {
+					PresentationManager.errorWindow("Has de seleccionar una canco");
+					return;
+				}
+				
+				String song = (String) songsList.getSelectedValue();
+				
+				
+			}
+		});
+		btnMoureALa.setBounds(514, 324, 148, 25);
+		add(btnMoureALa);
 	}
 
 	public static void setCurrentSolutionDate(String date)
@@ -150,13 +175,20 @@ public class EditarSolucioPanel extends JPanel
 		
 		DefaultListModel dlm = new DefaultListModel();
 		dlm.clear();
+		DefaultComboBoxModel<String> listsModel = new DefaultComboBoxModel<String>();
 		int i = 0;
-		for(ArrayList<String> list : currentSolutionLists) 
-			dlm.addElement("Llista " + String.valueOf(++i));
+		for(ArrayList<String> list : currentSolutionLists) {
+			++i;
+			dlm.addElement("Llista " + String.valueOf(i));
+			listsModel.addElement("Llista " + String.valueOf(i));
+		}
 		listsList.setModel(dlm);
 
 		if(listsList.getSelectedIndex() == -1) songsList.setModel(new DefaultListModel());
 		else populateSongList(listsList.getSelectedIndex());
+
+		
+		comboLists.setModel(listsModel);
 	}
 	
 	public void populateSongList(int listIndex)

@@ -379,4 +379,10 @@ public class SolutionManager
 	{
 		return getSolutionStringGraphCommunities(lastGeneratedSolutionId);
 	}
+
+	public static void modifyLastGeneratedSolution(String song, int from, int to) {
+		SongSolution s = getSolutionFromDate(lastGeneratedSolutionId);
+		ArrayList<Community> communities = s.getCommunities();
+		//TO-DO kñbgASDÑCVKUGASDÑVKDHASFÑVHASDÑBVHSCDVKLJBHSLFIBHSÓDVHBṔOAH
+	}
 }
