@@ -30,6 +30,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.Action;
 
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.CardLayout;
@@ -54,8 +55,13 @@ import java.io.IOException;
 import java.awt.SystemColor;
 import javax.swing.UIManager;
 
+import com.orsoncharts.Chart3DHints.Key;
 
-public class MainPanel extends JPanel {
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+
+public class MainPanel extends JPanel implements KeyListener{
 
 	/**
 	 * Create the panel.
@@ -170,7 +176,6 @@ public class MainPanel extends JPanel {
 		btnGenerarLlistes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//PresentationManager.goToCard(GenerarLlistesPanel.class.getSimpleName());
 				PresentationManager.goToCard(GenerarLlistesPanel.class.getSimpleName());
 			}
 		});
@@ -190,5 +195,26 @@ public class MainPanel extends JPanel {
 		btnEstadstiques.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEstadstiques.setMaximumSize(new Dimension(999, 25));
 		btnEstadstiques.setAlignmentY(0.0f);
+		
+		this.addKeyListener(this);
+		setFocusable(true);
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == 10)
+		{
+			System.out.println("SDASDADS");
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
 	}
 }
