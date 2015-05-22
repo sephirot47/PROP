@@ -203,6 +203,6 @@ public class EditarCanconsPanel extends JPanel
 		PresentationManager.saveCurrentSongsToDisk();
 		
 		PresentationManager.infoWindow("La canco ha estat modificada correctament!");
-		PresentationManager.goBack();
+		PresentationManager.goBack(false);
 	}
 }

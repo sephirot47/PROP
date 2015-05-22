@@ -1,0 +1,21 @@
+0
+(jfons, j)
+(jfons, aaa)
+(a, nnn)
+(jfons, nnn)
+(b, j)
+(b, nnn)
+(a, x)
+(b, f)
+1
+(k, k)
+(kx, kx)
+2
+(jfons, nooo no mentendeees carahoo)
+3
+(cx, kxy)
+(cx, cjkxya)
+(cx, kxya)
+(cx, ckxya)
+(kxy, kxy)
+(c, kxy)

@@ -132,7 +132,7 @@ public class EditarSolucioPanel extends JPanel
 			public void mouseClicked(MouseEvent e) 
 			{
 				PresentationManager.saveLastGeneratedSolution();
-				PresentationManager.goBack();
+				PresentationManager.goBack(false);
 			}
 		});
 		buttonSaveSolution.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

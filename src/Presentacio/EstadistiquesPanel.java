@@ -437,6 +437,10 @@ public class EstadistiquesPanel extends JPanel
 				 grafica.repaint();
 			 }
 		 }
+	}
+	public void refresh() {
+		// TODO Auto-generated method stub
+		
 	}		
 }
 	

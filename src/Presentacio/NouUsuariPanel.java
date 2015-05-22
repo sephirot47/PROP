@@ -89,6 +89,11 @@ public class NouUsuariPanel extends JPanel {
 			return;
 		}
 		
-		PresentationManager.goBack();
+		PresentationManager.goBack(false);
+	}
+
+	public void refresh() {
+		// TODO Auto-generated method stub
+		
 	}
 }

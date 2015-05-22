@@ -386,4 +386,9 @@ public class GenerarLlistesPanel extends JPanel {
 		
 		PresentationManager.generateSolution(algorisme, durationP, yearP, styleP, publicP, proximityP, authorP);
 	}
+
+	public void refresh() {
+		// TODO Auto-generated method stub
+		
+	}
 }

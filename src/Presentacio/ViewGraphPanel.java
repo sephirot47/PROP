@@ -58,6 +58,7 @@ import javax.swing.border.StrokeBorder;
 
 import java.awt.event.MouseWheelListener;
 import java.awt.event.MouseWheelEvent;
+import java.awt.SystemColor;
 
 public class ViewGraphPanel extends JPanel 
 {
@@ -73,9 +74,10 @@ public class ViewGraphPanel extends JPanel
 	private static Pair<String, Integer> selectedVertex = null;
 	private static Set< Pair<String, Float> > edgesVisible;
 	private static Pair<ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > , ArrayList< Pair<String, Integer> > > graphCommunities;
-	private JLabel labelNodeName;
 	private JButton btnPausar;
+	private JLabel labelTitol, labelAutor, labelDuracio, labelAny, labelEstils;
 	
+	@SuppressWarnings("unchecked")
 	public ViewGraphPanel() 
 	{
 		setLayout(null);
@@ -88,6 +90,7 @@ public class ViewGraphPanel extends JPanel
 		graphLayout = new SpringLayout<Pair<String, Integer>, Pair<String, Float>>(g);
 		graphLayout.setSize( new Dimension(layoutWidth, layoutHeight) );
 		vv = new VisualizationViewer(graphLayout);
+		vv.setBackground(SystemColor.controlLtHighlight);
 		
 		vv.addGraphMouseListener(new GraphMouseListener()
 		{
@@ -99,18 +102,20 @@ public class ViewGraphPanel extends JPanel
 				if(selectedVertex != null && selectedVertex.equals(vertex)) 
 				{
 					selectedVertex = null;
-					labelNodeName.setText("----");
+					clearSongData();
 					return;
 				}
 				
 				selectedVertex = vertex;
-				labelNodeName.setText(vertex.getFirst());
+				setSongData(vertex.getFirst());
 
 				ArrayList<Pair<String, Float>> edges = new ArrayList<Pair<String, Float>>(g.getIncidentEdges(vertex));
 				for(Pair<String, Float> e : edges)
 				{
 					edgesVisible.add(e);
 				}
+				
+				vv.invalidate();
 			}
 
 			public void graphPressed(Object t, MouseEvent arg1) {
@@ -118,7 +123,7 @@ public class ViewGraphPanel extends JPanel
 			
 			public void graphReleased(Object t, MouseEvent arg1) 
 			{
-				labelNodeName.setText("-----");
+				clearSongData();
 			}
 		});
 
@@ -165,17 +170,50 @@ public class ViewGraphPanel extends JPanel
 		btnRedibuixarGraf.setBounds(425, 416, 250, 23);
 		panel.add(btnRedibuixarGraf);
 		
-		labelNodeName = new JLabel("");
-		labelNodeName.setFont(new Font("Dialog", Font.PLAIN, 12));
-		labelNodeName.setBounds(256, 488, 452, 20);
-		add(labelNodeName);
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(101, 470, 590, 96);
+		add(panel_1);
+		panel_1.setLayout(null);
 		
-		JLabel lblNodeSeleccionat = new JLabel("Canco seleccionada:");
-		lblNodeSeleccionat.setAlignmentX(1.0f);
-		lblNodeSeleccionat.setAlignmentY(1.0f);
-		lblNodeSeleccionat.setHorizontalTextPosition(SwingConstants.RIGHT);
-		lblNodeSeleccionat.setBounds(87, 488, 157, 20);
-		add(lblNodeSeleccionat);
+		JLabel lblNewLabel = new JLabel("Titol:");
+		lblNewLabel.setBounds(28, 12, 70, 15);
+		panel_1.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Autor:");
+		lblNewLabel_1.setBounds(28, 39, 70, 15);
+		panel_1.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Estils:");
+		lblNewLabel_2.setBounds(222, 12, 58, 15);
+		panel_1.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("Any:");
+		lblNewLabel_3.setBounds(222, 39, 58, 15);
+		panel_1.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("Duracio:");
+		lblNewLabel_4.setBounds(388, 39, 70, 15);
+		panel_1.add(lblNewLabel_4);
+		
+		labelTitol = new JLabel("----");
+		labelTitol.setBounds(86, 12, 124, 15);
+		panel_1.add(labelTitol);
+		
+		labelAutor = new JLabel("----");
+		labelAutor.setBounds(86, 39, 124, 15);
+		panel_1.add(labelAutor);
+		
+		labelAny = new JLabel("----");
+		labelAny.setBounds(292, 39, 70, 15);
+		panel_1.add(labelAny);
+		
+		labelEstils = new JLabel("----");
+		labelEstils.setBounds(292, 12, 286, 15);
+		panel_1.add(labelEstils);
+		
+		labelDuracio = new JLabel("----");
+		labelDuracio.setBounds(470, 38, 108, 15);
+		panel_1.add(labelDuracio);
 		applyZoom(1.0);
 		
 		verticesAdded = new HashSet< Pair<String, Integer> >();
@@ -337,7 +375,7 @@ public class ViewGraphPanel extends JPanel
 	{
 		currentZoom = 1.0f;
 		redrawGraphInstant();
-		labelNodeName.setText("----");
+		//labelTitol.setText("----");
 	}
 	
 	public void redrawGraphInstant()
@@ -381,5 +419,29 @@ public class ViewGraphPanel extends JPanel
 		
 		vv.setGraphLayout(graphLayout);
 		refreshPauseButton();
+	}
+	
+	private void clearSongData() {
+		labelTitol.setText("----");
+		labelAutor.setText("----");
+		labelEstils.setText("----");
+		labelDuracio.setText("----");
+		labelAny.setText("----");
+	}
+	
+	private void setSongData(String songName) {
+		String author = songName.split(", ")[0].trim();
+		String title = songName.split(", ")[1].trim();
+		labelTitol.setText(author);
+		labelAutor.setText(title);
+		
+		ArrayList<String> styles= PresentationManager.getSongStyles(author, title);
+		String stylesStr = "";
+		for (String style : styles) {
+			stylesStr += style + ", ";
+		}
+		labelEstils.setText(stylesStr);
+		labelDuracio.setText(String.valueOf(PresentationManager.getSongDuration(author, title)));
+		labelAny.setText(String.valueOf(PresentationManager.getSongYear(author, title)));
 	}
 }

@@ -55,7 +55,7 @@ public class ViewPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) 
 			{
-				PresentationManager.goBack();
+				PresentationManager.goBack(true);
 			}
 		});
 		btnEnrerepanel.setHorizontalAlignment(SwingConstants.LEFT);
@@ -99,5 +99,11 @@ public class ViewPanel extends JPanel {
 		else if(cardName.equals(ConsultarSolucioPanel.class.getSimpleName())) csp.refresh();
 		else if(cardName.equals(EditarSolucioPanel.class.getSimpleName())) esp.refresh();
 		else if(cardName.equals(ViewGraphPanel.class.getSimpleName())) vgp.onEnterPanel();
+		else if(cardName.equals(GenerarLlistesPanel.class.getSimpleName())) recp.refresh();
+		else if(cardName.equals(EstadistiquesPanel.class.getSimpleName())) estp.refresh();
+		else if(cardName.equals(CreditsPanel.class.getSimpleName())) credp.refresh();
+		else if(cardName.equals(NouUsuariPanel.class.getSimpleName())) nup.refresh();
+		else if(cardName.equals(EditarUsuarisPanel.class.getSimpleName())) edup.refresh();
+		else if(cardName.equals(NovaCancoPanel.class.getSimpleName())) ncp.refresh();
 	}
 }

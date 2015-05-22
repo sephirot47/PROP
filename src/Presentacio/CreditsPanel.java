@@ -28,4 +28,9 @@ public class CreditsPanel extends JPanel {
 		panel.add(lblcCredits);
 		lblcCredits.setHorizontalAlignment(SwingConstants.CENTER);
 	}
+
+	public void refresh() {
+		// TODO Auto-generated method stub
+		
+	}
 }

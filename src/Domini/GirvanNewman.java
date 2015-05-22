@@ -95,7 +95,7 @@ public class GirvanNewman extends Algorithm
 			for(Edge e : edges)
 			{
 				Pair<Node, Node> nn = g.getNodesConnectedBy(e);
-				if(e.getWeight() >= 0)System.out.println(nn.getFirst().getId() + " ~" + e.getWeight() + "~ " + nn.getSecond().getId());
+				//if(e.getWeight() >= 0)System.out.println(nn.getFirst().getId() + " ~" + e.getWeight() + "~ " + nn.getSecond().getId());
 			}
 
 			//Obtenim el edge amb MENOR pes, per eliminar, de la llista de edges amb la mateixa betweenness
@@ -104,7 +104,7 @@ public class GirvanNewman extends Algorithm
 			for(Edge e : edgesToRemove)
 			{
 				Pair<Node, Node> nn = g.getNodesConnectedBy(e);
-				System.out.println("Candidate to remove: " + nn.getFirst().getId() + " ~" + e.getWeight() + "~ " + nn.getSecond().getId() + " (edgeBetweenness=" + edgeBetweenness.get(e) + ")");
+				//System.out.println("Candidate to remove: " + nn.getFirst().getId() + " ~" + e.getWeight() + "~ " + nn.getSecond().getId() + " (edgeBetweenness=" + edgeBetweenness.get(e) + ")");
 				if(e.getWeight() <= minEdgeWeight)
 				{
 					if(e.getWeight() < minEdgeWeight) 
@@ -122,7 +122,7 @@ public class GirvanNewman extends Algorithm
 			for(Edge e : edgesWithSameBetweennesAndWeight)
 			{
 				Pair<Node, Node> nn = g.getNodesConnectedBy(e);
-				System.out.println(nn.getFirst().getId() + " ~" + e.getWeight() + "~ " + nn.getSecond().getId());
+				//System.out.println(nn.getFirst().getId() + " ~" + e.getWeight() + "~ " + nn.getSecond().getId());
 			}
 			
 			//Trobem el edge que te la major S, on S es la suma de els nodes adjacents a cada un dels nodes que conecta el edge
@@ -137,16 +137,16 @@ public class GirvanNewman extends Algorithm
 					maxS = s;
 				}
 			}
-			System.out.println("");
-			System.out.println("maxS: " + maxS);
+			//System.out.println("");
+			//System.out.println("maxS: " + maxS);
 
 			if(edgeToRemove != null)
 			{
 				Pair<Node, Node> nn = g.getNodesConnectedBy(edgeToRemove);
-				System.out.println("");
-				System.out.println("EDGE TO REMOVE:");
-				System.out.println(nn.getFirst().getId() + " ~" + edgeToRemove.getWeight() + "~ " + nn.getSecond().getId());
-				System.out.println("________________");
+				//System.out.println("");
+				//System.out.println("EDGE TO REMOVE:");
+				//System.out.println(nn.getFirst().getId() + " ~" + edgeToRemove.getWeight() + "~ " + nn.getSecond().getId());
+				//System.out.println("________________");
 			}
 			
 			/*
@@ -170,7 +170,7 @@ public class GirvanNewman extends Algorithm
 			//Count the connected components again, in order to know if we must continue
 			//removing edges or not
 			connectedComponents = getConnectedComponents(g);
-			System.out.println("*******************************************+");
+			//System.out.println("*******************************************+");
 		}
 
 		//Restore the original weights !!!!!

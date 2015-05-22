@@ -38,6 +38,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import java.awt.Component;
+import javax.swing.ListSelectionModel;
 
 
 public class GestioCanconsPanel extends JPanel
@@ -86,6 +87,8 @@ public class GestioCanconsPanel extends JPanel
 		txtBuscar.setColumns(10);
 		
 		listSongs = new JList();
+		listSongs.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listSongs.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		listSongs.setAutoscrolls(false);
 		listSongs.setAlignmentY(0.0f);
 		listSongs.setAlignmentX(0.0f);
@@ -202,6 +205,8 @@ public class GestioCanconsPanel extends JPanel
 		panelSongDetail.add(scrollPane);
 		
 		listEstils = new JList();
+		listEstils.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listEstils.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		listEstils.setAutoscrolls(false);
 		listEstils.setAlignmentY(0.0f);
 		listEstils.setAlignmentX(0.0f);
@@ -254,6 +259,8 @@ public class GestioCanconsPanel extends JPanel
 
 		if(listSongs.getModel().getSize() > 0)
 			listSongs.setSelectedIndex(0);
+		
+		txtBuscar.requestFocus();
 	}
 	
 	public void populateSongDetails(String authorAndTitle)

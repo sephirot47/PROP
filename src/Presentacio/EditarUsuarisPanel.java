@@ -221,7 +221,7 @@ public class EditarUsuarisPanel extends JPanel
 				PresentationManager.setUserReproductions(currentUsername, repros);
 				PresentationManager.saveCurrentUsers();
 				PresentationManager.infoWindow("Usuari editat correctament!");
-				PresentationManager.goBack();
+				PresentationManager.goBack(false);
 			}
 		});
 		btnDesar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -332,5 +332,10 @@ public class EditarUsuarisPanel extends JPanel
 	public static void setCurrentUsername(String username)
 	{
 		currentUsername = username;
+	}
+
+	public void refresh() {
+		// TODO Auto-generated method stub
+		
 	}
 }

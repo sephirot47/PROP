@@ -28,6 +28,7 @@ public class PresentationManager
 {
 	private static Stack<String> windowHistory;
 	private static MainWindow window;
+	private static String currentCard = MainPanel.class.getSimpleName();
 	
 	public static void main(String[] args) 
 	{
@@ -239,16 +240,44 @@ public class PresentationManager
 		}
 	}
 	
-	public static void goBack()
+	public static void goBack(boolean confirm)
 	{
-		windowHistory.pop();
-		if(windowHistory.empty())
+		boolean goes = true;
+		if(confirm)
 		{
-			changeCard("Main");
+			if(currentCard.equals(EditarSolucioPanel.class.getSimpleName()))
+			{
+				goes = PresentationManager.confirmWindow("Estas segur de que vols anar enrere i descartar la teva solucio?");
+			}
+			else if(currentCard.equals(EditarUsuarisPanel.class.getSimpleName()))
+			{
+				goes = PresentationManager.confirmWindow("Estas segur de que vols anar enrere i descartar els canvis fets al usuari?");
+			}
+			else if(currentCard.equals(EditarCanconsPanel.class.getSimpleName()))
+			{
+				goes = PresentationManager.confirmWindow("Estas segur de que vols anar enrere i descartar els canvis fets a la canco?");
+			}
+			else if(currentCard.equals(NouUsuariPanel.class.getSimpleName()))
+			{
+				goes = PresentationManager.confirmWindow("Estas segur de que vols anar enrere i descartar el nou usuari?");
+			}
+			else if(currentCard.equals(NovaCancoPanel.class.getSimpleName()))
+			{
+				goes = PresentationManager.confirmWindow("Estas segur de que vols anar enrere i descartar la nova canco?");
+			}
 		}
-		else
+			
+		if(goes)
 		{
-			changeCard(windowHistory.peek());
+			windowHistory.pop();
+			if(windowHistory.empty())
+			{
+				changeCard(MainPanel.class.getSimpleName());
+			}
+			else
+			{
+				changeCard(windowHistory.peek());
+			}
 		}
 	}
 
@@ -403,6 +432,7 @@ public class PresentationManager
 	{
 		changeCard(cardName);
 		JPanel p = (JPanel) MainWindow.frmYoutube.getContentPane();
+		currentCard = cardName;
 		windowHistory.push(cardName);
 	}
 	
@@ -425,6 +455,8 @@ public class PresentationManager
 			cl = (CardLayout) (p.getLayout());
 			cl.show(p, cardName);
 		}
+		
+		currentCard = cardName;
 	}
 	//////////////////////////////////////////////////
 

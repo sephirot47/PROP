@@ -61,7 +61,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 
-public class MainPanel extends JPanel implements KeyListener{
+public class MainPanel extends JPanel
+{
 
 	/**
 	 * Create the panel.
@@ -195,26 +196,5 @@ public class MainPanel extends JPanel implements KeyListener{
 		btnEstadstiques.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEstadstiques.setMaximumSize(new Dimension(999, 25));
 		btnEstadstiques.setAlignmentY(0.0f);
-		
-		this.addKeyListener(this);
-		setFocusable(true);
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == 10)
-		{
-			System.out.println("SDASDADS");
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
 	}
 }
