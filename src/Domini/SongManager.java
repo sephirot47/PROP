@@ -139,6 +139,11 @@ public class SongManager
     	return null;
     }
     
+    public static int getSongsNum()
+	{
+    	return songs.size();
+	}
+    
     public static ArrayList<Pair<String, String>> getSongsAuthorsAndTitles()
 	{
     	ArrayList<Pair<String, String>> res = new ArrayList<Pair<String, String>>();

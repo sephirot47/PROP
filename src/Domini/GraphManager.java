@@ -203,7 +203,7 @@ public class GraphManager
 		return result;
 	}
 
-	public static String generateSolution(char algorisme, int durationP, int yearP, int styleP, int publicP, int proximityP, int authorP) throws Exception
+	public static String generateSolution(char algorisme, int durationP, int yearP, int styleP, int publicP, int proximityP, int authorP, int numComGN) throws Exception
 	{
 		try { SongManager.loadSongsFromDisk(); } 
 		catch(Exception e) { throw new Exception("No es troba el arxiu de cancons 'data/songs/songs.txt'"); }
@@ -223,7 +223,7 @@ public class GraphManager
 		generateEdges(g, p);
 		
 		Solution rawSol = null;
-		if(algorisme == 'G') rawSol = new GirvanNewman().getSolution(g);
+		if(algorisme == 'G') rawSol = new GirvanNewman().getSolution(g, numComGN);
 		else if(algorisme == 'C') rawSol = new Clique().getSolution(g);		
 		else rawSol = new Louvain().getSolution(g);
 		SongSolution sol = new SongSolution(g, rawSol);

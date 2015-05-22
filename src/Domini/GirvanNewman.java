@@ -90,8 +90,8 @@ public class GirvanNewman extends Algorithm
 				}
 			}
 
-			System.out.println("");
-			System.out.println("Edges Left:");
+			//System.out.println("");
+			//System.out.println("Edges Left:");
 			for(Edge e : edges)
 			{
 				Pair<Node, Node> nn = g.getNodesConnectedBy(e);
@@ -117,8 +117,8 @@ public class GirvanNewman extends Algorithm
 				}
 			}
 
-			System.out.println("");
-			System.out.println("edgesWithSameBetweennesAndWeight: ");
+			//System.out.println("");
+			//System.out.println("edgesWithSameBetweennesAndWeight: ");
 			for(Edge e : edgesWithSameBetweennesAndWeight)
 			{
 				Pair<Node, Node> nn = g.getNodesConnectedBy(e);

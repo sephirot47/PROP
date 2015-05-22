@@ -142,12 +142,12 @@ public class PresentationManager
 		return SolutionManager.getSolutionCommunities(solutionDate);
 	}
 
-	public static void generateSolution(char algorisme, int durationP, int yearP, int styleP, int publicP, int proximityP, int authorP) 
+	public static void generateSolution(char algorisme, int durationP, int yearP, int styleP, int publicP, int proximityP, int authorP, int numComGN) 
 	{
 		String id = "";
 		try 
 		{ 
-			 id = GraphManager.generateSolution(algorisme, durationP, yearP, styleP, publicP, proximityP, authorP); 
+			 id = GraphManager.generateSolution(algorisme, durationP, yearP, styleP, publicP, proximityP, authorP, numComGN); 
 		}
 		catch(Exception e) { errorWindow(e.getMessage()); return; }
 		
@@ -317,6 +317,11 @@ public class PresentationManager
 	public static void createSong(String author, String title, int year, int duration, ArrayList<String> styles) throws Exception
 	{
 		SongManager.createSong(author, title, year, duration, styles);
+	}
+
+	public static int getSongsNum()
+	{
+		return SongManager.getSongsNum();
 	}
 	
 	public static ArrayList<Pair<String, String>> getSongsAuthorsAndTitles()

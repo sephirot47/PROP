@@ -30,19 +30,31 @@ import javax.swing.border.BevelBorder;
 import javax.swing.JSeparator;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
+
+import Domini.GirvanNewman;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JTextArea;
+import javax.swing.JEditorPane;
+import javax.swing.JTextPane;
 
 public class GenerarLlistesPanel extends JPanel {
 
-	JLabel labelSliderDuracio = null, 
+	private JLabel labelSliderDuracio = null, 
 			labelSliderAny = null, 
 			labelSliderEstil = null,
 			labelSliderPublic = null,
 			labelSliderProximitat = null,
 			labelSliderAutor = null;
 
+	private JPanel panelGirvanNewmanSlider;
 	private final ButtonGroup algorismeGroup = new ButtonGroup();
 	private JRadioButton Girvan, louvain, clique;
+	private final JSlider sliderComunitatsGN;
 	private JSlider sliderDuracio, sliderAny,sliderEstil, sliderPublic, sliderProximitat, sliderAutor;
+	private JTextField textComunitatsGN;
 	
 	public GenerarLlistesPanel()
 	{
@@ -288,6 +300,19 @@ public class GenerarLlistesPanel extends JPanel {
 		
 
 		Girvan = new JRadioButton("Girvan Newman");
+		Girvan.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) 
+			{
+				if(Girvan.isSelected())
+				{
+					panelGirvanNewmanSlider.setVisible(true);
+				}
+				else
+				{
+					panelGirvanNewmanSlider.setVisible(false);
+				}
+			}
+		});
 		Girvan.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		Girvan.setSize(234, 20);
 		Girvan.setLocation(6, 7);
@@ -315,6 +340,73 @@ public class GenerarLlistesPanel extends JPanel {
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(10, 80, 225, 2);
 		panelAlgorisme.add(separator_1);
+		
+		panelGirvanNewmanSlider = new JPanel();
+		panelGirvanNewmanSlider.setLayout(null);
+		panelGirvanNewmanSlider.setBounds(505, 175, 250, 137);
+		add(panelGirvanNewmanSlider);
+		
+		JLabel lblNombreComunitatsGirvan = new JLabel("Llistes Girvan Newman:");
+		lblNombreComunitatsGirvan.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblNombreComunitatsGirvan.setBounds(12, 13, 186, 15);
+		panelGirvanNewmanSlider.add(lblNombreComunitatsGirvan);
+		
+		sliderComunitatsGN = new JSlider();
+		sliderComunitatsGN.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		sliderComunitatsGN.setMinorTickSpacing(1);
+		sliderComunitatsGN.setMaximum(10);
+		sliderComunitatsGN.setMajorTickSpacing(1);
+		sliderComunitatsGN.setBounds(0, 40, 238, 16);
+		panelGirvanNewmanSlider.add(sliderComunitatsGN);
+		
+		Girvan.setSelected(true);
+		panelGirvanNewmanSlider.setVisible(true);
+		
+		textComunitatsGN = new JTextField();
+		textComunitatsGN.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) 
+			{
+				new Thread(new Runnable() { public void run() { try{Thread.sleep(100);}catch(Exception e){}
+				int nComunitats = -1;
+				try
+				{
+					nComunitats = Integer.parseInt(textComunitatsGN.getText());
+				}
+				catch(NumberFormatException exc){ return; }
+				
+				int numNodes = PresentationManager.getSongsNum();
+				if(nComunitats < 1 || nComunitats >= numNodes) return;
+				sliderComunitatsGN.setValue(nComunitats);
+				}}).start();
+			}
+		});
+		textComunitatsGN.setBounds(191, 12, 47, 19);
+		panelGirvanNewmanSlider.add(textComunitatsGN);
+		textComunitatsGN.setColumns(10);
+		
+		JTextPane txtpnminimesLlistesDe = new JTextPane();
+		txtpnminimesLlistesDe.setBackground(new Color(0,0,0,0));
+		txtpnminimesLlistesDe.setEditable(false);
+		txtpnminimesLlistesDe.setText("(Minimes llistes de reproduccio que tindra la reproduccio)");
+		txtpnminimesLlistesDe.setBounds(12, 68, 226, 57);
+		panelGirvanNewmanSlider.add(txtpnminimesLlistesDe);
+
+		sliderComunitatsGN.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) 
+			{
+				textComunitatsGN.setText( String.valueOf(sliderComunitatsGN.getValue()) );
+				textComunitatsGN.setCaretPosition(textComunitatsGN.getText().length());
+			}
+		});
+		
+		sliderComunitatsGN.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) 
+			{
+				if(textComunitatsGN != null)
+					textComunitatsGN.setText( String.valueOf(sliderComunitatsGN.getValue()) );
+			}
+		});
 		
 		sliderDuracio.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) 
@@ -384,11 +476,13 @@ public class GenerarLlistesPanel extends JPanel {
 		int proximityP = sliderProximitat.getValue();
 		int authorP = sliderAutor.getValue();
 		
-		PresentationManager.generateSolution(algorisme, durationP, yearP, styleP, publicP, proximityP, authorP);
+		PresentationManager.generateSolution(algorisme, durationP, yearP, styleP, publicP, proximityP, authorP, sliderComunitatsGN.getValue());
 	}
 
-	public void refresh() {
-		// TODO Auto-generated method stub
-		
+	public void refresh() 
+	{
+		int numNodes = PresentationManager.getSongsNum();
+		sliderComunitatsGN.setMinimum(1);
+		sliderComunitatsGN.setMaximum(numNodes);
 	}
 }

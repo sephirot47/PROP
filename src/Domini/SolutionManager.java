@@ -395,14 +395,8 @@ public class SolutionManager
 				communities.add(stringNode);
 			}
 		}
-		
-		for(Pair<String, Integer> entry : communities)
-		{
-			System.out.println(entry.getFirst() + ", " + entry.getSecond());
-		}
-			
-		result.setSecond(communities);
-		
+
+		result.setSecond(communities);		
 		return result;
 	}
 
