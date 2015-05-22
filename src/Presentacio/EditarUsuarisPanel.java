@@ -43,12 +43,10 @@ import javax.swing.JScrollPane;
 public class EditarUsuarisPanel extends JPanel
 {
 	private static String currentUsername = "";
-	final private JList listReproductions;
+	final private JList listReproductions, songList;
 	private JLabel textNom;
 	private JTextField textEdat;
 	private JButton btnEliminarReproduccio;
-	private JTextField textTitol;
-	private JTextField textAutor;
 	private JTextField textTimestamp;
 	
 	public EditarUsuarisPanel()
@@ -65,30 +63,31 @@ public class EditarUsuarisPanel extends JPanel
 		setLayout(null);
 		
 		JPanel panelUserDetail = new JPanel();
-		panelUserDetail.setBounds(0, 30, 364, 486);
+		panelUserDetail.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		panelUserDetail.setBounds(29, 58, 364, 418);
 		add(panelUserDetail);
 		panelUserDetail.setLayout(null);
 		
 		JLabel lblNom = new JLabel("Nom:");
 		lblNom.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNom.setBounds(10, 11, 36, 20);
+		lblNom.setBounds(12, 12, 36, 20);
 		panelUserDetail.add(lblNom);
 		
 		JLabel lblEdat = new JLabel("Edat:");
 		lblEdat.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblEdat.setBounds(10, 39, 48, 20);
+		lblEdat.setBounds(12, 40, 48, 20);
 		panelUserDetail.add(lblEdat);
 		
 		JLabel lblReproduccions = new JLabel("Reproduccions:");
 		lblReproduccions.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblReproduccions.setBounds(10, 71, 119, 20);
+		lblReproduccions.setBounds(12, 72, 119, 20);
 		panelUserDetail.add(lblReproduccions);
 		
 		listReproductions = new JList();
 		listReproductions.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 103, 336, 301);
+		scrollPane.setBounds(10, 97, 336, 231);
 		panelUserDetail.add(scrollPane);
 		listReproductions.setBounds(12, 127, 340, 304);
 		scrollPane.setViewportView(listReproductions);
@@ -102,7 +101,7 @@ public class EditarUsuarisPanel extends JPanel
 			}
 		});
 		btnEliminarReproduccio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEliminarReproduccio.setBounds(10, 416, 336, 25);
+		btnEliminarReproduccio.setBounds(12, 340, 336, 25);
 		panelUserDetail.add(btnEliminarReproduccio);
 		
 		textNom = new JLabel();
@@ -113,13 +112,13 @@ public class EditarUsuarisPanel extends JPanel
 				refreshAll();
 			}
 		});
-		textNom.setBounds(57, 12, 114, 19);
+		textNom.setBounds(59, 13, 114, 19);
 		panelUserDetail.add(textNom);
 		//textNom.setColumns(10);
 		
 		textEdat = new JTextField();
 		textEdat.setColumns(10);
-		textEdat.setBounds(57, 40, 114, 19);
+		textEdat.setBounds(59, 41, 114, 19);
 		panelUserDetail.add(textEdat);
 		
 		JButton btnImportarFitxer = new JButton("Importar fitxer");
@@ -132,42 +131,25 @@ public class EditarUsuarisPanel extends JPanel
 				refreshReproductionsList();
 			}
 		});
-		btnImportarFitxer.setBounds(10, 450, 336, 25);
+		btnImportarFitxer.setBounds(12, 374, 336, 25);
 		panelUserDetail.add(btnImportarFitxer);
 		
 		JPanel panelUsers = new JPanel();
-		panelUsers.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelUsers.setBounds(406, 155, 311, 152);
+		panelUsers.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		panelUsers.setBounds(445, 58, 311, 405);
 		add(panelUsers);
 		panelUsers.setLayout(null);
-		
-		JLabel lblTitol = new JLabel("Titol:");
-		lblTitol.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblTitol.setBounds(10, 13, 70, 15);
-		panelUsers.add(lblTitol);
-		
-		JLabel lblAutor = new JLabel("Autor:");
-		lblAutor.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblAutor.setBounds(10, 42, 70, 15);
-		panelUsers.add(lblAutor);
-		
-		textTitol = new JTextField();
-		textTitol.setBounds(106, 11, 191, 19);
-		panelUsers.add(textTitol);
-		textTitol.setColumns(10);
-		
-		textAutor = new JTextField();
-		textAutor.setBounds(106, 40, 191, 19);
-		panelUsers.add(textAutor);
-		textAutor.setColumns(10);
 		
 		JButton btnAfegir = new JButton("Afegir");
 		btnAfegir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 
 			{
-				String titol = textTitol.getText().trim();
-				String autor = textAutor.getText().trim();
+				if(songList.getSelectedIndex() < 0) return;
+				
+				String line = (String) songList.getSelectedValue();
+				String autor = line.split(",")[1].trim();
+				String titol = line.split(",")[0].trim();
 				int timestamp = -1;
 				try
 				{
@@ -191,18 +173,27 @@ public class EditarUsuarisPanel extends JPanel
 		});
 
 		btnAfegir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnAfegir.setBounds(10, 110, 287, 25);
+		btnAfegir.setBounds(12, 368, 287, 25);
 		panelUsers.add(btnAfegir);
 		
 		textTimestamp = new JTextField();
 		textTimestamp.setColumns(10);
-		textTimestamp.setBounds(106, 71, 191, 19);
+		textTimestamp.setBounds(108, 337, 191, 19);
 		panelUsers.add(textTimestamp);
 		
 		JLabel lblTimestamp = new JLabel("Timestamp:");
 		lblTimestamp.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblTimestamp.setBounds(10, 73, 112, 15);
+		lblTimestamp.setBounds(12, 339, 112, 15);
 		panelUsers.add(lblTimestamp);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(12, 12, 287, 312);
+		panelUsers.add(scrollPane_1);
+		
+		songList = new JList();
+		songList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		songList.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		scrollPane_1.setViewportView(songList);
 		
 		JButton btnDesar = new JButton("Desar canvis");
 		btnDesar.addMouseListener(new MouseAdapter() {
@@ -234,17 +225,17 @@ public class EditarUsuarisPanel extends JPanel
 			}
 		});
 		btnDesar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnDesar.setBounds(406, 327, 311, 42);
+		btnDesar.setBounds(445, 475, 311, 42);
 		add(btnDesar);
 		
-		JLabel lblNovaReproduccio = new JLabel("Nova Reproduccio");
+		JLabel lblNovaReproduccio = new JLabel("Afegir nova reproduccio:");
 		lblNovaReproduccio.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNovaReproduccio.setBounds(406, 129, 126, 15);
+		lblNovaReproduccio.setBounds(445, 31, 311, 15);
 		add(lblNovaReproduccio);
 		
 		JLabel lblDetallsUsuari = new JLabel("Detalls usuari:");
 		lblDetallsUsuari.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDetallsUsuari.setBounds(0, 11, 114, 20);
+		lblDetallsUsuari.setBounds(37, 26, 114, 20);
 		add(lblDetallsUsuari);
 		
 		refreshAll();
@@ -253,6 +244,7 @@ public class EditarUsuarisPanel extends JPanel
 	public void refreshAll()
 	{
 		refreshReproductionsList();
+		refreshSongsList();
 		refreshTexts();
 	}
 	
@@ -263,7 +255,27 @@ public class EditarUsuarisPanel extends JPanel
 		int age = PresentationManager.getUserAge(currentUsername);
 		textEdat.setText( String.valueOf(age) );
 	}
-	
+
+	private void refreshSongsList()
+	{	
+		DefaultListModel dlm = new DefaultListModel();
+		dlm.clear();
+
+		ArrayList<Pair<String, String>> authorsAndTitles = PresentationManager.getSongsAuthorsAndTitles();
+		ArrayList<String> authorsAndTitlesTogether = new ArrayList<String>();
+		for(Pair<String, String> p : authorsAndTitles) authorsAndTitlesTogether.add(p.getFirst() + ", " + p.getSecond());
+		Collections.sort(authorsAndTitlesTogether);
+		
+		if(authorsAndTitlesTogether != null)
+		{
+			for(String song : authorsAndTitlesTogether)
+			{
+				dlm.addElement(song);
+			}
+		}
+		
+		songList.setModel(dlm);
+	}
 	
 	private void refreshReproductionsList()
 	{	
