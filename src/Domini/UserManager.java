@@ -32,6 +32,8 @@ public class UserManager
 			addUser(u);
 		}
 	}
+	
+	public static Set<User> getUsers() { return users; }
 
 	public static void addUsersFrom(String filepath) throws Exception
 	{

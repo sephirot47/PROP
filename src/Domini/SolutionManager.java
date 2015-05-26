@@ -383,15 +383,17 @@ public class SolutionManager
 			boolean found = false;
 			for(Song song2 : communitiedSongs)
 			{
-				if(song2.getAuthor().equals(song.getAuthor()) && 
-				   song2.getTitle().equals(song.getTitle()))
+				if(song2.getAuthor().trim().equals(song.getAuthor().trim()) && 
+				   song2.getTitle().trim().equals(song.getTitle().trim()))
 				{
 					found = true; break;
 				}
 			}
+			
 			if(!found)
 			{
 				Pair<String, Integer> stringNode = new Pair<String, Integer>(song.getId(), -1);
+				System.out.println(stringNode.getFirst() + " ~~~~~~  community = -1");
 				communities.add(stringNode);
 			}
 		}

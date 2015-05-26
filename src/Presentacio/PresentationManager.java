@@ -149,7 +149,7 @@ public class PresentationManager
 		{ 
 			 id = GraphManager.generateSolution(algorisme, durationP, yearP, styleP, publicP, proximityP, authorP, numComGN); 
 		}
-		catch(Exception e) { errorWindow(e.getMessage()); return; }
+		catch(Exception e) { errorWindow(e.getMessage()); e.printStackTrace(); return; }
 		
 		goToEditarSolucioPanel(id);
 	}
