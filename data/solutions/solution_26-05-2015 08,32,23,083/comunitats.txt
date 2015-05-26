@@ -1,3 +1,0 @@
-0
-(autor, titol2)
-(autor, titol)

@@ -33,6 +33,7 @@ public class PresentationManager
 	public static void main(String[] args) 
 	{
 		windowHistory = new Stack<String>();
+		
 
 		EventQueue.invokeLater(new Runnable() 
 		{

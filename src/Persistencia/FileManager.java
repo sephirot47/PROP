@@ -35,6 +35,10 @@ public class FileManager
 
     public static ArrayList<String> loadData(String path) throws IOException
     {
+    	
+    	if (!new File(path).exists()) {
+    		saveData(path,new ArrayList<String>());
+    	}
         ArrayList<String> list = new ArrayList<String>(); //Creem array
         
         Path fileToLoad = Paths.get(path); //generem un path amb l'string

@@ -188,23 +188,23 @@ public class ViewGraphPanel extends JPanel
 		panel_1.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Any:");
-		lblNewLabel_3.setBounds(222, 39, 58, 15);
+		lblNewLabel_3.setBounds(302, 39, 58, 15);
 		panel_1.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Duracio:");
-		lblNewLabel_4.setBounds(388, 39, 70, 15);
+		lblNewLabel_4.setBounds(468, 39, 70, 15);
 		panel_1.add(lblNewLabel_4);
 		
-		labelTitol = new JLabel("----");
-		labelTitol.setBounds(86, 12, 124, 15);
-		panel_1.add(labelTitol);
-		
 		labelAutor = new JLabel("----");
-		labelAutor.setBounds(86, 39, 124, 15);
+		labelAutor.setBounds(86, 12, 124, 15);
 		panel_1.add(labelAutor);
 		
+		labelTitol = new JLabel("----");
+		labelTitol.setBounds(86, 39, 124, 15);
+		panel_1.add(labelTitol);
+		
 		labelAny = new JLabel("----");
-		labelAny.setBounds(292, 39, 70, 15);
+		labelAny.setBounds(372, 39, 70, 15);
 		panel_1.add(labelAny);
 		
 		labelEstils = new JLabel("----");
@@ -212,7 +212,7 @@ public class ViewGraphPanel extends JPanel
 		panel_1.add(labelEstils);
 		
 		labelDuracio = new JLabel("----");
-		labelDuracio.setBounds(470, 38, 108, 15);
+		labelDuracio.setBounds(550, 38, 108, 15);
 		panel_1.add(labelDuracio);
 		applyZoom(1.0);
 		
