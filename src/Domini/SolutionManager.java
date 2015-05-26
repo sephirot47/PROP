@@ -361,7 +361,6 @@ public class SolutionManager
 		result.setFirst(stringGraph);
 		
 		ArrayList< Pair<String, Integer> > communities = new ArrayList< Pair<String, Integer> >(); 
-		System.out.println(s.getCommunities().size());
 		Set<Song> communitiedSongs = new HashSet<Song>();
 		int cIndex = 0;
 		for(Community c : s.getCommunities())
@@ -393,7 +392,6 @@ public class SolutionManager
 			if(!found)
 			{
 				Pair<String, Integer> stringNode = new Pair<String, Integer>(song.getId(), -1);
-				System.out.println(stringNode.getFirst() + " ~~~~~~  community = -1");
 				communities.add(stringNode);
 			}
 		}

@@ -68,9 +68,8 @@ public class GraphManager
 		System.out.println("Despres de calcular affinities");
 		
 		int numNodes = songs.size();
-		int nAristes = (int)(numNodes * (numNodes+1)/2);
-		int step = nAristes * 2 - numNodes * 4;
-		System.out.println("BEFORE TO ARRAY " + step + "/" + (affinities.size() / 2) + ", " + nAristes);
+		int step = affinities.size() - numNodes * 4;
+		System.out.println("BEFORE TO ARRAY " + step + "/");
 		Float threshold = (Float) (numNodes == 0 ? 0.0f : affinities.toArray()[step]);
 		System.out.println("AFTEER TO ARRAY");
 		if(threshold == Float.NaN) threshold = 0.0f;
@@ -80,6 +79,7 @@ public class GraphManager
 		System.out.println("Step " + step);
 		System.out.println("Threshold " + threshold);
 
+		int i = 0;
 		for(Song s : songs)
 		{
 			for(Song s2 : songs)
@@ -92,6 +92,7 @@ public class GraphManager
 				if(affinity >= threshold) { ++edges; g.addEdge(s, s2, edge); }
 				//System.out.println("Affinity " + affinity);
 			}
+			System.out.println(++i);
 		}
 		System.out.println("Num edges " + edges);
 	}

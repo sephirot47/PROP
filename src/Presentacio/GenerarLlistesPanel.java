@@ -121,7 +121,7 @@ public class GenerarLlistesPanel extends JPanel {
 		panelDuracio.add(lblCanonsAmbRelacio);
 		lblCanonsAmbRelacio.setFont(new Font("Dialog", Font.PLAIN, 12));
 		
-		 sliderDuracio = new JSlider();
+    	sliderDuracio = new JSlider();
 		sliderDuracio.setBounds(0, 40, 332, 16);
 		panelDuracio.add(sliderDuracio);
 		sliderDuracio.setMajorTickSpacing(1);
@@ -376,7 +376,7 @@ public class GenerarLlistesPanel extends JPanel {
 				catch(NumberFormatException exc){ return; }
 				
 				int numNodes = PresentationManager.getSongsNum();
-				if(nComunitats < 1 || nComunitats >= numNodes) return;
+				if(nComunitats < 1 || nComunitats > numNodes) return;
 				sliderComunitatsGN.setValue(nComunitats);
 				}}).start();
 			}
