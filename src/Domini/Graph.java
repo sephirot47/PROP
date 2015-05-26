@@ -11,10 +11,12 @@ public class Graph <N extends Node>
 {
 	//For every node, there will be a hash containing
 	//the nodes it's connected to and its corresponding edges
-	private HashMap<N, HashMap<N, Edge>> graph; 
+	private HashMap<N, HashMap<N, Edge>> graph;
+	private HashMap<Edge, Pair<N, N>> edgesToNodes;
 	
 	public Graph()
 	{
+		edgesToNodes = new HashMap<Edge, Pair<N, N>>();
 		graph = new HashMap<N, HashMap<N, Edge>>();
 	}
 
@@ -26,7 +28,7 @@ public class Graph <N extends Node>
 	 */
 	public void addNode(N node)
 	{
-		graph.put(node, new HashMap<N, Edge>()); //Tot correcte, es pot afegir el node
+		graph.put(node, new HashMap<N, Edge>());
 	}
 
 	/**
@@ -43,11 +45,7 @@ public class Graph <N extends Node>
 	 */
 	public Pair<N, N> getNodesConnectedBy(Edge e)
 	{
-		for(N n1 : graph.keySet())
-			for(N n2 : graph.get(n1).keySet())
-				if(getEdge(n1, n2) == e) 
-					return new Pair<N, N>(n1, n2);
-		return null;
+		return edgesToNodes.get(e);
 	}
 
 	/**
@@ -91,6 +89,7 @@ public class Graph <N extends Node>
 	{
 		graph.get(node1).put(node2, edge);
 		graph.get(node2).put(node1, edge);
+		edgesToNodes.put(edge, new Pair<N,N>(node1, node2));
 	}
 
 	/**
@@ -110,17 +109,7 @@ public class Graph <N extends Node>
 	 */
 	public Set<Edge> getAllEdges()
 	{
-		Set<Edge> edges = new HashSet<Edge>();
-		Set<N> nodes =  getAllNodes();
-		for(N n : nodes)
-		{
-			for(N n2 : nodes)
-			{
-				Edge edge = getEdge(n, n2);
-				if(edge != null && !edges.contains(edge)) edges.add(edge);
-			}
-		}
-		return edges;
+		return edgesToNodes.keySet();
 	}
 	
 	/**
@@ -130,25 +119,19 @@ public class Graph <N extends Node>
 	public void removeEdge(Edge edge)
 	{
 		//We need to use iterators because we are removing while iterating items
-		Iterator it1 = graph.values().iterator();
-		while(it1.hasNext())
-		{
-			HashMap<N,Edge> adjList = (HashMap<N,Edge>) it1.next();
-			Iterator it2 = adjList.keySet().iterator();
-			while(it2.hasNext())
-			{
-				Node adjNode = (Node)it2.next();
-				if(adjList.get(adjNode) == edge) it2.remove();
-			}
-		}
+		Pair<N,N> nodes = edgesToNodes.get(edge);
+		N n1 = nodes.getFirst(); N n2 = nodes.getSecond();
+		graph.get(n1).remove(n2);
+		graph.get(n2).remove(n1);
+		edgesToNodes.remove(edge);
 	}
 	/**
 	 * Removes all the edges.
 	 */
 	public void removeAllEdges()
 	{
-		Set<Edge> edges = getAllEdges();
-		for(Edge e : edges) removeEdge(e);
+		edgesToNodes = new HashMap<Edge, Pair<N,N>>();
+		for(N n : graph.keySet()) graph.put(n, new HashMap<N, Edge>());
 	}
 	
 	public Set<Edge> getAdjacentEdgesTo(Node n)

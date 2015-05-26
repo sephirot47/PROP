@@ -1,0 +1,43 @@
+(Melendi,Pentakill_228)
+(Bertri,All I want for Christmas is you_220)
+(Camela,The Freak_245)
+(Skrillex,Sabata Rota_280)
+(DJ RFA,Cuando zarpa el hamor_54)
+(Camela,Pentakill_26)
+(Camela,The Freak_288)
+(Abraham,Pentakill_127)
+(Vector,Boca beats_102)
+(DJ RFA,Cuando zarpa el hamor_109)
+(Skrillex,Sabata Rota_135)
+3;8;1.0
+10;4;0.33333334
+8;3;0.6666667
+3;2;0.5
+7;6;1.0
+9;2;0.33333334
+6;0;0.5
+4;10;1.0
+4;2;1.0
+0;10;0.5
+3;9;0.5
+2;8;0.6666667
+2;9;0.33333334
+2;10;0.6666667
+0;7;1.0
+3;10;0.5
+10;1;0.33333334
+0;1;0.5
+1;10;1.0
+10;2;0.6666667
+6;7;1.0
+1;0;1.0
+8;2;0.6666667
+8;10;0.6666667
+7;0;1.0
+10;8;0.6666667
+10;3;0.33333334
+2;3;0.33333334
+2;4;0.33333334
+10;0;0.33333334
+0;6;0.5
+9;3;0.33333334

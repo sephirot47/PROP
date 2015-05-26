@@ -53,7 +53,7 @@ public class GraphManager
 				++n;
 			}
 		}
-		System.out.println("Threshold: " + threshold);
+		//System.out.println("Threshold: " + threshold);
 		
 		threshold /= n;
 		if(threshold == Float.NaN) threshold = 0.0f;
@@ -67,7 +67,7 @@ public class GraphManager
 				Float affinity = getAffinity(s,s2,p,g);
 				edge.setWeight(affinity);
 				if(affinity >= threshold) g.addEdge(s, s2, edge);
-				System.out.println("Affinity " + affinity);
+				//System.out.println("Affinity " + affinity);
 			}
 		}
 

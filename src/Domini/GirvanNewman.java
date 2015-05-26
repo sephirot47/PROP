@@ -64,7 +64,6 @@ public class GirvanNewman extends Algorithm
 			///////////////////
 			
 			//Search for the edge with maximum betweenness
-			Set<Edge> edgesToRemove = new HashSet<Edge>();
 			Edge edgeToRemove = null;
 			float maxEdgeBetweenness = Float.NEGATIVE_INFINITY;
 			for(Node node1 : nodes)
@@ -80,83 +79,14 @@ public class GirvanNewman extends Algorithm
 						{
 							if(betweenness > maxEdgeBetweenness)
 							{
-								edgesToRemove.clear();
+								edgeToRemove = currentEdge;
 								maxEdgeBetweenness = betweenness;
 							}
-							
-							edgesToRemove.add(currentEdge);
 						}
 					}
 				}
 			}
 
-			//System.out.println("");
-			//System.out.println("Edges Left:");
-			for(Edge e : edges)
-			{
-				Pair<Node, Node> nn = g.getNodesConnectedBy(e);
-				//if(e.getWeight() >= 0)System.out.println(nn.getFirst().getId() + " ~" + e.getWeight() + "~ " + nn.getSecond().getId());
-			}
-
-			//Obtenim el edge amb MENOR pes, per eliminar, de la llista de edges amb la mateixa betweenness
-			ArrayList<Edge> edgesWithSameBetweennesAndWeight = new ArrayList<Edge>();
-			float minEdgeWeight = Float.POSITIVE_INFINITY;
-			for(Edge e : edgesToRemove)
-			{
-				Pair<Node, Node> nn = g.getNodesConnectedBy(e);
-				//System.out.println("Candidate to remove: " + nn.getFirst().getId() + " ~" + e.getWeight() + "~ " + nn.getSecond().getId() + " (edgeBetweenness=" + edgeBetweenness.get(e) + ")");
-				if(e.getWeight() <= minEdgeWeight)
-				{
-					if(e.getWeight() < minEdgeWeight) 
-					{
-						edgesWithSameBetweennesAndWeight.clear();
-						minEdgeWeight = e.getWeight();
-					}
-					
-					edgesWithSameBetweennesAndWeight.add(e);
-				}
-			}
-
-			//System.out.println("");
-			//System.out.println("edgesWithSameBetweennesAndWeight: ");
-			for(Edge e : edgesWithSameBetweennesAndWeight)
-			{
-				Pair<Node, Node> nn = g.getNodesConnectedBy(e);
-				//System.out.println(nn.getFirst().getId() + " ~" + e.getWeight() + "~ " + nn.getSecond().getId());
-			}
-			
-			//Trobem el edge que te la major S, on S es la suma de els nodes adjacents a cada un dels nodes que conecta el edge
-			float maxS = Float.NEGATIVE_INFINITY;
-			for(Edge e : edgesWithSameBetweennesAndWeight)
-			{
-				Pair<Node, Node> nn = g.getNodesConnectedBy(e);
-				float s = getAdjacentNodesCountGN(g, nn.getFirst()) + getAdjacentNodesCountGN(g, nn.getSecond());
-				if(s >= maxS)
-				{
-					edgeToRemove = e;
-					maxS = s;
-				}
-			}
-			//System.out.println("");
-			//System.out.println("maxS: " + maxS);
-
-			if(edgeToRemove != null)
-			{
-				Pair<Node, Node> nn = g.getNodesConnectedBy(edgeToRemove);
-				//System.out.println("");
-				//System.out.println("EDGE TO REMOVE:");
-				//System.out.println(nn.getFirst().getId() + " ~" + edgeToRemove.getWeight() + "~ " + nn.getSecond().getId());
-				//System.out.println("________________");
-			}
-			
-			/*
-			Set<Edge> edd = g.getAllEdges();
-			for(Edge e : edd)
-			{
-				Pair<Node, Node> nn = g.getNodesConnectedBy(e);
-				if(e != null) System.out.println( nn.getFirst().getId() + " ~" + edgeBetweenness.get(e) + "~ " + nn.getSecond().getId());
-			}*/
-			
 			//Remove it (pseudo remove it(put its weight to -1))
 			if(edgeToRemove != null) 
 			{
@@ -164,8 +94,6 @@ public class GirvanNewman extends Algorithm
 				//System.out.println("Going to remove " + nn.getFirst().getId() + "~" + nn.getSecond().getId());
 				edgeToRemove.setWeight(-1);
 			}
-			
-			//System.out.println("_______________");
 			
 			//Count the connected components again, in order to know if we must continue
 			//removing edges or not
