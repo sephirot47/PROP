@@ -227,4 +227,11 @@ public class SongManager
 		getSongsFromDisk(path);
 		saveCurrentSongsToDisk();
 	}
+
+	public static void removeAllSongs() 
+	{
+		FileManager.eraseData("data/songs/songs.txt");
+		try { FileManager.saveData("data/songs/songs.txt", new ArrayList<String>()); } catch(Exception e) { e.printStackTrace(); return; }
+		songs.clear();
+	}
 }

@@ -39,6 +39,8 @@ import javax.swing.ScrollPaneConstants;
 
 import java.awt.Component;
 import javax.swing.ListSelectionModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class GestioCanconsPanel extends JPanel
@@ -176,7 +178,7 @@ public class GestioCanconsPanel extends JPanel
 			}
 		});
 		buttonEditarCanco.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		buttonEditarCanco.setBounds(12, 381, 161, 25);
+		buttonEditarCanco.setBounds(12, 370, 161, 25);
 		panelSongDetail.add(buttonEditarCanco);
 		
 		JButton btnEliminarCanco = new JButton("Eliminar canco");
@@ -197,7 +199,7 @@ public class GestioCanconsPanel extends JPanel
 			}
 		});
 		btnEliminarCanco.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEliminarCanco.setBounds(191, 381, 161, 25);
+		btnEliminarCanco.setBounds(191, 370, 161, 25);
 		panelSongDetail.add(btnEliminarCanco);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -230,6 +232,23 @@ public class GestioCanconsPanel extends JPanel
 		labelDurationValue.setFont(new Font("Dialog", Font.PLAIN, 12));
 		labelDurationValue.setBounds(84, 161, 198, 20);
 		panelSongDetail.add(labelDurationValue);
+		
+		JButton btnEliminarTotesLes = new JButton("Eliminar totes les cancons");
+		btnEliminarTotesLes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnEliminarTotesLes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				if(PresentationManager.confirmWindow("Estas segur que vols eliminar TOTES les cancons ?"))
+				{
+					PresentationManager.removeAllSongs();
+					refreshSongList();
+					populateSongDetails("");
+				}
+			}
+		});
+		btnEliminarTotesLes.setBounds(12, 402, 340, 25);
+		panelSongDetail.add(btnEliminarTotesLes);
 		
 		JLabel lblDetallsCanco = new JLabel("Detalls canco:");
 		lblDetallsCanco.setBounds(419, 72, 114, 20);

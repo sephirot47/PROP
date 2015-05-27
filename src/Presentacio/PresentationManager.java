@@ -536,6 +536,16 @@ public class PresentationManager
 			}
 		}
 	}
+
+	public static void removeAllUsers() 
+	{
+		UserManager.removeAllUsers();
+	}
+
+	public static void removeAllSongs() 
+	{
+		SongManager.removeAllSongs();
+	}
 }
 
 

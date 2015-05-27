@@ -380,4 +380,11 @@ public class UserManager
 			for(Reproduction r : repros) u.addReproduction(r);
 			saveReproductionsToDisk("data/reproductions/" + u.getName() + "Reproductions.txt", u.getReproductions());
 		}
+		
+		public static void removeAllUsers() 
+		{
+			FileManager.eraseData("data/users/users.txt");
+			try { FileManager.saveData("data/users/users.txt", new ArrayList<String>()); } catch(Exception e) { e.printStackTrace(); return; }
+			users.clear();
+		}
 }

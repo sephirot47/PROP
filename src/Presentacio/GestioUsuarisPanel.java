@@ -210,6 +210,22 @@ public class GestioUsuarisPanel extends JPanel
 		listReproductions.setBounds(12, 127, 340, 304);
 		scrollPane.setViewportView(listReproductions);
 		
+		JButton btnEliminarTotsEls = new JButton("Eliminar tots els usuaris");
+		btnEliminarTotsEls.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				if(PresentationManager.confirmWindow("Estas segur que vols eliminar TOTS els usuaris ?"))
+				{
+					PresentationManager.removeAllUsers();
+					refreshUserList();
+					populateUserDetails("");
+				}
+			}
+		});
+		btnEliminarTotsEls.setBounds(12, 472, 340, 25);
+		panelUserDetail.add(btnEliminarTotsEls);
+		
 		refreshUserList();
 	}
 	
