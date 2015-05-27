@@ -177,7 +177,11 @@ public class MainPanel extends JPanel
 		btnGenerarLlistes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PresentationManager.goToCard(GenerarLlistesPanel.class.getSimpleName());
+				if(PresentationManager.getSongsNum() > 0)
+				{
+					PresentationManager.goToCard(GenerarLlistesPanel.class.getSimpleName());
+				}
+				else PresentationManager.errorWindow("Crea alguna canco abans de generar llistes de reproduccio. Actualment no hi ha cap canco creada.");
 			}
 		});
 		btnGenerarLlistes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

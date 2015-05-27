@@ -28,6 +28,7 @@ public class Clique extends Algorithm
         s = buildSolution(edgeIndexes, ds, g);
         long after = System.nanoTime();
         s.setTime(after - before);
+        s.setAlg('C');
         return s;
     }
  

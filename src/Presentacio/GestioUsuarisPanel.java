@@ -211,6 +211,7 @@ public class GestioUsuarisPanel extends JPanel
 		scrollPane.setViewportView(listReproductions);
 		
 		JButton btnEliminarTotsEls = new JButton("Eliminar tots els usuaris");
+		btnEliminarTotsEls.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEliminarTotsEls.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 
