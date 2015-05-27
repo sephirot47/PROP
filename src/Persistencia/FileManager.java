@@ -90,6 +90,24 @@ public class FileManager
           File file = new File(path);
           return file.delete();
     }
+    
+    public static boolean deleteDirectory(String path) {
+    	File directory = new File(path);
+        if(directory.exists()){
+            File[] files = directory.listFiles();
+            if(null!=files){
+                for(int i=0; i<files.length; i++) {
+                    if(files[i].isDirectory()) {
+                        deleteDirectory(files[i].getAbsolutePath());
+                    }
+                    else {
+                        files[i].delete();
+                    }
+                }
+            }
+        }
+        return(directory.delete());
+    }
 
     public static ArrayList<String> listFilesOf(String path)
     {

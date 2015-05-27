@@ -115,6 +115,12 @@ public class PresentationManager
 		date = date.replaceAll(":", ",");
 		return SolutionManager.getSolutionNumberOfCommunities(date);
 	}
+
+	public static int getSolutionNumberOfSongs(String date) 
+	{
+		date = date.replaceAll(":", ",");
+		return SolutionManager.getSolutionNumberOfSongs(date);
+	}
 	
 	public static void goToConsultarSolucioPanel(String selectedSolutionDate)
 	{
@@ -545,6 +551,11 @@ public class PresentationManager
 	public static void removeAllSongs() 
 	{
 		SongManager.removeAllSongs();
+	}
+
+	public static void removeAllSolutionsFromDisk() 
+	{
+		SolutionManager.removeAllSolutionsFromDisk();
 	}
 }
 

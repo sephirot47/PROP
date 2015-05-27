@@ -119,6 +119,12 @@ public class SolutionManager
 		SongSolution sol = getSolutionFromDate(date); 
 		return sol == null ? 0 : sol.getNumCommunities();
 	}
+
+	public static int getSolutionNumberOfSongs(String date) 
+	{
+		SongSolution sol = getSolutionFromDate(date); 
+		return sol == null ? 0 : sol.getNumNodes();
+	}
 	
 	public static ArrayList<SongSolution> getSolutions(String solutionsDir) throws Exception 
 	{
@@ -427,5 +433,14 @@ public class SolutionManager
 		Community cTo = communities.get(to);
 		cTo.addNode((Node) song);
 		cFrom.deleteNode(songName);
+	}
+
+	public static void removeAllSolutionsFromDisk() 
+	{
+		for(Solution s : solutions)
+		{
+			FileManager.deleteDirectory("data/solutions/" + "solution_" + s.getId());
+		}
+		solutions.clear();
 	}
 }

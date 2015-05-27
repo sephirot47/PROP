@@ -27,7 +27,7 @@ import java.awt.event.MouseEvent;
 public class HistorialPanel extends JPanel 
 {	
 	private JList solutionsList;
-	private JLabel lblAlgorismeUsatValue, labelNumeroLlistesValue, lblGenerationDateValue;
+	private JLabel lblAlgorismeUsatValue, labelNumeroLlistesValue, lblGenerationDateValue, labelNumeroCancons;
 	
 	public HistorialPanel() 
 	{
@@ -70,7 +70,7 @@ public class HistorialPanel extends JPanel
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(414, 58, 283, 179);
+		panel.setBounds(414, 58, 283, 241);
 		add(panel);
 		panel.setLayout(null);
 		
@@ -94,11 +94,11 @@ public class HistorialPanel extends JPanel
 		
 		JLabel lblNumeroDeLlistes = new JLabel("Numero de llistes generades:");
 		lblNumeroDeLlistes.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNumeroDeLlistes.setBounds(10, 124, 263, 23);
+		lblNumeroDeLlistes.setBounds(10, 182, 263, 23);
 		panel.add(lblNumeroDeLlistes);
 		
 		labelNumeroLlistesValue = new JLabel("21332423");
-		labelNumeroLlistesValue.setBounds(10, 148, 263, 23);
+		labelNumeroLlistesValue.setBounds(10, 206, 263, 23);
 		panel.add(labelNumeroLlistesValue);
 		
 		JSeparator separator = new JSeparator();
@@ -106,8 +106,21 @@ public class HistorialPanel extends JPanel
 		panel.add(separator);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(10, 115, 263, 2);
+		separator_1.setBounds(10, 118, 263, 2);
 		panel.add(separator_1);
+		
+		JLabel lblNumeroDeCancons = new JLabel("Numero de cancons:");
+		lblNumeroDeCancons.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblNumeroDeCancons.setBounds(10, 125, 263, 23);
+		panel.add(lblNumeroDeCancons);
+		
+		labelNumeroCancons = new JLabel("21332423");
+		labelNumeroCancons.setBounds(10, 149, 263, 23);
+		panel.add(labelNumeroCancons);
+		
+		JSeparator separator_2 = new JSeparator();
+		separator_2.setBounds(10, 176, 263, 2);
+		panel.add(separator_2);
 		
 		JButton btnEliminarSolucio = new JButton("Eliminar Solucio");
 		btnEliminarSolucio.addMouseListener(new MouseAdapter() {
@@ -127,7 +140,7 @@ public class HistorialPanel extends JPanel
 			}
 		});
 		btnEliminarSolucio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEliminarSolucio.setBounds(414, 285, 283, 23);
+		btnEliminarSolucio.setBounds(414, 343, 283, 23);
 		add(btnEliminarSolucio);
 		
 		JButton btnConsultarSolucio = new JButton("Consultar Solucio");
@@ -144,13 +157,28 @@ public class HistorialPanel extends JPanel
 			}
 		});
 		btnConsultarSolucio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnConsultarSolucio.setBounds(414, 251, 283, 23);
+		btnConsultarSolucio.setBounds(414, 309, 283, 23);
 		add(btnConsultarSolucio);
 		
 		JLabel lblLlistaSolucions = new JLabel("Llista solucions:");
 		lblLlistaSolucions.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblLlistaSolucions.setBounds(72, 35, 175, 23);
 		add(lblLlistaSolucions);
+		
+		JButton btnEliminarTotesLes = new JButton("Eliminar totes les solucions");
+		btnEliminarTotesLes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				if(PresentationManager.confirmWindow("Estas segur que vols esborrar TOTES les solucions ?"))
+				{
+					PresentationManager.removeAllSolutionsFromDisk();
+					refresh();
+				}
+			}
+		});
+		btnEliminarTotesLes.setBounds(414, 382, 283, 23);
+		add(btnEliminarTotesLes);
 	}
 	
 	public void refresh()
@@ -177,17 +205,20 @@ public class HistorialPanel extends JPanel
 		{
 			double genTime = PresentationManager.getSolutionGenTime(date) / 1E6;
 			int nCommunities = PresentationManager.getSolutionNumberOfCommunities(date);
+			int nCancons = PresentationManager.getSolutionNumberOfSongs(date);
 			String algorithm = PresentationManager.getSolutionAlgorithm(date);
 			
 			lblGenerationDateValue.setText( String.valueOf(genTime) + " ms");
 			labelNumeroLlistesValue.setText( String.valueOf(nCommunities) );
 			lblAlgorismeUsatValue.setText( algorithm );
+			labelNumeroCancons.setText( String.valueOf(nCancons) );
 		}
 		else
 		{
 			lblGenerationDateValue.setText("-");
 			labelNumeroLlistesValue.setText("-");
 			lblAlgorismeUsatValue.setText("-");
+			labelNumeroCancons.setText("-");
 		}
 	}
 }
