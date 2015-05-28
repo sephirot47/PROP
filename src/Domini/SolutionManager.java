@@ -128,6 +128,11 @@ public class SolutionManager
 	
 	public static ArrayList<SongSolution> getSolutions(String solutionsDir) throws Exception 
 	{
+		if(!FileManager.exists(solutionsDir))
+		{
+			FileManager.createDir(solutionsDir);
+		}
+		
 		ArrayList<SongSolution> result = new ArrayList<SongSolution>();
 
 		File baseDir = new File(solutionsDir);

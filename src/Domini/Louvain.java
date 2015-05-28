@@ -134,8 +134,10 @@ public class Louvain extends Algorithm
 			int numeroComunitats=c2n.size();
 			Node[] nodesNew= new Node[numeroComunitats];
 			gf2.getAllNodes().toArray(nodesNew);
-			
-				for(int i=0;i<n2cFinal.length;++i){
+
+				for(int i=0;i<n2cFinal.length;++i)
+				{
+					if(c2n.get(n2cFinal[i]) != null)
 					n2cFinal[i]=c2n.get(n2cFinal[i]);
 				}
 			

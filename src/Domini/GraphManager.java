@@ -46,14 +46,14 @@ public class GraphManager
 
 	private static void generateEdges(Graph<Song> g, Ponderations p)
 	{
-		System.out.println("Remove all edges");
+		//System.out.println("Remove all edges");
 		g.removeAllEdges();
 
-		System.out.println("Get all nodes");
+		//System.out.println("Get all nodes");
 		Set<Song> songs = g.getAllNodes();
 		HashMap<Song,HashMap<Song,Float>> nodeNodeAffinity = new HashMap<Song,HashMap<Song,Float>>();
 		TreeBag<Float> affinities = new TreeBag<Float>();
-		System.out.println("Calculem affinities");
+		//System.out.println("Calculem affinities");
 		for(Song s : songs)
 		{
 			nodeNodeAffinity.put(s, new HashMap<Song, Float>());
@@ -65,20 +65,20 @@ public class GraphManager
 				affinities.add(a);
 			}
 		}
-		System.out.println("Despres de calcular affinities");
+		//System.out.println("Despres de calcular affinities");
 		Float threshold= 0.0f;
 		if (affinities.size() > 0) {
 			int numNodes = songs.size();
 			int step = affinities.size() - numNodes * 4;
 			if (step < 0) step = 0;
-			System.out.println("BEFORE TO ARRAY " + step + "/");
+			//System.out.println("BEFORE TO ARRAY " + step + "/");
 			threshold = (Float) (numNodes == 0 ? 0.0f : affinities.toArray()[step]);
-			System.out.println("AFTEER TO ARRAY");
+			//System.out.println("AFTEER TO ARRAY");
 			if(threshold == Float.NaN) threshold = 0.0f;
 			
-			System.out.println("Num nodes " + numNodes);
-			System.out.println("Step " + step);
-			System.out.println("Threshold " + threshold);
+			//System.out.println("Num nodes " + numNodes);
+			//System.out.println("Step " + step);
+			//System.out.println("Threshold " + threshold);
 		}
 		
 		int i = 0;

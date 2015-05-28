@@ -79,7 +79,6 @@ public class FileManager
         writer.close();    
     }
     
-    
     //path es un path a un fitxer existent
     //path deixa d'existir
     public static boolean eraseData(String path) 
@@ -130,6 +129,11 @@ public class FileManager
         File file = new File(path);
         file.getParentFile().mkdirs();
         if(file.exists()) return true; return false;
+    }
+    
+    public static void createDir(String path)
+    {
+    	new File(path).mkdirs();
     }
     
     //path es un cami a un fitxer existent, newLine conte una linia de text
