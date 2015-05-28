@@ -148,6 +148,11 @@ public class PresentationManager
 	{
 		return SolutionManager.getSolutionCommunities(solutionDate);
 	}
+	
+	public static void addEmptyList(String solutionDate)
+	{
+		SolutionManager.addEmptyList(solutionDate);
+	}
 
 	public static void generateSolution(char algorisme, int durationP, int yearP, int styleP, int publicP, int proximityP, int authorP, int numComGN) 
 	{

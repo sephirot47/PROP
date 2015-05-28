@@ -448,4 +448,10 @@ public class SolutionManager
 		}
 		solutions.clear();
 	}
+
+	public static void addEmptyList(String id) 
+	{
+		SongSolution sol = getSolutionFromDate(id);
+		if(sol != null) sol.addCommunity(new Community());
+	}
 }
