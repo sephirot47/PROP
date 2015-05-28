@@ -28,7 +28,9 @@ import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 import edu.uci.ics.jung.graph.util.Context;
 import edu.uci.ics.jung.visualization.Layer;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
+import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.GraphMouseListener;
+import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
 import edu.uci.ics.jung.visualization.decorators.EdgeShape;
 import edu.uci.ics.jung.visualization.transform.MutableTransformer;
 import edu.uci.ics.jung.visualization.util.VertexShapeFactory;
@@ -136,7 +138,7 @@ public class ViewGraphPanel extends JPanel
 				else currentZoom /= delta * zoomStep;
 				if(currentZoom < minZoom) currentZoom = minZoom;
 				else if(currentZoom > maxZoom) currentZoom = maxZoom;
-				applyZoom(currentZoom);
+				//applyZoom(currentZoom);
 			}
 		});
 		vv.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -214,7 +216,7 @@ public class ViewGraphPanel extends JPanel
 		labelDuracio = new JLabel("----");
 		labelDuracio.setBounds(550, 38, 108, 15);
 		panel_1.add(labelDuracio);
-		applyZoom(1.0);
+		//applyZoom(1.0);
 		
 		verticesAdded = new HashSet< Pair<String, Integer> >();
 		edgesVisible =  new HashSet< Pair<String, Float> >();
@@ -382,16 +384,22 @@ public class ViewGraphPanel extends JPanel
 	{
 		resetLayout();
 
-		applyZoom(3.0);
+		//applyZoom(3.0);
 	    int initialGraphSteps = 100;
 		for(int i = 0; i < initialGraphSteps; ++i) graphLayout.step();
 		graphLayout.lock(false);
 		graphLocked = false;
-		applyZoom(1.0);
+		//applyZoom(1.0);
 		for(int i = 0; i < initialGraphSteps; ++i) graphLayout.step();
 		selectedVertex = null;
 		edgesVisible.clear();
-		
+
+	    DefaultModalGraphMouse gm = new DefaultModalGraphMouse();
+	    //gm.setMode(ModalGraphMouse.Mode.TRANSFORMING);
+	    ///vv.addKeyListener(gm.getModeKeyListener());
+	    //gm.setMode(ModalGraphMouse.Mode.PICKING);
+	    vv.setGraphMouse(gm);
+		  
 		refreshPauseButton();
 	}
 	
@@ -413,7 +421,7 @@ public class ViewGraphPanel extends JPanel
 	public void resetLayout() 
 	{
 		graphLayout = new SpringLayout<Pair<String, Integer>, Pair<String, Float>>(g);
-		applyZoom(currentZoom);
+		//applyZoom(currentZoom);
 		graphLocked = false;
 		graphLayout.setForceMultiplier(0.01f*g.getVertexCount());
 		
