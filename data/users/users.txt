@@ -1,1 +1,6 @@
-aaa;1234
+matusalen;60
+miMadre;40
+turmo;60
+aina;20
+abraham;40
+jfons;20

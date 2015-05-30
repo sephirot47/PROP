@@ -147,12 +147,14 @@ public class GraphManager
 		//
 		
 		//User Ages
-		Float userAgeDistance = Math.abs(s.getMeanUserAge() - s2.getMeanUserAge());
-		if (userAgeDistance.equals(Float.NaN) || userAgeAportation == 0.0f) userAgeAportation = 0.0f;
-		else {
-			userAgeAportation = (5.0f / userAgeDistance)*((float) p.getUserAge()*0.1f);
-			if(userAgeAportation > 1.0f) userAgeAportation = p.getUserAge()*0.1f;
-			
+		float meanUserAge1 = s.getMeanUserAge(), meanUserAge2 = s2.getMeanUserAge();
+		Float userAgeDistance = Math.abs(meanUserAge1 - meanUserAge2);
+		System.out.println(s.getTitle() + ": " + meanUserAge1 + ", " + s2.getTitle() + ": " +  meanUserAge2);
+		if (meanUserAge1 < 0.0f || meanUserAge2 < 0.0f) userAgeAportation = 0.0f;
+		else
+		{
+			float a = Math.min(1.0f, 5.0f / userAgeDistance);
+			userAgeAportation = a * ((float) p.getUserAge()*0.1f);	
 		}
 		//
 		

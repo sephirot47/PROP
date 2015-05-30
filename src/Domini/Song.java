@@ -117,8 +117,8 @@ public class Song extends Node
 		Set<User> users = null;
 		try 
 		{
-			users = UserManager.getUsers("data/users/users.txt", "data/reproductions");
-		} 
+			users = UserManager.getUsers();
+		}
 		catch (Exception e) 
 		{
 			e.printStackTrace();
@@ -127,8 +127,10 @@ public class Song extends Node
 		for(User u : users)
 		{
 			ArrayList<Reproduction> repros = u.getReproductions();
+			System.out.println(u.getName() + " ~  " + repros.size());
 			for(Reproduction r : repros)
 			{
+				System.out.println(r.getSongAuthor()  + "==" + author + ", " + r.getSongTitle() + "==" + title);
 				if(r.getSongAuthor().equals(author) && r.getSongTitle().equals(title))
 				{
 					sum += u.getAge();
@@ -138,7 +140,7 @@ public class Song extends Node
 			}
 		}
 		
-		return sum / numUsers;
+		return numUsers == 0 ? -1.0f : sum / numUsers ;
 	}
 	
 	private void checkString(String str) throws Exception

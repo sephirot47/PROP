@@ -273,6 +273,22 @@ public class GenerarLlistesPanel extends JPanel {
 		labelSliderAutor.setBounds(350, 40, 31, 15);
 		panelAutor.add(labelSliderAutor);
 		
+		JButton btnTotsAZero = new JButton("Tots a zero");
+		btnTotsAZero.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				sliderAutor.setValue(0);
+				sliderPublic.setValue(0);
+				sliderAny.setValue(0);
+				sliderDuracio.setValue(0);
+				sliderEstil.setValue(0);
+				sliderProximitat.setValue(0);
+			}
+		});
+		btnTotsAZero.setBounds(146, 481, 171, 25);
+		panelLeft.add(btnTotsAZero);
+		
 		JButton btnGenerar = new JButton("Generar llista");
 		btnGenerar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnGenerar.addMouseListener(new MouseAdapter() {
@@ -484,5 +500,6 @@ public class GenerarLlistesPanel extends JPanel {
 		int numNodes = PresentationManager.getSongsNum();
 		sliderComunitatsGN.setMinimum(1);
 		sliderComunitatsGN.setMaximum(numNodes);
+		sliderComunitatsGN.setValue((int)Math.sqrt(numNodes));
 	}
 }
