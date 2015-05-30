@@ -54,6 +54,8 @@ public class GraphManager
 		HashMap<Song,HashMap<Song,Float>> nodeNodeAffinity = new HashMap<Song,HashMap<Song,Float>>();
 		TreeBag<Float> affinities = new TreeBag<Float>();
 		//System.out.println("Calculem affinities");
+		float totalAffinity = 0.0f;
+		float maxAffinity = 0.0f;
 		for(Song s : songs)
 		{
 			nodeNodeAffinity.put(s, new HashMap<Song, Float>());
@@ -61,20 +63,25 @@ public class GraphManager
 			{
 				if(s == s2) continue;
 				float a = getAffinity(s,s2,p,g);
+				maxAffinity = a > maxAffinity ? a : maxAffinity;
 				nodeNodeAffinity.get(s).put(s2, a);
+				totalAffinity += a;
 				affinities.add(a);
 			}
 		}
 		//System.out.println("Despres de calcular affinities");
 		Float threshold= 0.0f;
-		if (affinities.size() > 0) {
+		float affinityMean = totalAffinity / affinities.size();
+		if (affinities.size() > 0)
+		{
 			int numNodes = songs.size();
 			int step = affinities.size() - numNodes * 4;
 			if (step < 0) step = 0;
-			//System.out.println("BEFORE TO ARRAY " + step + "/");
+			//System.out.println("BEFORE TO ARRAY " + step + "/" + affinities.size());
 			threshold = (Float) (numNodes == 0 ? 0.0f : affinities.toArray()[step]);
 			//System.out.println("AFTEER TO ARRAY");
-			if(threshold == Float.NaN) threshold = 0.0f;
+			threshold = Math.max(threshold, affinityMean);
+			if(threshold == Float.NaN) threshold = 0.1f;
 			
 			//System.out.println("Num nodes " + numNodes);
 			//System.out.println("Step " + step);
@@ -92,12 +99,16 @@ public class GraphManager
 				//Float affinity = getAffinity(s,s2,p,g);
 				Float affinity = nodeNodeAffinity.get(s).get(s2);
 				edge.setWeight(affinity);
-				if(affinity >= threshold) { ++edges; g.addEdge(s, s2, edge); }
+				if(threshold >= maxAffinity)
+				{
+					if(affinity >= threshold) { ++edges; g.addEdge(s, s2, edge); }
+				}
+				else if(affinity > threshold) { ++edges; g.addEdge(s, s2, edge); }
 				//System.out.println("Affinity " + affinity);
 			}
-			System.out.println(++i);
+			//System.out.println(++i);
 		}
-		System.out.println("Num edges " + edges);
+		//System.out.println("Num edges " + edges);
 	}
 	
 	private static Float getAffinity(Song s, Song s2, Ponderations p, Graph g)

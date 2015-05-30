@@ -46,7 +46,7 @@ public class EditarSolucioPanel extends JPanel
 		scrollPane_1.setViewportView(songsList);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(33, 54, 265, 384);
+		scrollPane.setBounds(33, 54, 318, 384);
 		add(scrollPane);
 		
 		listsList = new JList();
@@ -63,7 +63,7 @@ public class EditarSolucioPanel extends JPanel
 		});
 		scrollPane.setViewportView(listsList);
 		
-		JButton btnRemoveList = new JButton("Eliminar llista de la solucio");
+		JButton btnRemoveList = new JButton("Eliminar llista");
 		btnRemoveList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 
@@ -76,7 +76,7 @@ public class EditarSolucioPanel extends JPanel
 			}
 		});
 		btnRemoveList.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRemoveList.setBounds(33, 450, 265, 25);
+		btnRemoveList.setBounds(203, 450, 148, 25);
 		add(btnRemoveList);
 		lblLlistaSelected = new JLabel("Llista:");
 		lblLlistaSelected.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -173,6 +173,18 @@ public class EditarSolucioPanel extends JPanel
 		});
 		btnMoureALa.setBounds(514, 324, 148, 25);
 		add(btnMoureALa);
+		
+		JButton btnCrearLlista = new JButton("Crear llista");
+		btnCrearLlista.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				PresentationManager.addEmptyList(currentSolutionDate);
+				refresh();
+			}
+		});
+		btnCrearLlista.setBounds(33, 450, 148, 25);
+		add(btnCrearLlista);
 	}
 
 	public static void setCurrentSolutionDate(String date)

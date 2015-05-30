@@ -28,7 +28,10 @@ import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 import edu.uci.ics.jung.graph.util.Context;
 import edu.uci.ics.jung.visualization.Layer;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
+import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.GraphMouseListener;
+import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
+import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 import edu.uci.ics.jung.visualization.decorators.EdgeShape;
 import edu.uci.ics.jung.visualization.transform.MutableTransformer;
 import edu.uci.ics.jung.visualization.util.VertexShapeFactory;
@@ -76,6 +79,7 @@ public class ViewGraphPanel extends JPanel
 	private static Pair<ArrayList< Pair< String, ArrayList< Pair<String, Float> > > > , ArrayList< Pair<String, Integer> > > graphCommunities;
 	private JButton btnPausar;
 	private JLabel labelTitol, labelAutor, labelDuracio, labelAny, labelEstils;
+	private DefaultModalGraphMouse gm;
 	
 	@SuppressWarnings("unchecked")
 	public ViewGraphPanel() 
@@ -136,7 +140,7 @@ public class ViewGraphPanel extends JPanel
 				else currentZoom /= delta * zoomStep;
 				if(currentZoom < minZoom) currentZoom = minZoom;
 				else if(currentZoom > maxZoom) currentZoom = maxZoom;
-				applyZoom(currentZoom);
+				//applyZoom(currentZoom);
 			}
 		});
 		vv.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -169,6 +173,28 @@ public class ViewGraphPanel extends JPanel
 		});
 		btnRedibuixarGraf.setBounds(425, 416, 250, 23);
 		panel.add(btnRedibuixarGraf);
+		
+		JButton btnM = new JButton("M");
+		btnM.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				gm.setMode(ModalGraphMouse.Mode.PICKING);
+			}
+		});
+		btnM.setBounds(12, 349, 50, 23);
+		panel.add(btnM);
+		
+		JButton btnV = new JButton("V");
+		btnV.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				gm.setMode(ModalGraphMouse.Mode.TRANSFORMING);
+			}
+		});
+		btnV.setBounds(12, 382, 50, 23);
+		panel.add(btnV);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(101, 470, 590, 96);
@@ -214,7 +240,7 @@ public class ViewGraphPanel extends JPanel
 		labelDuracio = new JLabel("----");
 		labelDuracio.setBounds(550, 38, 108, 15);
 		panel_1.add(labelDuracio);
-		applyZoom(1.0);
+		//applyZoom(1.0);
 		
 		verticesAdded = new HashSet< Pair<String, Integer> >();
 		edgesVisible =  new HashSet< Pair<String, Float> >();
@@ -227,6 +253,7 @@ public class ViewGraphPanel extends JPanel
 		 * Array(
 		 * 			Pair( "A", Array("B", "C", "D"),
 		 * 			Pair( "X", Array("X", "Y", "A", ...)),
+	
 		 * 			...
 		 * 		)
 		 */
@@ -382,16 +409,22 @@ public class ViewGraphPanel extends JPanel
 	{
 		resetLayout();
 
-		applyZoom(3.0);
+		//applyZoom(3.0);
 	    int initialGraphSteps = 100;
 		for(int i = 0; i < initialGraphSteps; ++i) graphLayout.step();
 		graphLayout.lock(false);
 		graphLocked = false;
-		applyZoom(1.0);
+		//applyZoom(1.0);
 		for(int i = 0; i < initialGraphSteps; ++i) graphLayout.step();
 		selectedVertex = null;
 		edgesVisible.clear();
-		
+
+	    gm = new DefaultModalGraphMouse();
+	    //gm.setMode(ModalGraphMouse.Mode.TRANSFORMING);
+	    ///vv.addKeyListener(gm.getModeKeyListener());
+	    //gm.setMode(ModalGraphMouse.Mode.PICKING);
+	    vv.setGraphMouse(gm);
+		  
 		refreshPauseButton();
 	}
 	
@@ -413,7 +446,7 @@ public class ViewGraphPanel extends JPanel
 	public void resetLayout() 
 	{
 		graphLayout = new SpringLayout<Pair<String, Integer>, Pair<String, Float>>(g);
-		applyZoom(currentZoom);
+		//applyZoom(currentZoom);
 		graphLocked = false;
 		graphLayout.setForceMultiplier(0.01f*g.getVertexCount());
 		
