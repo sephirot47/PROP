@@ -13,7 +13,7 @@ import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Dimension;
+import java.awt.Dimension;	
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -271,25 +271,47 @@ public class EstadistiquesPanel extends JPanel
 				
 				
 				JFreeChart chart = null;
-				
+				double mitja = 0.0f;
 				final XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
 				XYSeriesCollection dades = new XYSeriesCollection();
 				
 				XYPlot plot;
 				if(alg != "Tots"){
 					XYSeries serie = new XYSeries(alg);
+					XYSeries desviationp = new XYSeries("Desviació positiva " + alg);
+					XYSeries desviationn = new XYSeries("Desviació negativa " + alg);
 					if(alg == "Louvain"){
 						for(int i = 0; i < dadesinfo.get(0).size(); i++){
 							serie.add(dadesinfo.get(0).get(i).getSecond().doubleValue(),dadesinfo.get(0).get(i).getFirst()/100);
-							 
+							mitja += dadesinfo.get(0).get(i).getFirst();
 						}
+						
 					}else{	
 						for(int i = 0; i < dadesinfo.get(0).size(); i++){						
 							 serie.add(dadesinfo.get(0).get(i).getSecond().doubleValue(),dadesinfo.get(0).get(i).getFirst()/1000000 );
-							 
+							 mitja += dadesinfo.get(0).get(i).getFirst()/1000000; 
 						}
 					}
+					mitja = mitja/dadesinfo.get(0).size();
 					dades.addSeries(serie);
+					double standard = 0.0f;
+					double standardf;
+					 for(int i = 0; i < dadesinfo.get(0).size(); i++){
+						 standard = Math.sqrt(Math.pow((dadesinfo.get(0).get(i).getFirst()/1000000 - mitja),2));						 
+						 desviationp.add(dades.getSeries(0).getX(i).doubleValue(), (dades.getSeries(0).getY(i).doubleValue() + standard));
+						 desviationn.add(dades.getSeries(0).getX(i).doubleValue(), (dades.getSeries(0).getY(i).doubleValue() - standard));
+						 System.out.println(dadesinfo.get(0).get(i).getFirst()/1000000 + " " + mitja + " " + (dadesinfo.get(0).get(i).getFirst()/1000000 - mitja) + " " + standard);
+					 }
+	
+					 if(!desviationp.isEmpty() && !desviationn.isEmpty()){
+						 dades.addSeries(desviationp);
+						 renderer.setSeriesPaint(1, new Color(255,78,78));
+						 renderer.setSeriesStroke(1, new BasicStroke(1.0f));
+						 dades.addSeries(desviationn);
+						 renderer.setSeriesPaint(2, new Color(2,78,78));
+						 renderer.setSeriesStroke(2, new BasicStroke(1.0f));
+					 }
+					 
 					 
 				}
 				else{
@@ -435,6 +457,14 @@ public class EstadistiquesPanel extends JPanel
 				 table.setBounds(10,10,500,400);
 				 grafica.add(table,BorderLayout.CENTER);
 				 grafica.repaint();
+			 }
+			 else{
+				 JTable table = new JTable();
+				 grafica.removeAll();
+				 table.setBounds(10,10,500,400);
+				 grafica.add(table,BorderLayout.CENTER);
+				 grafica.repaint();
+				 
 			 }
 		 }
 	}
