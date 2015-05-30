@@ -66,7 +66,7 @@ public class SolutionManager
 			int count = 1;
 			for(int i = 1; i < Dades.size(); i++){
 				
-				if(n.getSecond() == Dades.get(i).getSecond()){
+				if(n.getSecond().equals(Dades.get(i).getSecond())){
 					n.setFirst(n.getFirst() + Dades.get(i).getFirst());
 					count++;
 					

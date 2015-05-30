@@ -283,7 +283,7 @@ public class EstadistiquesPanel extends JPanel
 					if(alg == "Louvain"){
 						for(int i = 0; i < dadesinfo.get(0).size(); i++){
 							serie.add(dadesinfo.get(0).get(i).getSecond().doubleValue(),dadesinfo.get(0).get(i).getFirst()/100);
-							mitja += dadesinfo.get(0).get(i).getFirst();
+							mitja += dadesinfo.get(0).get(i).getFirst()/100;
 						}
 						
 					}else{	
@@ -296,12 +296,22 @@ public class EstadistiquesPanel extends JPanel
 					dades.addSeries(serie);
 					double standard = 0.0f;
 					double standardf;
-					 for(int i = 0; i < dadesinfo.get(0).size(); i++){
-						 standard = Math.sqrt(Math.pow((dadesinfo.get(0).get(i).getFirst()/1000000 - mitja),2));						 
-						 desviationp.add(dades.getSeries(0).getX(i).doubleValue(), (dades.getSeries(0).getY(i).doubleValue() + standard));
-						 desviationn.add(dades.getSeries(0).getX(i).doubleValue(), (dades.getSeries(0).getY(i).doubleValue() - standard));
-						 System.out.println(dadesinfo.get(0).get(i).getFirst()/1000000 + " " + mitja + " " + (dadesinfo.get(0).get(i).getFirst()/1000000 - mitja) + " " + standard);
-					 }
+					
+					if(alg != "Louvain"){
+						for(int i = 0; i < dadesinfo.get(0).size(); i++){
+							 standard = Math.sqrt(Math.pow((dadesinfo.get(0).get(i).getFirst()/1000000 - mitja),2));						 
+							 desviationp.add(dades.getSeries(0).getX(i).doubleValue(), (dades.getSeries(0).getY(i).doubleValue() + standard));
+							 desviationn.add(dades.getSeries(0).getX(i).doubleValue(), (dades.getSeries(0).getY(i).doubleValue() - standard));
+						 }
+					}
+					else{
+						for(int i = 0; i < dadesinfo.get(0).size(); i++){
+							 standard = Math.sqrt(Math.pow((dadesinfo.get(0).get(i).getFirst()/100 - mitja),2));						 
+							 desviationp.add(dades.getSeries(0).getX(i).doubleValue(), (dades.getSeries(0).getY(i).doubleValue() + standard));
+							 desviationn.add(dades.getSeries(0).getX(i).doubleValue(), (dades.getSeries(0).getY(i).doubleValue() - standard));
+						 }
+					}
+					 
 	
 					 if(!desviationp.isEmpty() && !desviationn.isEmpty()){
 						 dades.addSeries(desviationp);
