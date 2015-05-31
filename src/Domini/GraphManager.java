@@ -188,8 +188,8 @@ public class GraphManager
 				boolean s1Found = (r.getSongAuthor().equals(s1.getAuthor()) && r.getSongTitle().equals(s1.getTitle()));
 				boolean s2Found = (r.getSongAuthor().equals(s2.getAuthor()) && r.getSongTitle().equals(s2.getTitle()));
 				
-				System.out.println(r.getSongAuthor() + "==" + s1.getAuthor() + ", " + r.getSongTitle() + "==" + s1.getTitle());
-				System.out.println(r.getSongAuthor() + "==" + s2.getAuthor() + ", " + r.getSongTitle() + "==" + s2.getTitle());
+				//System.out.println(r.getSongAuthor() + "==" + s1.getAuthor() + ", " + r.getSongTitle() + "==" + s1.getTitle());
+				//System.out.println(r.getSongAuthor() + "==" + s2.getAuthor() + ", " + r.getSongTitle() + "==" + s2.getTitle());
 				if( s1Found || s2Found )
 				{			
 					for(Reproduction r2 : repros)
@@ -206,7 +206,7 @@ public class GraphManager
 							float d = Math.abs(r.getTime() - r2.getTime());
 							if(d <= 180)
 							{
-								System.out.println("d: " + d);
+								//System.out.println("d: " + d);
 								if(d <= 60) a = Math.max(0.333f, a);
 								else if(d <= 120) a = Math.max(0.666f, a);
 								else if(d <= 180) a = Math.max(1.0f, a);
