@@ -127,10 +127,8 @@ public class Song extends Node
 		for(User u : users)
 		{
 			ArrayList<Reproduction> repros = u.getReproductions();
-			System.out.println(u.getName() + " ~  " + repros.size());
 			for(Reproduction r : repros)
 			{
-				System.out.println(r.getSongAuthor()  + "==" + author + ", " + r.getSongTitle() + "==" + title);
 				if(r.getSongAuthor().equals(author) && r.getSongTitle().equals(title))
 				{
 					sum += u.getAge();

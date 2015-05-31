@@ -1,6 +1,4 @@
-matusalen;60
-miMadre;40
-turmo;60
-aina;20
-abraham;40
-jfons;20
+turmo;50
+rosa;58
+cristina;21
+victor;20

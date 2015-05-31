@@ -1,2 +1,0 @@
-ccc;victor;10
-ddd;victor;10

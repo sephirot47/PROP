@@ -409,20 +409,17 @@ public class ViewGraphPanel extends JPanel
 	{
 		resetLayout();
 
-		//applyZoom(3.0);
+		applyZoom(3.0);
 	    int initialGraphSteps = 100;
 		for(int i = 0; i < initialGraphSteps; ++i) graphLayout.step();
 		graphLayout.lock(false);
 		graphLocked = false;
-		//applyZoom(1.0);
+		applyZoom(1.0);
 		for(int i = 0; i < initialGraphSteps; ++i) graphLayout.step();
 		selectedVertex = null;
 		edgesVisible.clear();
 
 	    gm = new DefaultModalGraphMouse();
-	    //gm.setMode(ModalGraphMouse.Mode.TRANSFORMING);
-	    ///vv.addKeyListener(gm.getModeKeyListener());
-	    //gm.setMode(ModalGraphMouse.Mode.PICKING);
 	    vv.setGraphMouse(gm);
 		  
 		refreshPauseButton();

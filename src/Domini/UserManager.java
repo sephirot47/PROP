@@ -310,14 +310,13 @@ public class UserManager
 	    	
 	    	return new User(name, age);
 	    }
-
 		
 	    private static Reproduction getReproduction(String line) throws Exception
 		{
 	    	String fields[] = line.split(";");
 	    	if(fields.length != 3) { throw new Exception("Bad reproduction string format"); }
-	    	String author = fields[1].trim();
-	    	String title = fields[0].trim();
+	    	String author = fields[0].trim();
+	    	String title = fields[1].trim();
 	    	int time = Integer.parseInt(fields[2].trim());
 	    	
 	    	return new Reproduction(author, title, time);
