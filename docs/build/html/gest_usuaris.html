@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Gestió d’usuaris &mdash; YoutubeMix 3 documentació</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="YoutubeMix 3 documentació" href="index.html" />
+    <link rel="next" title="Gestió de cançons" href="gest_cancons.html" />
+    <link rel="prev" title="Interficie" href="interficie.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegació</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índex General"
+             accesskey="I">índex</a></li>
+        <li class="right" >
+          <a href="gest_cancons.html" title="Gestió de cançons"
+             accesskey="N">següent</a> |</li>
+        <li class="right" >
+          <a href="interficie.html" title="Interficie"
+             accesskey="P">anterior</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">YoutubeMix 3 documentació</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gestio-d-usuaris">
+<h1>Gestió d&#8217;usuaris<a class="headerlink" href="#gestio-d-usuaris" title="Link permanent a aquest títol">¶</a></h1>
+<p>Es pot accecir a l&#8217;apartat de gestió d&#8217;usuaris presionant en &#8220;Gestionar Usuaris&#8221; de la finestra principal.</p>
+<div class="section" id="descripcio-de-la-interficie">
+<h2>Descripció de la interficie<a class="headerlink" href="#descripcio-de-la-interficie" title="Link permanent a aquest títol">¶</a></h2>
+<img alt="_images/gest_usr.png" src="_images/gest_usr.png" />
+<ol class="arabic simple">
+<li><strong>Llista d&#8217;usuaris:</strong> Seleccionant un usuari d&#8217;aquesta llista es pot consultar la seva informació. La informació i resproduccions de l&#8217;usuari seleccionat es mostraran a <strong>l&#8217;apartat d&#8217;informació de l&#8217;usuari(3)</strong>. També es disposa d&#8217;una barra d cerca per tal de buscar l&#8217;usuari desitjat.</li>
+<li><strong>Introducció d&#8217;usuaris:</strong> Es poden introduir els usuaris de dues formes diferents: Individualment (Introduint un nom i una edat) o important usuaris des d&#8217;un fitxer. Per informació sobre el format del fitxer, cansultar l&#8217;apartat &#8220;Format del fitxer d&#8217;usuaris&#8221;.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">En nom d&#8217;usuari es informació basica per a identificar l&#8217;usuari, i com a tal no pot ser modificat, asseguri&#8217;s de que es correcte abans de desar el nou usuari.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li><strong>Informació sobre l&#8217;usuari seleccionat:</strong> En aquest apartat es mostra informació sobre l&#8217;usuari seleccionat. Nom, edat i cançons reproduides.</li>
+<li><strong>Edició dels usuaris:</strong> En aquest apartat es mostren les eines per a editar o eliminar els usuaris. Es pot eliminar un usuari individualment o be eliminar a tots els usuaris de cop. Editar usuari permet cambiar la edat d&#8217;un usuari així com gestionar les seves reproduccions. Consultar l&#8217;apartat &#8220;Afegir reproduccions a un usuari&#8221; per a mes informació sobre com gestionar les reproduccions d&#8217;un usuari.</li>
+</ol>
+</div>
+<div class="section" id="format-del-fitxer-d-usuaris">
+<h2>Format del fitxer d&#8217;usuaris<a class="headerlink" href="#format-del-fitxer-d-usuaris" title="Link permanent a aquest títol">¶</a></h2>
+<p>Per tal de poder importar un fitxer d&#8217;usuaris, el fitxer ha de seguir un format concret:</p>
+<div class="highlight-python"><div class="highlight"><pre>nom d&#39;usuari;edat
+</pre></div>
+</div>
+<ul class="simple">
+<li>Un usari per linia.</li>
+<li>Un nom d&#8217;usuari i una edat separat per &#8221;;&#8221; i sense espais.</li>
+<li>Si un usuari conté error, no serà importat (Per exemple usuari repetit o edat no numerica).</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">Asseguri&#8217;s de que el fitxer d&#8217;usuaris no acaba en una linia en blanc, això provocarà que els usuaris no s&#8217;importin correctament.</p>
+</div>
+</div>
+<div class="section" id="afegir-reproduccions-a-un-usuari">
+<h2>Afegir reproduccions a un usuari<a class="headerlink" href="#afegir-reproduccions-a-un-usuari" title="Link permanent a aquest títol">¶</a></h2>
+<p>A part d&#8217;editar la seva edat, al editar un usuari es poden genstionar les seves reproduccions.</p>
+<img alt="_images/edit_usr.png" src="_images/edit_usr.png" />
+<ol class="arabic simple">
+<li><strong>Editar edat:</strong> L&#8217;edat d&#8217;un usuari es editable, es pot cambiar aquí.</li>
+<li><strong>Edició de reproduccions:</strong> Aquí es poden veure les reproduccions d&#8217;un usuari, seleccionant una reproducció i presionant &#8220;Eliminar reproducció&#8221;, eliminarà la reproducció seleccionada. També tenim la opció d&#8217;afegir reproduccions, importantlos d&#8217;un fitxer (consultar l&#8217;apartat &#8220;Format del fitxer de reproduccions&#8221; per mes informació sobre el format del fitxer) o individualment usant el <strong>selector de cançons (3)</strong> .</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">Si es desitja eliminar mes d&#8217;una reproducció, es pot presionar ctrl i seleccionar les reproduccions que desitgem eliminar.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li><strong>Selector de cançons:</strong> Es mostren les cançons disponibles al programa. Seleccionant una cançó de les disponibles i un timestamp, podem afegir la cançó com a escoltada per a l&#8217;usuari.</li>
+<li><strong>Desar canvis:</strong> Qualsevol canvi fet al usuari no serà aplicat fins a desarlos. Si es torna enrere sense desar els canvis, es perdran les modificacions.</li>
+</ol>
+</div>
+<div class="section" id="format-del-fitxer-de-reproduccions">
+<h2>Format del fitxer de reproduccions<a class="headerlink" href="#format-del-fitxer-de-reproduccions" title="Link permanent a aquest títol">¶</a></h2>
+<p>Per tal de poder importar un fitxer d&#8217;usuaris, el fitxer ha de seguir un format concret:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Autor</span><span class="p">;</span><span class="n">titol</span><span class="p">;</span><span class="n">timestamp</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Una reproducció per linia.</li>
+<li>Camps separats per &#8221;;&#8221; i sense espais.</li>
+<li>Si una reproducció conté un error, no s&#8217;importarà  .</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">Asseguri&#8217;s de que el fitxer de reproduccions no acaba en una linia en blanc, això provocarà que les reproduccions no s&#8217;importin correctament.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Taula de Contingut</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Gestió d&#8217;usuaris</a><ul>
+<li><a class="reference internal" href="#descripcio-de-la-interficie">Descripció de la interficie</a></li>
+<li><a class="reference internal" href="#format-del-fitxer-d-usuaris">Format del fitxer d&#8217;usuaris</a></li>
+<li><a class="reference internal" href="#afegir-reproduccions-a-un-usuari">Afegir reproduccions a un usuari</a></li>
+<li><a class="reference internal" href="#format-del-fitxer-de-reproduccions">Format del fitxer de reproduccions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="interficie.html"
+                        title="capítol anterior">Interficie</a></p>
+  <h4>Tema següent</h4>
+  <p class="topless"><a href="gest_cancons.html"
+                        title="capítol següent">Gestió de cançons</a></p>
+  <div role="note" aria-label="source link">
+    <h3>Aquesta Pàgina</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/gest_usuaris.txt"
+            rel="nofollow">Mostra Codi Font</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Cerca ràpida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ves a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Entra paraules de cerca o el nom d'un mòdul, classe o funció.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, PROP 5.2.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.4</a>
+      
+      |
+      <a href="_sources/gest_usuaris.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

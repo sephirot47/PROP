@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Generació de llistes &mdash; YoutubeMix 3 documentació</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="YoutubeMix 3 documentació" href="index.html" />
+    <link rel="next" title="Consultar l’historial" href="consult_hist.html" />
+    <link rel="prev" title="Gestió de cançons" href="gest_cancons.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegació</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índex General"
+             accesskey="I">índex</a></li>
+        <li class="right" >
+          <a href="consult_hist.html" title="Consultar l’historial"
+             accesskey="N">següent</a> |</li>
+        <li class="right" >
+          <a href="gest_cancons.html" title="Gestió de cançons"
+             accesskey="P">anterior</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">YoutubeMix 3 documentació</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="generacio-de-llistes">
+<h1>Generació de llistes<a class="headerlink" href="#generacio-de-llistes" title="Link permanent a aquest títol">¶</a></h1>
+<p>Es pot accecir a l&#8217;apartat de generació de llistes presionant en &#8220;Generar llistes&#8221; de la finestra principal.</p>
+<div class="section" id="descripcio-de-la-interficie">
+<h2>Descripció de la interficie<a class="headerlink" href="#descripcio-de-la-interficie" title="Link permanent a aquest títol">¶</a></h2>
+<img alt="_images/gen_llist.png" src="_images/gen_llist.png" />
+<ol class="arabic">
+<li><p class="first"><strong>Selector de ponderacions:</strong> Usant els selectors d&#8217;aquest apartat, es poden seleccionar el valor de les ponderacions que s&#8217;usaran per generar les llistes. Cada un dels valor es troba explicat en eel selector, i son els seguents</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Duració:</strong> Les llistes es generaran tenint en compte la duració de la cançó. Cançons amb duracions semblants es trobaran en les mateixes llistes.</li>
+<li><strong>Any:</strong> Les llistes es generaran tenint en compte l&#8217;any en la que es va publicar la cançó. Cançons en anys pròxims es trobaran en les mateixes llistes.</li>
+<li><strong>Estil:</strong> Les llistes es generaran tenint en compte els seus estils. Cançons del mateix estil es trobaran en la mateixa llista.</li>
+<li><strong>Public:</strong> Les llistes es generaran tinguen en compte el public que acostuma a escoltarles. Si dues cançons les escolta gent d&#8217;edat semblant aniran a la mateixa lllista.</li>
+<li><strong>Proximitat:</strong>  Les llistes es generan tenint en compte cançons que s escolten normalment juntes. Dues cançons escoltades normalment juntes en un curt periode de temps pels usuaris aniran el les mateixes llistes.</li>
+<li><strong>Autor:</strong> Les llistes es generaran tenint en compte l&#8217;autor de les cançons. Dues cançons del mateix autor aniran a la mateixa llista.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Tots a zero:</strong> Si es vol resaltar un sol criteri, pot ser interssant posar tots els criteris a zero facilment per tan de que sigui mes ràpid seleccionar el desitjat.</p>
+</li>
+<li><p class="first"><strong>Selecció de l&#8217;Algorisme:</strong> El programa disposa de 3 algorismes entre els que triar per tal de generar les llistes, amb aquest selector es pot indicar quin algorisme s&#8217;ha d&#8217;usar.</p>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">L&#8217;algorisme Girvan Newman permet també indicar el nombre minim de llistes que es generaran, seleccionant &#8220;Girvan Newman&#8221; apareixarà un selector per tal de triar aquest valor. Els valors disponibles depenen del nombre de cançons que hi hagi en aquell moment al programa.</p>
+</div>
+<ol class="arabic simple" start="4">
+<li><strong>Generar llista:</strong> Al presionar aques botó, es generaran les llistes amb els criteris desitjats. Si us plau, tingui paciencia, ja que depenent de l&#8217;algorisme i el nombre de cançons, aquest procés pot trigar bastant.</li>
+</ol>
+</div>
+<div class="section" id="edicio-d-una-solucio-generada">
+<h2>Edició d&#8217;una solució generada<a class="headerlink" href="#edicio-d-una-solucio-generada" title="Link permanent a aquest títol">¶</a></h2>
+<p>Un cop generades les llistes, es poden editar per realitzar els canvis desitjats en aquest apartat.</p>
+<img alt="_images/edit_llist.png" src="_images/edit_llist.png" />
+<ol class="arabic simple">
+<li><strong>Consulta de la solució:</strong> En aquests apartats de la finestra es poden veure les diferents llistes generades. Seleccionant una de les llistes, es mostrarà al quadre de la dreta les cançons de les que esta formada.</li>
+<li><strong>Edició de llistes:</strong> Seleccionant una llista es pot eliminar presionant el botó de &#8220;Eliminar llista&#8221;. Addicionalment, es poden afegir llistes buides a la solució per tal de mourehi cançons que es trobin a altres llistes.</li>
+<li><strong>Edició de cançons:</strong> Seleccionant una cançó d&#8217;una llista, es pot eliminar la cançó seleccionada de la llista, també existeix la opció de moure la cançó a una altre llista. Per a fer això, selecciona la nova llista de les disponibles en el menú i presiona &#8220;Moure a la llista&#8221;.</li>
+<li><strong>Visualitzar el graf:</strong> Presionant en aquesta opció es pot consultar el graf de la solució. Per a mes informació, consultar l&#8217;apartat &#8220;Consulta del graf&#8221;.</li>
+<li><strong>Desar la solució:</strong> Es desaran les llistes que hem modificat al gust per a futura consulta. Aquestes llistes estan disponibles al historial.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">Les llistes un cop desades no poden ser modificades. Realitzi totes les edicións desitjades abans de desarla.</p>
+</div>
+</div>
+<div class="section" id="consulta-del-graf">
+<h2>Consulta del graf<a class="headerlink" href="#consulta-del-graf" title="Link permanent a aquest títol">¶</a></h2>
+<img alt="_images/consult_graf.png" src="_images/consult_graf.png" />
+<p>1. <strong>Visualitxació del graf:</strong> En aquesta finestra es mostra el graf de la solució. Cada llista de reproducció te les seves cançons (Nodes) d&#8217;un color diferent. Els nodes que apareixen &#8220;transparent&#8221; son cançons que no es troben a la solució final. Això pot ser degut a que s&#8217;han eliminat manualment, eren en una llista que ha sigut eliminada o que l&#8217;algorisme l&#8217;ha eliminat com a part del seu procés de generació.
+Per a facilitar la consulta del graf, existeixen varies eines per moure&#8217;s per la vista.</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Clicar i arrossegar:</strong> Permet moure&#8217;s per el graf.</li>
+<li><strong>La roda del ratolí:</strong> Permer fer zoom per veure amb mes detall zones concretes del graf.</li>
+<li><strong>Presionar shift mentre es clica i s&#8217;arrossega:</strong> Permet girar el graf.</li>
+<li><strong>Presionar ctrl mentre es clica i s&#8217;arrossega:</strong> Permet sesgar el graf per consultarlo des de una prespectiva diferent.</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><strong>Informació sobre la cançó:</strong> Al seleccionar un dels nodes amb el click esquerra del ratolí podem observar que s&#8217;activen dues funcions, primer de tot es pot consultar informació sobre la cançó seleccionada, que apareixerà en els espais per a text de sota del graf. També podem veure que els vertex (Les relacions amb altres cançons) de la cançó seleccionada es resalten, i es mostren les seves ponderacions.</li>
+<li><strong>Mode Veure i mode moure:</strong> Mab aquests botons es pot cambiar entre el mode veure (V) i el mode moure(M). El comportament descrit al punt 1 es el corresponent al mode Veure, que es el mode per defecte. Al seleccionar el mode Moure, podem clicar un o mes nodes (Clicant i arrossegant de forma que els nodes quedin inclosos en el rectangle que apareix) i es podem moure. aquesta funció es util si tenim un graf tan poblar pue es dificil llegir el seu contingut o les seves relacions i les volem apartar.</li>
+<li><strong>Control de la vista del graf:</strong> Per dibuixar el graf, el programa usa uns algorismes que apliquen forces als seus vertex i nodes a partir d&#8217;una posició aleatoria inicial. Amb &#8220;Redibuixar graf&#8221; tornem a posicionar aleatoriament els nodes i aplicar l&#8217;algorisme. Obtenint una nova distribució del graf. Amb aturar/continuar animació, podem pausar i continuar la animació dels vertex sen efectats per aquestes forces.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">Obtenir un bon posicionament del graf es un problema molt complicat, per tant es molt possible que en grafs grans quedi tot molt junt i sigui dificil de llegir. Això es una limitació de l&#8217;algorisme i la velocitat del ordinador, i es dificil millorar el seu posicionament.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Taula de Contingut</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Generació de llistes</a><ul>
+<li><a class="reference internal" href="#descripcio-de-la-interficie">Descripció de la interficie</a></li>
+<li><a class="reference internal" href="#edicio-d-una-solucio-generada">Edició d&#8217;una solució generada</a></li>
+<li><a class="reference internal" href="#consulta-del-graf">Consulta del graf</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="gest_cancons.html"
+                        title="capítol anterior">Gestió de cançons</a></p>
+  <h4>Tema següent</h4>
+  <p class="topless"><a href="consult_hist.html"
+                        title="capítol següent">Consultar l&#8217;historial</a></p>
+  <div role="note" aria-label="source link">
+    <h3>Aquesta Pàgina</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/gen_llistes.txt"
+            rel="nofollow">Mostra Codi Font</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Cerca ràpida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ves a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Entra paraules de cerca o el nom d'un mòdul, classe o funció.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, PROP 5.2.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.4</a>
+      
+      |
+      <a href="_sources/gen_llistes.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Gestió de cançons &mdash; YoutubeMix 3 documentació</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="YoutubeMix 3 documentació" href="index.html" />
+    <link rel="next" title="Generació de llistes" href="gen_llistes.html" />
+    <link rel="prev" title="Gestió d’usuaris" href="gest_usuaris.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegació</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índex General"
+             accesskey="I">índex</a></li>
+        <li class="right" >
+          <a href="gen_llistes.html" title="Generació de llistes"
+             accesskey="N">següent</a> |</li>
+        <li class="right" >
+          <a href="gest_usuaris.html" title="Gestió d’usuaris"
+             accesskey="P">anterior</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">YoutubeMix 3 documentació</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gestio-de-cancons">
+<h1>Gestió de cançons<a class="headerlink" href="#gestio-de-cancons" title="Link permanent a aquest títol">¶</a></h1>
+<p>Es pot accecir a l&#8217;apartat de gestió de cançons presionant en &#8220;Gestionar Cançons&#8221; de la finestra principal.</p>
+<div class="section" id="descripcio-de-la-interficie">
+<h2>Descripció de la interficie<a class="headerlink" href="#descripcio-de-la-interficie" title="Link permanent a aquest títol">¶</a></h2>
+<img alt="_images/gest_canco.png" src="_images/gest_canco.png" />
+<ol class="arabic">
+<li><p class="first"><strong>Llista de Cançons disponibles:</strong> En aquest apartat es poden consultar totes les cançons disponibles al programa, si la llista es molt gran, es pot usar <strong>el buscador (2)</strong> per filtrar les cançons i trobar la desitjada, al seleccionar una canço en aquesta llista, es podrà veure la seva informació en la <strong>finestra de consulta d&#8217;informació (3)</strong>.</p>
+</li>
+<li><p class="first"><strong>Buscador:</strong> Introdueixio part del nom d&#8217;una cançó o un autor per filtrar el resultat.</p>
+</li>
+<li><p class="first"><strong>Consulta d&#8217;informació:</strong> En aquest apartat es mostra la informació de la cançó seleccionada.</p>
+</li>
+<li><p class="first"><strong>Afegir cançons:</strong> El programa disposa de dues formes d&#8217;introduir cançons noves, individualment o a partir d&#8217;un fitxer de cançons.</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Introducció manual:</strong> Presionant el botó &#8220;Nova cançó&#8221;, s&#8217;accedirà a la introducció manual de cançons, La informació necesaria per a la introducció de la cançó es el nom de l&#8217;autor, el titol de la cançó, la duració en segons, l&#8217;any de publicació de la cançó i entre un i tres estils dels que la cançó formi part.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">Tant el titol com el nom de l&#8217;autor de la cançó son informació bàsica per identificar la cançó, i com a tal no pot ser modificada mes endavant, comprovi que sigui correcte abans de desar la informació.</p>
+</div>
+<ul class="simple">
+<li><strong>Importar d&#8217;un fitxer:</strong> Es poden importar cançons a partir d&#8217;un fitxer, referirse a l&#8217;apartat &#8220;Format del fitxer de cançons&#8221; per una descripció del format que ha de tenir aquest fitxer.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Edició de les cançons:</strong> En aques apartat es mostren les eines necessaries per editar i eliminar cançons, existeixen dues formes d&#8217;eliminar cançons, individualment o de forma massiva. Presionar a &#8220;Eliminar totes les cançons&#8221; elimina totes les cançons presents al programa. També es dona la opció de modificar la informació d&#8217;una cançó. Si us plau, referirse a la nota de l&#8217;apartat de introducció manual per a informació sobre el nom i l&#8217;autor de la cançó.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="format-del-fitxer-de-cancons">
+<h2>Format del fitxer de cançons<a class="headerlink" href="#format-del-fitxer-de-cancons" title="Link permanent a aquest títol">¶</a></h2>
+<p>Per tal de poder importar un fitxer de cançons, el fitxer ha de seguir un format concret:</p>
+<div class="highlight-python"><div class="highlight"><pre>Nom Artista;Titol Cançó;any;Estil 1;Estil 2;Estil 3;Duració en segons;
+</pre></div>
+</div>
+<ul class="simple">
+<li>Una cançó per linia, acabada en &#8221;;&#8221;.</li>
+<li>Cada apartat ha d&#8217;anar separat amb &#8221;;&#8221; i sense espais (o els espais seran interpretats com a part del camp).</li>
+<li>Si la cançó no te 3 estils, es pot substituir Estil 2 i Estil 3 per &#8220;-&#8221;.</li>
+<li>Si existeix algun error en el format d&#8217;una cançó (Falta Estil 1, l&#8217;any o la duració no son numeros...), la cançó no s&#8217;importarà.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">Asseguri&#8217;s de que el fitxer de cançons no acaba en una linia en blanc, això provocarà que les cançons no s&#8217;importin correctament.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Taula de Contingut</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Gestió de cançons</a><ul>
+<li><a class="reference internal" href="#descripcio-de-la-interficie">Descripció de la interficie</a></li>
+<li><a class="reference internal" href="#format-del-fitxer-de-cancons">Format del fitxer de cançons</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="gest_usuaris.html"
+                        title="capítol anterior">Gestió d&#8217;usuaris</a></p>
+  <h4>Tema següent</h4>
+  <p class="topless"><a href="gen_llistes.html"
+                        title="capítol següent">Generació de llistes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>Aquesta Pàgina</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/gest_cancons.txt"
+            rel="nofollow">Mostra Codi Font</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Cerca ràpida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ves a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Entra paraules de cerca o el nom d'un mòdul, classe o funció.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, PROP 5.2.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.4</a>
+      
+      |
+      <a href="_sources/gest_cancons.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

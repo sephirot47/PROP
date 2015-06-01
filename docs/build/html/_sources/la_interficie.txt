@@ -1,0 +1,5 @@
+La Interficie
+=============
+
+En aquest apartat veurem la estructuració bàsica d'una pantalla cualsevol de la interficie d'usuari.
+
