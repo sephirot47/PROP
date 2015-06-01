@@ -1,25 +1,38 @@
 package Presentacio;
 
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
+
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
 import java.awt.FlowLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.JDialog;
+import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
 import javax.swing.BoxLayout;
 import javax.swing.JToolBar;
 import javax.swing.JButton;
+import javax.swing.SwingWorker;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Dimension;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
 import java.awt.Cursor;
+
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.plaf.SliderUI;
@@ -28,14 +41,18 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.JSeparator;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JTextField;
 
 import Domini.GirvanNewman;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
+
 import javax.swing.JTextArea;
 import javax.swing.JEditorPane;
 import javax.swing.JTextPane;
@@ -55,6 +72,8 @@ public class GenerarLlistesPanel extends JPanel {
 	private final JSlider sliderComunitatsGN;
 	private JSlider sliderDuracio, sliderAny,sliderEstil, sliderPublic, sliderProximitat, sliderAutor;
 	private JTextField textComunitatsGN;
+	
+	public static boolean done = false, aborted = false;
 	
 	public GenerarLlistesPanel()
 	{
@@ -274,6 +293,7 @@ public class GenerarLlistesPanel extends JPanel {
 		panelAutor.add(labelSliderAutor);
 		
 		JButton btnTotsAZero = new JButton("Tots a zero");
+		btnTotsAZero.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTotsAZero.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 
@@ -474,6 +494,73 @@ public class GenerarLlistesPanel extends JPanel {
 	}
 	
 	private void generateSolution()
+	{ 
+		if(sliderAny.getValue() <= 0 && sliderAutor.getValue() <= 0 && sliderComunitatsGN.getValue() <= 0 && sliderDuracio.getValue() <= 0 &&
+		   sliderEstil.getValue() <= 0 && sliderProximitat.getValue() <= 0 && sliderPublic.getValue() <= 0)
+		{
+			PresentationManager.errorWindow("Almenys algun criteri ha de ser no nul.");
+			return;
+		}
+		
+		final String msg = "Generant solucio";
+        final DialogGenerantSolucio dialog = new DialogGenerantSolucio();
+        
+        SwingWorker worker = new SwingWorker() 
+        {
+            @Override protected void done() 
+            {
+            	done = aborted = false;
+                dialog.dispose();
+            }
+            @Override protected void process(List chunks)  { }
+            @Override protected Object doInBackground() throws Exception 
+            {
+            	int i = 0;
+            	while(!done && !aborted) 
+            	{
+            		i = (i+1)%4;
+            		String newmsg = msg;
+            		for(int j = 0; j < i; ++j) newmsg += ".";
+            		dialog.label.setText(newmsg);
+            		try { Thread.sleep(500); } catch(Exception e) {}
+            	}
+                return null;
+            }
+        };
+
+        MainWindow.frmYoutube.setEnabled(false);
+    	done = false;
+        worker.execute();
+        
+    	final Thread t = new Thread( new Runnable() { 
+    		public void run() 
+    		{ 
+    			workoutSolution(); 
+    			done = true;
+    			MainWindow.frmYoutube.setEnabled(true);
+    		} 
+    	} );
+    	t.start();
+    	
+    	new Thread( new Runnable() { 
+    		public void run() 
+    		{ 
+    			while(true)
+    			{
+    				if(aborted) 
+					{
+    					t.interrupt();
+            			MainWindow.frmYoutube.setEnabled(true);
+            			break;
+					}
+            		try { Thread.sleep(100); } catch(Exception e) {}
+    			}
+    		} 
+    	} ).start();
+        
+	}
+	
+	private void workoutSolution()
 	{
 		char algorisme = '-';
 		if(louvain.isSelected()) algorisme = 'L';

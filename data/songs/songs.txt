@@ -1,0 +1,300 @@
+Skrillex;Pentakill_192;1700;Dubstep;House;-;60
+Vector;Double four_2;1990;House;Trash metal;-;120
+Bertri;Boca beats_56;2010;Trash metal;-;-;240
+Tomeu Penya;Sabata Rota_180;1800;Techno Punk;-;-;120
+Aina;Sabata Rota_59;1600;Trash metal;Death metal;Trash metal;120
+Melendi;Triple six_133;1990;Soul;House;-;60
+Skrillex;Paquito el chocolatero_184;1700;Trash metal;-;-;120
+Bertri;All I want for Christmas is you_80;2010;Soul;-;-;60
+Skrillex;Cuando zarpa el hamor_219;2010;Flamenquillo;Folk;-;240
+Vector;Boca beats_1;1600;Flamenquillo;-;-;120
+Skrillex;Pentakill_123;1960;Techno Punk;Folk;Flamenquillo;180
+Bertri;Pentakill_124;1990;Trash metal;Soul;House;60
+Bertri;Triple six_66;1900;Trash metal;Country;House;120
+Bertri;The Freak_106;1970;Dubstep;Trash metal;Perroflautins;60
+Melendi;All I want for Christmas is you_138;1950;Trash metal;Death metal;House;60
+Bertri;Cuando zarpa el hamor_175;1980;Techno Punk;Soul;-;120
+Melendi;Cuando zarpa el hamor_9;1800;House;Country;Techno Punk;240
+Melendi;Double four_285;2000;Soul;Soul;-;180
+Vector;The Freak_262;1970;Trash metal;Flamenquillo;-;240
+Skrillex;Pentakill_236;2000;Folk;Trash metal;-;120
+JFons;The Freak_203;1960;Perroflautins;-;-;180
+Aina;Pentakill_266;2000;Techno Punk;Soul;-;240
+Aina;The Freak_265;1950;Dubstep;-;-;240
+Abraham;Pentakill_240;1600;Perroflautins;-;-;180
+Skrillex;Cuando zarpa el hamor_250;1960;Soul;-;-;60
+DJ RFA;Pentakill_11;1980;Country;House;-;120
+Vector;Double four_135;1950;Death metal;Death metal;Folk;240
+Skrillex;Boca beats_174;1900;House;-;-;180
+Aina;The Freak_117;1900;Country;Death metal;-;180
+Vector;Sabata Rota_286;1990;Trash metal;Death metal;-;60
+Tomeu Penya;Cuando zarpa el hamor_13;1900;Folk;Dubstep;-;240
+Camela;Pentakill_134;1950;Trash metal;Perroflautins;Perroflautins;60
+JFons;Sabata Rota_3;1970;Country;-;-;240
+Tomeu Penya;The Freak_58;1900;Techno Punk;-;-;240
+Bertri;The Freak_43;1970;Flamenquillo;Soul;Flamenquillo;60
+Abraham;Sabata Rota_89;1800;Perroflautins;Country;-;60
+Bertri;Pentakill_29;1950;Flamenquillo;-;-;120
+Tomeu Penya;Double four_63;1800;Country;Techno Punk;-;60
+Tomeu Penya;Boca beats_131;2010;House;-;-;60
+Vector;Pentakill_102;1980;Death metal;-;-;240
+JFons;Boca beats_231;1990;House;Flamenquillo;House;120
+JFons;Sabata Rota_209;1980;Perroflautins;-;-;180
+Tomeu Penya;Paquito el chocolatero_201;1800;Dubstep;Dubstep;House;120
+Bertri;All I want for Christmas is you_244;2010;Flamenquillo;-;-;240
+JFons;Sabata Rota_17;1960;Folk;Dubstep;-;180
+JFons;Sabata Rota_194;1600;Death metal;Flamenquillo;-;240
+Skrillex;Sabata Rota_223;1600;Perroflautins;Flamenquillo;House;60
+Skrillex;The Freak_136;1950;Death metal;Flamenquillo;-;240
+Melendi;Sabata Rota_239;2010;Flamenquillo;Techno Punk;Techno Punk;240
+Abraham;Double four_280;1950;Flamenquillo;Country;-;120
+Bertri;All I want for Christmas is you_120;1700;Soul;Country;-;180
+DJ RFA;Double four_149;2000;Dubstep;-;-;180
+Aina;The Freak_221;1960;Flamenquillo;Techno Punk;House;240
+Abraham;Triple six_73;1600;Dubstep;Flamenquillo;-;240
+Aina;Boca beats_61;1600;Soul;Perroflautins;Death metal;120
+Aina;Cuando zarpa el hamor_217;1600;Soul;Soul;-;60
+Melendi;Pentakill_296;2000;Trash metal;-;-;60
+Bertri;Boca beats_82;1970;Dubstep;Flamenquillo;-;180
+Tomeu Penya;Pentakill_74;2010;Country;Dubstep;Country;120
+Tomeu Penya;Pentakill_39;1950;Dubstep;Flamenquillo;Death metal;120
+Aina;Cuando zarpa el hamor_14;1960;Trash metal;Dubstep;-;120
+Bertri;All I want for Christmas is you_101;2000;House;Soul;-;60
+JFons;Double four_143;1950;Perroflautins;Flamenquillo;-;120
+Skrillex;Cuando zarpa el hamor_177;1970;Country;-;-;180
+Skrillex;Double four_62;1700;Trash metal;Country;Dubstep;240
+Aina;All I want for Christmas is you_207;1950;Trash metal;-;-;120
+Aina;Paquito el chocolatero_20;1960;Techno Punk;Death metal;-;120
+DJ RFA;Pentakill_85;1980;Death metal;-;-;60
+Bertri;Paquito el chocolatero_52;1970;Trash metal;Folk;-;60
+Aina;Triple six_164;1950;House;Techno Punk;-;240
+Vector;Mahjong beats_49;2010;Perroflautins;Soul;-;60
+Camela;Double four_113;1970;Trash metal;Folk;-;60
+Abraham;The Freak_171;2000;Soul;-;-;120
+Tomeu Penya;The Freak_181;1950;Perroflautins;Techno Punk;-;60
+Tomeu Penya;The Freak_260;1600;Dubstep;Soul;-;60
+Bertri;Triple six_100;1800;Dubstep;Trash metal;Folk;240
+JFons;Triple six_282;1960;House;Soul;Flamenquillo;240
+DJ RFA;Double four_84;1970;Perroflautins;Folk;-;180
+JFons;Cuando zarpa el hamor_245;1600;Flamenquillo;Trash metal;Soul;180
+Camela;Mahjong beats_81;1600;Flamenquillo;-;-;180
+Abraham;The Freak_183;2010;Soul;Perroflautins;-;180
+Aina;The Freak_205;1900;Perroflautins;Techno Punk;-;180
+Skrillex;Pentakill_46;1970;Soul;Death metal;-;240
+DJ RFA;Paquito el chocolatero_295;1990;Trash metal;Trash metal;Flamenquillo;60
+Tomeu Penya;Double four_31;1990;Folk;Folk;Dubstep;240
+Camela;The Freak_172;2000;Death metal;-;-;180
+Skrillex;The Freak_273;1900;Trash metal;-;-;60
+Bertri;Sabata Rota_256;1970;Perroflautins;-;-;240
+Aina;The Freak_159;1960;House;-;-;60
+Aina;The Freak_294;2010;Country;House;Country;120
+Skrillex;Triple six_195;1900;Techno Punk;-;-;60
+DJ RFA;The Freak_154;1800;Death metal;Dubstep;Folk;60
+Tomeu Penya;Paquito el chocolatero_97;2010;Country;Perroflautins;-;240
+Melendi;All I want for Christmas is you_213;1970;Dubstep;Trash metal;-;180
+JFons;Pentakill_270;2000;Folk;Folk;-;60
+Abraham;Paquito el chocolatero_35;1990;Country;Death metal;Death metal;120
+Melendi;Sabata Rota_227;1960;Perroflautins;Trash metal;House;240
+Skrillex;All I want for Christmas is you_220;1800;Flamenquillo;Death metal;Country;180
+Abraham;Paquito el chocolatero_212;1960;Perroflautins;-;-;60
+Skrillex;Cuando zarpa el hamor_55;1970;Flamenquillo;Trash metal;-;180
+Skrillex;Pentakill_249;1700;Techno Punk;Perroflautins;House;240
+DJ RFA;Double four_144;1990;Country;Country;-;60
+JFons;All I want for Christmas is you_157;1960;Country;Folk;-;60
+JFons;Cuando zarpa el hamor_230;1960;Country;Death metal;-;60
+DJ RFA;Cuando zarpa el hamor_140;1950;Flamenquillo;-;-;60
+JFons;Boca beats_198;1700;Techno Punk;Flamenquillo;Flamenquillo;60
+DJ RFA;Double four_4;2000;Country;-;-;240
+Bertri;Triple six_193;1950;Flamenquillo;Country;Flamenquillo;120
+Melendi;Double four_187;1960;Dubstep;Country;-;240
+JFons;Triple six_277;1960;Soul;Flamenquillo;Techno Punk;180
+Melendi;All I want for Christmas is you_225;1980;Trash metal;Flamenquillo;Dubstep;180
+Abraham;Boca beats_33;1980;Folk;Country;House;120
+Tomeu Penya;Boca beats_297;1970;Soul;Flamenquillo;-;180
+Melendi;Triple six_218;1990;Soul;-;-;60
+Skrillex;Double four_166;1960;Trash metal;Country;-;240
+DJ RFA;Cuando zarpa el hamor_57;1700;Soul;House;Country;240
+Melendi;All I want for Christmas is you_6;1800;Death metal;House;Country;60
+Bertri;Boca beats_98;1990;House;-;-;60
+Bertri;Sabata Rota_147;2000;House;Death metal;-;240
+Camela;Triple six_278;2000;Country;-;-;240
+JFons;Mahjong beats_141;1990;Techno Punk;House;Folk;240
+DJ RFA;Double four_151;1970;Trash metal;Folk;-;120
+Aina;Pentakill_255;1700;Techno Punk;Folk;-;60
+Bertri;Boca beats_122;1980;Death metal;-;-;60
+Melendi;Boca beats_5;2010;Flamenquillo;-;-;60
+Abraham;Paquito el chocolatero_179;2010;Flamenquillo;House;-;60
+Tomeu Penya;Cuando zarpa el hamor_257;1900;Dubstep;Folk;Folk;240
+Skrillex;Boca beats_54;1980;Soul;-;-;60
+DJ RFA;Mahjong beats_291;1970;Flamenquillo;-;-;180
+Skrillex;Cuando zarpa el hamor_15;1990;Flamenquillo;Folk;Soul;240
+Abraham;Mahjong beats_210;1800;Death metal;-;-;180
+Vector;The Freak_293;1700;Flamenquillo;-;-;240
+JFons;All I want for Christmas is you_267;1970;Soul;-;-;60
+Vector;Paquito el chocolatero_44;1960;Techno Punk;Flamenquillo;-;180
+Tomeu Penya;Cuando zarpa el hamor_146;1900;Country;Death metal;Perroflautins;240
+Melendi;Boca beats_76;2010;Folk;-;-;240
+Skrillex;Boca beats_111;1700;Perroflautins;House;-;120
+Melendi;Double four_148;1600;Folk;-;-;240
+Abraham;The Freak_105;1600;Perroflautins;Techno Punk;-;120
+Bertri;All I want for Christmas is you_99;1800;Death metal;Dubstep;-;240
+Abraham;Double four_204;1600;House;Trash metal;Country;240
+JFons;Cuando zarpa el hamor_158;1900;Soul;-;-;60
+JFons;Sabata Rota_253;1990;Soul;Folk;Country;120
+Skrillex;Mahjong beats_114;1980;Flamenquillo;Trash metal;-;240
+Vector;Mahjong beats_25;1600;Flamenquillo;-;-;180
+DJ RFA;All I want for Christmas is you_276;1600;Techno Punk;Techno Punk;Perroflautins;180
+Camela;Cuando zarpa el hamor_165;2000;Trash metal;-;-;240
+Vector;Double four_45;1950;Soul;Flamenquillo;Folk;180
+Tomeu Penya;Mahjong beats_284;1900;Trash metal;Trash metal;Country;180
+Melendi;Mahjong beats_283;1800;Folk;-;-;180
+Vector;Mahjong beats_34;1980;Flamenquillo;Soul;Soul;240
+Melendi;All I want for Christmas is you_170;1990;Flamenquillo;Techno Punk;Death metal;60
+Abraham;The Freak_109;2000;Country;Trash metal;-;240
+JFons;Cuando zarpa el hamor_226;2000;Techno Punk;Soul;Folk;60
+Abraham;Double four_153;1700;Death metal;-;-;60
+JFons;Boca beats_298;1900;Country;-;-;120
+JFons;The Freak_91;1990;Flamenquillo;-;-;180
+Skrillex;Pentakill_290;1970;Dubstep;Country;Country;180
+Camela;Double four_127;1800;House;Death metal;-;120
+Vector;Paquito el chocolatero_246;1970;Perroflautins;-;-;240
+Camela;The Freak_132;1950;Techno Punk;Flamenquillo;-;60
+JFons;Boca beats_41;1960;Country;Trash metal;-;180
+Abraham;Triple six_126;1960;Folk;Folk;-;120
+Vector;Pentakill_27;1970;House;Trash metal;Trash metal;60
+Camela;Sabata Rota_121;1950;Death metal;Perroflautins;Country;60
+Skrillex;Pentakill_281;1960;Techno Punk;House;-;120
+Tomeu Penya;Pentakill_252;2010;Trash metal;Folk;-;180
+DJ RFA;Cuando zarpa el hamor_21;1900;Folk;-;-;120
+Skrillex;Triple six_104;2000;Soul;Perroflautins;Trash metal;120
+JFons;Mahjong beats_53;2010;Flamenquillo;Perroflautins;-;120
+Camela;Mahjong beats_115;1600;Flamenquillo;-;-;180
+DJ RFA;Triple six_173;1700;Dubstep;-;-;60
+Skrillex;Pentakill_268;2010;Trash metal;Death metal;Death metal;240
+DJ RFA;Triple six_37;2000;Techno Punk;Perroflautins;-;180
+Skrillex;Paquito el chocolatero_160;2010;Dubstep;-;-;180
+Tomeu Penya;Double four_272;1950;Techno Punk;Folk;Dubstep;120
+Vector;Paquito el chocolatero_206;1980;Flamenquillo;Flamenquillo;Trash metal;240
+Skrillex;Double four_202;1980;Techno Punk;Soul;-;120
+Tomeu Penya;Pentakill_47;1800;Techno Punk;Country;-;120
+DJ RFA;The Freak_72;1900;Folk;Perroflautins;Dubstep;240
+JFons;Triple six_189;1960;Trash metal;Trash metal;Dubstep;60
+Abraham;The Freak_139;1970;Soul;Perroflautins;Soul;60
+Vector;Triple six_69;1980;Trash metal;-;-;240
+Bertri;Sabata Rota_116;1990;Folk;Death metal;-;240
+JFons;Cuando zarpa el hamor_234;2000;Soul;Soul;-;120
+DJ RFA;Double four_176;1950;Flamenquillo;Perroflautins;Soul;120
+JFons;Pentakill_83;1990;Trash metal;House;Perroflautins;60
+Vector;Sabata Rota_215;1980;Folk;-;-;240
+Camela;Boca beats_92;1700;Death metal;-;-;120
+Skrillex;Double four_103;1950;Flamenquillo;Folk;Flamenquillo;240
+Tomeu Penya;The Freak_258;2010;Death metal;-;-;60
+Aina;Sabata Rota_190;2010;Country;Country;-;60
+Skrillex;Cuando zarpa el hamor_299;1600;Country;Trash metal;-;60
+Tomeu Penya;Pentakill_235;1990;Dubstep;Techno Punk;House;60
+Abraham;Sabata Rota_108;1700;Folk;Death metal;-;180
+Aina;Triple six_26;1600;Death metal;Folk;Soul;60
+Skrillex;The Freak_95;1700;Death metal;Perroflautins;-;180
+DJ RFA;Sabata Rota_196;1980;Dubstep;-;-;240
+Camela;All I want for Christmas is you_167;2010;Folk;Death metal;Trash metal;180
+Skrillex;Sabata Rota_36;1960;Dubstep;-;-;180
+Melendi;Boca beats_178;1990;House;Soul;-;120
+JFons;Boca beats_42;1900;Flamenquillo;Flamenquillo;Dubstep;240
+Bertri;Mahjong beats_70;1700;Death metal;-;-;240
+Abraham;Sabata Rota_186;1800;Techno Punk;House;-;180
+Vector;Triple six_79;1950;Perroflautins;Trash metal;House;120
+Tomeu Penya;All I want for Christmas is you_68;1960;Folk;Dubstep;Trash metal;240
+Skrillex;Boca beats_51;2000;House;Dubstep;Trash metal;60
+Tomeu Penya;Pentakill_40;2010;Folk;-;-;180
+Abraham;Double four_119;2010;Flamenquillo;Soul;-;240
+DJ RFA;Cuando zarpa el hamor_168;1600;Death metal;Perroflautins;Country;240
+Melendi;Triple six_156;2010;Techno Punk;Death metal;Perroflautins;60
+Aina;Mahjong beats_88;1800;Dubstep;-;-;180
+Melendi;Paquito el chocolatero_288;1700;Soul;Soul;House;240
+Vector;Sabata Rota_96;1900;House;Techno Punk;-;120
+Tomeu Penya;The Freak_222;1970;Soul;House;Trash metal;60
+Abraham;Paquito el chocolatero_271;1970;Soul;House;-;120
+Aina;The Freak_233;1980;Dubstep;House;-;240
+Tomeu Penya;Double four_60;1990;Perroflautins;-;-;60
+Skrillex;Sabata Rota_200;1600;Folk;House;-;180
+Melendi;Sabata Rota_90;2000;Flamenquillo;Soul;-;240
+Aina;Triple six_118;1900;Perroflautins;-;-;120
+JFons;All I want for Christmas is you_279;1800;Perroflautins;-;-;180
+Aina;Pentakill_107;1800;Perroflautins;Flamenquillo;-;240
+Bertri;Triple six_94;1600;Death metal;Dubstep;Trash metal;180
+Melendi;Cuando zarpa el hamor_78;1990;Trash metal;Soul;-;180
+Aina;Cuando zarpa el hamor_211;1980;Folk;Trash metal;Folk;180
+Vector;Boca beats_152;1980;Country;Dubstep;Flamenquillo;60
+Vector;Triple six_0;1990;Trash metal;Soul;-;120
+Vector;Paquito el chocolatero_163;1600;Perroflautins;-;-;120
+Camela;Pentakill_228;1990;Trash metal;-;-;60
+Abraham;Triple six_16;2010;Death metal;-;-;180
+Aina;Mahjong beats_110;1980;Country;Flamenquillo;-;120
+JFons;Pentakill_247;1700;Dubstep;-;-;180
+Skrillex;Triple six_77;1980;Soul;-;-;180
+Skrillex;Double four_18;1960;Folk;Flamenquillo;-;60
+Vector;Boca beats_274;1950;Country;-;-;240
+Camela;Double four_162;1900;Techno Punk;Techno Punk;-;180
+Vector;All I want for Christmas is you_169;1960;Country;Trash metal;Dubstep;240
+Vector;The Freak_242;1970;Techno Punk;Techno Punk;Soul;180
+Camela;Double four_197;1900;Country;Dubstep;Folk;180
+Skrillex;Paquito el chocolatero_292;1600;Folk;-;-;60
+DJ RFA;Double four_188;1900;Soul;-;-;180
+Camela;Sabata Rota_28;1700;House;Flamenquillo;-;240
+Camela;Mahjong beats_199;1980;House;-;-;60
+Bertri;Paquito el chocolatero_248;2010;Soul;-;-;240
+Aina;Sabata Rota_208;1800;Techno Punk;-;-;120
+Skrillex;Sabata Rota_275;1980;Trash metal;-;-;180
+Camela;Boca beats_261;1950;Death metal;-;-;180
+Camela;Triple six_251;1900;Soul;Dubstep;Death metal;240
+DJ RFA;Mahjong beats_150;1950;Soul;House;-;180
+DJ RFA;Mahjong beats_130;1960;Dubstep;Perroflautins;-;60
+Tomeu Penya;The Freak_232;1990;Country;-;-;120
+Aina;Sabata Rota_50;1990;Techno Punk;-;-;120
+Skrillex;Paquito el chocolatero_128;1800;Dubstep;-;-;240
+Skrillex;Sabata Rota_161;1950;Soul;-;-;180
+Abraham;Pentakill_238;1960;Perroflautins;House;Flamenquillo;120
+Camela;Paquito el chocolatero_289;1800;Soul;Soul;-;180
+JFons;Paquito el chocolatero_48;1800;Death metal;Death metal;-;240
+Tomeu Penya;Mahjong beats_19;2000;Soul;Flamenquillo;-;60
+JFons;Double four_224;1900;Soul;Techno Punk;-;240
+Bertri;The Freak_23;1960;Death metal;Soul;Techno Punk;240
+Abraham;Boca beats_7;2010;Dubstep;Dubstep;Flamenquillo;60
+Tomeu Penya;Boca beats_86;1980;Trash metal;Country;Dubstep;240
+Abraham;Boca beats_259;2000;Flamenquillo;-;-;180
+JFons;All I want for Christmas is you_287;2000;Death metal;Dubstep;House;60
+JFons;Triple six_137;1600;Perroflautins;-;-;60
+Bertri;Boca beats_65;1970;Country;Soul;-;60
+Bertri;All I want for Christmas is you_8;1960;House;Death metal;Folk;120
+JFons;Boca beats_269;2010;Dubstep;House;-;60
+Abraham;Boca beats_243;1800;Soul;Country;Country;120
+Melendi;Double four_185;2010;Soul;Dubstep;-;60
+Skrillex;Double four_71;1950;Dubstep;Country;-;60
+Camela;Paquito el chocolatero_24;1800;Country;Trash metal;-;120
+Camela;Pentakill_263;1800;Soul;-;-;240
+Abraham;Paquito el chocolatero_182;2010;House;Trash metal;-;120
+Skrillex;Pentakill_67;1970;Dubstep;Flamenquillo;Country;240
+Skrillex;Mahjong beats_129;1600;House;-;-;240
+Melendi;Paquito el chocolatero_264;1700;Country;Death metal;-;180
+JFons;All I want for Christmas is you_112;1800;Folk;Flamenquillo;-;240
+Melendi;Cuando zarpa el hamor_155;1960;Death metal;Flamenquillo;-;180
+Tomeu Penya;Mahjong beats_32;2010;Techno Punk;Trash metal;-;240
+Skrillex;Paquito el chocolatero_38;2010;House;Techno Punk;Country;60
+DJ RFA;The Freak_75;2000;Techno Punk;Soul;Dubstep;180
+Skrillex;Boca beats_216;1970;Dubstep;Flamenquillo;-;60
+DJ RFA;Cuando zarpa el hamor_93;2010;Techno Punk;-;-;180
+Tomeu Penya;Cuando zarpa el hamor_87;1970;Folk;-;-;60
+JFons;Cuando zarpa el hamor_30;2000;Soul;Dubstep;-;240
+Camela;Cuando zarpa el hamor_254;2000;Folk;Flamenquillo;-;240
+JFons;Triple six_64;1990;Flamenquillo;-;-;240
+Bertri;Mahjong beats_191;1800;Soul;Folk;-;60
+Abraham;Sabata Rota_241;1900;Trash metal;-;-;180
+Vector;Mahjong beats_22;1800;Trash metal;-;-;60
+Vector;Mahjong beats_145;1980;Perroflautins;Folk;Death metal;60
+Bertri;The Freak_10;1600;Death metal;Soul;Country;60
+Melendi;All I want for Christmas is you_142;1990;Folk;Death metal;House;120
+JFons;Paquito el chocolatero_214;1970;Techno Punk;Dubstep;-;60
+Bertri;Pentakill_237;1900;Soul;-;-;240
+Bertri;Double four_229;2000;Country;Dubstep;-;240
+Bertri;The Freak_125;1950;Soul;-;-;180
+Bertri;Paquito el chocolatero_12;1600;Dubstep;-;-;240

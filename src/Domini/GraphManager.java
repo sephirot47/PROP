@@ -13,6 +13,7 @@ import org.apache.commons.collections15.SortedBag;
 import org.apache.commons.collections15.bag.TreeBag;
 
 import Persistencia.FileManager;
+import Presentacio.PresentationManager;
 
 public class GraphManager 
 {
