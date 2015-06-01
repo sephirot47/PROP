@@ -428,9 +428,10 @@ public class EstadistiquesPanel extends JPanel
 				 grafica.removeAll();
 				 table.setBounds(10,10,500,400);
 				 
-				 grafica.add(table,BorderLayout.CENTER);
-				 //JScrollPane tableContainer = new JScrollPane(table);			     
-				 //grafica.add(tableContainer,BorderLayout.CENTER);
+				 //grafica.add(table,BorderLayout.CENTER);
+				 JScrollPane tableContainer = new JScrollPane(table);			     
+				 tableContainer.setBounds(10,10,490,400);
+				 grafica.add(tableContainer,BorderLayout.CENTER);
 			     grafica.repaint();
 			 }
 			 else if(!dadesinfo.get(0).isEmpty()){
@@ -465,14 +466,17 @@ public class EstadistiquesPanel extends JPanel
 				 JTable table = new JTable(fields,ColumNames);
 				 grafica.removeAll();
 				 table.setBounds(10,10,500,400);
-				 grafica.add(table,BorderLayout.CENTER);
+				 JScrollPane tableContainer = new JScrollPane(table);			     
+				 tableContainer.setBounds(10,10,490,400);
+				 grafica.add(tableContainer,BorderLayout.CENTER);
+				 //grafica.add(table,BorderLayout.CENTER);
 				 grafica.repaint();
 			 }
 			 else{
 				 JTable table = new JTable();
 				 grafica.removeAll();
 				 table.setBounds(10,10,500,400);
-				 grafica.add(table,BorderLayout.CENTER);
+				 //grafica.add(table,BorderLayout.CENTER);
 				 grafica.repaint();
 				 
 			 }
