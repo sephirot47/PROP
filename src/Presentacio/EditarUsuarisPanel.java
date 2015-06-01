@@ -56,7 +56,7 @@ public class EditarUsuarisPanel extends JPanel
 			@Override
 			public void componentShown(ComponentEvent e) 
 			{
-					refreshAll();
+				refreshAll();
 			}
 		});
 		setPreferredSize(new Dimension(800, 561));
@@ -148,8 +148,8 @@ public class EditarUsuarisPanel extends JPanel
 				if(songList.getSelectedIndex() < 0) return;
 				
 				String line = (String) songList.getSelectedValue();
-				String autor = line.split(",")[1].trim();
-				String titol = line.split(",")[0].trim();
+				String autor = line.split(",")[0].trim();
+				String titol = line.split(",")[1].trim();
 				int timestamp = -1;
 				try
 				{

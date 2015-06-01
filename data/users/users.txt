@@ -1,1 +1,4 @@
-aaa;1234
+turmo;50
+rosa;58
+cristina;21
+victor;20

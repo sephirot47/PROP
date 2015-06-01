@@ -310,7 +310,6 @@ public class UserManager
 	    	
 	    	return new User(name, age);
 	    }
-
 		
 	    private static Reproduction getReproduction(String line) throws Exception
 		{

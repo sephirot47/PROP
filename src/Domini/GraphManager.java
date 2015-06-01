@@ -147,12 +147,13 @@ public class GraphManager
 		//
 		
 		//User Ages
-		Float userAgeDistance = Math.abs(s.getMeanUserAge() - s2.getMeanUserAge());
-		if (userAgeDistance.equals(Float.NaN) || userAgeAportation == 0.0f) userAgeAportation = 0.0f;
-		else {
-			userAgeAportation = (5.0f / userAgeDistance)*((float) p.getUserAge()*0.1f);
-			if(userAgeAportation > 1.0f) userAgeAportation = p.getUserAge()*0.1f;
-			
+		float meanUserAge1 = s.getMeanUserAge(), meanUserAge2 = s2.getMeanUserAge();
+		Float userAgeDistance = Math.abs(meanUserAge1 - meanUserAge2);
+		if (meanUserAge1 < 0.0f || meanUserAge2 < 0.0f) userAgeAportation = 0.0f;
+		else
+		{
+			float a = Math.min(1.0f, 5.0f / userAgeDistance);
+			userAgeAportation = a * ((float) p.getUserAge()*0.1f);	
 		}
 		//
 		
@@ -179,21 +180,44 @@ public class GraphManager
 		
 		for(User u : users)
 		{
-			Reproduction r1 = null, r2 = null;
 			ArrayList<Reproduction> repros = u.getReproductions();
+			float a = 0.0f;
 			for(Reproduction r : repros)
-			{				
-				if(r.getSongAuthor().equals(s1.getAuthor()) && r.getSongTitle().equals(s1.getTitle())){
-					r1 = r;
-				}
+			{	
+				boolean nearbyReproductionsFound = false;
+				boolean s1Found = (r.getSongAuthor().equals(s1.getAuthor()) && r.getSongTitle().equals(s1.getTitle()));
+				boolean s2Found = (r.getSongAuthor().equals(s2.getAuthor()) && r.getSongTitle().equals(s2.getTitle()));
 				
-				if(r.getSongAuthor().equals(s2.getAuthor()) && r.getSongTitle().equals(s2.getTitle())){
-					r2 = r;
+				//System.out.println(r.getSongAuthor() + "==" + s1.getAuthor() + ", " + r.getSongTitle() + "==" + s1.getTitle());
+				//System.out.println(r.getSongAuthor() + "==" + s2.getAuthor() + ", " + r.getSongTitle() + "==" + s2.getTitle());
+				if( s1Found || s2Found )
+				{			
+					for(Reproduction r2 : repros)
+					{ 
+						if(r == r2) continue;
+
+						if(s1Found) 
+							nearbyReproductionsFound = (r2.getSongAuthor().equals(s2.getAuthor()) && r2.getSongTitle().equals(s2.getTitle()));
+						else if(s2Found) 
+							nearbyReproductionsFound = (r2.getSongAuthor().equals(s1.getAuthor()) && r2.getSongTitle().equals(s1.getTitle()));
+						
+						if(nearbyReproductionsFound)
+						{
+							float d = Math.abs(r.getTime() - r2.getTime());
+							if(d <= 180)
+							{
+								//System.out.println("d: " + d);
+								if(d <= 60) a = Math.max(0.333f, a);
+								else if(d <= 120) a = Math.max(0.666f, a);
+								else if(d <= 180) a = Math.max(1.0f, a);
+								break;
+							}
+						}
+					}
 				}
+				if(a >= 1.0f) break;
 			}
-			
-			if((r1 != null && r2 != null) && (Math.abs(r1.getTime() - r2.getTime()) <= 180000))
-				aportation += step;
+			aportation += step * a;
 		}
 		return aportation;
 	}

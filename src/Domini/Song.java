@@ -117,8 +117,8 @@ public class Song extends Node
 		Set<User> users = null;
 		try 
 		{
-			users = UserManager.getUsers("data/users/users.txt", "data/reproductions");
-		} 
+			users = UserManager.getUsers();
+		}
 		catch (Exception e) 
 		{
 			e.printStackTrace();
@@ -138,7 +138,7 @@ public class Song extends Node
 			}
 		}
 		
-		return sum / numUsers;
+		return numUsers == 0 ? -1.0f : sum / numUsers ;
 	}
 	
 	private void checkString(String str) throws Exception

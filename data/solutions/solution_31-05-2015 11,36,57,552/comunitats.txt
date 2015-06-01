@@ -1,0 +1,10 @@
+0
+(victor, bbb)
+(victor, ccc)
+(victor, aaa)
+1
+(victor, eee)
+2
+(victor, fff)
+3
+(victor, ddd)
