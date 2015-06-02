@@ -1,20 +1,20 @@
 \select@language {catalan}
 \contentsline {chapter}{\numberline {1}Interficie}{2}{chapter.1}
-\contentsline {chapter}{\numberline {2}Gesti\IeC {\'o} d'usuaris}{4}{chapter.2}
-\contentsline {section}{\numberline {2.1}Descripci\IeC {\'o} de la interficie}{4}{section.2.1}
-\contentsline {section}{\numberline {2.2}Format del fitxer d'usuaris}{5}{section.2.2}
-\contentsline {section}{\numberline {2.3}Afegir reproduccions a un usuari}{5}{section.2.3}
-\contentsline {section}{\numberline {2.4}Format del fitxer de reproduccions}{6}{section.2.4}
-\contentsline {chapter}{\numberline {3}Gesti\IeC {\'o} de can\IeC {\c c}ons}{8}{chapter.3}
-\contentsline {section}{\numberline {3.1}Descripci\IeC {\'o} de la interficie}{8}{section.3.1}
-\contentsline {section}{\numberline {3.2}Format del fitxer de can\IeC {\c c}ons}{9}{section.3.2}
-\contentsline {chapter}{\numberline {4}Generaci\IeC {\'o} de llistes}{10}{chapter.4}
-\contentsline {section}{\numberline {4.1}Descripci\IeC {\'o} de la interficie}{10}{section.4.1}
-\contentsline {section}{\numberline {4.2}Edici\IeC {\'o} d'una soluci\IeC {\'o} generada}{11}{section.4.2}
-\contentsline {section}{\numberline {4.3}Consulta del graf}{13}{section.4.3}
-\contentsline {chapter}{\numberline {5}Consultar l'historial}{15}{chapter.5}
-\contentsline {section}{\numberline {5.1}Descripci\IeC {\'o} de la interficie}{15}{section.5.1}
-\contentsline {section}{\numberline {5.2}Format d'un fitxer de soluci\IeC {\'o}}{16}{section.5.2}
-\contentsline {chapter}{\numberline {6}Consultar les estadistiques}{17}{chapter.6}
-\contentsline {section}{\numberline {6.1}Descripci\IeC {\'o} de la interficie}{17}{section.6.1}
-\contentsline {section}{\numberline {6.2}Exportant les gr\IeC {\`a}fiques com a imatge}{18}{section.6.2}
+\contentsline {chapter}{\numberline {2}Gesti\IeC {\'o} d'usuaris}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Descripci\IeC {\'o} de la interficie}{3}{section.2.1}
+\contentsline {section}{\numberline {2.2}Format del fitxer d'usuaris}{4}{section.2.2}
+\contentsline {section}{\numberline {2.3}Afegir reproduccions a un usuari}{4}{section.2.3}
+\contentsline {section}{\numberline {2.4}Format del fitxer de reproduccions}{5}{section.2.4}
+\contentsline {chapter}{\numberline {3}Gesti\IeC {\'o} de can\IeC {\c c}ons}{6}{chapter.3}
+\contentsline {section}{\numberline {3.1}Descripci\IeC {\'o} de la interficie}{6}{section.3.1}
+\contentsline {section}{\numberline {3.2}Format del fitxer de can\IeC {\c c}ons}{7}{section.3.2}
+\contentsline {chapter}{\numberline {4}Generaci\IeC {\'o} de llistes}{8}{chapter.4}
+\contentsline {section}{\numberline {4.1}Descripci\IeC {\'o} de la interficie}{8}{section.4.1}
+\contentsline {section}{\numberline {4.2}Edici\IeC {\'o} d'una soluci\IeC {\'o} generada}{9}{section.4.2}
+\contentsline {section}{\numberline {4.3}Consulta del graf}{10}{section.4.3}
+\contentsline {chapter}{\numberline {5}Consultar l'historial}{12}{chapter.5}
+\contentsline {section}{\numberline {5.1}Descripci\IeC {\'o} de la interficie}{12}{section.5.1}
+\contentsline {section}{\numberline {5.2}Format d'un fitxer de soluci\IeC {\'o}}{13}{section.5.2}
+\contentsline {chapter}{\numberline {6}Consultar les estadistiques}{14}{chapter.6}
+\contentsline {section}{\numberline {6.1}Descripci\IeC {\'o} de la interficie}{14}{section.6.1}
+\contentsline {section}{\numberline {6.2}Exportant les gr\IeC {\`a}fiques com a imatge}{15}{section.6.2}

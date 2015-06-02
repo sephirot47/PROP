@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.26)  1 JUN 2015 21:34
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.26)  2 JUN 2015 21:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -965,17 +965,17 @@ File: interficie.png Graphic file (type png)
 
 <use interficie.png>
 Package pdftex.def Info: interficie.png used on input line 141.
-(pdftex.def)             Requested size: 469.755pt x 354.34297pt.
+(pdftex.def)             Requested size: 452.96788pt x 341.67578pt.
 
 
 Package Fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
-less on input line 151.
+less on input line 155.
 
 [2
 
- <./interficie.png>] [3]
+ <./interficie.png>]
 Cap\'{\i }tol 2.
-<gest_usr.png, id=140, 817.0525pt x 616.3025pt>
+<gest_usr.png, id=136, 817.0525pt x 616.3025pt>
 File: gest_usr.png Graphic file (type png)
  <use gest_usr.png>
 Package pdftex.def Info: gest_usr.png used on input line 162.
@@ -984,13 +984,13 @@ File: gest_usr.png Graphic file (type png)
 
 <use gest_usr.png>
 Package pdftex.def Info: gest_usr.png used on input line 162.
-(pdftex.def)             Requested size: 469.755pt x 354.34297pt.
+(pdftex.def)             Requested size: 452.96788pt x 341.67578pt.
 
 
 Package Fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
-less on input line 169.
+less on input line 177.
 
-[4
+[3
 
  <./gest_usr.png>]
 LaTeX Font Info:    Try loading font information for T1+pcr on input line 190.
@@ -1009,7 +1009,7 @@ LaTeX Font Info:    Try loading font information for TS1+ptm on input line 194.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
-<edit_usr.png, id=148, 817.0525pt x 616.3025pt>
+<edit_usr.png, id=144, 817.0525pt x 616.3025pt>
 File: edit_usr.png Graphic file (type png)
  <use edit_usr.png>
 Package pdftex.def Info: edit_usr.png used on input line 214.
@@ -1018,10 +1018,10 @@ File: edit_usr.png Graphic file (type png)
 
 <use edit_usr.png>
 Package pdftex.def Info: edit_usr.png used on input line 214.
-(pdftex.def)             Requested size: 469.755pt x 354.34297pt.
- [5] [6 <./edit_usr.png>] [7]
+(pdftex.def)             Requested size: 452.96788pt x 341.67578pt.
+ [4 <./edit_usr.png>] [5]
 Cap\'{\i }tol 3.
-<gest_canco.png, id=171, 817.0525pt x 616.3025pt>
+<gest_canco.png, id=163, 817.0525pt x 616.3025pt>
 File: gest_canco.png Graphic file (type png)
  <use gest_canco.png>
 Package pdftex.def Info: gest_canco.png used on input line 269.
@@ -1030,17 +1030,17 @@ File: gest_canco.png Graphic file (type png)
 
 <use gest_canco.png>
 Package pdftex.def Info: gest_canco.png used on input line 269.
-(pdftex.def)             Requested size: 469.755pt x 354.34297pt.
+(pdftex.def)             Requested size: 452.96788pt x 341.67578pt.
 
 
 Package Fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
-less on input line 277.
+less on input line 282.
 
-[8
+[6
 
- <./gest_canco.png>] [9]
+ <./gest_canco.png>] [7]
 Cap\'{\i }tol 4.
-<gen_llist.png, id=186, 817.0525pt x 616.3025pt>
+<gen_llist.png, id=178, 817.0525pt x 616.3025pt>
 File: gen_llist.png Graphic file (type png)
  <use gen_llist.png>
 Package pdftex.def Info: gen_llist.png used on input line 339.
@@ -1049,15 +1049,15 @@ File: gen_llist.png Graphic file (type png)
 
 <use gen_llist.png>
 Package pdftex.def Info: gen_llist.png used on input line 339.
-(pdftex.def)             Requested size: 469.755pt x 354.34297pt.
+(pdftex.def)             Requested size: 452.96788pt x 341.67578pt.
 
 
 Package Fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
-less on input line 347.
+less on input line 352.
 
-[10
+[8
 
- <./gen_llist.png>] <edit_llist.png, id=194, 817.0525pt x 616.3025pt>
+ <./gen_llist.png>] <edit_llist.png, id=185, 817.0525pt x 616.3025pt>
 File: edit_llist.png Graphic file (type png)
 
 <use edit_llist.png>
@@ -1066,9 +1066,9 @@ Package pdftex.def Info: edit_llist.png used on input line 387.
 File: edit_llist.png Graphic file (type png)
  <use edit_llist.png>
 Package pdftex.def Info: edit_llist.png used on input line 387.
-(pdftex.def)             Requested size: 469.755pt x 354.34297pt.
- [11]
-<consult_graf.png, id=202, 817.0525pt x 616.3025pt>
+(pdftex.def)             Requested size: 452.96788pt x 341.67578pt.
+ [9 <./edit_llist.png>]
+<consult_graf.png, id=194, 817.0525pt x 616.3025pt>
 File: consult_graf.png Graphic file (type png)
  <use consult_graf.png>
 Package pdftex.def Info: consult_graf.png used on input line 413.
@@ -1077,11 +1077,10 @@ File: consult_graf.png Graphic file (type png)
 
 <use consult_graf.png>
 Package pdftex.def Info: consult_graf.png used on input line 413.
-(pdftex.def)             Requested size: 469.755pt x 354.34297pt.
- [12 <./edit_llist.png>] [13 <./consult_graf.png>]
-[14]
+(pdftex.def)             Requested size: 452.96788pt x 341.67578pt.
+ [10 <./consult_graf.png>] [11]
 Cap\'{\i }tol 5.
-<consult_sol.png, id=225, 817.0525pt x 616.3025pt>
+<consult_sol.png, id=213, 817.0525pt x 616.3025pt>
 File: consult_sol.png Graphic file (type png)
  <use consult_sol.png>
 Package pdftex.def Info: consult_sol.png used on input line 457.
@@ -1090,17 +1089,17 @@ File: consult_sol.png Graphic file (type png)
 
 <use consult_sol.png>
 Package pdftex.def Info: consult_sol.png used on input line 457.
-(pdftex.def)             Requested size: 469.755pt x 354.34297pt.
+(pdftex.def)             Requested size: 452.96788pt x 341.67578pt.
 
 
 Package Fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
-less on input line 464.
+less on input line 470.
 
-[15
+[12
 
- <./consult_sol.png>] [16]
+ <./consult_sol.png>] [13]
 Cap\'{\i }tol 6.
-<consult_est.png, id=240, 817.0525pt x 616.3025pt>
+<consult_est.png, id=227, 817.0525pt x 616.3025pt>
 File: consult_est.png Graphic file (type png)
  <use consult_est.png>
 Package pdftex.def Info: consult_est.png used on input line 499.
@@ -1109,17 +1108,17 @@ File: consult_est.png Graphic file (type png)
 
 <use consult_est.png>
 Package pdftex.def Info: consult_est.png used on input line 499.
-(pdftex.def)             Requested size: 469.755pt x 354.34297pt.
+(pdftex.def)             Requested size: 452.96788pt x 341.67578pt.
 
 
 Package Fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
-less on input line 506.
+less on input line 514.
 
-[17
+[14
 
  <./consult_est.png>] (./YoutubeMix.ind)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 521.
- [18]
+ [15]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 521.
  (./YoutubeMix.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 521.
@@ -1129,22 +1128,22 @@ Package rerunfilecheck Info: File `YoutubeMix.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 521.
  ) 
 Here is how much of TeX's memory you used:
- 9331 strings out of 493304
- 129696 string characters out of 6139871
- 228306 words of memory out of 5000000
+ 9328 strings out of 493304
+ 129667 string characters out of 6139871
+ 227290 words of memory out of 5000000
  12451 multiletter control sequences out of 15000+600000
  52518 words of font info for 58 fonts, out of 8000000 for 9000
  958 hyphenation exceptions out of 8191
- 36i,12n,45p,540b,459s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,12n,45p,540b,461s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 urw/helvetic/uhvbo8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
 tmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on YoutubeMix.pdf (21 pages, 450315 bytes).
+Output written on YoutubeMix.pdf (18 pages, 448864 bytes).
 PDF statistics:
- 291 PDF objects out of 1000 (max. 8388607)
- 237 compressed objects within 3 object streams
- 76 named destinations out of 1000 (max. 500000)
+ 278 PDF objects out of 1000 (max. 8388607)
+ 227 compressed objects within 3 object streams
+ 73 named destinations out of 1000 (max. 500000)
  218 words of extra memory for PDF output out of 10000 (max. 10000000)
 
