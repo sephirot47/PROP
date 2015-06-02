@@ -51,7 +51,7 @@ public class EstadistiquesPanel extends JPanel
 	private final ButtonGroup metodes = new ButtonGroup();
 	private final ButtonGroup ym = new ButtonGroup();
 	private JPanel panelLeft = new JPanel();
-	
+	private JRadioButton Girvan = null, Grafica = null, nodes = null;
 	
 	private ArrayList<ArrayList<Pair<Double,Integer>>> dadesinfo = new ArrayList<ArrayList<Pair<Double,Integer>>>();
 	private JPanel grafica = new JPanel();
@@ -74,8 +74,7 @@ public class EstadistiquesPanel extends JPanel
 		Box left = Box.createVerticalBox();
 		
 		
-		
-		final JRadioButton Girvan = new JRadioButton("Newman-Girvan");
+		Girvan = new JRadioButton("Newman-Girvan");
 		Girvan.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		algorisme.add(Girvan);
 		left.add(Girvan);
@@ -98,7 +97,7 @@ public class EstadistiquesPanel extends JPanel
 		JLabel label = new JLabel("---------------------------");
 		left.add(label);
 		
-		final JRadioButton Grafica = new JRadioButton("Grafica");
+		Grafica = new JRadioButton("Grafica");
 		Grafica.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		metodes.add(Grafica); 
 		left.add(Grafica);
@@ -112,19 +111,10 @@ public class EstadistiquesPanel extends JPanel
 		left.add(label1);
 		
 		
-		final JRadioButton nodes = new JRadioButton("Temps-Nodes");
+		nodes = new JRadioButton("Temps-Nodes");
 		nodes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		ym.add(nodes);
 		left.add(nodes);
-		
-		final JRadioButton edges = new JRadioButton("Temps-Edges");
-		edges.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		ym.add(edges);
-		left.add(edges);
-		final JRadioButton altres = new JRadioButton("Altres");
-		altres.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		ym.add(altres);
-		left.add(altres);
 
 		panelLeft.add(left);
 
@@ -268,8 +258,6 @@ public class EstadistiquesPanel extends JPanel
 			
 			if (!dadesinfo.isEmpty())
 			{
-				
-				
 				JFreeChart chart = null;
 				double mitja = 0.0f;
 				final XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
@@ -278,8 +266,8 @@ public class EstadistiquesPanel extends JPanel
 				XYPlot plot;
 				if(alg != "Tots"){
 					XYSeries serie = new XYSeries(alg);
-					XYSeries desviationp = new XYSeries("Desviació positiva " + alg);
-					XYSeries desviationn = new XYSeries("Desviació negativa " + alg);
+					XYSeries desviationp = new XYSeries("Desviacio positiva " + alg);
+					XYSeries desviationn = new XYSeries("Desviacio negativa " + alg);
 					if(alg == "Louvain"){
 						for(int i = 0; i < dadesinfo.get(0).size(); i++){
 							serie.add(dadesinfo.get(0).get(i).getSecond().doubleValue(),dadesinfo.get(0).get(i).getFirst()/100);
@@ -482,9 +470,12 @@ public class EstadistiquesPanel extends JPanel
 			 }
 		 }
 	}
-	public void refresh() {
-		// TODO Auto-generated method stub
-		
+	public void refresh() 
+	{
+		Girvan.setSelected(true);
+		Grafica.setSelected(true);
+		nodes.setSelected(true);
+		grafiques(Girvan.isSelected(), "Grafica", nodes.isSelected(), "Girvan-Newman");
 	}		
 }
 	

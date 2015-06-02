@@ -208,9 +208,9 @@ public class GraphManager
 							if(d <= 180)
 							{
 								//System.out.println("d: " + d);
-								if(d <= 60) a = Math.max(0.333f, a);
+								if(d <= 60) a = Math.max(1.0f, a);
 								else if(d <= 120) a = Math.max(0.666f, a);
-								else if(d <= 180) a = Math.max(1.0f, a);
+								else if(d <= 180) a = Math.max(0.333f, a);
 								break;
 							}
 						}

@@ -495,9 +495,11 @@ public class GenerarLlistesPanel extends JPanel {
 	
 	private void generateSolution()
 	{ 
-		if(sliderAny.getValue() <= 0 && sliderAutor.getValue() <= 0 && sliderComunitatsGN.getValue() <= 0 && sliderDuracio.getValue() <= 0 &&
+		if(sliderAny.getValue() <= 0 && sliderAutor.getValue() <= 0 && sliderDuracio.getValue() <= 0 &&
 		   sliderEstil.getValue() <= 0 && sliderProximitat.getValue() <= 0 && sliderPublic.getValue() <= 0)
 		{
+			
+			
 			PresentationManager.errorWindow("Almenys algun criteri ha de ser no nul.");
 			return;
 		}
